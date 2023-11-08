@@ -6,6 +6,7 @@ using UniRx;
 
 namespace _.Scripts.Player
 {
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float walkSpeed;
@@ -23,6 +24,9 @@ namespace _.Scripts.Player
         [SerializeField] public float dashTime;
         [SerializeField] private GameObject dashWeapon;
         [SerializeField] private GameObject dashPreviewObj;
+        public bool isDashing;
+
+        [Header("Extra Dash")] public bool extraDash;
 
         [Header("Pull Setting")] [SerializeField]
         private float pullTime;
@@ -51,7 +55,7 @@ namespace _.Scripts.Player
             pullVisualizeObject.transform.localScale = Vector3.zero;
             attackWeapon.SetActive(false);
         }
-      
+
 
         public void Move(Vector3 dir)
         {
@@ -71,6 +75,7 @@ namespace _.Scripts.Player
             {
                 dir = transform.forward;
             }
+
             dir.y = 0;
             Quaternion toRotation = Quaternion.LookRotation(dir.normalized, transform.up);
             transform.rotation = toRotation;
@@ -95,6 +100,7 @@ namespace _.Scripts.Player
 
         public void Dash()
         {
+            isDashing = true;
             dashPreviewObj.SetActive(false);
             dashWeapon.SetActive(true);
 
@@ -111,6 +117,7 @@ namespace _.Scripts.Player
             {
                 timerSubscription.Dispose();
                 dashWeapon.SetActive(false);
+                isDashing = false;
             });
         }
 
@@ -132,11 +139,14 @@ namespace _.Scripts.Player
 
         #endregion
 
+      
+
         #region Pull
 
         //注意地圖或是周遭物件不是IgnoreRayacst
 
         private readonly List<IPullable> _pullableObject = new List<IPullable>();
+
 
         public void SetPullTarget()
         {
@@ -224,5 +234,17 @@ namespace _.Scripts.Player
         }
 
         #endregion
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (isDashing)
+            {
+                if (other.gameObject.CompareTag("DashObject"))
+                {
+                    extraDash = true;
+                    extraDash = false;
+                }
+            }
+        }
     }
 }

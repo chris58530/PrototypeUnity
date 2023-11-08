@@ -76,6 +76,8 @@ namespace _.Scripts.Player.State
                 transition => _input.Move);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Dash,
                 transition => _input.IsReleasedDash);
+            _fsm.AddTransition(PlayerState.Idle, PlayerState.Dash,
+                transition => _controller.extraDash);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Pull,
                 transition => _input.IsPressedPull);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Attack,
@@ -88,6 +90,8 @@ namespace _.Scripts.Player.State
             //Walk
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Dash,
                 transition => _input.IsReleasedDash);
+            _fsm.AddTransition(PlayerState.Walk, PlayerState.Dash,
+                transition => _controller.extraDash);
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Pull,
                 transition => _input.IsPressedPull);
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Attack,
@@ -98,7 +102,8 @@ namespace _.Scripts.Player.State
                 transition => _playerHp.Dead);
             //Dash
             _fsm.AddTransition(PlayerState.Dash, PlayerState.Idle);
-
+            _fsm.AddTransition(PlayerState.Dash, PlayerState.Dash,
+                transition => _controller.extraDash);
             //Pull
             _fsm.AddTransition(PlayerState.Pull, PlayerState.Idle,
                 transition => _input.IsReleasedPull);

@@ -9,7 +9,7 @@ namespace _.Scripts.Player.State
     {
         private readonly PlayerMapInput _input;
         private readonly PlayerController _controller;
-        private Animator _animator;
+        private readonly Animator _animator;
 
         public PlayerWalk(
             PlayerMapInput playerMapInput,

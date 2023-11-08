@@ -33,11 +33,11 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             AudioManager.Instance.PlaySFX("Dash");
-            if (ContextPresenter.Instance.GetAilityCount() <= 0)
-            {
-                fsm.StateCanExit();
-            }
-            ContextPresenter.Instance.UseAbility();
+            // if (ContextPresenter.Instance.GetAilityCount() <= 0)
+            // {
+            //     fsm.StateCanExit();
+            // }
+            // ContextPresenter.Instance.UseAbility();
             _timer = new Timer();
             _animator.Play("Dash");
             _controller.Dash();            
