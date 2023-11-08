@@ -6,6 +6,8 @@ using UniRx;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using _.Scripts.Temporary;
+using TMPro;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Temporary
 {
@@ -19,6 +21,10 @@ namespace _.Scripts.Temporary
 
     public class TDash : PlayerBehaviourSimple
     {
+        [Header("DebugUI")] [SerializeField] private TMP_Text state;
+        [SerializeField] private TMP_Text atk;
+        [SerializeField] private TMP_Text time;
+
         [Header("Dash UI")] [SerializeField] private Image _dashCDImage;
         [SerializeField] private float _dashCD;
         private float _currentDashCD;
@@ -52,7 +58,11 @@ namespace _.Scripts.Temporary
             _currentDashCD = _dashCD;
             _dashState.Value = DashState.None;
 
-            _dashState.Subscribe(_ => { Debug.Log($"current state : {_dashState.Value}"); }).AddTo(this);
+            _dashState.Subscribe(_ =>
+            {
+                Debug.Log($"current state : {_dashState.Value}");
+                state.text = _dashState.Value.ToString();
+            }).AddTo(this);
         }
 
         protected override void Update()
@@ -60,6 +70,8 @@ namespace _.Scripts.Temporary
             SwitchDashState();
             UpdateDashImage();
             ResetDashCD();
+
+           
         }
 
         void SwitchDashState()
@@ -87,7 +99,7 @@ namespace _.Scripts.Temporary
                     {
                         _currentDashCD = _dashCD;
                         Time.timeScale = 0.1f;
-
+                        time.text = 0.1.ToString();
                         _dashState.Value = DashState.ExtraDash;
                     }
 
@@ -104,8 +116,6 @@ namespace _.Scripts.Temporary
 
                     if (input.IsReleasedDash)
                     {
-                        model.transform.localEulerAngles = new Vector3(0, 0, 0);
-
                         Dash();
                     }
 
@@ -152,6 +162,9 @@ namespace _.Scripts.Temporary
         public void Dash()
         {
             if (!canDash) return;
+            model.transform.localEulerAngles = new Vector3(0, 0, 0);
+            time.text = 1.ToString();
+
             Time.timeScale = 1f;
             onTheWall = false;
 
@@ -168,7 +181,6 @@ namespace _.Scripts.Temporary
             var timerSubscription = doDash.Subscribe(_ =>
             {
                 controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
-                model.transform.localEulerAngles = new Vector3(0, 0, 0);
             });
 
 
