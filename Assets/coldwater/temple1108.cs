@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ public class temple1108 : MonoBehaviour
     public float dashDistance = 10f;
     public float dashDuration = 0.5f;
     private bool isDashing = false;
-
+    [SerializeField] private int attackValue;
 
     void Start()
     {
@@ -49,12 +50,12 @@ public class temple1108 : MonoBehaviour
             bool onBeat = rhythmTimer.IsOnBeat();
             if (onBeat)
             {
-                Debug.Log("Perfect!" + AniTime);
+                // Debug.Log("Perfect!" + AniTime);
                 hitDetec.Play("Perfect", -1, 0);
             }
             else
             {
-                Debug.Log("Missed the beat!" + AniTime);
+                // Debug.Log("Missed the beat!" + AniTime);
                 hitDetec.Play("Fail", -1, 0);
             }
         }
@@ -65,14 +66,22 @@ public class temple1108 : MonoBehaviour
             bool onBeat = rhythmTimer.IsOnBeat();
             if (onBeat)
             {
-                comboBar.value += 1;
-                Debug.Log("Perfect!" + AniTime);
+                if(comboBar.value <=4)
+                {
+                    comboBar.value += 1;
+                }
+                else
+                {
+                    comboBar.value = 4;
+                }
+                
+                // Debug.Log("Perfect!" + AniTime);
                 hitDetec.Play("Perfect", -1, 0);
             }
             else
             {
                 comboBar.value = 0;
-                Debug.Log("Missed the beat!" + AniTime);
+                // Debug.Log("Missed the beat!" + AniTime);
                 hitDetec.Play("Fail", -1, 0);
             }
         }
@@ -111,6 +120,17 @@ public class temple1108 : MonoBehaviour
             yield return null;
         }
         isDashing = false;
+    }
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.TryGetComponent<EnemyTempCold>(out var damageObj))
+        {
+            attackValue = 1*(int)comboBar.value;
+            damageObj.OnTakeDamage(attackValue);
+        }
+
+
+
     }
 
 }
