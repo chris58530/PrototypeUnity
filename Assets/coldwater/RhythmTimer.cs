@@ -5,36 +5,35 @@ using UnityEngine.UI;
 
 public class RhythmTimer : MonoBehaviour
 {
-    public float beatInterval = 5f; // 節奏的時間間隔
-    public float tolerance = 1f; // 時間容忍度，用於判斷節奏準確度
-
-    private float beatTimer = 0.0f;
-
-    [SerializeField] private Image timerImg;    
-    // 計算是否在節奏點上的函數
-    private bool isTrue = false;
-
-    private void Start()
+    public bool OnBeat;
+    private float beatTimer2 = 0;//計時器
+    public void Update()
     {
-        StartCoroutine(CycleBool());
+        beatTimer2 += Time.deltaTime;
+
     }
-
-    private IEnumerator CycleBool()
+    void SetBeatBoolFalse()
     {
-        while (true)
-        {
-            isTrue = false; // 設置為 false
-            timerImg.enabled = !timerImg.enabled;
-            yield return new WaitForSeconds(beatInterval); // 等待 5 秒
-
-            
-            isTrue = true; // 設置為 true
-            timerImg.enabled = !timerImg.enabled;
-            yield return new WaitForSeconds(tolerance); // 等待 1 秒
-        }
+        OnBeat = false;
+        // Debug.Log("結束判定點V" + beatTimer2);
+    }
+    void SetBeatBoolTrue()
+    {
+        OnBeat = true;
+        // Debug.Log("開始判定點A" + beatTimer2);
+    }
+    void ResetAni()
+    {
+        // Debug.Log("拍點,動畫計時器:" + beatTimer2);
+        beatTimer2 = 0;
     }
     public bool IsOnBeat()
     {
-        return isTrue;
+        return OnBeat;
+    }
+    public float AniTime()
+    {
+
+        return beatTimer2;
     }
 }

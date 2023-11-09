@@ -6,98 +6,56 @@ using UnityEngine.UI;
 
 public class temple1108 : MonoBehaviour
 {
-    private float beatTimer = 0;
-    private bool isOnBeat = false;
-    public float beatInterval = 0.5f;
+    private float beatTimer = 0;//計時器
+    private bool isOnBeat = false;//節點布林
+    public float beatInterval = 0.45f;//節奏長度
     public float tolerance = 0.05f; // 寬容區間
-    [SerializeField] private TMP_Text timerText;
-    [SerializeField] private Image timerImg;
-    [SerializeField] private Slider timerBar;
+    // [SerializeField] private Image timerImg;//節奏中心圖
+    // [SerializeField] private Slider timerBar;//節奏節點
 
     public RhythmTimer rhythmTimer;
+    public Animator hitDetec;
+
+
     void Start()
     {
-        timerBar.maxValue = beatInterval + tolerance;
-        beatTimer = beatInterval + tolerance;
+
+        // //節奏節點的總值為:節奏長度+寬容區間
+        // timerBar.maxValue = beatInterval + tolerance;
+        // //計時器同理
+        // beatTimer = beatInterval + tolerance;
     }
 
     void Update()
     {
+        //計時器運作
         beatTimer -= Time.deltaTime;
-        timerBar.value = beatTimer;
-        if (beatTimer <= 0)
-        {
-            beatTimer = beatInterval + tolerance;
-        }
-        Debug.Log(beatTimer);
-        timerBar.value = beatTimer;
-
-        bool onBeat = rhythmTimer.IsOnBeat();
+        //計時器同步至Bar
+        // timerBar.value = beatTimer;
+        //計時器歸零迴圈
+        // if (beatTimer <= 0)
+        // {
+        //     beatTimer = beatInterval + tolerance;
+        //     Debug.Log("reset!" + beatTimer);
+        // }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // bool onBeat = rhythmTimer.IsOnBeat();
+            // Debug.Log("Space!" + beatTimer);
+            float AniTime = rhythmTimer.AniTime();
+            bool onBeat = rhythmTimer.IsOnBeat();
             if (onBeat)
             {
-                Debug.Log("Perfect!");
+                Debug.Log("Perfect!" + AniTime);
+                hitDetec.Play("Perfect", -1, 0);
             }
             else
             {
-                Debug.Log("Missed the beat!");
+                Debug.Log("Missed the beat!" + AniTime);
+                hitDetec.Play("Fail", -1, 0);
             }
         }
 
 
-        // beatTimer += Time.deltaTime;
-
-        // if (beatTimer >= beatInterval)
-        // {
-        //     beatTimer = 0.0f;
-        //     StartCoroutine(toleranceRoutine());
-        // }
-
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     // 玩家按下按鍵時，計算時間差
-        //     float timeDifference = Mathf.Abs(beatTimer - beatInterval);
-
-        //     if (timeDifference <= tolerance || Mathf.Abs(timeDifference - beatInterval) <= tolerance)
-        //     {
-        //         // 在容忍範圍內按下按鍵，表示按得準確
-        //         Debug.Log("Perfect!");
-        //     }
-        //     else
-        //     {
-        //         // 按得不準確
-        //         Debug.Log("Missed the beat!");
-        //     }
-        // }
-
-
-        // if (beatTimer >= beatInterval-tolerance)
-        // {
-        //     StartCoroutine(toleranceRoutine());
-        //     beatTimer = 0;
-        // }
-        // else
-        // {
-        //     isOnBeat = false;
-        // }
     }
-    // private IEnumerator toleranceRoutine()
-    // {
-    //     while (true)
-    //     {
-    //         timerImg.enabled = !timerImg.enabled;
-    //         isOnBeat = true;
-    //         yield return new WaitForSeconds(tolerance);
-    //     }
-    // }
-    private IEnumerator toleranceRoutine()
-    {
-        while (true)
-        {
-            timerImg.enabled = !timerImg.enabled;
-            yield return new WaitForSeconds(tolerance);
-        }
-    }
+
 }
