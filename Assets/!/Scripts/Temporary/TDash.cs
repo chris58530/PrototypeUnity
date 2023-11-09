@@ -13,10 +13,10 @@ namespace _.Scripts.Temporary
 {
     public enum DashState
     {
-        None = 0,
-        Dash = 1,
-        ChanceTime = 2,
-        ExtraDash = 3
+        None,
+        Dash,
+        ExtraReadyToDash,
+        ExtraDash
     }
 
     public class TDash : PlayerBehaviourSimple
@@ -26,38 +26,41 @@ namespace _.Scripts.Temporary
         [SerializeField] private TMP_Text time;
 
         [Header("Dash UI")] [SerializeField] private Image _dashCDImage;
+        [SerializeField] private Image _ReadyToDashImage;
         [SerializeField] private float _dashCD;
+
         private float _currentDashCD;
 
         [Header("Dash Setting")] [SerializeField]
         public float dashSpeed;
 
         [SerializeField] public float dashTime;
+        [SerializeField] public float currentDashTime;
+        [SerializeField] public bool canDoubleTime;
         [SerializeField] private GameObject dashWeapon;
         [SerializeField] private GameObject dashPreviewObj;
         [SerializeField] private GameObject model;
 
         [Header("Extra Dash Setting")] [SerializeField]
-        private float timeToExtra = 1f;
+        private float ExtraReadyToDashKeepTime = 3;
 
-        private float currentTimeToExtra;
-
+        [SerializeField] private float currentExtraReadyToDashKeepTime;
+        [SerializeField] private int dashQuanity;
         private float speedAddition;
 
-        private bool onTheWall;
-        private bool _isDashing;
+        private bool _isDashing = false;
+        private bool _isOnWall = false;
         private bool canDash;
         private Vector3 _dashDir;
         private ReactiveProperty<DashState> _dashState = new ReactiveProperty<DashState>();
+        private IDisposable timerSubscription;
 
         private void Start()
         {
-            currentTimeToExtra = timeToExtra;
-
-            dashPreviewObj.SetActive(false);
             _currentDashCD = _dashCD;
+            currentDashTime = dashTime;
+            dashQuanity = 0;
             _dashState.Value = DashState.None;
-
             _dashState.Subscribe(_ =>
             {
                 Debug.Log($"current state : {_dashState.Value}");
@@ -69,9 +72,26 @@ namespace _.Scripts.Temporary
         {
             SwitchDashState();
             UpdateDashImage();
+            UpdateReadyToDashImage();
             ResetDashCD();
-
-           
+            if (_isDashing)
+            {
+                currentDashTime -= Time.deltaTime;
+                if (currentDashTime <= 100)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Debug.Log("success");
+                        currentDashTime = dashTime;
+                        Dash();
+                    }
+                }
+            }
+            else
+            {
+                currentDashTime = dashTime;
+                dashQuanity = 0;
+            }
         }
 
         void SwitchDashState()
@@ -79,61 +99,112 @@ namespace _.Scripts.Temporary
             switch (_dashState.Value)
             {
                 case DashState.None:
-                    _dashState.Value = DashState.Dash;
+                    base.Update();
+                    model.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+                    currentExtraReadyToDashKeepTime = ExtraReadyToDashKeepTime;
+                    dashPreviewObj.SetActive(false);
+
+                    Time.timeScale = 1f;
+                    time.text = 1.ToString();
+
+                    if (input.IsReleasedDash && canDash)
+                    {
+                        ShowDashDirection(true);
+                        transform.LookAt(_dashDir);
+                        _dashState.Value = DashState.Dash;
+                        Dash();
+                    }
                     break;
 
                 case DashState.Dash:
-
-                    if (input.IsPressedDash) ShowDashDirection(true);
-                    if (input.IsReleasedDash) Dash();
-                    base.Update();
-
+                    _dashState.Value = DashState.None;
                     break;
-                case DashState.ChanceTime:
 
-                    timeToExtra -= Time.deltaTime;
-                    if (timeToExtra <= 0)
-                        _dashState.Value = DashState.Dash;
 
-                    else if (input.IsPressedDash)
-                    {
-                        _currentDashCD = _dashCD;
-                        Time.timeScale = 0.1f;
-                        time.text = 0.1.ToString();
-                        _dashState.Value = DashState.ExtraDash;
-                    }
-
-                    break;
-                case DashState.ExtraDash:
-                    currentTimeToExtra = timeToExtra;
-
-                    if (input.IsPressedDash)
-                    {
-                        model.transform.localEulerAngles = new Vector3(90, 0, 0);
-
-                        ShowDashDirection(true);
-                    }
-
+                case DashState.ExtraReadyToDash:
+                    // currentExtraReadyToDashKeepTime -= Time.deltaTime;
+                    Time.timeScale = 0.1f;
+                    time.text = 0.1.ToString();
+                    // if (currentExtraReadyToDashKeepTime <= 0)
+                    // {
+                    //     _dashState.Value = DashState.None;
+                    //     Time.timeScale = 1f;
+                    //     time.text = 1.ToString();
+                    // }
+                    ShowDashDirection(true);
                     if (input.IsReleasedDash)
                     {
+                        transform.LookAt(_dashDir);
+
+                        model.transform.localEulerAngles = new Vector3(90, 0, 0);
+
+                        _dashState.Value = DashState.ExtraDash;
+                        Time.timeScale = 1f;
+                        time.text = 1.ToString();
                         Dash();
                     }
+                    break;
 
-                    base.Update();
+                case DashState.ExtraDash:
+                    _isOnWall = true;
+                    currentExtraReadyToDashKeepTime = ExtraReadyToDashKeepTime;
+                    model.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    _dashState.Value = DashState.None;
                     break;
             }
         }
+
+        public void Dash()
+        {
+            dashQuanity += 1;
+            if (!canDash) return;
+            canDash = false;
+
+            time.text = 1.ToString();
+
+
+            _currentDashCD = 0;
+
+            dashPreviewObj.SetActive(false);
+
+
+            timerSubscription = Observable.EveryFixedUpdate().Subscribe(_ =>
+            {
+                _isDashing = true;
+
+                controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
+            });
+
+
+            Observable.Timer(TimeSpan.FromSeconds(dashTime)).Subscribe(_ =>
+            {
+                timerSubscription.Dispose();
+                dashWeapon.SetActive(false);
+                _isDashing = false;
+                if (!_isOnWall)
+                    _dashState.Value = Temporary.DashState.None;
+            }).AddTo(this);
+        }
+
+
+        #region UI
 
         public void UpdateDashImage()
         {
             _dashCDImage.fillAmount = _currentDashCD / _dashCD;
         }
 
+        public void UpdateReadyToDashImage()
+        {
+            _ReadyToDashImage.fillAmount = currentExtraReadyToDashKeepTime / ExtraReadyToDashKeepTime;
+        }
+
         void ResetDashCD()
         {
             if (!canDash)
             {
-                _currentDashCD += 0.02f;
+                _currentDashCD += Time.deltaTime;
             }
 
             if (_currentDashCD >= _dashCD)
@@ -141,6 +212,8 @@ namespace _.Scripts.Temporary
                 canDash = true;
             }
         }
+
+        #endregion
 
         public void ShowDashDirection(bool isShow)
         {
@@ -158,43 +231,6 @@ namespace _.Scripts.Temporary
             dashPreviewObj.transform.LookAt(_dashDir);
         }
 
-
-        public void Dash()
-        {
-            if (!canDash) return;
-            model.transform.localEulerAngles = new Vector3(0, 0, 0);
-            time.text = 1.ToString();
-
-            Time.timeScale = 1f;
-            onTheWall = false;
-
-
-            transform.parent = null;
-            _currentDashCD = 0;
-            _isDashing = true;
-            dashPreviewObj.SetActive(false);
-            dashWeapon.SetActive(true);
-
-            transform.LookAt(_dashDir);
-
-            var doDash = Observable.EveryFixedUpdate();
-            var timerSubscription = doDash.Subscribe(_ =>
-            {
-                controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
-            });
-
-
-            Observable.Timer(TimeSpan.FromSeconds(dashTime)).Subscribe(_ =>
-            {
-                timerSubscription.Dispose();
-                dashWeapon.SetActive(false);
-                _isDashing = false;
-                _dashState.Value = Temporary.DashState.Dash;
-
-                canDash = false;
-            });
-        }
-
         Vector3 GetDirection()
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -207,16 +243,21 @@ namespace _.Scripts.Temporary
                 hitpoint.y = transform.position.y;
                 return hitpoint;
             }
+            else Debug.Log("nothing");
 
             return hitpoint;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_dashState.Value == DashState.ChanceTime) return;
+            // if (_dashState.Value == DashState.ReadyToDash) return;
+            if (_dashState.Value == DashState.ExtraReadyToDash) return;
+            if (!_isDashing) return;
             if (other.gameObject.CompareTag("DashObject"))
             {
-                _dashState.Value = Temporary.DashState.ChanceTime;
+                timerSubscription.Dispose();
+                _isOnWall = true;
+                _dashState.Value = Temporary.DashState.ExtraReadyToDash;
             }
         }
     }
