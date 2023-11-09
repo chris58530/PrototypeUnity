@@ -24,7 +24,7 @@ public class RhythmTimer : MonoBehaviour
     }
     void ResetAni()
     {
-        // Debug.Log("拍點,動畫計時器:" + beatTimer2);
+        Debug.Log("拍點,動畫計時器:" + beatTimer2);
         beatTimer2 = 0;
     }
     public bool IsOnBeat()
