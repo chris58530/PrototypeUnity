@@ -17,7 +17,8 @@ public class Attack : EnemyAction
         _startTime = Time.time;
         animator.Play("Attack");
         animator.speed = 1;
-        AudioManager.Instance.PlaySFX("EnemyAttack");
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX("EnemyAttack");
         // AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // float currentTime = stateInfo.normalizedTime * stateInfo.length;
         //

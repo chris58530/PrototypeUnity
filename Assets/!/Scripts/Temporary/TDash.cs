@@ -162,8 +162,6 @@ namespace _.Scripts.Temporary
                 hasAdd = true;
             }
 
-            Debug.Log("isdashing");
-            Debug.Log(canDash);
             _isDashing = true;
             ShowDashDirection(false);
             controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
@@ -246,7 +244,7 @@ namespace _.Scripts.Temporary
             // if (_dashState.Value == DashState.ReadyToDash) return;
             if (_dashState.Value == DashState.ExtraReadyToDash) return;
             if (!_isDashing) return;
-            if (other.gameObject.CompareTag("DashObject"))
+            if (other.TryGetComponent<DoubleDashObject>(out var doubleDashObject))
             {
                 _isOnWall = true;
                 _dashState.Value = Temporary.DashState.ExtraReadyToDash;
