@@ -1,6 +1,7 @@
 using System;
 using _.Scripts.UI;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityHFSM;
 
@@ -33,6 +34,12 @@ namespace _.Scripts.Player.State
             _combo.combo += 1;
             _timer = new Timer();
             _controller.Dash();
+            AudioManager.Instance.PlaySFX("Dash");
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(_controller.dashTime / 2)).First().Subscribe(_ =>
+            {
+                AudioManager.Instance.PlaySFX("DashChance");
+
+            });
         }
 
         public override void OnLogic()
@@ -44,6 +51,7 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
+
         }
     }
 }

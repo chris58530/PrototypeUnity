@@ -79,16 +79,16 @@ namespace _.Scripts.Player.State
             _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Dash,
-                transition => _input.IsPressedDash);
+                transition => Input.GetMouseButtonDown(0));
             //Walk
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Dash,
-                transition => _input.IsPressedDash);
+                transition => Input.GetMouseButtonDown(0));
             //Dash
             _fsm.AddTransition(PlayerState.Dash, PlayerState.DashChance);
 
             //DashChance
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.Dash,
-                transition => _input.IsPressedDash);
+                transition => Input.GetMouseButtonDown(0));
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail,
                 transition => _controller.finishChance);
 

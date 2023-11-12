@@ -43,7 +43,7 @@ namespace _.Scripts.Player
                 TMP_Text t = GameObject.Find("ATKTypeText").GetComponent<TMP_Text>();
                 t.text = "Multi";
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 SwitchToNextWeapon();
             }
