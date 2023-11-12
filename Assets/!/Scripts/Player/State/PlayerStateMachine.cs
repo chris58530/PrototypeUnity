@@ -25,7 +25,7 @@ namespace _.Scripts.Player.State
         private PlayerMapInput _input;
         private PlayerController _controller;
         private PlayerHp _playerHp;
-
+        private PlayerCombo _combo;
         [SerializeField] private Animator animator;
 
 
@@ -34,6 +34,7 @@ namespace _.Scripts.Player.State
             _input = GetComponent<PlayerMapInput>();
             _controller = GetComponent<PlayerController>();
             _playerHp = GetComponent<PlayerHp>();
+            _combo = GetComponent<PlayerCombo>();
             // _animator = GetComponentInChildren<Animator>();
         }
 
@@ -50,13 +51,13 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, false));
             _fsm.AddState(
                 PlayerState.Dash, new PlayerDash(
-                    _controller, animator, true));
+                    _controller, animator,_combo, true));
             _fsm.AddState(
                 PlayerState.DashChance, new PlayerDashChance(
-                    _input, _controller, animator, true));
+                    _input, _controller, animator, false));
             _fsm.AddState(
                 PlayerState.DashFail, new PlayerDashFail(
-                    _input, _controller, animator, true));
+                    _input, _controller, animator,_combo, true));
 
             // _fsm.AddState(
             //     PlayerState.Attack, new PlayerAttack(
@@ -88,7 +89,8 @@ namespace _.Scripts.Player.State
             //DashChance
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.Dash,
                 transition => _input.IsPressedDash);
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail);
+            _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail,
+                transition => _controller.finishChance);
 
             //DashFail
             _fsm.AddTransition(PlayerState.DashFail, PlayerState.Idle);

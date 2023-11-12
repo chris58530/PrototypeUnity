@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityHFSM;
+using UniRx;
 
 namespace _.Scripts.Player.State
 {
@@ -9,7 +10,6 @@ namespace _.Scripts.Player.State
         private Animator _animator;
         private readonly PlayerMapInput _input;
         private readonly PlayerController _controller;
-        private Timer _timer;
 
         public PlayerDashChance(PlayerMapInput playerMapInput,
             PlayerController playerController,
@@ -24,17 +24,20 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            _timer = new Timer();
             //debug
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "DashChance";
-
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.dashChanceTime)
-                fsm.StateCanExit();
+            if (_input.Move)
+            {
+                Vector2 getInput = _input.MoveVector;
+                Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
+                _controller.Move(dir);
+            }
+           
         }
 
         public override void OnExit()

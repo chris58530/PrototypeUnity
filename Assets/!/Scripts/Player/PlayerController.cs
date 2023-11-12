@@ -23,7 +23,10 @@ namespace _.Scripts.Player
 
         [SerializeField] public float dashFailTime;
 
-        // [SerializeField] private GameObject dashWeapon;
+        public bool finishChance;
+
+        [SerializeField] private GameObject dashWeapon;
+
         // [SerializeField] private GameObject dashPreviewObj;
         public bool isDashing;
 
@@ -35,12 +38,21 @@ namespace _.Scripts.Player
         private CharacterController _controller;
         private AttackDetect _attackDetect;
         private PlayerWeapon _playerWeapon;
+        private IDisposable chanceDis;
+
+
+        //debug
+        public bool useMousePosToDash;
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
             _attackDetect = GetComponentInChildren<AttackDetect>();
             _playerWeapon = GetComponentInChildren<PlayerWeapon>();
+        }
+
+        private void Start()
+        {
         }
 
 
@@ -51,7 +63,7 @@ namespace _.Scripts.Player
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
         }
 
-
+        
         #region Dash
 
         private Vector3 _dashDir;
@@ -64,51 +76,88 @@ namespace _.Scripts.Player
             //     return;
             // }
 
-            _dashDir = GetDirection();
+            _dashDir = new Vector3(GetDirection().x, transform.position.y, GetDirection().z).normalized;
             // dashPreviewObj.SetActive(true);
             // dashPreviewObj.transform.LookAt(_dashDir);
         }
 
         public void Dash()
         {
-            isDashing = true;
-            // dashPreviewObj.SetActive(false);
-            // dashWeapon.SetActive(true);
+            chanceDis?.Dispose();
+            finishChance = false;
 
-            // transform.LookAt(_dashDir);
-            // Vector3 endPosition = transform.position + transform.forward * dashDistance;
-            // float elapsedTime = 0f;
-            // Observable.EveryFixedUpdate().Subscribe(_ =>
-            // {
-            //     while (elapsedTime < dashTime)
-            //     {
-            //         elapsedTime += Time.deltaTime;
-            //         float a = elapsedTime / dashTime;
-            //         transform.position = Vector3.Lerp(transform.position, endPosition, a);
-            //         // if (a >= 1f)
-            //         // {
-            //         //     break;
-            //         // }
-            //     }
-            // });
-            StartCoroutine(MoveToTarget());
+            #region PerformDash
+
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
+            var targetPosition = Vector3.zero;
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, mask))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                targetPosition = hit.point;
+                targetPosition.y = transform.position.y;
+            }
+
+            Vector3 dashDirection = (targetPosition - transform.position).normalized;
+
+            #endregion
+
+
+            if (useMousePosToDash)
+            {
+                StartCoroutine(PerformDash(dashDirection));
+            }
+            else StartCoroutine(MoveToTarget());
         }
+
         IEnumerator MoveToTarget()
         {
             Vector3 endPosition = transform.position + transform.forward * dashDistance;
+
+
             float t = 0;
             while (true)
             {
                 t += Time.deltaTime;
-                float a = t /dashTime;
+                float a = t / dashTime;
                 transform.position = Vector3.Lerp(transform.position, endPosition, a);
                 if (a >= 1f)
                 {
+
+                    chanceDis = Observable.EveryUpdate()
+                        .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                        .First()
+                        .Subscribe(_ => { finishChance = true; }).AddTo(this);
                     break;
                 }
 
                 yield return null;
             }
+        }
+
+        IEnumerator PerformDash(Vector3 dashDirection)
+        {
+         
+
+            isDashing = true;
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            transform.LookAt(endPosition);
+            float elapsedTime = 0f;
+
+            while (elapsedTime < dashTime)
+            {
+
+                transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            dashWeapon.SetActive(false);
+
+            chanceDis = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                .First()
+                .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            isDashing = false;
         }
 
         Vector3 GetDirection()
