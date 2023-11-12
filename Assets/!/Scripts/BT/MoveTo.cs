@@ -16,7 +16,7 @@ public class MoveTo : EnemyAction
 
     public override TaskStatus OnUpdate()
     {
-        if (Vector3.SqrMagnitude(transform.position - Target.Value.position) < 5f)
+        if (Vector3.SqrMagnitude(transform.position - Target.Value.position) < 10f)
         {
             return TaskStatus.Success;
         }
