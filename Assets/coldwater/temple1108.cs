@@ -66,7 +66,7 @@ public class temple1108 : MonoBehaviour
             bool onBeat = rhythmTimer.IsOnBeat();
             if (onBeat)
             {
-                if(comboBar.value <=4)
+                if(comboBar.value <=40)
                 {
                     comboBar.value += 1;
                 }
@@ -128,9 +128,6 @@ public class temple1108 : MonoBehaviour
             attackValue = 1*(int)comboBar.value;
             damageObj.OnTakeDamage(attackValue);
         }
-
-
-
     }
 
 }

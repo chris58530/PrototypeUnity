@@ -15,7 +15,7 @@ namespace _.Scripts.Temporary
     {
         None,
         Dash,
-        ExtraReadyToDash,
+        Chance,
         ExtraDash
     }
 
@@ -26,36 +26,32 @@ namespace _.Scripts.Temporary
         [SerializeField] private TMP_Text time;
 
         [Header("Dash UI")] [SerializeField] private Image _dashCDImage;
-        [SerializeField] private Image _ReadyToDashImage;
-        [SerializeField] private float _dashCD;
-        private float _currentDashCD;
+
 
         [Header("Dash Setting")] [SerializeField]
-        public float dashSpeed;
+        private float dashSpeed;
 
+//衝刺持續時間一定要小於beat
         [SerializeField] public float dashTime;
         [SerializeField] public float currentDashTime;
-        [SerializeField] public bool canDoubleTime;
-        [SerializeField] private GameObject dashWeapon;
+        [SerializeField] private float dashCD = 4;
         [SerializeField] private GameObject dashPreviewObj;
-        [SerializeField] private GameObject model;
+        [SerializeField] private GameObject shadowModel;
+        [SerializeField] private int dashCombo;
 
 
-        [SerializeField] private int dashQuanity;
         private bool hasAdd;
-
-        private bool _isDashing = false;
-        private bool _isOnWall = false;
-        private bool canDash;
-        private bool isDashCD;
+        [SerializeField] private bool canDash;
         private Vector3 _dashDir;
         private ReactiveProperty<DashState> _dashState = new ReactiveProperty<DashState>();
+        private IDisposable dashCoolTime;
+        private IDisposable dashingTime;
 
         private void Start()
         {
-            _currentDashCD = _dashCD;
             currentDashTime = dashTime;
-            dashQuanity = 0;
+            dashCombo = 0;
+            canDash = true;
             _dashState.Value = DashState.None;
             _dashState.Subscribe(_ =>
             {
@@ -67,18 +63,8 @@ namespace _.Scripts.Temporary
         protected override void Update()
         {
             SwitchDashState();
-            UpdateDashImage();
+            UpdateDashImg();
             UpdateCombo();
-            DoDash();
-            if (isDashCD)
-            {
-                dashQuanity = 0;
-                _currentDashCD -= Time.deltaTime;
-                if (_currentDashCD <= 0)
-                {
-                    isDashCD = false;
-                }
-            }
         }
 
         void SwitchDashState()
@@ -86,126 +72,103 @@ namespace _.Scripts.Temporary
             switch (_dashState.Value)
             {
                 case DashState.None:
+
                     base.Update();
-
-                    model.transform.localEulerAngles = new Vector3(0, 0, 0);
-
-                    dashPreviewObj.SetActive(false);
-
-                    Time.timeScale = 1f;
-                    time.text = 1.ToString();
-
-                    if (input.IsPressedDash && !isDashCD)
+                    ResetCombo();
+                    InDashCoolTime();
+                    if (input.IsPressedDash && canDash)
                     {
-                        canDash = true;
-                        ShowDashDirection(true);
-                        transform.LookAt(_dashDir);
                         _dashState.Value = DashState.Dash;
+
+                        DashShadow shadow = Instantiate(
+                                shadowModel, transform.position, transform.rotation)
+                            .GetComponent<DashShadow>();
+                        shadow.Init(1f, transform);
                     }
 
                     break;
 
                 case DashState.Dash:
 
+                    if (!hasAdd) AddCombo();
+
+                    controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
+
+
+                    dashingTime = Observable.EveryUpdate()
+                        .First()
+                        .Sample(TimeSpan.FromSeconds(dashTime))
+                        .Subscribe(_ =>
+                        {
+                            canDash = false;
+                            RestDash();
+                            _dashState.Value = DashState.Chance;
+                        }).AddTo(this);
+
+
                     break;
-
-
-                case DashState.ExtraReadyToDash:
-                    // currentExtraReadyToDashKeepTime -= Time.deltaTime;
-                    canDash = false;
-                    Time.timeScale = 0.1f;
-                    time.text = 0.1.ToString();
-
-                    model.transform.localEulerAngles = new Vector3(90, 0, 0);
-
-                    // if (currentExtraReadyToDashKeepTime <= 0)
-                    // {
-                    //     _dashState.Value = DashState.None;
-                    //     Time.timeScale = 1f;
-                    //     time.text = 1.ToString();
-                    // }
-                    ShowDashDirection(true);
-                    if (input.IsPressedDash)
+                case DashState.Chance:
+                    base.Update();
+                    if (BeatManager.missBeat)
                     {
-                        canDash = true;
-                        transform.LookAt(_dashDir);
-                        Time.timeScale = 1f;
-                        time.text = 1.ToString();
-                        _dashState.Value = DashState.ExtraDash;
+                        _dashState.Value = DashState.None;
+                        BeatManager.missBeat = false;
                     }
 
-                    break;
+                    if (BeatManager.onBeat && input.IsPressedDash)
+                    {
+                        dashingTime.Dispose();
+                        hasAdd = false;
+                        _dashState.Value = DashState.Dash;
+                    }
 
-                case DashState.ExtraDash:
-                    _isOnWall = false;
-                    model.transform.localEulerAngles = new Vector3(0, 0, 0);
                     break;
             }
         }
 
-        void DoDash()
+        void RestDash()
         {
-            if (!canDash || isDashCD)
-            {
-                UpdateReadyToDashImage(false);
+            dashCoolTime?.Dispose();
+            dashingTime?.Dispose();
+        }
 
-                currentDashTime = dashTime;
-                _isDashing = false;
-                if (!_isOnWall)
-                    _dashState.Value = Temporary.DashState.None;
-                return;
-            }
+        void AddCombo()
+        {
+            dashCombo += 1;
+            hasAdd = true;
+        }
 
-            if (!hasAdd)
-            {
-                dashQuanity += 1;
-                hasAdd = true;
-            }
+        void ResetCombo()
+        {
+            dashCombo = 0;
+            hasAdd = false;
+        }
 
-            _isDashing = true;
-            ShowDashDirection(false);
-            controller.Move(transform.forward * (Time.deltaTime * dashSpeed));
-            currentDashTime -= Time.deltaTime;
-
-            if (currentDashTime < 0.2)
-            {
-                UpdateReadyToDashImage(true);
-                if (input.IsPressedDash)
-                {
-                    currentDashTime = dashTime;
-                    hasAdd = false;
-                    ShowDashDirection(true);
-                    transform.LookAt(_dashDir);
-                }
-            }
-
-            if (currentDashTime <= 0)
-            {
-                canDash = false;
-                isDashCD = true;
-                _currentDashCD = _dashCD;
-            }
+        void InDashCoolTime()
+        {
+            dashCoolTime = Observable.EveryUpdate()
+                .First()
+                .Delay(TimeSpan.FromSeconds(dashCD))
+                .Subscribe(_ => { canDash = true; }).AddTo(this);
         }
 
 
         #region UI
 
-        public void UpdateDashImage()
-        {
-            _dashCDImage.fillAmount = _currentDashCD / _dashCD;
-        }
-
-        public void UpdateReadyToDashImage(bool t)
-        {
-            _ReadyToDashImage.enabled = t;
-        }
-
         public void UpdateCombo()
         {
-            combo.text = dashQuanity.ToString();
+            combo.text = dashCombo.ToString();
+        }
+
+        void UpdateDashImg()
+        {
+            if (canDash) _dashCDImage.enabled = true;
+            else _dashCDImage.enabled = false;
         }
 
         #endregion
+
+        #region MouseDash
 
         public void ShowDashDirection(bool isShow)
         {
@@ -239,16 +202,6 @@ namespace _.Scripts.Temporary
             return hitpoint;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            // if (_dashState.Value == DashState.ReadyToDash) return;
-            if (_dashState.Value == DashState.ExtraReadyToDash) return;
-            if (!_isDashing) return;
-            if (other.TryGetComponent<DoubleDashObject>(out var doubleDashObject))
-            {
-                _isOnWall = true;
-                _dashState.Value = Temporary.DashState.ExtraReadyToDash;
-            }
-        }
+        #endregion
     }
 }
