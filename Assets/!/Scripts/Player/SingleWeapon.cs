@@ -14,7 +14,7 @@ public class SingleWeapon : MonoBehaviour
 
         int combo = FindObjectOfType<PlayerCombo>().combo;
 
-        damageObj.OnTakeDamage(attackValue + combo / 2);
+        damageObj.OnTakeDamage(attackValue + combo );
 
         //dubug
         TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();

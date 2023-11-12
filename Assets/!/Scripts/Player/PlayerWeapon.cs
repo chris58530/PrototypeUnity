@@ -43,6 +43,10 @@ namespace _.Scripts.Player
                 TMP_Text t = GameObject.Find("ATKTypeText").GetComponent<TMP_Text>();
                 t.text = "Multi";
             }
+            if (Input.GetMouseButtonDown(0))
+            {
+                SwitchToNextWeapon();
+            }
         }
 
 
@@ -61,7 +65,14 @@ namespace _.Scripts.Player
                 _currentAttackWeapon.SetActive(false);
             }).AddTo(this);
         }
+        void SwitchToNextWeapon()
+        {
+            int currentIndex = (int)weaponType;
+            int nextIndex = (currentIndex + 1) % Enum.GetValues(typeof(WeaponType)).Length;
 
+            weaponType = (WeaponType)nextIndex;
+
+        }
 
         private void OnTriggerEnter(Collider other)
         {
