@@ -10,8 +10,10 @@ namespace _.Scripts.Player.State
         Idle,
         Walk,
         Attack,
-        Pull,
+
         Dash,
+        DashChance,
+        DashFail,
         Hurt,
         Roll,
         Dead
@@ -25,10 +27,6 @@ namespace _.Scripts.Player.State
         private PlayerHp _playerHp;
 
         [SerializeField] private Animator animator;
-
-        //Coldwater//
-        [SerializeField] private Transform _positionToSpawn;
-        [SerializeField] private GameObject _dashModel;
 
 
         private void Awake()
@@ -51,23 +49,28 @@ namespace _.Scripts.Player.State
                 PlayerState.Walk, new PlayerWalk(
                     _input, _controller, animator, false));
             _fsm.AddState(
-                PlayerState.Attack, new PlayerAttack(
+                PlayerState.Dash, new PlayerDash(
+                    _controller, animator, true));
+            _fsm.AddState(
+                PlayerState.DashChance, new PlayerDashChance(
                     _input, _controller, animator, true));
             _fsm.AddState(
-                PlayerState.Pull, new PlayerPull(
-                    _input, _controller, animator, false));
-            _fsm.AddState(
-                PlayerState.Dash, new PlayerDash(
-                    _controller, animator, _positionToSpawn, _dashModel, true));
-            _fsm.AddState(
-                PlayerState.Hurt, new PlayerHurt(
-                    _controller, animator, _playerHp, true));
-            _fsm.AddState(
-                PlayerState.Roll, new PlayerRoll(
-                    false));
-            _fsm.AddState(
-                PlayerState.Dead, new PlayerDead(
-                    animator, _playerHp,false));
+                PlayerState.DashFail, new PlayerDashFail(
+                    _input, _controller, animator, true));
+
+            // _fsm.AddState(
+            //     PlayerState.Attack, new PlayerAttack(
+            //         _input, _controller, animator, true));
+            //
+            // _fsm.AddState(
+            //     PlayerState.Hurt, new PlayerHurt(
+            //         _controller, animator, _playerHp, true));
+            // _fsm.AddState(
+            //     PlayerState.Roll, new PlayerRoll(
+            //         false));
+            // _fsm.AddState(
+            //     PlayerState.Dead, new PlayerDead(
+            //         animator, _playerHp,false));
 
             //_fsm Transition
 
@@ -75,47 +78,30 @@ namespace _.Scripts.Player.State
             _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Dash,
-                transition => _input.IsReleasedDash);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Dash,
-                transition => _controller.extraDash);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Pull,
-                transition => _input.IsPressedPull);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Attack,
-                transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Hurt,
-                transition => _playerHp.getAttack);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Dead,
-                transition => _playerHp.Dead);
-
+                transition => _input.IsPressedDash);
             //Walk
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Dash,
-                transition => _input.IsReleasedDash);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Dash,
-                transition => _controller.extraDash);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Pull,
-                transition => _input.IsPressedPull);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Attack,
-                transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Hurt,
-                transition => _playerHp.getAttack);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Dead,
-                transition => _playerHp.Dead);
+                transition => _input.IsPressedDash);
             //Dash
-            _fsm.AddTransition(PlayerState.Dash, PlayerState.Idle);
-            _fsm.AddTransition(PlayerState.Dash, PlayerState.Dash,
-                transition => _controller.extraDash);
-            //Pull
-            _fsm.AddTransition(PlayerState.Pull, PlayerState.Idle,
-                transition => _input.IsReleasedPull);
+            _fsm.AddTransition(PlayerState.Dash, PlayerState.DashChance);
 
-            //Attack
-            _fsm.AddTransition(PlayerState.Attack, PlayerState.Idle);
-            _fsm.AddTransition(PlayerState.Attack, PlayerState.Hurt);
-            
-            //Hurt
-            _fsm.AddTransition(PlayerState.Hurt, PlayerState.Idle);
-            _fsm.AddTransition(PlayerState.Hurt, PlayerState.Dead,
-                transition => _playerHp.Dead);
+            //DashChance
+            _fsm.AddTransition(PlayerState.DashChance, PlayerState.Dash,
+                transition => _input.IsPressedDash);
+            _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail);
+
+            //DashFail
+            _fsm.AddTransition(PlayerState.DashFail, PlayerState.Idle);
+
+            // //Attack
+            // _fsm.AddTransition(PlayerState.Attack, PlayerState.Idle);
+            // _fsm.AddTransition(PlayerState.Attack, PlayerState.Hurt);
+            //
+            // //Hurt
+            // _fsm.AddTransition(PlayerState.Hurt, PlayerState.Idle);
+            // _fsm.AddTransition(PlayerState.Hurt, PlayerState.Dead,
+            //     transition => _playerHp.Dead);
+
             //Initialize
             _fsm.Init();
         }

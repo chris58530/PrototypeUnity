@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityHFSM;
 using UniRx;
@@ -24,14 +25,13 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            _animator.Play("Idle");
-
+            //debug
+            TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
+            t.text = "Idle";
         }
 
         public override void OnLogic()
         {
-            if (_input.IsPressedDash)
-                _controller.ShowDashDirection(true);
             _controller.Fall();
         }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityHFSM;
 using System;
+using TMPro;
 using UniRx;
 
 namespace _.Scripts.Player.State
@@ -24,8 +25,9 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            _animator.Play("Walk");
-            AudioManager.Instance.PlaySFX2("Walk");
+            //debug
+            TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
+            t.text = "Walk";
         }
 
         public override void OnLogic()
@@ -43,7 +45,6 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            AudioManager.Instance.StopPlaySFX2();
             _controller.ShowDashDirection(false);            
         }
     }
