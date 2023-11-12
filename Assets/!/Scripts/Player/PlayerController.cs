@@ -25,7 +25,6 @@ namespace _.Scripts.Player
 
         public bool finishChance;
 
-        [SerializeField] private GameObject dashWeapon;
 
         // [SerializeField] private GameObject dashPreviewObj;
         public bool isDashing;
@@ -151,7 +150,6 @@ namespace _.Scripts.Player
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-            dashWeapon.SetActive(false);
 
             chanceDis = Observable.EveryUpdate()
                 .Delay(TimeSpan.FromSeconds(dashChanceTime))

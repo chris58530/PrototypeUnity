@@ -14,12 +14,12 @@ namespace _.Scripts.Player
 
     public class PlayerWeapon : MonoBehaviour
     {
-        public  WeaponType weaponType = WeaponType.Single;
+        public WeaponType weaponType = WeaponType.Single;
         [SerializeField] private GameObject singleWeapon;
         [SerializeField] private GameObject multiWeapon;
         private GameObject _currentAttackWeapon;
         [SerializeField] private int attackValue;
-        [SerializeField] private float attackEffectTime = 0.2f;
+        [SerializeField] private float attackEffectTime = 0.5f;
 
         private void OnEnable()
         {
@@ -33,20 +33,18 @@ namespace _.Scripts.Player
 
         private void Update()
         {
-            Debug.Log("attack");
-
-            if(weaponType == WeaponType.Single)
+            if (weaponType == WeaponType.Single)
             {
                 TMP_Text t = GameObject.Find("ATKTypeText").GetComponent<TMP_Text>();
                 t.text = "Single";
-            }else if(weaponType == WeaponType.Multi)
+            }
+            else if (weaponType == WeaponType.Multi)
             {
                 TMP_Text t = GameObject.Find("ATKTypeText").GetComponent<TMP_Text>();
                 t.text = "Multi";
             }
         }
 
-     
 
         public void Attack() //animation event
         {
@@ -55,10 +53,10 @@ namespace _.Scripts.Player
             else if (weaponType == WeaponType.Multi)
                 _currentAttackWeapon = multiWeapon;
 
-
+            
             _currentAttackWeapon.SetActive(true);
-
-            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(attackEffectTime)).Subscribe(_ =>
+            float t = 0;
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(attackEffectTime)).First().Subscribe(_ =>
             {
                 _currentAttackWeapon.SetActive(false);
             }).AddTo(this);

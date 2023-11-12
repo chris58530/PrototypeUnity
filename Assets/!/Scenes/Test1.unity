@@ -1765,7 +1765,7 @@ GameObject:
   - component: {fileID: 738645838}
   - component: {fileID: 738645837}
   m_Layer: 5
-  m_Name: Type
+  m_Name: ATKTypeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2905,13 +2905,14 @@ GameObject:
   - component: {fileID: 1371767849}
   - component: {fileID: 1371767848}
   - component: {fileID: 1371767847}
+  - component: {fileID: 1371767850}
   m_Layer: 0
   m_Name: Multi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1371767846
 Transform:
   m_ObjectHideFlags: 0
@@ -2990,6 +2991,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371767845}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1371767850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371767845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498948ef405c3474d860217941ecdafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackValue: 5
 --- !u!1 &1455615733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,6 +3016,7 @@ GameObject:
   - component: {fileID: 1455615737}
   - component: {fileID: 1455615736}
   - component: {fileID: 1455615735}
+  - component: {fileID: 1455615738}
   m_Layer: 0
   m_Name: Single
   m_TagString: Untagged
@@ -3017,7 +3032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455615733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.11}
+  m_LocalPosition: {x: 0, y: 0, z: 0.21}
   m_LocalScale: {x: 3.36, y: 3.36, z: 3.36}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3088,6 +3103,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455615733}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1455615738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455615733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfdc3ffe95ed3e47b3ca62feec5fddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackValue: 5
 --- !u!1 &1517949138
 GameObject:
   m_ObjectHideFlags: 0
@@ -7207,10 +7235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493e1e3f33fa8a4428f60e089da1dff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
   singleWeapon: {fileID: 1455615733}
   multiWeapon: {fileID: 1371767845}
   attackValue: 1
-  attackEffectTime: 0
+  attackEffectTime: 0.2
 --- !u!4 &3976079886098535327
 Transform:
   m_ObjectHideFlags: 0
@@ -8785,7 +8814,6 @@ MonoBehaviour:
   dashChanceTime: 0.3
   dashFailTime: 0.5
   finishChance: 0
-  dashWeapon: {fileID: 6126976947349749877}
   isDashing: 0
   gravity: -20
   useMousePosToDash: 1
