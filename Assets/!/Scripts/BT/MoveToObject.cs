@@ -12,10 +12,8 @@ public class MoveToObject : EnemyAction
 
     public override void OnStart()
     {
-        animator.Play("Walk");
         navMeshAgent.isStopped = false;
-        navMeshAgent.speed = 7;
-        animator.speed = 2;
+        navMeshAgent.speed = 11;
     }
 
     public override TaskStatus OnUpdate()
@@ -38,9 +36,6 @@ public class MoveToObject : EnemyAction
     public override void OnEnd()
     {
         navMeshAgent.isStopped = true;
-        Vector3 targetPos = Target.Value.transform.position;
-        Vector3 dir = targetPos - transform.position;
-        Quaternion toRotation = Quaternion.LookRotation(dir.normalized, transform.up);
-        transform.rotation = toRotation;
+    
     }
 }

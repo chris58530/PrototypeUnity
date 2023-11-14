@@ -14,7 +14,7 @@ namespace _.Scripts.Player
 
     public class PlayerWeapon : MonoBehaviour
     {
-        public WeaponType weaponType = WeaponType.Single;
+        public static WeaponType weaponType = WeaponType.Single;
         [SerializeField] private GameObject singleWeapon;
         [SerializeField] private GameObject multiWeapon;
         private GameObject _currentAttackWeapon;

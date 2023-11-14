@@ -37,7 +37,8 @@ namespace _.Scripts.Player.State
                 Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
                 _controller.Move(dir);
             }
-           
+            _controller.Fall();
+
         }
 
         public override void OnExit()

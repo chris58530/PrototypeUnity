@@ -1,20 +1,18 @@
-using System;
-using _.Scripts.UI;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityHFSM;
+using TMPro;
+using System;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerDash : StateBase<PlayerState>
+    public class Player_PureDash : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
         private PlayerCombo _combo;
         private Animator _animator;
-
-        public PlayerDash(PlayerController controller,
+        public Player_PureDash(PlayerController controller,
             Animator animator, PlayerCombo combo,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -33,8 +31,8 @@ namespace _.Scripts.Player.State
             if (PlayerWeapon.weaponType == WeaponType.Multi)
                 _animator.Play("MultiDash");
 
-                if (PlayerWeapon.weaponType == WeaponType.Single)
-                    _animator.Play("SingleDash");
+            if (PlayerWeapon.weaponType == WeaponType.Single)
+                _animator.Play("SingleDash");
 
             _combo.combo += 1;
             _timer = new Timer();

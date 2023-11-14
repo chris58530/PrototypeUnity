@@ -6,7 +6,6 @@ namespace _.Scripts.Enemy
     public class Enemy : MonoBehaviour, IPullable
     {
         [SerializeField] private float pullDistance;
-        [SerializeField] private GameObject visualizePullDirection;
         public Vector3 PullDirection { get; set; }
 
         private BehaviorTree _bt;
@@ -19,7 +18,6 @@ namespace _.Scripts.Enemy
 
         private void Start()
         {
-            visualizePullDirection.SetActive(false);
             PullDirection = Vector3.zero;
         }
 
@@ -30,7 +28,6 @@ namespace _.Scripts.Enemy
             {
                 SetVisualizePullDirection(PullDirection);
             }
-            else visualizePullDirection.SetActive(false);
         }
 
         public void Pull()
@@ -45,10 +42,6 @@ namespace _.Scripts.Enemy
         public void SetVisualizePullDirection(Vector3 direction)
         {
             Debug.Log("set active");
-            visualizePullDirection.SetActive(true);
-            Vector3 look = new Vector3(PullDirection.x,
-                visualizePullDirection.transform.position.y, PullDirection.z);
-            visualizePullDirection.transform.LookAt(look);
         }
 
     }

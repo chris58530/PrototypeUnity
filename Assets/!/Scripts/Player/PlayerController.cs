@@ -62,7 +62,7 @@ namespace _.Scripts.Player
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
         }
 
-        
+
         #region Dash
 
         private Vector3 _dashDir;
@@ -119,10 +119,10 @@ namespace _.Scripts.Player
             {
                 t += Time.deltaTime;
                 float a = t / dashTime;
+
                 transform.position = Vector3.Lerp(transform.position, endPosition, a);
                 if (a >= 1f)
                 {
-
                     chanceDis = Observable.EveryUpdate()
                         .Delay(TimeSpan.FromSeconds(dashChanceTime))
                         .First()
@@ -136,8 +136,6 @@ namespace _.Scripts.Player
 
         IEnumerator PerformDash(Vector3 dashDirection)
         {
-         
-
             isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
@@ -145,8 +143,9 @@ namespace _.Scripts.Player
 
             while (elapsedTime < dashTime)
             {
-
-                transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
+                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

@@ -38,6 +38,8 @@ namespace _.Scripts.Player.State
         {
             if (_timer.Elapsed > _controller.dashFailTime)
                 fsm.StateCanExit();
+            _controller.Fall();
+
         }
 
         public override void OnExit()

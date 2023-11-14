@@ -10,7 +10,7 @@ public class MoveTo : EnemyAction
 
     public override void OnStart()
     {
-        animator.Play("Walk");
+        // animator.Play("Walk");
         navMeshAgent.isStopped = false;
     }
 
