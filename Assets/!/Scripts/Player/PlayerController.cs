@@ -23,6 +23,10 @@ namespace _.Scripts.Player
 
         [SerializeField] public float dashFailTime;
 
+        [SerializeField] public float PureDashTime = 0.5f;
+        [SerializeField] public float SingleDashTime = 0.3f;
+        [SerializeField] public float MultiDashTime = 0.1f;
+
         public bool finishChance;
 
 
@@ -65,6 +69,78 @@ namespace _.Scripts.Player
 
         #region Dash
 
+        public void PureDash()
+        {
+            chanceDis?.Dispose();
+            finishChance = false;
+
+            #region PerformDash
+
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
+            var targetPosition = Vector3.zero;
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, mask))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                targetPosition = hit.point;
+                targetPosition.y = transform.position.y;
+            }
+
+            Vector3 dashDirection = (targetPosition - transform.position).normalized;
+
+            #endregion
+
+            StartCoroutine(PerformDash(dashDirection, dashTime));
+        }
+
+        public void SingleDash()
+        {
+            chanceDis?.Dispose();
+            finishChance = false;
+
+            #region PerformDash
+
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
+            var targetPosition = Vector3.zero;
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, mask))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                targetPosition = hit.point;
+                targetPosition.y = transform.position.y;
+            }
+
+            Vector3 dashDirection = (targetPosition - transform.position).normalized;
+
+            #endregion
+
+            StartCoroutine(PerformDash(dashDirection, dashTime));
+        }
+
+        public void MultiDash()
+        {
+            chanceDis?.Dispose();
+            finishChance = false;
+
+            #region PerformDash
+
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
+            var targetPosition = Vector3.zero;
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, mask))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                targetPosition = hit.point;
+                targetPosition.y = transform.position.y;
+            }
+
+            Vector3 dashDirection = (targetPosition - transform.position).normalized;
+
+            #endregion
+
+            StartCoroutine(PerformDash(dashDirection, dashTime));
+        }
+
         private Vector3 _dashDir;
 
         public void ShowDashDirection(bool isShow)
@@ -104,7 +180,7 @@ namespace _.Scripts.Player
 
             if (useMousePosToDash)
             {
-                StartCoroutine(PerformDash(dashDirection));
+                StartCoroutine(PerformDash(dashDirection, dashTime));
             }
             else StartCoroutine(MoveToTarget());
         }
@@ -134,14 +210,14 @@ namespace _.Scripts.Player
             }
         }
 
-        IEnumerator PerformDash(Vector3 dashDirection)
+        IEnumerator PerformDash(Vector3 dashDirection, float time)
         {
             isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
             float elapsedTime = 0f;
 
-            while (elapsedTime < dashTime)
+            while (elapsedTime < time)
             {
                 _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
                 // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));

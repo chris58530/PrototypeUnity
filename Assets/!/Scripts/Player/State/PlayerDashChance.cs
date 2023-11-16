@@ -10,7 +10,7 @@ namespace _.Scripts.Player.State
         private Animator _animator;
         private readonly PlayerMapInput _input;
         private readonly PlayerController _controller;
-
+        private Timer _timer;
         public PlayerDashChance(PlayerMapInput playerMapInput,
             PlayerController playerController,
             Animator animator,
@@ -27,16 +27,15 @@ namespace _.Scripts.Player.State
             //debug
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "DashChance";
+            
+            _timer = new Timer();
         }
 
         public override void OnLogic()
         {
-            if (_input.Move)
-            {
-                Vector2 getInput = _input.MoveVector;
-                Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
-                _controller.Move(dir);
-            }
+           
+           
+         
             _controller.Fall();
 
         }

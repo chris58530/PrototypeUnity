@@ -6,13 +6,14 @@ using System;
 
 namespace _.Scripts.Player.State
 {
-    public class Player_PureDash : StateBase<PlayerState>
+    public class PlayerPureDash : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
         private PlayerCombo _combo;
         private Animator _animator;
-        public Player_PureDash(PlayerController controller,
+
+        public PlayerPureDash(PlayerController controller,
             Animator animator, PlayerCombo combo,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -26,29 +27,25 @@ namespace _.Scripts.Player.State
         {
             //debug
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
-            t.text = "Dash";
-
-            if (PlayerWeapon.weaponType == WeaponType.Multi)
-                _animator.Play("MultiDash");
-
-            if (PlayerWeapon.weaponType == WeaponType.Single)
-                _animator.Play("SingleDash");
+            t.text = "PureDash";
+            Debug.Log("PureDash");
 
             _combo.combo += 1;
             _timer = new Timer();
-            _controller.Dash();
+            //Action
+            _controller.PureDash();
+            _animator.Play("PureDash");
             // AudioManager.Instance.PlaySFX("Dash");
             Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(_controller.dashTime / 2)).First().Subscribe(_ =>
             {
                 // AudioManager.Instance.PlaySFX("DashChance");
             });
             _controller.Fall();
-
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.dashTime)
+            if (_timer.Elapsed > _controller.PureDashTime / 1.5f)
                 fsm.StateCanExit();
         }
 
