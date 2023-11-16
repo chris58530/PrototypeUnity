@@ -30,7 +30,7 @@ namespace _.Scripts.Player.State
             Debug.Log("MultiDash");
             PlayerWeapon.weaponType = WeaponType.Multi;
 
-            _combo.combo += 1;
+            // _combo.combo += 1;
             _timer = new Timer();
             //Action
             _controller.MultiDash();

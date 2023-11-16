@@ -31,7 +31,7 @@ namespace _.Scripts.Player.State
 
             PlayerWeapon.weaponType = WeaponType.Single;
 
-            _combo.combo += 1;
+            // _combo.combo += 1;
             _timer = new Timer();
             //Action
             _controller.SingleDash();
