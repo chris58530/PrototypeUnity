@@ -14,6 +14,7 @@ namespace _.Scripts.Player.State
         PureDash,
         SingleDash,
         MultiDash,
+        BackDash,
         DashChance,
         DashFail,
         Hurt,
@@ -67,7 +68,9 @@ namespace _.Scripts.Player.State
             _fsm.AddState(
                 PlayerState.MultiDash, new PlayerMultiDash(
                     _controller, animator, _combo, true));
-
+            _fsm.AddState(
+                PlayerState.BackDash, new PlayerBackDash(
+                    _controller, animator, _combo, true));
 
             // _fsm.AddState(
             //     PlayerState.Attack, new PlayerAttack(
@@ -95,11 +98,14 @@ namespace _.Scripts.Player.State
                 transition => Input.GetKeyDown(KeyCode.W));
             _fsm.AddTransition(PlayerState.Idle, PlayerState.MultiDash,
                 transition => Input.GetKeyDown(KeyCode.E));
+            _fsm.AddTransition(PlayerState.Idle, PlayerState.BackDash,
+                transition => Input.GetKeyDown(KeyCode.R));
             //Walk
             _fsm.AddTransition(PlayerState.Walk, PlayerState.PureDash,
                 transition => Input.GetKeyDown(KeyCode.Q));
             _fsm.AddTransition(PlayerState.Walk, PlayerState.SingleDash,
                 transition => Input.GetKeyDown(KeyCode.W));
+        
 
             //PureDash
             _fsm.AddTransition(PlayerState.PureDash, PlayerState.DashChance);
@@ -110,6 +116,10 @@ namespace _.Scripts.Player.State
             
             //MultiDash
             _fsm.AddTransition(PlayerState.MultiDash, PlayerState.DashChance);
+            
+            //BackDash
+            _fsm.AddTransition(PlayerState.BackDash, PlayerState.DashChance);
+
 
             //DashChance
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.PureDash,
@@ -118,6 +128,8 @@ namespace _.Scripts.Player.State
                 transition => Input.GetKeyDown(KeyCode.W));
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.MultiDash,
                 transition => Input.GetKeyDown(KeyCode.E));
+            _fsm.AddTransition(PlayerState.DashChance, PlayerState.BackDash,
+                transition => Input.GetKeyDown(KeyCode.R));
             _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail,
                 transition=>_controller.finishChance);
 

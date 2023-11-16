@@ -23,10 +23,16 @@ namespace _.Scripts.Player
 
         [SerializeField] public float dashFailTime;
 
-        [SerializeField] public float PureDashTime = 0.5f;
-        [SerializeField] public float SingleDashTime = 0.3f;
-        [SerializeField] public float MultiDashTime = 0.1f;
+        [SerializeField] public float PureDashTime;
+        [SerializeField] public float SingleDashTime ;
+        [SerializeField] public float MultiDashTime;
+        [SerializeField] public float BackDashTime ;
 
+        [Header("BackDash Bullet Setting")] [SerializeField]
+        private GameObject bullet;
+        [SerializeField] private float lifeTime;
+        [SerializeField]private Transform shootPoint;
+        [SerializeField]private  float speed;
         public bool finishChance;
 
 
@@ -141,6 +147,33 @@ namespace _.Scripts.Player
             StartCoroutine(PerformDash(dashDirection, dashTime));
         }
 
+        public void BackDash()
+        {
+            chanceDis?.Dispose();
+            finishChance = false;
+            
+        
+
+            
+            #region PerformDash
+
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
+            var targetPosition = Vector3.zero;
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, mask))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                targetPosition = hit.point;
+                targetPosition.y = transform.position.y;
+            }
+
+            Vector3 dashDirection = (targetPosition - transform.position).normalized;
+
+            #endregion
+
+            StartCoroutine(BackDash(dashDirection, dashTime));
+        }
+
         private Vector3 _dashDir;
 
         public void ShowDashDirection(bool isShow)
@@ -215,6 +248,7 @@ namespace _.Scripts.Player
             isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
+         
             float elapsedTime = 0f;
 
             while (elapsedTime < time)
@@ -232,7 +266,29 @@ namespace _.Scripts.Player
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
             isDashing = false;
         }
+        IEnumerator BackDash(Vector3 dashDirection, float time)
+        {
+            isDashing = true;
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            transform.LookAt(endPosition);   //spawn bullet
+            Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+            float elapsedTime = 0f;
 
+            while (elapsedTime < time)
+            {
+                _controller.Move(-transform.forward * (dashSpeed * Time.deltaTime));
+                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
+                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            chanceDis = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                .First()
+                .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            isDashing = false;
+        }
         Vector3 GetDirection()
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
