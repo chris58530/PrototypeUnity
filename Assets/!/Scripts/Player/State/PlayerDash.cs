@@ -38,7 +38,6 @@ namespace _.Scripts.Player.State
 
             _combo.combo += 1;
             _timer = new Timer();
-            _controller.Dash();
             // AudioManager.Instance.PlaySFX("Dash");
             Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(_controller.dashTime / 2)).First().Subscribe(_ =>
             {
