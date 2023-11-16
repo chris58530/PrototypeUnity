@@ -121,7 +121,7 @@ namespace _.Scripts.Player
 
             #endregion
 
-            StartCoroutine(PureDash(dashDirection, dashTime));
+            StartCoroutine(SingleDash(dashDirection, dashTime));
         }
 
         public void MultiDash()
@@ -145,7 +145,7 @@ namespace _.Scripts.Player
 
             #endregion
 
-            StartCoroutine(PureDash(dashDirection, dashTime));
+            StartCoroutine(MultiDash(dashDirection, dashTime));
         }
 
 
@@ -176,6 +176,55 @@ namespace _.Scripts.Player
             while (elapsedTime < time)
             {
                 _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
+                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            chanceDis = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                .First()
+                .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            isDashing = false;
+        }
+        IEnumerator SingleDash(Vector3 dashDirection, float time)
+        {
+            isDashing = true;
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            transform.LookAt(endPosition);
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < time)
+            {
+                //test to 0
+
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime)*1.5f);
+                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
+                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            chanceDis = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                .First()
+                .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            isDashing = false;
+        }
+        IEnumerator MultiDash(Vector3 dashDirection, float time)
+        {
+            isDashing = true;
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            transform.LookAt(endPosition);
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < time)
+            {
+                //test to 0
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime)*0.5f);
                 // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
                 // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
