@@ -24,7 +24,7 @@ public class Attack : EnemyAction
         Vector3 dir = targetPos - transform.position;
         Quaternion toRotation = Quaternion.LookRotation(dir.normalized, transform.up);
         transform.rotation = toRotation;
-        rb.AddForce(dir*200);
+        rb.AddForce(dir*100);
     }
 
     public override TaskStatus OnUpdate()

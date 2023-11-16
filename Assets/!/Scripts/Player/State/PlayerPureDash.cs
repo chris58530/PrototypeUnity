@@ -40,13 +40,14 @@ namespace _.Scripts.Player.State
             {
                 // AudioManager.Instance.PlaySFX("DashChance");
             });
-            _controller.Fall();
         }
 
         public override void OnLogic()
         {
             if (_timer.Elapsed > _controller.PureDashTime / 1.5f)
                 fsm.StateCanExit();
+            _controller.Fall();
+
         }
 
 
