@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _.Scripts.Event;
 using UnityEngine;
 using UniRx;
+using UniRx.Triggers;
 
 namespace _.Scripts.Player
 {
@@ -35,10 +36,10 @@ namespace _.Scripts.Player
         [SerializeField] private Transform shootPoint;
         [SerializeField] private float speed;
         public bool finishChance;
-
+        public bool singleDashStop;
 
         // [SerializeField] private GameObject dashPreviewObj;
-        public bool isDashing;
+        public bool isSingleDash;
 
 
         [Header("Gravity Setting")] [SerializeField]
@@ -59,10 +60,6 @@ namespace _.Scripts.Player
             _controller = GetComponent<CharacterController>();
             _attackDetect = GetComponentInChildren<AttackDetect>();
             _playerWeapon = GetComponentInChildren<PlayerWeapon>();
-        }
-
-        private void Start()
-        {
         }
 
 
@@ -167,7 +164,6 @@ namespace _.Scripts.Player
 
         IEnumerator PureDash(Vector3 dashDirection, float time)
         {
-            isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
 
@@ -186,11 +182,11 @@ namespace _.Scripts.Player
                 .Delay(TimeSpan.FromSeconds(dashChanceTime))
                 .First()
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
-            isDashing = false;
         }
+
         IEnumerator SingleDash(Vector3 dashDirection, float time)
         {
-            isDashing = true;
+            isSingleDash = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
 
@@ -198,11 +194,14 @@ namespace _.Scripts.Player
 
             while (elapsedTime < time)
             {
-                //test to 0
+                //test 
+                if (!isSingleDash) break;
 
-                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime)*1.5f);
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime) * 1.5f);
                 // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
                 // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+
+
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -211,11 +210,11 @@ namespace _.Scripts.Player
                 .Delay(TimeSpan.FromSeconds(dashChanceTime))
                 .First()
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
-            isDashing = false;
+            isSingleDash = false;
         }
+
         IEnumerator MultiDash(Vector3 dashDirection, float time)
         {
-            isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition);
 
@@ -224,7 +223,7 @@ namespace _.Scripts.Player
             while (elapsedTime < time)
             {
                 //test to 0
-                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime)*0.5f);
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime) * 0.5f);
                 // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
                 // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
@@ -235,7 +234,6 @@ namespace _.Scripts.Player
                 .Delay(TimeSpan.FromSeconds(dashChanceTime))
                 .First()
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
-            isDashing = false;
         }
 
         public void BackDash()
@@ -261,11 +259,10 @@ namespace _.Scripts.Player
             #endregion
 
             StartCoroutine(BackDash(dashDirection, dashTime));
-         }
+        }
 
         IEnumerator BackDash(Vector3 dashDirection, float time)
         {
-            isDashing = true;
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
             transform.LookAt(endPosition); //spawn bullet
             Instantiate(bullet, shootPoint.position, shootPoint.rotation);
@@ -284,7 +281,6 @@ namespace _.Scripts.Player
                 .Delay(TimeSpan.FromSeconds(dashChanceTime))
                 .First()
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
-            isDashing = false;
         }
 
         #endregion
@@ -345,5 +341,36 @@ namespace _.Scripts.Player
         }
 
         #endregion
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Enemy") && isSingleDash)
+            {
+                isSingleDash = false;
+                Debug.Log("singledash stop");
+                StartCoroutine(ForceBack());
+            }
+        }
+
+        IEnumerator ForceBack()
+        {
+            Vector3 endPosition = transform.position + transform.forward * dashDistance;
+            float t = 0;
+            while (true)
+            {
+                t += Time.deltaTime;
+                float a = t / dashTime;
+
+                transform.position = Vector3.Lerp(transform.position, -endPosition/2, a);
+                if (a >= 1f)
+                {
+                    break;
+                }
+
+                yield return null;
+            }
+            yield return null;
+            
+        }
     }
 }

@@ -457,5 +457,10 @@ namespace UniRx.Triggers
 #endif
 
         #endregion
+
+        private static void OnCollisionEnterAsObservable(this Component component, Action<object> action)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

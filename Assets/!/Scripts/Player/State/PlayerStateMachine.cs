@@ -112,7 +112,7 @@ namespace _.Scripts.Player.State
 
             //SingleDash
             _fsm.AddTransition(PlayerState.SingleDash, PlayerState.DashChance);
-            
+
             
             //MultiDash
             _fsm.AddTransition(PlayerState.MultiDash, PlayerState.DashChance);
