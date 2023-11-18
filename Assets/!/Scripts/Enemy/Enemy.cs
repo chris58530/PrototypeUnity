@@ -1,48 +1,38 @@
+using System;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
 
 namespace _.Scripts.Enemy
 {
-    public class Enemy : MonoBehaviour, IPullable
+    public class Enemy : MonoBehaviour, IMarkable
     {
-        [SerializeField] private float pullDistance;
-        public Vector3 PullDirection { get; set; }
-
         private BehaviorTree _bt;
         private Rigidbody _rb;
+
+        [SerializeField] private GameObject markObject;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _bt = GetComponent<BehaviorTree>();
         }
 
-        private void Start()
+         
+
+        private IDisposable _markRoutine;
+        public bool GetMark { get; set; }
+
+        public void Mark()
         {
-            PullDirection = Vector3.zero;
+            _markRoutine?.Dispose();
+            GetMark = true;
+            markObject.SetActive(true);
+            _markRoutine = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(5))
+                .First()
+                .Subscribe(_ => { markObject.SetActive(false); }).AddTo(this);
         }
-
-        private void Update()
-        {
-
-            if (PullDirection != Vector3.zero)
-            {
-                SetVisualizePullDirection(PullDirection);
-            }
-        }
-
-        public void Pull()
-        {
-            _bt.SendEvent("HasStun");
-            if (PullDirection == Vector3.zero) return;
-            Vector3 dir = PullDirection - transform.position;
-            _rb.AddForce(dir.normalized * pullDistance, ForceMode.Impulse);
-            PullDirection = Vector3.zero;
-        }
-
-        public void SetVisualizePullDirection(Vector3 direction)
-        {
-            Debug.Log("set active");
-        }
-
     }
 }

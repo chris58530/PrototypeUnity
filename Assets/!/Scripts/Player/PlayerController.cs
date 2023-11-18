@@ -354,21 +354,21 @@ namespace _.Scripts.Player
 
         IEnumerator ForceBack()
         {
-            Vector3 endPosition = transform.position + transform.forward * dashDistance;
-            float t = 0;
-            while (true)
-            {
-                t += Time.deltaTime;
-                float a = t / dashTime;
-
-                transform.position = Vector3.Lerp(transform.position, -endPosition/2, a);
-                if (a >= 1f)
-                {
-                    break;
-                }
-
-                yield return null;
-            }
+            // Vector3 endPosition = transform.position + transform.forward * dashDistance;
+            // float t = 0;
+            // while (true)
+            // {
+            //     t += Time.deltaTime;
+            //     float a = t / dashTime;
+            //
+            //     transform.position = Vector3.Lerp(transform.position, -endPosition/2, a);
+            //     if (a >= 1f)
+            //     {
+            //         break;
+            //     }
+            //
+            //     yield return null;
+            // }
             yield return null;
             
         }

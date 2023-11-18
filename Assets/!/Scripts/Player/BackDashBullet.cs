@@ -22,7 +22,10 @@ public class BackDashBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.TryGetComponent<IMarkable>(out var markable))
+        {
+            markable.Mark();
             Destroy(gameObject);
+        }
     }
 }
