@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class TypeAEnemy : MonoBehaviour
+namespace _.Scripts.Enemy.TypeA
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(TypeAController))]
+    public class TypeAEnemy : Enemy
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            
+        }
     }
 }

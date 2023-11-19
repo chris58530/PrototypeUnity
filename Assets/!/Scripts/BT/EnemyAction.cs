@@ -1,9 +1,8 @@
+using _.Scripts.Enemy.TypeA;
 using BehaviorDesigner.Runtime.Tasks;
-using JetBrains.Annotations;
 using BehaviorDesigner.Runtime;
 using UnityEngine.AI;
 using UnityEngine;
-
 
 public class EnemyAction : Action
 {

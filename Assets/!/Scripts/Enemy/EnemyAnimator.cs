@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-   public Animator ani;
+   [HideInInspector]public Animator ani;
 
    private void Awake()
    {
