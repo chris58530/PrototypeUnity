@@ -65,7 +65,7 @@ namespace _.Scripts.Enemy.TypeA
                 t += Time.deltaTime;
                 float y = jumpToPlayerCurve.Evaluate(t);
            
-                destination.y += y;
+                destination.y = y;
                 transform.position = Vector3.MoveTowards(transform.position, destination,
                     speed * Time.deltaTime);
 
