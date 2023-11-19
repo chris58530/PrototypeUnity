@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using UniRx;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _.Scripts.Enemy.TypeA
 {
@@ -45,21 +47,32 @@ namespace _.Scripts.Enemy.TypeA
         }
 
         //skill two 
-        public void JumpToPlayer(Transform target, float jumpTime)
+        public void JumpToPlayer(NavMeshAgent nav, Transform player, float jumpTime)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, player.position);
+            float speed = distanceToTarget / jumpTime; // Calculate speed based on distance
+
+            Vector3 destination = new Vector3(player.position.x, player.position.y, player.position.z);
+            StartCoroutine(JumpToPlayerRoutine(destination, jumpTime, speed));
+        }
+
+        IEnumerator JumpToPlayerRoutine(Vector3 destination, float time, float speed)
         {
             float t = 0;
-            var jumpAction = Observable.EveryUpdate().Subscribe(_ =>
+            while (t < time)
             {
-                t += 0.01f;
+                Debug.Log(t);
+                t += Time.deltaTime;
                 float y = jumpToPlayerCurve.Evaluate(t);
-                Debug.Log(y);
-                Vector3 go = new Vector3(target.position.x, target.position.y + y, target.position.z);
-                transform.position = Vector3.MoveTowards(transform.position,go, 50 * Time.deltaTime);
-            }).AddTo(this);
-            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(jumpTime)).First().Subscribe(_ =>
-            {
-                jumpAction.Dispose();
-            }).AddTo(this);
+           
+                destination.y = y;
+                transform.position = Vector3.MoveTowards(transform.position, destination,
+                    speed * Time.deltaTime);
+
+                yield return null;
+            }
+
+            yield return null;
         }
 
         public void ShakeTail()
