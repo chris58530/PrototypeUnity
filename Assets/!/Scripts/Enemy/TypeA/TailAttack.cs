@@ -21,13 +21,13 @@ namespace _.Scripts.Enemy.TypeA
             if (Vector3.Distance(transform.position, player.position) > tailDistance)
             {
                 controller.JumpToPlayer(navMeshAgent,player,jumpTime);
-                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(3))
+                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1f))
                     .First()
                     .Subscribe(_ => { _success = true; })
                     .AddTo(this.gameObject);
             }
             else
-                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(3))
+                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1f))
                     .First()
                     .Subscribe(_ => { _success = true; })
                     .AddTo(this.gameObject);
@@ -46,6 +46,7 @@ namespace _.Scripts.Enemy.TypeA
         public override void OnEnd()
         {
             navMeshAgent.enabled = true;
+            animator.Play("TailAttack");
             controller.ShakeTail();
         }
     }
