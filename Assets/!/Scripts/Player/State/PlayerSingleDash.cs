@@ -35,7 +35,7 @@ namespace _.Scripts.Player.State
             _timer = new Timer();
             //Action
             _controller.SingleDash();
-            _animator.Play("SingleDash");
+            _animator.Play("Attack");
 
             // AudioManager.Instance.PlaySFX("Dash");
             Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(_controller.dashTime / 2)).First().Subscribe(_ =>
