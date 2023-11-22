@@ -15,7 +15,8 @@ namespace _.Scripts.Player
         [SerializeField] private float rotateSpeed;
 
         [Header("Attack Setting")] [SerializeField]
-        public float attackTime =5f;
+        public float attackTime = 5f;
+
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
 
@@ -92,8 +93,28 @@ namespace _.Scripts.Player
 
             #endregion
 
-            StartCoroutine(PureDash(dashDirection, dashTime));
+            StartCoroutine(Roll(dashDirection, dashTime));
         }
+
+        IEnumerator Roll(Vector3 dashDirection, float time)
+        {
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            // transform.LookAt(endPosition);
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < time)
+            {
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
+                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+           
+        }
+
 
         #region Dash
 
@@ -185,29 +206,6 @@ namespace _.Scripts.Player
         }
 
 
-        IEnumerator PureDash(Vector3 dashDirection, float time)
-        {
-            Vector3 endPosition = transform.position + dashDirection * dashDistance;
-            transform.LookAt(endPosition);
-
-            float elapsedTime = 0f;
-
-            while (elapsedTime < time)
-            {
-                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
-                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
-                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            chanceDis = Observable.EveryUpdate()
-                .Delay(TimeSpan.FromSeconds(dashChanceTime))
-                .First()
-                .Subscribe(_ => { finishChance = true; }).AddTo(this);
-        }
-
-
         IEnumerator MultiDash(Vector3 dashDirection, float time)
         {
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
@@ -281,7 +279,6 @@ namespace _.Scripts.Player
         #endregion
 
 
-
         IEnumerator MoveToTarget()
         {
             Vector3 endPosition = transform.position + transform.forward * dashDistance;
@@ -324,7 +321,6 @@ namespace _.Scripts.Player
         }
 
 
-
         #region Fall
 
         public void Fall()
@@ -334,9 +330,5 @@ namespace _.Scripts.Player
         }
 
         #endregion
-
-     
-
-     
     }
 }

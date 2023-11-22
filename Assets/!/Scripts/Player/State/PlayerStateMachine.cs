@@ -113,7 +113,7 @@ namespace _.Scripts.Player.State
             _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.Roll,
-                transition => Input.GetKeyDown(KeyCode.LeftShift));
+                transition => _input.IsPressedRoll);
             _fsm.AddTransition(PlayerState.Idle, PlayerState.AttackFirst,
                 transition => _input.IsPressedAttack);
             // _fsm.AddTransition(PlayerState.Idle, PlayerState.SingleDash,
@@ -124,13 +124,15 @@ namespace _.Scripts.Player.State
             //     transition => Input.GetKeyDown(KeyCode.E));
             //Walk
             _fsm.AddTransition(PlayerState.Walk, PlayerState.Roll,
-                transition => Input.GetKeyDown(KeyCode.LeftShift));
+                transition => _input.IsPressedRoll);
             _fsm.AddTransition(PlayerState.Walk, PlayerState.SingleDash,
                 transition => Input.GetKeyDown(KeyCode.Q));
             _fsm.AddTransition(PlayerState.Walk, PlayerState.AttackFirst,
                 transition => _input.IsPressedAttack);
             //Roll
             _fsm.AddTransition(PlayerState.Roll, PlayerState.Idle);
+            _fsm.AddTransition(PlayerState.Roll, PlayerState.Walk,
+                transition => _input.Move);
 
             //Attack
             _fsm.AddTransition(PlayerState.AttackFirst, PlayerState.AttackChanceFirst);

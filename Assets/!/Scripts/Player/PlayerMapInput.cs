@@ -10,6 +10,7 @@ namespace _.Scripts.Player
         public Vector2 MoveVector => _input.Player.Movement.ReadValue<Vector2>();
 
         public bool IsPressedDash => _input.Player.Dash.WasPressedThisFrame();
+        public bool IsPressedRoll => _input.Player.Roll.WasPressedThisFrame();
         public bool IsReleasedDash => _input.Player.Dash.WasReleasedThisFrame();
 
         public bool IsPressedPull => _input.Player.Pull.IsPressed();

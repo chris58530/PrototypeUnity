@@ -208,6 +208,17 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""db02d75f-3544-4a8a-9317-eb49f5d5eba0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3d1887f4-d97a-4bd1-9cd8-36794a8ee072"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
