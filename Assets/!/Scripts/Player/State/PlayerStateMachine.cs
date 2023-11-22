@@ -9,14 +9,18 @@ namespace _.Scripts.Player.State
     {
         Idle,
         Walk,
-        Attack,
-
-        PureDash,
+        AttackFirst,
+        AttackSecond,
+        AttackThird,
         SingleDash,
         MultiDash,
         BackDash,
-        DashChance,
-        DashFail,
+
+        AttackChanceFirst,
+        AttackChanceSecond,
+        AttackChanceThird,
+        Fail,
+
         Hurt,
         Roll,
         Dead
@@ -54,13 +58,10 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, false));
 
             _fsm.AddState(
-                PlayerState.DashChance, new PlayerDashChance(
-                    _input, _controller, animator, false));
-            _fsm.AddState(
-                PlayerState.DashFail, new PlayerDashFail(
+                PlayerState.Fail, new PlayerFail(
                     _input, _controller, animator, _combo, true));
             _fsm.AddState(
-                PlayerState.PureDash, new PlayerPureDash(
+                PlayerState.Roll, new PlayerRoll(
                     _controller, animator, _combo, true));
             _fsm.AddState(
                 PlayerState.SingleDash, new PlayerSingleDash(
@@ -72,10 +73,29 @@ namespace _.Scripts.Player.State
                 PlayerState.BackDash, new PlayerBackDash(
                     _controller, animator, _combo, true));
 
-            // _fsm.AddState(
-            //     PlayerState.Attack, new PlayerAttack(
-            //         _input, _controller, animator, true));
-            //
+            _fsm.AddState(
+                PlayerState.AttackFirst, new PlayerAttackFirst(
+                    _input, _controller, animator, true));
+
+            _fsm.AddState(
+                PlayerState.AttackSecond, new PlayerAttackSecond(
+                    _input, _controller, animator, true));
+
+            _fsm.AddState(
+                PlayerState.AttackThird, new PlayerAttackThird(
+                    _input, _controller, animator, true));
+
+            _fsm.AddState(
+                PlayerState.AttackChanceFirst, new PlayerAttackChanceFirst(
+                    _input, _controller, animator, false));
+
+            _fsm.AddState(
+                PlayerState.AttackChanceSecond, new PlayerAttackChanceScecond(
+                    _input, _controller, animator, false));
+            _fsm.AddState(
+                PlayerState.AttackChanceThird, new PlayerAttackChanceThird(
+                    _input, _controller, animator, false));
+
             // _fsm.AddState(
             //     PlayerState.Hurt, new PlayerHurt(
             //         _controller, animator, _playerHp, true));
@@ -92,49 +112,71 @@ namespace _.Scripts.Player.State
             //Idle
             _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.PureDash,
-                transition => Input.GetKeyDown(KeyCode.Q));
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.SingleDash,
-                transition => Input.GetKeyDown(KeyCode.W));
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.MultiDash,
-                transition => Input.GetKeyDown(KeyCode.E));
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.BackDash,
-                transition => Input.GetKeyDown(KeyCode.R));
+            _fsm.AddTransition(PlayerState.Idle, PlayerState.Roll,
+                transition => Input.GetKeyDown(KeyCode.LeftShift));
+            _fsm.AddTransition(PlayerState.Idle, PlayerState.AttackFirst,
+                transition => _input.IsPressedAttack);
+            // _fsm.AddTransition(PlayerState.Idle, PlayerState.SingleDash,
+            //     transition => Input.GetKeyDown(KeyCode.Q));
+            // _fsm.AddTransition(PlayerState.Idle, PlayerState.MultiDash,
+            //     transition => Input.GetKeyDown(KeyCode.W));
+            // _fsm.AddTransition(PlayerState.Idle, PlayerState.BackDash,
+            //     transition => Input.GetKeyDown(KeyCode.E));
             //Walk
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.PureDash,
-                transition => Input.GetKeyDown(KeyCode.Q));
+            _fsm.AddTransition(PlayerState.Walk, PlayerState.Roll,
+                transition => Input.GetKeyDown(KeyCode.LeftShift));
             _fsm.AddTransition(PlayerState.Walk, PlayerState.SingleDash,
-                transition => Input.GetKeyDown(KeyCode.W));
-        
+                transition => Input.GetKeyDown(KeyCode.Q));
+            _fsm.AddTransition(PlayerState.Walk, PlayerState.AttackFirst,
+                transition => _input.IsPressedAttack);
+            //Roll
+            _fsm.AddTransition(PlayerState.Roll, PlayerState.Idle);
 
-            //PureDash
-            _fsm.AddTransition(PlayerState.PureDash, PlayerState.DashChance);
+            //Attack
+            _fsm.AddTransition(PlayerState.AttackFirst, PlayerState.AttackChanceFirst);
+            _fsm.AddTransition(PlayerState.AttackSecond, PlayerState.AttackChanceSecond);
+            _fsm.AddTransition(PlayerState.AttackThird, PlayerState.AttackChanceThird);
 
-            //SingleDash
-            _fsm.AddTransition(PlayerState.SingleDash, PlayerState.DashChance);
+            //AttackChance
+            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.AttackSecond,
+                transition => _input.IsPressedAttack);
+            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Walk,
+                transition => _input.Move);
+            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.AttackThird,
+                transition => _input.IsPressedAttack);
+            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.Walk,
+                transition => _input.Move);
+            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.AttackFirst,
+                transition => _input.IsPressedAttack);
+            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.Walk,
+                transition => _input.Move);
 
-            
-            //MultiDash
-            _fsm.AddTransition(PlayerState.MultiDash, PlayerState.DashChance);
-            
-            //BackDash
-            _fsm.AddTransition(PlayerState.BackDash, PlayerState.DashChance);
+
+            // //SingleDash
+            // _fsm.AddTransition(PlayerState.SingleDash, PlayerState.DashChance);
+            //
+            //
+            // //MultiDash
+            // _fsm.AddTransition(PlayerState.MultiDash, PlayerState.DashChance);
+            //
+            // //BackDash
+            // _fsm.AddTransition(PlayerState.BackDash, PlayerState.DashChance);
 
 
             //DashChance
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.PureDash,
-                transition => Input.GetKeyDown(KeyCode.Q));
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.SingleDash,
-                transition => Input.GetKeyDown(KeyCode.W));
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.MultiDash,
-                transition => Input.GetKeyDown(KeyCode.E));
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.BackDash,
-                transition => Input.GetKeyDown(KeyCode.R));
-            _fsm.AddTransition(PlayerState.DashChance, PlayerState.DashFail,
-                transition=>_controller.finishChance);
+            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Roll,
+                transition => Input.GetKeyDown(KeyCode.LeftShift));
+            // _fsm.AddTransition(PlayerState.DashChance, PlayerState.SingleDash,
+            //     transition => Input.GetKeyDown(KeyCode.Q));
+            // _fsm.AddTransition(PlayerState.DashChance, PlayerState.MultiDash,
+            //     transition => Input.GetKeyDown(KeyCode.W));
+            // _fsm.AddTransition(PlayerState.DashChance, PlayerState.BackDash,
+            //     transition => Input.GetKeyDown(KeyCode.E));
+            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Fail,
+                transition => _controller.finishChance);
 
             //DashFail
-            _fsm.AddTransition(PlayerState.DashFail, PlayerState.Idle);
+            _fsm.AddTransition(PlayerState.Fail, PlayerState.Idle);
 
             //Initialize
             _fsm.Init();

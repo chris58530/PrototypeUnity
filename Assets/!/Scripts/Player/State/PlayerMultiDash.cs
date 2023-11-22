@@ -1,4 +1,5 @@
 using System;
+using _.Scripts.Tools;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -25,16 +26,15 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
-            TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
-            t.text = "MultiDash";
-            Debug.Log("MultiDash");
+            DebugTools.StateText("MultiDash");
+
             PlayerWeapon.weaponType = WeaponType.Multi;
 
-            // _combo.combo += 1;
             _timer = new Timer();
+            
+            
             //Action
             _controller.MultiDash();
-            _animator.Play("MultiDash");
 
             // AudioManager.Instance.PlaySFX("Dash");
             Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(_controller.dashTime / 2)).First().Subscribe(_ =>

@@ -61,7 +61,6 @@ namespace _.Scripts.Enemy.TypeA
             float t = 0;
             while (t < time)
             {
-                Debug.Log(t);
                 t += Time.deltaTime;
                 float y = jumpToPlayerCurve.Evaluate(t);
            

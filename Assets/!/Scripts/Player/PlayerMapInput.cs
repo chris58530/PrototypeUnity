@@ -14,7 +14,7 @@ namespace _.Scripts.Player
 
         public bool IsPressedPull => _input.Player.Pull.IsPressed();
         public bool IsReleasedPull => _input.Player.Pull.WasReleasedThisFrame();
-        public bool IsPressedAttack => _input.Player.Attack.IsPressed();
+        public bool IsPressedAttack => _input.Player.Attack.WasPressedThisFrame();
 
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 

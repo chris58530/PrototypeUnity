@@ -1,10 +1,11 @@
+using _.Scripts.Tools;
 using TMPro;
 using UnityEngine;
 using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerDashFail : StateBase<PlayerState>
+    public class PlayerFail : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerMapInput _input;
@@ -12,7 +13,7 @@ namespace _.Scripts.Player.State
         private Timer _timer;
         private PlayerCombo _combo;
 
-        public PlayerDashFail(PlayerMapInput playerMapInput,
+        public PlayerFail(PlayerMapInput playerMapInput,
             PlayerController playerController,
             Animator animator, PlayerCombo combo,
             bool needsExitTime,
@@ -29,9 +30,7 @@ namespace _.Scripts.Player.State
             _timer = new Timer();
             _combo.combo = 0;
 
-            //debug
-            TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
-            t.text = "DashFail";
+            DebugTools.StateText("DashFail");
         }
 
         public override void OnLogic()
@@ -39,7 +38,6 @@ namespace _.Scripts.Player.State
             if (_timer.Elapsed > _controller.dashFailTime)
                 fsm.StateCanExit();
             _controller.Fall();
-
         }
 
         public override void OnExit()

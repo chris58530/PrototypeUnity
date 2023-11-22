@@ -19,7 +19,6 @@ namespace _.Scripts.Player
         [SerializeField] private GameObject multiWeapon;
         private GameObject _currentAttackWeapon;
         [SerializeField] private int attackValue;
-        [SerializeField] private float attackEffectTime = 0.5f;
 
         private void OnEnable()
         {
@@ -50,8 +49,9 @@ namespace _.Scripts.Player
         }
 
 
-        public void Attack() //animation event
+        public void Attack(float delay) //animation event
         {
+            
             if (weaponType == WeaponType.Single)
                 _currentAttackWeapon = singleWeapon;
             else if (weaponType == WeaponType.Multi)
@@ -59,8 +59,7 @@ namespace _.Scripts.Player
 
             
             _currentAttackWeapon.SetActive(true);
-            float t = 0;
-            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(attackEffectTime)).First().Subscribe(_ =>
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(delay)).First().Subscribe(_ =>
             {
                 _currentAttackWeapon.SetActive(false);
             }).AddTo(this);

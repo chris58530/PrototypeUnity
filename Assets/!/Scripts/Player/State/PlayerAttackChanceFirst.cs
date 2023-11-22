@@ -1,4 +1,3 @@
-using System;
 using _.Scripts.Tools;
 using TMPro;
 using UnityEngine;
@@ -7,17 +6,16 @@ using UniRx;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerIdle : StateBase<PlayerState>
+    public class PlayerAttackChanceFirst : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerMapInput _input;
         private readonly PlayerController _controller;
-
-        public PlayerIdle(PlayerMapInput playerMapInput,
-            PlayerController playerController, Animator animator,
+        public PlayerAttackChanceFirst(PlayerMapInput playerMapInput,
+            PlayerController playerController,
+            Animator animator,
             bool needsExitTime,
-            bool isGhostState = false) : base(needsExitTime,
-            isGhostState)
+            bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerMapInput;
             _controller = playerController;
@@ -27,9 +25,8 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
-            DebugTools.StateText("Idle");
+            DebugTools.StateText("ChanceFirst");
 
-            _animator.CrossFade(Animator.StringToHash("Idle"), 2f);
         }
 
         public override void OnLogic()
@@ -39,7 +36,6 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            _controller.ShowDashDirection(false);
         }
     }
 }

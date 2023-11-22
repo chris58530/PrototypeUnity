@@ -1,17 +1,15 @@
-using TMPro;
+using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
-using UniRx;
 
-namespace _.Scripts.Player.State
+namespace @_.Scripts.Player.State
 {
-    public class PlayerDashChance : StateBase<PlayerState>
+    public class PlayerAttackChanceScecond : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerMapInput _input;
         private readonly PlayerController _controller;
-        private Timer _timer;
-        public PlayerDashChance(PlayerMapInput playerMapInput,
+        public PlayerAttackChanceScecond(PlayerMapInput playerMapInput,
             PlayerController playerController,
             Animator animator,
             bool needsExitTime,
@@ -25,19 +23,13 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
-            TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
-            t.text = "DashChance";
-            
-            _timer = new Timer();
+            DebugTools.StateText("ChanceScecond");
+
         }
 
         public override void OnLogic()
         {
-           
-           
-         
             _controller.Fall();
-
         }
 
         public override void OnExit()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,6 +7,11 @@ using UnityEngine;
 public class SingleWeapon : MonoBehaviour
 {
     [SerializeField]private int attackValue;
+
+    private void Start()
+    {
+        // transform.parent = GameObject.Find("Sword").transform;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

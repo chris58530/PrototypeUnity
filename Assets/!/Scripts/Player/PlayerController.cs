@@ -14,6 +14,10 @@ namespace _.Scripts.Player
         [SerializeField] private float walkSpeed;
         [SerializeField] private float rotateSpeed;
 
+        [Header("Attack Setting")] [SerializeField]
+        public float attackTime =5f;
+        [Header("Roll Setting")] [SerializeField]
+        public float rollTime;
 
         [Header("Dash Setting")] [SerializeField]
         public float dashSpeed;
@@ -24,7 +28,6 @@ namespace _.Scripts.Player
 
         [SerializeField] public float dashFailTime;
 
-        [SerializeField] public float PureDashTime;
         [SerializeField] public float SingleDashTime;
         [SerializeField] public float MultiDashTime;
         [SerializeField] public float BackDashTime;
@@ -47,19 +50,12 @@ namespace _.Scripts.Player
 
         public bool IsGround => _controller.isGrounded;
         private CharacterController _controller;
-        private AttackDetect _attackDetect;
-        private PlayerWeapon _playerWeapon;
         private IDisposable chanceDis;
 
-
-        //debug
-        public bool useMousePosToDash;
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
-            _attackDetect = GetComponentInChildren<AttackDetect>();
-            _playerWeapon = GetComponentInChildren<PlayerWeapon>();
         }
 
 
@@ -70,10 +66,12 @@ namespace _.Scripts.Player
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
         }
 
+        public void Attack()
+        {
+            transform.LookAt(GetDirection());
+        }
 
-        #region Dash
-
-        public void PureDash()
+        public void Roll()
         {
             chanceDis?.Dispose();
             finishChance = false;
@@ -97,6 +95,8 @@ namespace _.Scripts.Player
             StartCoroutine(PureDash(dashDirection, dashTime));
         }
 
+        #region Dash
+
         public void SingleDash()
         {
             chanceDis?.Dispose();
@@ -119,6 +119,29 @@ namespace _.Scripts.Player
             #endregion
 
             StartCoroutine(SingleDash(dashDirection, dashTime));
+        }
+
+        IEnumerator SingleDash(Vector3 dashDirection, float time)
+        {
+            isSingleDash = true;
+            Vector3 endPosition = transform.position + dashDirection * dashDistance;
+            transform.LookAt(endPosition);
+
+            float elapsedTime = 0f;
+            while (elapsedTime < time)
+            {
+                //test 
+                if (!isSingleDash) break;
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            chanceDis = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                .First()
+                .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            isSingleDash = false;
         }
 
         public void MultiDash()
@@ -184,34 +207,6 @@ namespace _.Scripts.Player
                 .Subscribe(_ => { finishChance = true; }).AddTo(this);
         }
 
-        IEnumerator SingleDash(Vector3 dashDirection, float time)
-        {
-            isSingleDash = true;
-            Vector3 endPosition = transform.position + dashDirection * dashDistance;
-            transform.LookAt(endPosition);
-
-            float elapsedTime = 0f;
-
-            while (elapsedTime < time)
-            {
-                //test 
-                if (!isSingleDash) break;
-
-                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime) * 1.5f);
-                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
-                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
-
-
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            chanceDis = Observable.EveryUpdate()
-                .Delay(TimeSpan.FromSeconds(dashChanceTime))
-                .First()
-                .Subscribe(_ => { finishChance = true; }).AddTo(this);
-            isSingleDash = false;
-        }
 
         IEnumerator MultiDash(Vector3 dashDirection, float time)
         {
@@ -223,7 +218,7 @@ namespace _.Scripts.Player
             while (elapsedTime < time)
             {
                 //test to 0
-                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime) * 0.5f);
+                _controller.Move(transform.forward * (dashSpeed * Time.deltaTime * 0.5f));
                 // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
                 // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
@@ -286,7 +281,6 @@ namespace _.Scripts.Player
         #endregion
 
 
-        #region no use
 
         IEnumerator MoveToTarget()
         {
@@ -329,7 +323,6 @@ namespace _.Scripts.Player
             return hitpoint;
         }
 
-        #endregion
 
 
         #region Fall
@@ -342,35 +335,8 @@ namespace _.Scripts.Player
 
         #endregion
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Enemy") && isSingleDash)
-            {
-                isSingleDash = false;
-                Debug.Log("singledash stop");
-                StartCoroutine(ForceBack());
-            }
-        }
+     
 
-        IEnumerator ForceBack()
-        {
-            // Vector3 endPosition = transform.position + transform.forward * dashDistance;
-            // float t = 0;
-            // while (true)
-            // {
-            //     t += Time.deltaTime;
-            //     float a = t / dashTime;
-            //
-            //     transform.position = Vector3.Lerp(transform.position, -endPosition/2, a);
-            //     if (a >= 1f)
-            //     {
-            //         break;
-            //     }
-            //
-            //     yield return null;
-            // }
-            yield return null;
-            
-        }
+     
     }
 }
