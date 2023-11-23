@@ -41,7 +41,8 @@ namespace @_.Scripts.Player.State
         }
 
         public override void OnExit()
-        {
+        {            _controller.CancelAttack();
+
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }

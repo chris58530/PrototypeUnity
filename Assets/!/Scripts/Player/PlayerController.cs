@@ -19,6 +19,7 @@ namespace _.Scripts.Player
 
         [SerializeField] private GameObject weapon;
         [SerializeField] private GameObject attackChancePreview;
+
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
 
@@ -39,8 +40,8 @@ namespace _.Scripts.Player
         private GameObject bullet;
 
         [SerializeField] private Transform shootPoint;
-        
-        
+
+
         public bool finishChance;
 
         // [SerializeField] private GameObject dashPreviewObj;
@@ -69,20 +70,27 @@ namespace _.Scripts.Player
         }
 
         private IDisposable _attack;
+
         public void Attack(float f)
         {
-            finishChance =false;
+            chanceDis?.Dispose();
             _attack?.Dispose();
+
+            finishChance = false;
             transform.LookAt(GetDirection());
             weapon.SetActive(true);
             _attack = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(f)).Subscribe(_ =>
             {
-                weapon.SetActive(false);
                 chanceDis = Observable.EveryUpdate()
                     .Delay(TimeSpan.FromSeconds(dashChanceTime))
                     .First()
                     .Subscribe(_ => { finishChance = true; }).AddTo(this);
             }).AddTo(this);
+        }
+
+        public void CancelAttack()
+        {
+            weapon.SetActive(false);
         }
 
         public void AttackChancePreview(Color color)
@@ -129,8 +137,6 @@ namespace _.Scripts.Player
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-
-           
         }
 
 
