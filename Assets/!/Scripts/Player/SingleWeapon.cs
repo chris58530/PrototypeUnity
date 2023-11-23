@@ -10,7 +10,7 @@ public class SingleWeapon : MonoBehaviour
 
     private void Start()
     {
-        // transform.parent = GameObject.Find("Sword").transform;
+        transform.parent = GameObject.Find("Sword").transform;
     }
 
     private void OnTriggerEnter(Collider other)

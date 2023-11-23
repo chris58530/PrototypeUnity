@@ -15,11 +15,11 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         _currentHp = maxHp;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(float value)
     {
         // AudioManager.Instance.PlaySFX("EnemyInjured");
         _currentHp -= value;
-        hpImage.fillAmount = (float)(_currentHp / maxHp);
+        hpImage.fillAmount = (_currentHp / maxHp);
         if (_currentHp <= 0) OnDied();
     }
 

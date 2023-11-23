@@ -8,18 +8,18 @@ namespace _.Scripts.Player.State
     public class PlayerFail : StateBase<PlayerState>
     {
         private Animator _animator;
-        private readonly PlayerMapInput _input;
+        private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private Timer _timer;
         private PlayerCombo _combo;
 
-        public PlayerFail(PlayerMapInput playerMapInput,
+        public PlayerFail(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator, PlayerCombo combo,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
-            _input = playerMapInput;
+            _input = playerInput;
             _controller = playerController;
             _animator = animator;
             _combo = combo;
@@ -29,6 +29,7 @@ namespace _.Scripts.Player.State
         {
             _timer = new Timer();
             _combo.combo = 0;
+            _controller.AttackChancePreview(Color.red);
 
             DebugTools.StateText("DashFail");
         }
@@ -42,6 +43,8 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
+            _controller.AttackChancePreview(Color.white);
+
         }
     }
 }

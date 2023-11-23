@@ -6,15 +6,14 @@ namespace _.Scripts.Player.State
     public class PlayerDead : StateBase<PlayerState>
     {
         private Animator _animator;
-        private PlayerHp _playerHp;
 
         public PlayerDead(
             Animator animator,
-            PlayerHp playerHp,
+         
             bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _animator = animator;
-            _playerHp = playerHp;
+           
         }
 
         public override void OnEnter()
@@ -30,7 +29,7 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            _playerHp.Dead = false;
+            
         }
     }
 }

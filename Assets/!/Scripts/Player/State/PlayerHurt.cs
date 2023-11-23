@@ -8,18 +8,16 @@ namespace _.Scripts.Player.State
         private readonly PlayerController _controller;
         private Animator _animator;
         private Timer _timer;
-        private PlayerHp _playerHp;
         private float _aniTime;
 
         public PlayerHurt(
             PlayerController playerController,
             Animator animator,
-            PlayerHp playerHp, bool
+            bool
                 needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _controller = playerController;
             _animator = animator;
-            _playerHp = playerHp;
         }
 
         public override void OnEnter()
@@ -39,7 +37,6 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            _playerHp.getAttack = false;
         }
     }
 }

@@ -6,16 +6,16 @@ namespace _.Scripts.Player.State
     public class PlayerFall : StateBase<PlayerState>
     {
         private Animator _animator;
-        private readonly PlayerMapInput _input;
+        private readonly PlayerInput _input;
         private readonly PlayerController _controller;
 
-        public PlayerFall(PlayerMapInput playerMapInput,
+        public PlayerFall(PlayerInput playerInput,
             PlayerController playerController,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
         {
-            _input = playerMapInput;
+            _input = playerInput;
             _controller = playerController;
         }
 

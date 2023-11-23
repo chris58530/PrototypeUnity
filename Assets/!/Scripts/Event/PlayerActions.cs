@@ -6,6 +6,7 @@ namespace _.Scripts.Event
     {
         public static Action onPlayerDead;
         public static Action<float> onPlayerAttack;
+        public static Action onPlayerDamaged;
         public static Action<int> onUseAbility;
 
     }

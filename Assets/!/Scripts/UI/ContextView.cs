@@ -5,15 +5,17 @@ namespace _.Scripts.UI
 {
     public class ContextView : MonoBehaviour
     {
-       [SerializeField] private Image hpImage;
-       [SerializeField] private Image abilityImage;
+        [SerializeField] private Image hpImage;
+        [SerializeField] private Image skillImage;
 
-       public void UpdateHp(float hp,float max)
-       {
-           hpImage.fillAmount = hp / max;
-       }   public void UpdateAbility(float hp,float max)
-       {
-           abilityImage.fillAmount = hp / max;
-       }
+        public void UpdateHp(float current, float max)
+        {
+            hpImage.fillAmount = current / max;
+        }
+
+        public void UpdateSkill(float current, float max)
+        {
+            skillImage.fillAmount = current / max;
+        }
     }
 }

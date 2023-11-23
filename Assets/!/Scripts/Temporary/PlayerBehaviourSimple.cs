@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _.Scripts.Temporary
 {
-    [RequireComponent(typeof(CharacterController), (typeof(PlayerMapInput)))]
+    [RequireComponent(typeof(CharacterController), (typeof(PlayerInput)))]
     public class PlayerBehaviourSimple : MonoBehaviour
     {
         public bool canMove;
@@ -13,12 +13,12 @@ namespace _.Scripts.Temporary
         [SerializeField] private float gravity;
 
         protected CharacterController controller;
-        protected PlayerMapInput input;
+        protected PlayerInput input;
         private bool IsGround => controller.isGrounded;
 
         private void Awake()
         {
-            input = GetComponent<PlayerMapInput>();
+            input = GetComponent<PlayerInput>();
             controller = GetComponent<CharacterController>();
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
@@ -77,6 +78,15 @@ namespace _.Scripts.Enemy.TypeA
         public void ShakeTail()
         {
             //play animation 
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
+            if (other.gameObject.layer != 6) return;
+    
+            damageObj.OnTakeDamage(10);
+            PlayerActions.onPlayerDamaged?.Invoke();
+            Debug.Log($"{other.name} get {10} damage");
         }
     }
 }

@@ -8,17 +8,17 @@ namespace _.Scripts.Player.State
 {
     public class PlayerWalk : StateBase<PlayerState>
     {
-        private readonly PlayerMapInput _input;
+        private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private readonly Animator _animator;
 
         public PlayerWalk(
-            PlayerMapInput playerMapInput,
+            PlayerInput playerInput,
             PlayerController controller, Animator animator,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
-            _input = playerMapInput;
+            _input = playerInput;
             _controller = controller;
             _animator = animator;
         }

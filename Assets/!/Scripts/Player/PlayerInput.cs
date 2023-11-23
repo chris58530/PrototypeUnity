@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace _.Scripts.Player
 {
-    public class PlayerMapInput : MonoBehaviour
+    public class PlayerInput : MonoBehaviour
     {
         private PlayerCustomInput _input;
         public Vector2 MoveVector => _input.Player.Movement.ReadValue<Vector2>();

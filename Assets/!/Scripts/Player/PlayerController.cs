@@ -15,8 +15,10 @@ namespace _.Scripts.Player
         [SerializeField] private float rotateSpeed;
 
         [Header("Attack Setting")] [SerializeField]
-        public float attackTime = 5f;
+        public float attackTime;
 
+        [SerializeField] private GameObject weapon;
+        [SerializeField] private GameObject attackChancePreview;
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
 
@@ -36,11 +38,10 @@ namespace _.Scripts.Player
         [Header("BackDash Bullet Setting")] [SerializeField]
         private GameObject bullet;
 
-        [SerializeField] private float lifeTime;
         [SerializeField] private Transform shootPoint;
-        [SerializeField] private float speed;
+        
+        
         public bool finishChance;
-        public bool singleDashStop;
 
         // [SerializeField] private GameObject dashPreviewObj;
         public bool isSingleDash;
@@ -67,9 +68,26 @@ namespace _.Scripts.Player
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
         }
 
-        public void Attack()
+        private IDisposable _attack;
+        public void Attack(float f)
         {
+            finishChance =false;
+            _attack?.Dispose();
             transform.LookAt(GetDirection());
+            weapon.SetActive(true);
+            _attack = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(f)).Subscribe(_ =>
+            {
+                weapon.SetActive(false);
+                chanceDis = Observable.EveryUpdate()
+                    .Delay(TimeSpan.FromSeconds(dashChanceTime))
+                    .First()
+                    .Subscribe(_ => { finishChance = true; }).AddTo(this);
+            }).AddTo(this);
+        }
+
+        public void AttackChancePreview(Color color)
+        {
+            attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
         }
 
         public void Roll()

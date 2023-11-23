@@ -10,5 +10,17 @@ namespace _.Scripts.Tools
             TMP_Text tmp = GameObject.Find("StateText").GetComponent<TMP_Text>();
             tmp.text = t;
         }
+
+        public static void HpText(float t)
+        {
+            TMP_Text tmp = GameObject.Find("HPText").GetComponent<TMP_Text>();
+            tmp.text = t.ToString();
+        }
+
+        public static void SkillText(float t)
+        {
+            TMP_Text tmp = GameObject.Find("SkillText").GetComponent<TMP_Text>();
+            tmp.text = t.ToString();
+        }
     }
 }
