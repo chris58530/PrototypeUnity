@@ -29,22 +29,23 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("ChanceThird");
-            _playerBase.SetSkillValue(1);            _controller.AttackChancePreview(Color.yellow);
-
+            _playerBase.SetSkillValue(1);
+            _controller.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()
         {
             Vector2 getInput = _input.MoveVector;
             Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
-            _controller.Move(dir);
+            if (_input.Move)
+                _controller.Move(dir);
 
             _controller.Fall();
         }
 
         public override void OnExit()
-        {            _controller.AttackChancePreview(Color.white);
-
+        {
+            _controller.AttackChancePreview(Color.white);
         }
     }
 }

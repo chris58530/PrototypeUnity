@@ -64,6 +64,7 @@ namespace _.Scripts.Player
 
         public void Move(Vector3 dir)
         {
+            
             Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
