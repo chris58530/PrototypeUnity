@@ -9,14 +9,9 @@ namespace _.Scripts.Player
         private PlayerCustomInput _input;
         public Vector2 MoveVector => _input.Player.Movement.ReadValue<Vector2>();
 
-        public bool IsPressedDash => _input.Player.Dash.WasPressedThisFrame();
         public bool IsPressedRoll => _input.Player.Roll.WasPressedThisFrame();
-        public bool IsReleasedDash => _input.Player.Dash.WasReleasedThisFrame();
-
-        public bool IsPressedPull => _input.Player.Pull.IsPressed();
-        public bool IsReleasedPull => _input.Player.Pull.WasReleasedThisFrame();
         public bool IsPressedAttack => _input.Player.Attack.WasPressedThisFrame();
-
+        public bool IsPressedUltimateAttack => _input.Player.AttackUltimate.WasPressedThisFrame();
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 
         private void Awake()

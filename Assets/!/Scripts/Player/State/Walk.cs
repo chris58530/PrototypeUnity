@@ -6,13 +6,13 @@ using UniRx;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerWalk : StateBase<PlayerState>
+    public class Walk : StateBase<PlayerState>
     {
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private readonly Animator _animator;
 
-        public PlayerWalk(
+        public Walk(
             PlayerInput playerInput,
             PlayerController controller, Animator animator,
             bool needsExitTime,
@@ -33,19 +33,16 @@ namespace _.Scripts.Player.State
         public override void OnLogic()
         {
 
-            Vector2 getInput = _input.MoveVector;
-            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
-            _controller.Move(dir);
+            if (_input.Move)
+            _controller.Move(_input);
 
-            if (_input.IsPressedDash)
-                _controller.ShowDashDirection(true);
+       
 
             _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _controller.ShowDashDirection(false);            
         }
     }
 }

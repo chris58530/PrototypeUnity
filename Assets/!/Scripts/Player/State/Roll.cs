@@ -8,21 +8,21 @@ using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerRoll : StateBase<PlayerState>
+    public class Roll : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
-        private PlayerCombo _combo;
+        private PlayerAttackSystem _attackSystem;
         private Animator _animator;
 
-        public PlayerRoll(PlayerController controller,
-            Animator animator, PlayerCombo combo,
+        public Roll(PlayerController controller,
+            Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
         {
             _controller = controller;
             _animator = animator;
-            _combo = combo;
+            _attackSystem = attackSystem;
         }
 
         public override void OnEnter()

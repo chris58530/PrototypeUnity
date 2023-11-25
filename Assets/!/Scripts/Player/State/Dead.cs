@@ -3,11 +3,11 @@ using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerDead : StateBase<PlayerState>
+    public class Dead : StateBase<PlayerState>
     {
         private Animator _animator;
 
-        public PlayerDead(
+        public Dead(
             Animator animator,
          
             bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)

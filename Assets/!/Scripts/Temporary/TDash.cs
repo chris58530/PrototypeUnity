@@ -76,16 +76,7 @@ namespace _.Scripts.Temporary
                     base.Update();
                     ResetCombo();
                     InDashCoolTime();
-                    if (input.IsPressedDash && canDash)
-                    {
-                        _dashState.Value = DashState.Dash;
-
-                        DashShadow shadow = Instantiate(
-                                shadowModel, transform.position, transform.rotation)
-                            .GetComponent<DashShadow>();
-                        shadow.Init(1f, transform);
-                    }
-
+                
                     break;
 
                 case DashState.Dash:
@@ -115,13 +106,7 @@ namespace _.Scripts.Temporary
                         BeatManager.missBeat = false;
                     }
 
-                    if (BeatManager.onBeat && input.IsPressedDash)
-                    {
-                        dashingTime.Dispose();
-                        hasAdd = false;
-                        _dashState.Value = DashState.Dash;
-                    }
-
+             
                     break;
             }
         }

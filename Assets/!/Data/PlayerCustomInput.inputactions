@@ -15,24 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "e47097aa-d88f-4b57-bfb3-c07450ce720a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pull",
-                    "type": "Button",
-                    "id": "06b66cf2-20b5-451e-aaa9-24f72899b65f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Roll",
                     "type": "Button",
                     "id": "272ffcce-6b5b-4c1b-9a8f-2a98a18601f3",
@@ -45,6 +27,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "ec805b8a-8f5a-4aec-b53f-6c8ce58460ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackUltimate",
+                    "type": "Button",
+                    "id": "32c92456-7d0e-4348-b424-38bd2c03576b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -164,17 +155,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6902325a-75b1-425f-9e48-0e9919daedf3",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pull",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9500a4aa-029f-456f-9e78-8e0ba280fedd",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -197,23 +177,23 @@
                 },
                 {
                     "name": "",
-                    "id": "3d1887f4-d97a-4bd1-9cd8-36794a8ee072",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "89281153-1dfd-4a22-8e30-bfd9c127d647",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7eb25b55-c196-4e6a-8e3c-e25bcf4103d2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackUltimate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

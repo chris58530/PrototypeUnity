@@ -4,44 +4,44 @@ using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerAttackSecond : StateBase<PlayerState>
+    public class UltimateAttack : StateBase<PlayerState>
     {
-        private Animator _animator;
+        private readonly Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private Timer _timer;
+        private PlayerAttackSystem _attackSystem;
 
-        public PlayerAttackSecond(PlayerInput playerInput,
+        public UltimateAttack(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator,
+            Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerInput;
             _controller = playerController;
-            _animator = animator;
+            _animator = animator;            _attackSystem = attackSystem;
+
         }
 
         public override void OnEnter()
         {
-            DebugTools.StateText("AttackSecond");
-
+            DebugTools.StateText("UltimateAttack");
             _timer = new Timer();
-            _animator.CrossFade(Animator.StringToHash("Attack2"), 0.1f);
-            _controller.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
+            _attackSystem.UseUltimate();
+            _animator.Play("UltimateAttack");
 
-            Debug.Log(_animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.attackTime)
+            if (_timer.Elapsed > _attackSystem.attackTime)
                 fsm.StateCanExit();
         }
 
         public override void OnExit()
-        {            _controller.CancelAttack();
-
+        {
+            _attackSystem.CancelAttack();
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }

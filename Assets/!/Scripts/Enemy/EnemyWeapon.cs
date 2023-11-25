@@ -14,7 +14,8 @@ public class EnemyWeapon : MonoBehaviour
         if (other.gameObject.layer != 6) return;
     
         damageObj.OnTakeDamage(attackValue);
-        PlayerActions.onPlayerDamaged?.Invoke();
+        PlayerActions.onHitPlayer?.Invoke();
+        
         Debug.Log($"{other.name} get {attackValue} damage");
     }
 }

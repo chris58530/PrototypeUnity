@@ -1,50 +1,51 @@
 using _.Scripts.Tools;
-using TMPro;
 using UnityEngine;
 using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class PlayerFail : StateBase<PlayerState>
+    public class AttackSecond : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private Timer _timer;
-        private PlayerCombo _combo;
+        private PlayerAttackSystem _attackSystem;
 
-        public PlayerFail(PlayerInput playerInput,
+        public AttackSecond(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator, PlayerCombo combo,
+            Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerInput;
             _controller = playerController;
             _animator = animator;
-            _combo = combo;
+            _attackSystem = attackSystem;
         }
 
         public override void OnEnter()
         {
-            _timer = new Timer();
-            _combo.combo = 0;
-            _controller.AttackChancePreview(Color.red);
+            DebugTools.StateText("AttackSecond");
 
-            DebugTools.StateText("DashFail");
+            _timer = new Timer();
+            _animator.CrossFade(Animator.StringToHash("Attack2"), 0.1f);
+            _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
+
+            Debug.Log(_animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.dashFailTime)
+            if (_timer.Elapsed > _attackSystem.attackTime)
                 fsm.StateCanExit();
-            _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _controller.AttackChancePreview(Color.white);
+            _attackSystem.CancelAttack();
 
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }
 }

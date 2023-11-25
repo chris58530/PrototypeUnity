@@ -37,24 +37,6 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""e47097aa-d88f-4b57-bfb3-c07450ce720a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Pull"",
-                    ""type"": ""Button"",
-                    ""id"": ""06b66cf2-20b5-451e-aaa9-24f72899b65f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Roll"",
                     ""type"": ""Button"",
                     ""id"": ""272ffcce-6b5b-4c1b-9a8f-2a98a18601f3"",
@@ -67,6 +49,15 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""ec805b8a-8f5a-4aec-b53f-6c8ce58460ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackUltimate"",
+                    ""type"": ""Button"",
+                    ""id"": ""32c92456-7d0e-4348-b424-38bd2c03576b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -186,17 +177,6 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6902325a-75b1-425f-9e48-0e9919daedf3"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9500a4aa-029f-456f-9e78-8e0ba280fedd"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -219,23 +199,23 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3d1887f4-d97a-4bd1-9cd8-36794a8ee072"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""89281153-1dfd-4a22-8e30-bfd9c127d647"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7eb25b55-c196-4e6a-8e3c-e25bcf4103d2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUltimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -247,10 +227,9 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_Pull = m_Player.FindAction("Pull", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_AttackUltimate = m_Player.FindAction("AttackUltimate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -313,19 +292,17 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_Pull;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_AttackUltimate;
     public struct PlayerActions
     {
         private @PlayerCustomInput m_Wrapper;
         public PlayerActions(@PlayerCustomInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @Pull => m_Wrapper.m_Player_Pull;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @AttackUltimate => m_Wrapper.m_Player_AttackUltimate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,18 +315,15 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
-            @Pull.started += instance.OnPull;
-            @Pull.performed += instance.OnPull;
-            @Pull.canceled += instance.OnPull;
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @AttackUltimate.started += instance.OnAttackUltimate;
+            @AttackUltimate.performed += instance.OnAttackUltimate;
+            @AttackUltimate.canceled += instance.OnAttackUltimate;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -357,18 +331,15 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
-            @Pull.started -= instance.OnPull;
-            @Pull.performed -= instance.OnPull;
-            @Pull.canceled -= instance.OnPull;
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @AttackUltimate.started -= instance.OnAttackUltimate;
+            @AttackUltimate.performed -= instance.OnAttackUltimate;
+            @AttackUltimate.canceled -= instance.OnAttackUltimate;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -389,9 +360,8 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
-        void OnPull(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnAttackUltimate(InputAction.CallbackContext context);
     }
 }

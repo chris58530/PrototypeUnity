@@ -5,17 +5,18 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class PlayerAttackChanceThird : StateBase<PlayerState>
+    public class AttackChanceThird : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private PlayerBase _playerBase;
+        private PlayerAttackSystem _attackSystem;
 
-        public PlayerAttackChanceThird(PlayerInput playerInput,
+        public AttackChanceThird(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator,
-            PlayerBase playerBase,
+            PlayerBase playerBase, PlayerAttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
@@ -23,29 +24,28 @@ namespace @_.Scripts.Player.State
             _controller = playerController;
             _animator = animator;
             _playerBase = playerBase;
+            _attackSystem = attackSystem;
         }
 
         public override void OnEnter()
         {
             //debug
             DebugTools.StateText("ChanceThird");
-            _playerBase.SetSkillValue(1);
-            _controller.AttackChancePreview(Color.yellow);
+            _attackSystem.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()
         {
-            Vector2 getInput = _input.MoveVector;
-            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
+ 
             if (_input.Move)
-                _controller.Move(dir);
+                _controller.Move(_input);
 
             _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _controller.AttackChancePreview(Color.white);
+            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }
