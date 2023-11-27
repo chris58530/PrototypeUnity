@@ -1,11 +1,10 @@
 using _.Scripts.Tools;
-using _.Scripts.UI;
 using UnityEngine;
 using UnityHFSM;
 
-namespace @_.Scripts.Player.State
+namespace _.Scripts.Player.State
 {
-    public class AttackThird : StateBase<PlayerState>
+    public class Attack2 : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
@@ -13,7 +12,7 @@ namespace @_.Scripts.Player.State
         private Timer _timer;
         private PlayerAttackSystem _attackSystem;
 
-        public AttackThird(PlayerInput playerInput,
+        public Attack2(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime,
@@ -27,11 +26,10 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-            DebugTools.StateText("AttackThird");
-
+            DebugTools.StateText("AttackSecond");
 
             _timer = new Timer();
-            _animator.CrossFade(Animator.StringToHash("Attack3"), 0.1f);
+            _animator.CrossFade(Animator.StringToHash("Attack2"), 0.1f);
             _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
 
             Debug.Log(_animator.GetCurrentAnimatorStateInfo(0).length);
@@ -46,7 +44,6 @@ namespace @_.Scripts.Player.State
         public override void OnExit()
         {
             _attackSystem.CancelAttack();
-
 
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }

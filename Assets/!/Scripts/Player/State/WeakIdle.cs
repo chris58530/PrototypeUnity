@@ -1,23 +1,22 @@
 using _.Scripts.Tools;
-using TMPro;
 using UnityEngine;
 using UnityHFSM;
-using UniRx;
 
 namespace _.Scripts.Player.State
 {
-    public class AttackChanceFirst : StateBase<PlayerState>
+    public class WeakIdle : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private PlayerAttackSystem _attackSystem;
 
-        public AttackChanceFirst(PlayerInput playerInput,
-            PlayerController playerController,
-            Animator animator, PlayerAttackSystem attackSystem,
+        public WeakIdle(PlayerInput playerInput,
+            PlayerController playerController, Animator animator,
+            PlayerAttackSystem attackSystem,
             bool needsExitTime,
-            bool isGhostState = false) : base(needsExitTime, isGhostState)
+            bool isGhostState = false) : base(needsExitTime,
+            isGhostState)
         {
             _input = playerInput;
             _controller = playerController;
@@ -27,23 +26,20 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            //debug
-            DebugTools.StateText("ChanceFirst");
-            _attackSystem.AttackChancePreview(Color.yellow);
+            Debug.Log("WeakIdle");
+
+            DebugTools.StateText("WeakIdle");
+            _attackSystem.SetWeakTime();
+            _animator.CrossFade(Animator.StringToHash("Idle"), 2f);
         }
 
         public override void OnLogic()
         {
-         
-            if (_input.Move)
-                _controller.Move(_input);
-
             _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }

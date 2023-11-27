@@ -1,21 +1,17 @@
-using System;
-using _.Scripts.Event;
 using _.Scripts.Tools;
-using TMPro;
-using UniRx;
 using UnityEngine;
 using UnityHFSM;
 
-namespace _.Scripts.Player.State
+namespace @_.Scripts.Player.State
 {
-    public class Roll : StateBase<PlayerState>
+    public class NoSwordRoll : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
         private PlayerAttackSystem _attackSystem;
         private Animator _animator;
 
-        public Roll(PlayerController controller,
+        public NoSwordRoll(PlayerController controller,
             Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -27,27 +23,26 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            DebugTools.StateText("Roll");
+            Debug.Log("NoSwordRoll");
+            DebugTools.StateText("NoSwordRoll");
             _timer = new Timer();
-            
+
             _animator.Play(Animator.StringToHash("Dash"));
 
             _controller.Roll();
-            _attackSystem.ResetChance();
-
+            _attackSystem.ResetWeak();
+            _attackSystem.NoSwordRoll();
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.rollTime )
+            if (_timer.Elapsed > _controller.rollTime)
                 fsm.StateCanExit();
             _controller.Fall();
-
         }
 
         public override void OnExit()
         {
-            
         }
     }
 }

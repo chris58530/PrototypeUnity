@@ -8,6 +8,7 @@ namespace _.Scripts.Player
 {
     public class PlayerBase : MonoBehaviour, IDamageable
     {
+        public bool hasSword;
         public float maxHpValue;
         [HideInInspector] public ReactiveProperty<float> currentHpValue = new ReactiveProperty<float>();
 

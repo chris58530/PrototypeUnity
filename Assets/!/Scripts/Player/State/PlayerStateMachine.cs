@@ -2,7 +2,6 @@ using System;
 using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityHFSM;
 
 namespace _.Scripts.Player.State
@@ -11,34 +10,47 @@ namespace _.Scripts.Player.State
     {
         Idle,
         Walk,
-        AttackFirst,
-        AttackSecond,
-        AttackThird,
+        Attack1,
+        Attack2,
+        Attack3,
         UltimateAttack,
-        SingleDash,
-        MultiDash,
-        BackDash,
-
-        AttackChanceFirst,
-        AttackChanceSecond,
-        AttackChanceThird,
+        Chance1,
+        Chance2,
+        Chance3,
         Fail,
-
         Hurt,
         Roll,
+
+        WeakHurt,
+        WeakIdle,
+        WeakWalk,
+
+        NoSwordIdle,
+        NoSwordHurt,
+        NoSwordRoll,
+        NoSwordWalk
+    }
+
+    public enum SuperState
+    {
+        Weak,
+        NoSword,
+        Normal,
         Dead
     }
 
     public class PlayerStateMachine : MonoBehaviour
     {
-        private StateMachine<PlayerState> _fsm;
         private PlayerInput _input;
         private PlayerController _controller;
         private PlayerAttackSystem _attackSystem;
         private PlayerBase _playerBase;
-
         [SerializeField] private Animator animator;
 
+        private StateMachine<SuperState, string> _fsm;
+        private StateMachine<SuperState, PlayerState, string> _normalState;
+        private StateMachine<SuperState, PlayerState, string> _weakState;
+        private StateMachine<SuperState, PlayerState, string> _noSwordState;
 
         private void Awake()
         {
@@ -46,138 +58,178 @@ namespace _.Scripts.Player.State
             _controller = GetComponent<PlayerController>();
             _attackSystem = GetComponent<PlayerAttackSystem>();
             _playerBase = GetComponent<PlayerBase>();
-            // _animator = GetComponentInChildren<Animator>();
         }
 
         private void Start()
         {
-            _fsm = new StateMachine<PlayerState>();
+            #region Normal state
 
-            //_fsm Add New State
-            _fsm.AddState(
+            _normalState = new StateMachine<SuperState, PlayerState, string>();
+
+            _normalState.AddState(
                 PlayerState.Idle, new Idle(
                     _input, _controller, animator, false));
-            _fsm.AddState(
+            _normalState.AddState(
                 PlayerState.Walk, new Walk(
                     _input, _controller, animator, false));
-
-            _fsm.AddState(
-                PlayerState.Fail, new Fail(
-                    _input, _controller, animator, _attackSystem, true));
-            _fsm.AddState(
+            _normalState.AddState(
                 PlayerState.Roll, new Roll(
                     _controller, animator, _attackSystem, true));
-
-            _fsm.AddState(
-                PlayerState.Hurt, new Hurt(
-                    _input, _controller, animator, _attackSystem, _playerBase, false));
-            _fsm.AddState(
-                PlayerState.AttackFirst, new AttackFirst(
+            _normalState.AddState(
+                PlayerState.Attack1, new Attack1(
                     _input, _controller, animator, _attackSystem, true));
 
-            _fsm.AddState(
-                PlayerState.AttackSecond, new AttackSecond(
+            _normalState.AddState(
+                PlayerState.Attack2, new Attack2(
                     _input, _controller, animator, _attackSystem, true));
 
-            _fsm.AddState(
-                PlayerState.AttackThird, new AttackThird(
+            _normalState.AddState(
+                PlayerState.Attack3, new Attack3(
                     _input, _controller, animator, _attackSystem, true));
 
-            _fsm.AddState(
-                PlayerState.AttackChanceFirst, new AttackChanceFirst(
+            _normalState.AddState(
+                PlayerState.Chance1, new Chance1(
                     _input, _controller, animator, _attackSystem, false));
 
-            _fsm.AddState(
-                PlayerState.AttackChanceSecond, new AttackChanceScecond(
+            _normalState.AddState(
+                PlayerState.Chance2, new Chance2(
                     _input, _controller, animator, _attackSystem, false));
-            _fsm.AddState(
-                PlayerState.AttackChanceThird, new AttackChanceThird(
+            _normalState.AddState(
+                PlayerState.Chance3, new Chance3(
                     _input, _controller, animator, _playerBase, _attackSystem, false));
-            _fsm.AddState(
-                PlayerState.AttackChanceThird, new AttackChanceThird(
-                    _input, _controller, animator, _playerBase, _attackSystem, false));
-            _fsm.AddState(
+            _normalState.AddState(
                 PlayerState.UltimateAttack, new UltimateAttack(
                     _input, _controller, animator, _attackSystem, true));
-
-
-            //Transition
-
+            
+            
             //Idle
-            _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
+            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.Roll,
+            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.AttackFirst,
+            _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.Idle, PlayerState.UltimateAttack,
+            _normalState.AddTransition(PlayerState.Idle, PlayerState.UltimateAttack,
                 transition => _input.IsPressedUltimateAttack && _attackSystem.CanDoUltimate);
-            _fsm.AddTwoWayTransition(PlayerState.Idle, PlayerState.Hurt,
-                transition => _playerBase.getHurt);
-
-
             //Walk
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Roll,
+            _normalState.AddTwoWayTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.AttackFirst,
+            _normalState.AddTransition(PlayerState.Walk, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.Walk, PlayerState.Hurt,
-                transition => _playerBase.getHurt);
-            //Roll
-            _fsm.AddTransition(PlayerState.Roll, PlayerState.Idle);
-            _fsm.AddTransition(PlayerState.Roll, PlayerState.Walk,
-                transition => _input.Move);
-
+            _normalState.AddTransition(PlayerState.Walk, PlayerState.UltimateAttack,
+                transition => _input.IsPressedUltimateAttack && _attackSystem.CanDoUltimate);
             //Attack
-            _fsm.AddTransition(PlayerState.AttackFirst, PlayerState.AttackChanceFirst);
-            // _fsm.AddTransition(PlayerState.AttackFirst, PlayerState.Fail,
-            //     transition =>  _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.AttackSecond, PlayerState.AttackChanceSecond);
-            //_fsm.AddTransition(PlayerState.AttackSecond, PlayerState.Fail,
-            //     transition =>  _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.AttackThird, PlayerState.AttackChanceThird);
-            // _fsm.AddTransition(PlayerState.AttackThird, PlayerState.Fail,
-            //     transition =>  _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.UltimateAttack, PlayerState.Idle);
+            _normalState.AddTransition(PlayerState.Attack1, PlayerState.Chance1);
+            _normalState.AddTransition(PlayerState.Attack2, PlayerState.Chance2);
+            _normalState.AddTransition(PlayerState.Attack3, PlayerState.Chance3);
+
 
             //AttackChance
-            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.AttackSecond,
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Attack2,
                 transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Roll,
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Fail,
-                transition => _attackSystem.finishChance);
-            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.UltimateAttack,
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.UltimateAttack,
                 transition => _input.IsPressedUltimateAttack && _attackSystem.CanDoUltimate);
-            _fsm.AddTransition(PlayerState.AttackChanceFirst, PlayerState.Hurt,
-                transition => _playerBase.getHurt);
 
-            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.AttackThird,
+
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.Roll,
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.Fail,
-                transition => _attackSystem.finishChance);
-            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.UltimateAttack,
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.UltimateAttack,
                 transition => _input.IsPressedUltimateAttack && _attackSystem.CanDoUltimate);
-            _fsm.AddTransition(PlayerState.AttackChanceSecond, PlayerState.Hurt,
-                transition => _playerBase.getHurt);
 
-            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.AttackFirst,
+
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
-            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.Roll,
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.Fail,
-                transition => _attackSystem.finishChance);
-            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.UltimateAttack,
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.UltimateAttack,
                 transition => _input.IsPressedUltimateAttack && _attackSystem.CanDoUltimate);
-            _fsm.AddTransition(PlayerState.AttackChanceThird, PlayerState.Hurt,
-                transition => _playerBase.getHurt);
-            //Fail
-            _fsm.AddTransition(PlayerState.Fail, PlayerState.Idle);
-            _fsm.AddTransition(PlayerState.Fail, PlayerState.Hurt);
 
-            //Initialize
+            #endregion
+
+
+            //=========================================================================
+
+
+            #region Weak state
+
+            _weakState = new StateMachine<SuperState, PlayerState, string>();
+
+            _weakState.AddState(
+                PlayerState.WeakIdle, new WeakIdle(
+                    _input, _controller, animator,_attackSystem, false));
+            _weakState.AddState(
+                PlayerState.WeakWalk, new WeakWalk(
+                    _input, _controller, animator, false));
+            _weakState.AddState(
+                PlayerState.WeakHurt, new WeakHurt(
+                    _input, _controller, animator, _attackSystem, _playerBase, false));
+
+            _weakState.AddTwoWayTransition(PlayerState.WeakIdle, PlayerState.WeakWalk,
+                transition => _input.Move);
+            _weakState.AddTwoWayTransition(PlayerState.WeakIdle, PlayerState.WeakHurt,
+                transition => _playerBase.getHurt);
+            _weakState.AddTransition(PlayerState.WeakWalk, PlayerState.WeakHurt,
+                transition => _playerBase.getHurt);
+            #endregion
+
+            #region No Sword State
+
+            _noSwordState = new StateMachine<SuperState, PlayerState, string>();
+            _noSwordState.AddState(
+                PlayerState.NoSwordRoll, new NoSwordRoll(
+                    _controller, animator, _attackSystem, true));
+            _noSwordState.AddState(
+                PlayerState.NoSwordIdle, new NoSwordIdle(
+                    _input, _controller, animator, false));
+            _noSwordState.AddState(
+                PlayerState.NoSwordHurt, new NoSwordHurt(
+                    _input, _controller, animator, _attackSystem, _playerBase, false));
+            _noSwordState.AddState(
+                PlayerState.NoSwordWalk, new NoSwordWalk(
+                    _input, _controller, animator, false));
+
+            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordWalk,
+                transition => _input.Move);
+            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordHurt,
+                transition => _playerBase.getHurt);
+            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordRoll,
+                transition => _input.IsPressedRoll);
+            
+            _noSwordState.AddTransition(PlayerState.NoSwordWalk, PlayerState.NoSwordRoll,
+                transition => _input.IsPressedRoll);
+            _noSwordState.AddTransition(PlayerState.NoSwordWalk, PlayerState.NoSwordHurt,
+                transition => _playerBase.getHurt);
+            
+         
+      
+
+            #endregion
+
+            //=========================================================================
+            //Initialize fsm
+            _fsm = new StateMachine<SuperState, string>();
+            _fsm.AddState(SuperState.Normal, _normalState);
+            _fsm.AddState(SuperState.NoSword, _noSwordState);
+            _fsm.AddState(SuperState.Weak, _weakState);
+            _fsm.AddState(SuperState.Dead, new Dead(animator, false));
+
+            _fsm.AddTransition(SuperState.Normal, SuperState.Weak,
+                transition => _attackSystem.finishChance || _playerBase.getHurt);
+            _fsm.AddTransition(SuperState.Weak, SuperState.Normal,
+                transition => !_attackSystem.finishChance);
+            _fsm.AddTransition(SuperState.Weak, SuperState.NoSword, 
+                transition => _input.IsPressedRoll);
+            //for test 
+            _fsm.AddTransition(SuperState.NoSword, SuperState.Normal, 
+                transitionon => _attackSystem.hasSword);
+            
+            
+            // _fsm.AddTriggerTransition("Award", new Transition<SuperState>(SuperState.Weak, SuperState.Normal));
+            // _fsm.AddTriggerTransition("NoSword", new Transition<SuperState>(SuperState.NoSword, SuperState.Weak));
             _fsm.Init();
         }
 

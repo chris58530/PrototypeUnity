@@ -5,6 +5,7 @@ using _.Scripts.Event;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Player
 {
@@ -14,6 +15,9 @@ namespace _.Scripts.Player
         [SerializeField] private float walkSpeed;
         [SerializeField] private float rotateSpeed;
 
+       
+        [Header("Weak Setting")] [SerializeField]
+        private float weakWalkSpeed;
 
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
@@ -35,6 +39,18 @@ namespace _.Scripts.Player
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
+        }
+
+
+      
+
+        public void WeakMove(PlayerInput input)
+        {
+            Vector2 getInput = input.MoveVector;
+            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
+            Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
+            _controller.Move(dir * (weakWalkSpeed * (Time.deltaTime)));
         }
 
 
@@ -86,14 +102,13 @@ namespace _.Scripts.Player
             }
         }
 
-        public void SwitchTag()
-        {
-        }
 
         public void Fall()
         {
             if (IsGround) return;
             _controller.Move(transform.up * (gravity * Time.deltaTime));
         }
+
+     
     }
 }

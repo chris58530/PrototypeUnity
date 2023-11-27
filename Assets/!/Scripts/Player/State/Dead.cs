@@ -3,7 +3,7 @@ using UnityHFSM;
 
 namespace _.Scripts.Player.State
 {
-    public class Dead : StateBase<PlayerState>
+    public class Dead : StateBase<SuperState>
     {
         private Animator _animator;
 

@@ -1,21 +1,21 @@
 using _.Scripts.Tools;
+using TMPro;
 using UnityEngine;
 using UnityHFSM;
+using UniRx;
 
 namespace _.Scripts.Player.State
 {
-    public class AttackFirst : StateBase<PlayerState>
+    public class Chance1 : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
-        private Timer _timer;
         private PlayerAttackSystem _attackSystem;
 
-        public AttackFirst(PlayerInput playerInput,
+        public Chance1(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator,
-            PlayerAttackSystem attackSystem,
+            Animator animator, PlayerAttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
@@ -27,24 +27,23 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            DebugTools.StateText("AttackFirst");
-            _timer = new Timer();
-            _animator.Play(Animator.StringToHash("Attack1"));
-            float aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
-            _attackSystem.Attack(aniTime);
-            Debug.Log(aniTime);
+            //debug
+            DebugTools.StateText("ChanceFirst");
+            _attackSystem.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _attackSystem.attackTime)
-                fsm.StateCanExit();
+         
+            if (_input.Move)
+                _controller.Move(_input);
+
+            _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _attackSystem.CancelAttack();
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
+            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }

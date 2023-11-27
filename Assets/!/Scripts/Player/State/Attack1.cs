@@ -1,51 +1,49 @@
 using _.Scripts.Tools;
-using _.Scripts.UI;
 using UnityEngine;
 using UnityHFSM;
 
-namespace @_.Scripts.Player.State
+namespace _.Scripts.Player.State
 {
-    public class AttackChanceThird : StateBase<PlayerState>
+    public class Attack1 : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
-        private PlayerBase _playerBase;
+        private Timer _timer;
         private PlayerAttackSystem _attackSystem;
 
-        public AttackChanceThird(PlayerInput playerInput,
+        public Attack1(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator,
-            PlayerBase playerBase, PlayerAttackSystem attackSystem,
+            PlayerAttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerInput;
             _controller = playerController;
             _animator = animator;
-            _playerBase = playerBase;
             _attackSystem = attackSystem;
         }
 
         public override void OnEnter()
         {
-            //debug
-            DebugTools.StateText("ChanceThird");
-            _attackSystem.AttackChancePreview(Color.yellow);
+            DebugTools.StateText("AttackFirst");
+            _timer = new Timer();
+            _animator.Play(Animator.StringToHash("Attack1"));
+            float aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
+            _attackSystem.Attack(aniTime);
         }
 
         public override void OnLogic()
         {
- 
-            if (_input.Move)
-                _controller.Move(_input);
-
-            _controller.Fall();
+            if (_timer.Elapsed > _attackSystem.attackTime)
+                fsm.StateCanExit();
         }
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
+            _attackSystem.CancelAttack();
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }
 }

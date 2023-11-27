@@ -7,6 +7,12 @@ namespace _.Scripts.Player
 {
     public class PlayerAttackSystem : MonoBehaviour
     {
+        [Header("No Sword Setting")] [SerializeField]
+        private GameObject swordModle;
+
+        public bool hasSword;
+        [SerializeField] private GameObject swordParent;
+
         [Header("Attack Setting")] //
         [SerializeField]
         public float attackTime;
@@ -21,12 +27,45 @@ namespace _.Scripts.Player
 
         private PlayerBase _playerBase;
         public bool finishChance;
+        public bool isWeak;
+        public float weakTime;
+
         private IDisposable _chanceDis;
         private IDisposable _lastAttack;
 
         private void Awake()
         {
             _playerBase = GetComponent<PlayerBase>();
+        }
+
+        public void NoSwordRoll()
+        {
+            swordModle.transform.parent = null;
+
+            hasSword = false;
+        }
+
+        private IDisposable _weakObser;
+
+        public void SetWeakTime()
+        {
+            _weakObser = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(weakTime)).Subscribe(_ =>
+            {
+                finishChance = false;
+            });
+        }
+
+        public void ResetWeak()
+        {
+            _weakObser?.Dispose();
+            isWeak = false;
+        }
+
+        public void ResetChance()
+        {
+            _lastAttack?.Dispose();
+            _chanceDis?.Dispose();
+            finishChance = false;
         }
 
 
@@ -64,7 +103,11 @@ namespace _.Scripts.Player
             _chanceDis = Observable.EveryUpdate()
                 .Delay(TimeSpan.FromSeconds(chanceTime))
                 .First()
-                .Subscribe(_ => { finishChance = true; });
+                .Subscribe(_ =>
+                {
+                    finishChance = true;
+                    isWeak = true;
+                });
             weapon.SetActive(false);
         }
 
@@ -108,6 +151,18 @@ namespace _.Scripts.Player
         private void OnDisable()
         {
             if (IsInvoking(nameof(DecreaseSkill))) CancelInvoke(nameof(DecreaseSkill));
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Sword") && !hasSword)
+            {
+                swordModle.transform.parent = swordParent.transform;
+                swordModle.transform.position = swordParent.transform.position;
+                swordModle.transform.rotation = swordParent.transform.rotation;
+                finishChance = false;
+                hasSword = true;
+            }
         }
     }
 }

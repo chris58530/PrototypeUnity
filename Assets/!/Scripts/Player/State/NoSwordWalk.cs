@@ -1,46 +1,46 @@
 using _.Scripts.Tools;
+using TMPro;
 using UnityEngine;
 using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class AttackChanceScecond : StateBase<PlayerState>
+    public class NoSwordWalk : StateBase<PlayerState>
     {
-        private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
-        private PlayerAttackSystem _attackSystem;
+        private readonly Animator _animator;
 
-        public AttackChanceScecond(PlayerInput playerInput,
-            PlayerController playerController,
-            Animator animator, PlayerAttackSystem attackSystem,
+        public NoSwordWalk(
+            PlayerInput playerInput,
+            PlayerController controller, Animator animator,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerInput;
-            _controller = playerController;
+            _controller = controller;
             _animator = animator;
-            _attackSystem = attackSystem;
         }
 
         public override void OnEnter()
         {
-            //debug
-            DebugTools.StateText("ChanceScecond");
-            _attackSystem.AttackChancePreview(Color.yellow);
+          
+            DebugTools.StateText("NoSwordWalk");
         }
 
         public override void OnLogic()
         {
+
             if (_input.Move)
-            _controller.Move(_input);
+                _controller.Move(_input);
+
+       
 
             _controller.Fall();
         }
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }
