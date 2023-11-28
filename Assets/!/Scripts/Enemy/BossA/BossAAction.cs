@@ -1,12 +1,13 @@
+using _.Scripts.Enemy.BossA;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace _.Scripts.Enemy.TypeA
 {
-    public class TypeAAction:Action
+    public class BossAAction:Action
     {
-        protected TypeAController controller;
+        protected BossAController controller;
         protected Transform player;
         protected NavMeshAgent navMeshAgent;
         protected Animator animator;
@@ -18,7 +19,7 @@ namespace _.Scripts.Enemy.TypeA
             navMeshAgent = GetComponent<NavMeshAgent>();
             EnemyAnimator enemyAnimator = GetComponent<EnemyAnimator>();
             animator = enemyAnimator.ani;
-            controller = GetComponent<TypeAController>();
+            controller = GetComponent<BossAController>();
             player = UnityEngine.GameObject.FindWithTag("Player").transform;
         }
     }

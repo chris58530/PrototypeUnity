@@ -49,6 +49,8 @@ namespace _.Scripts.Player
 
         public void SetWeakTime()
         {
+            finishChance = true;
+            _weakObser?.Dispose();
             _weakObser = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(weakTime)).Subscribe(_ =>
             {
                 finishChance = false;

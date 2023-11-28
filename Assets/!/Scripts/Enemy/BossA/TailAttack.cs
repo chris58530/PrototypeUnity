@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _.Scripts.Enemy.TypeA
 {
-    public class TailAttack : TypeAAction
+    public class TailAttack : BossAAction
     {
         public float jumpTime;
         public float tailDistance;

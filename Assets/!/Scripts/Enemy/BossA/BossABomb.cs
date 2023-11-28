@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class TypeABomb : MonoBehaviour
+public class BossABomb : MonoBehaviour
 {
     public Transform target;
 

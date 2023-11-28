@@ -33,6 +33,8 @@ namespace @_.Scripts.Player.State
             DebugTools.StateText("WeakHurt");
             PlayerActions.onPlayerHurt?.Invoke();
             _playerBase.getHurt = false;
+            _attackSystem.SetWeakTime();
+
         }
 
         public override void OnLogic()

@@ -28,8 +28,8 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
 
             _animator.Play(Animator.StringToHash("Dash"));
-
             _controller.Roll();
+            _attackSystem.AttackChancePreview(Color.white);
             _attackSystem.ResetWeak();
             _attackSystem.NoSwordRoll();
         }

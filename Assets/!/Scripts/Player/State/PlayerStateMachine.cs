@@ -68,7 +68,7 @@ namespace _.Scripts.Player.State
 
             _normalState.AddState(
                 PlayerState.Idle, new Idle(
-                    _input, _controller, animator, false));
+                    _input, _controller, animator,_attackSystem, false));
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
                     _input, _controller, animator, false));
@@ -187,7 +187,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, false));
             _noSwordState.AddState(
                 PlayerState.NoSwordHurt, new NoSwordHurt(
-                    _input, _controller, animator, _attackSystem, _playerBase, false));
+                    _input, _controller, animator,  _playerBase, false));
             _noSwordState.AddState(
                 PlayerState.NoSwordWalk, new NoSwordWalk(
                     _input, _controller, animator, false));

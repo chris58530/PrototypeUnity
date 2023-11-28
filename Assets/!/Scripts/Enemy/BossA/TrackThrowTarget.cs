@@ -5,7 +5,7 @@ using UniRx;
 
 namespace _.Scripts.Enemy.TypeA
 {
-    public class TrackThrowTarget : TypeAAction
+    public class TrackThrowTarget : BossAAction
     {
         public SharedTransform player;
 

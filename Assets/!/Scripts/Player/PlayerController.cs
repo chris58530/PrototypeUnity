@@ -40,10 +40,6 @@ namespace _.Scripts.Player
         {
             _controller = GetComponent<CharacterController>();
         }
-
-
-      
-
         public void WeakMove(PlayerInput input)
         {
             Vector2 getInput = input.MoveVector;
@@ -101,8 +97,6 @@ namespace _.Scripts.Player
                 yield return null;
             }
         }
-
-
         public void Fall()
         {
             if (IsGround) return;

@@ -12,18 +12,16 @@ namespace @_.Scripts.Player.State
 
         private Animator _animator;
         private Timer _timer;
-        private PlayerAttackSystem _attackSystem;
         private PlayerBase _playerBase;
 
         public NoSwordHurt(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator, PlayerAttackSystem attackSystem
+            Animator animator
             , PlayerBase playerBase,
             bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _controller = playerController;
             _animator = animator;
-            _attackSystem = attackSystem;
             _playerBase = playerBase;
             _input = playerInput;
         }

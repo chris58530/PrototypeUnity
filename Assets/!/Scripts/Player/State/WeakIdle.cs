@@ -27,6 +27,7 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             Debug.Log("WeakIdle");
+            _attackSystem.AttackChancePreview(Color.red);
 
             DebugTools.StateText("WeakIdle");
             _attackSystem.SetWeakTime();

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _.Scripts.Enemy.TypeA
 {
-    public class ThrowBomb : TypeAAction
+    public class ThrowSmallBomb : BossAAction
     {
         public float trackTime;
 
@@ -36,7 +36,7 @@ namespace _.Scripts.Enemy.TypeA
 
         public override void OnEnd()
         {
-            controller.ThrowBomb(_target);
+            controller.ThrowSmallBomb(_target);
         }
     }
 }

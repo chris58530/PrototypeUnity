@@ -5,14 +5,19 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace _.Scripts.Enemy.TypeA
+namespace @_.Scripts.Enemy.BossA
 {
-    public class TypeAController : EnemyController
+    public class BossAController : EnemyController
     {
         //生成物件類別
         [Header("Preview Setting")] //.
         [SerializeField]
         private GameObject previewObject;
+
+        [Header("Throw Small Bomb Setting")] //.
+        [SerializeField]
+        private GameObject smallBomb;
+        private Transform _smallBombPoint;
 
         [Header("ThrowBomb Setting")] //.
         [SerializeField]
@@ -24,7 +29,16 @@ namespace _.Scripts.Enemy.TypeA
 
         [SerializeField] private GameObject damageCollider;
 
-        //skill one 
+        public void ThrowSmallBomb(Vector3 target)
+        {
+            var obj = Instantiate(bomb, _smallBombPoint.transform.position, Quaternion.identity);
+            Destroy(obj, 3);
+            Observable.EveryUpdate().Subscribe(_ =>
+            {
+                obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 100 * Time.deltaTime);
+            }).AddTo(obj);
+        }
+
         public void PreviewThrow(Transform target)
         {
             var obj = Instantiate(previewObject, transform.position, Quaternion.Euler(90, 0, 0));
@@ -64,7 +78,7 @@ namespace _.Scripts.Enemy.TypeA
             {
                 t += Time.deltaTime;
                 float y = jumpToPlayerCurve.Evaluate(t);
-           
+
                 destination.y = y;
                 transform.position = Vector3.MoveTowards(transform.position, destination,
                     speed * Time.deltaTime);
@@ -79,11 +93,12 @@ namespace _.Scripts.Enemy.TypeA
         {
             //play animation 
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             if (other.gameObject.layer != 6) return;
-    
+
             damageObj.OnTakeDamage(10);
             PlayerActions.onHitPlayer?.Invoke();
             Debug.Log($"{other.name} get {10} damage");
