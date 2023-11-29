@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace _.Scripts.Enemy.TypeA
 {
+    [TaskCategory("BossA")]
     public class TailAttack : BossAAction
     {
         public float jumpTime;
@@ -20,7 +21,7 @@ namespace _.Scripts.Enemy.TypeA
 
             if (Vector3.Distance(transform.position, player.position) > tailDistance)
             {
-                controller.JumpToPlayer(navMeshAgent,player,jumpTime);
+                controller.JumpToPlayer(navMeshAgent, player, jumpTime);
                 Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1f))
                     .First()
                     .Subscribe(_ => { _success = true; })

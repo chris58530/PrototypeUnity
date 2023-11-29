@@ -17,7 +17,8 @@ namespace @_.Scripts.Enemy.BossA
         [Header("Throw Small Bomb Setting")] //.
         [SerializeField]
         private GameObject smallBomb;
-        private Transform _smallBombPoint;
+
+        [SerializeField] private Transform _smallBombPoint;
 
         [Header("ThrowBomb Setting")] //.
         [SerializeField]
@@ -31,11 +32,13 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowSmallBomb(Vector3 target)
         {
-            var obj = Instantiate(bomb, _smallBombPoint.transform.position, Quaternion.identity);
+            var obj = Instantiate(smallBomb, _smallBombPoint.position, Quaternion.identity);
+            Vector3 offset =(  _smallBombPoint.position - target).normalized ;
+            offset.y = 0.02f;
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 100 * Time.deltaTime);
+                obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 0 * Time.deltaTime);
             }).AddTo(obj);
         }
 

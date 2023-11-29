@@ -1,42 +1,36 @@
 using System;
-using BehaviorDesigner.Runtime;
+using _.Scripts.Enemy.TypeA;
 using BehaviorDesigner.Runtime.Tasks;
 using UniRx;
 using UnityEngine;
 
-namespace _.Scripts.Enemy.TypeA
+namespace @_.Scripts.Enemy.BossA
 {
+    [TaskCategory("BossA")]
     public class ThrowSmallBomb : BossAAction
     {
-        public float trackTime;
+        public float throwQuantity;
 
         private float _startTime;
         private Vector3 _target;
-        private bool _success;
+        private bool _success = false;
 
         public override void OnStart()
         {
-            _success = false;
-            controller.PreviewThrow(player);
-            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(trackTime)).First().Subscribe(_ => { _success = true; })
-                .AddTo(this.gameObject);
+            _target = new Vector3(player.position.x, player.position.y, player.position.z);
+            controller.ThrowSmallBomb(_target);
         }
 
         public override TaskStatus OnUpdate()
         {
-            if (_success)
-            {
-                _target = new Vector3(player.position.x, player.position.y, player.position.z);
-                Debug.Log($"throw to {_target}");
-                return TaskStatus.Success;
-            }
+            return TaskStatus.Success;
+
 
             return TaskStatus.Running;
         }
 
         public override void OnEnd()
         {
-            controller.ThrowSmallBomb(_target);
         }
     }
 }
