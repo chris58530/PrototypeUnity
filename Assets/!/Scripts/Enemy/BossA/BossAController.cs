@@ -30,15 +30,24 @@ namespace @_.Scripts.Enemy.BossA
 
         [SerializeField] private GameObject damageCollider;
 
+        public void ResetShield()
+        {
+            //do somthing
+        }
+        public void RemoveShield()
+        {
+            //do somthing
+        }
         public void ThrowSmallBomb(Vector3 target)
         {
             var obj = Instantiate(smallBomb, _smallBombPoint.position, Quaternion.identity);
-            Vector3 offset =(  _smallBombPoint.position - target).normalized ;
-            offset.y = 0.02f;
+            Rigidbody objRB = obj.GetComponent<Rigidbody>();
+            Vector3 offset = -(_smallBombPoint.position - target).normalized;
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 0 * Time.deltaTime);
+                objRB.velocity = offset*300;
+                // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
 
@@ -99,6 +108,8 @@ namespace @_.Scripts.Enemy.BossA
 
         private void OnTriggerEnter(Collider other)
         {
+         
+           
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             if (other.gameObject.layer != 6) return;
 

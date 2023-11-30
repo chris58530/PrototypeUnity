@@ -5,8 +5,8 @@ using UniRx;
 using UnityEngine;
 
 namespace _.Scripts.Enemy.TypeA
-{    [TaskCategory("BossA")]
-
+{
+    [TaskCategory("BossA")]
     public class ThrowBomb : BossAAction
     {
         public float trackTime;

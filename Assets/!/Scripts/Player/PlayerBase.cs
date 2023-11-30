@@ -63,6 +63,8 @@ namespace _.Scripts.Player
                 currentHpValue.Value = maxHpValue;
         }
 
+      
+
         public void OnDied()
         {
         }
