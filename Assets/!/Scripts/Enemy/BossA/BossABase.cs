@@ -17,17 +17,14 @@ namespace _.Scripts.Enemy.BossA
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
         public bool isShielded;
 
-
         private void Start()
         {
             Initialize();
 
-            if (hpImage != null)
-            {
-                IsShield(true);
 
-                _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
-            }
+            IsShield(true);
+
+            _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
         }
 
         void Initialize()
