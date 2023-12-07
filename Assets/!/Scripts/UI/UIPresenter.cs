@@ -33,6 +33,11 @@ namespace _.Scripts.UI
                 DebugTools.SkillText(_player.currentSkillValue.Value);
                 _view.UpdateSkill(_player.currentSkillValue.Value, _player.maxSkillValue);
             }).AddTo(this);
+            _player.currentShieldValue.Subscribe(_ =>
+            {
+                DebugTools.ShieldText(_player.currentShieldValue.Value);
+            }).AddTo(this);
+       
         }
     }
 }

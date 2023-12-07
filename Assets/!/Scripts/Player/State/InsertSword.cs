@@ -10,11 +10,12 @@ namespace @_.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private AttackSystem _attackSystem;
-
+        private PlayerBase _playerBase;
         private float _insertTime;
 
         public InsertSword(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem,
+            PlayerBase playerBase,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -23,6 +24,7 @@ namespace @_.Scripts.Player.State
             _controller = playerController;
             _animator = animator;
             _attackSystem = attackSystem;
+            _playerBase = playerBase;
         }
 
         public override void OnEnter()
@@ -38,7 +40,9 @@ namespace @_.Scripts.Player.State
             if (_insertTime > 2)
             {
                 fsm.StateCanExit();
+
                 _attackSystem.NoSword();
+                _playerBase.currentShieldValue.Value = 3;
             }
             else if (Input.GetKeyUp(KeyCode.Q))
             {

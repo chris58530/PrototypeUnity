@@ -73,7 +73,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.InsertSword, new InsertSword(
-                    _input, _controller, animator, _attackSystem, true));
+                    _input, _controller, animator, _attackSystem,_playerBase, true));
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
                     _input, _controller, animator, false));
