@@ -2,18 +2,19 @@ using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
 
-namespace _.Scripts.Player.State
+namespace @_.Scripts.Player.State
 {
-    public class WeakIdle : StateBase<PlayerState>
+    public class InsertSword : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
-        private PlayerAttackSystem _attackSystem;
+        private AttackSystem _attackSystem;
 
-        public WeakIdle(PlayerInput playerInput,
-            PlayerController playerController, Animator animator,
-            PlayerAttackSystem attackSystem,
+        private float _insertTime;
+
+        public InsertSword(PlayerInput playerInput,
+            PlayerController playerController, Animator animator, AttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -26,16 +27,24 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
-            Debug.Log("WeakIdle");
-            _attackSystem.AttackChancePreview(Color.red);
-
-            DebugTools.StateText("WeakIdle");
-            _attackSystem.SetWeakTime();
-            _animator.CrossFade(Animator.StringToHash("Idle"), 2f);
+            //debug
+            DebugTools.StateText("InsertSword");
+            _insertTime = 0;
         }
 
         public override void OnLogic()
         {
+            _insertTime += Time.deltaTime;
+            if (_insertTime > 2)
+            {
+                fsm.StateCanExit();
+                _attackSystem.NoSword();
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                fsm.StateCanExit();
+            }
+
             _controller.Fall();
         }
 

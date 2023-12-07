@@ -4,14 +4,14 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class NoSwordRoll : StateBase<PlayerState>
+    public class RollAttack : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
         private Animator _animator;
 
-        public NoSwordRoll(PlayerController controller,
+        public RollAttack(PlayerController controller,
             Animator animator, AttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -23,24 +23,27 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-            Debug.Log("NoSwordRoll");
-            DebugTools.StateText("NoSwordRoll");
+            DebugTools.StateText("Roll");
             _timer = new Timer();
-
+            
             _animator.Play(Animator.StringToHash("Dash"));
+
             _controller.Roll();
-            _attackSystem.AttackChancePreview(Color.white);
+            _attackSystem.ResetChance();
+
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.rollTime)
+            if (_timer.Elapsed > _controller.rollTime )
                 fsm.StateCanExit();
             _controller.Fall();
+
         }
 
         public override void OnExit()
         {
+            
         }
     }
 }

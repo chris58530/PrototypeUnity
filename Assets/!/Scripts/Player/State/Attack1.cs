@@ -10,12 +10,12 @@ namespace _.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private Timer _timer;
-        private PlayerAttackSystem _attackSystem;
+        private AttackSystem _attackSystem;
 
         public Attack1(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator,
-            PlayerAttackSystem attackSystem,
+            AttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {

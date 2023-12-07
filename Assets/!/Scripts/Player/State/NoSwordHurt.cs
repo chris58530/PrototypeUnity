@@ -29,7 +29,6 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             DebugTools.StateText("NoSwordHurt");
-            PlayerActions.onPlayerHurt?.Invoke();
             _playerBase.getHurt = false;
         }
 

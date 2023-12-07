@@ -2094,7 +2094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275763105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.5, y: 0, z: -44.4}
+  m_LocalPosition: {x: -15.7, y: 0, z: 15.6}
   m_LocalScale: {x: 0.73221004, y: 0.73221004, z: 0.73221004}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5580,7 +5580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 725349535}
   m_Layer: 0
-  m_Name: TypeA HPMax
+  m_Name: Crocodile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5593,16 +5593,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725349534}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -90.86, y: 0, z: -57.82}
+  m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
+  m_LocalPosition: {x: 36.930954, y: 0, z: -164.36418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 275763106}
   - {fileID: 753572039}
   - {fileID: 884027904}
-  m_Father: {fileID: 1401243219}
-  m_RootOrder: 0
+  m_Father: {fileID: 1390242524}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &750742094
 PrefabInstance:
@@ -5611,6 +5611,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1438994266}
     m_Modifications:
+    - target: {fileID: 2544752199732277335, guid: 079b444feba373746a8302395e1ac4d7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5167037780128644185, guid: 079b444feba373746a8302395e1ac4d7,
         type: 3}
       propertyPath: m_RootOrder
@@ -8212,7 +8217,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1390242524}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &882612101
 MonoBehaviour:
@@ -8293,6 +8298,7 @@ GameObject:
   - component: {fileID: 884027912}
   - component: {fileID: 884027911}
   - component: {fileID: 884027910}
+  - component: {fileID: 884027913}
   m_Layer: 7
   m_Name: Base
   m_TagString: Enemy
@@ -8370,6 +8376,49 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &884027913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884027903}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(316,60)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.24994659,117.499985)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.MoveTowards","NodeData":{"Offset":"(-148.333328,112.916656)"},"ID":2,"Name":"Move
+        Towards","Instant":true,"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10},"SharedFloatarriveDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoollookAtTarget":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatmaxLookAtRotationDelta":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"SharedGameObjecttarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"GameObjectmValue":0},"SharedVector3targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"}}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"GameObjectmValue":1}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 2259666724119089372}
+        - {fileID: 2259666724119089372}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.7
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!1 &890751449
 GameObject:
   m_ObjectHideFlags: 0
@@ -10717,7 +10766,7 @@ PrefabInstance:
     - target: {fileID: 8933884228928244379, guid: 31cb5c4b5a1f9074998c91605c3dcfe0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8933884228928244379, guid: 31cb5c4b5a1f9074998c91605c3dcfe0,
         type: 3}
@@ -15425,7 +15474,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44570
+  m_Name: pb_Mesh35218
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17714,7 +17763,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44428
+  m_Name: pb_Mesh35076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18074,7 +18123,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44310
+  m_Name: pb_Mesh34952
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18477,6 +18526,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3094173921097434924}
+  - {fileID: 725349535}
   - {fileID: 1401243219}
   - {fileID: 2259666724119089373}
   - {fileID: 882612100}
@@ -18512,10 +18562,9 @@ Transform:
   m_LocalPosition: {x: 13.568125, y: 0, z: -269.49683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 725349535}
+  m_Children: []
   m_Father: {fileID: 1390242524}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1433573557
 GameObject:
@@ -21181,7 +21230,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44722
+  m_Name: pb_Mesh35360
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22204,7 +22253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1390242524}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2005753235
 GameObject:
@@ -22396,7 +22445,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44654
+  m_Name: pb_Mesh35292
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22560,7 +22609,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44824
+  m_Name: pb_Mesh35464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23078,14 +23127,10 @@ MonoBehaviour:
   swordParent: {fileID: 1267968395}
   attackTime: 0.5
   chanceTime: 0.5
-  failTime: 2
   weapon: {fileID: 362026659}
   attackChancePreview: {fileID: 305332393}
   decreaseSkillTime: 3
   decreaseSkillSpeed: 3
-  finishChance: 0
-  isWeak: 0
-  weakTime: 3
 --- !u!136 &2259666724119089360
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23163,9 +23208,10 @@ GameObject:
   - component: {fileID: 2259666724119089366}
   - component: {fileID: 2259666724119089360}
   - component: {fileID: 2259666724119089358}
+  - component: {fileID: 2259666724119089374}
   - component: {fileID: 2259666724119089361}
   - component: {fileID: 2259666724119089359}
-  - component: {fileID: 2259666724119089374}
+  - component: {fileID: 2259666724119089375}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -23189,7 +23235,7 @@ Transform:
   - {fileID: 5358324765102563591}
   - {fileID: 305332394}
   m_Father: {fileID: 1390242524}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2259666724119089374
 MonoBehaviour:
@@ -23214,6 +23260,23 @@ MonoBehaviour:
   currentUltimateValue:
     value: 0
   getHurt: 0
+--- !u!114 &2259666724119089375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259666724119089372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393abb6825e848a7adf4c92fe62696be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishUltimate: 0
+  ultimateTime: 1
+  chanceTime: 1
+  ultimateCount: 0
+  ultimateweapon: {fileID: 362026659}
 --- !u!224 &2407036480073423327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23469,7 +23532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3094173921097434924}
   m_Layer: 0
-  m_Name: Boss1
+  m_Name: BossA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24415,7 +24478,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029726585452538556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 

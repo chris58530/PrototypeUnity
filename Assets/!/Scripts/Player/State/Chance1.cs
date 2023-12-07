@@ -11,11 +11,11 @@ namespace _.Scripts.Player.State
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
-        private PlayerAttackSystem _attackSystem;
+        private AttackSystem _attackSystem;
 
         public Chance1(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator, PlayerAttackSystem attackSystem,
+            Animator animator, AttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {

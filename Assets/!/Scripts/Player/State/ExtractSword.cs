@@ -4,14 +4,14 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class NoSwordRoll : StateBase<PlayerState>
+    public class ExtractSword : StateBase<PlayerState>
     {
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
         private Animator _animator;
 
-        public NoSwordRoll(PlayerController controller,
+        public ExtractSword(PlayerController controller,
             Animator animator, AttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -23,13 +23,11 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-            Debug.Log("NoSwordRoll");
-            DebugTools.StateText("NoSwordRoll");
+            Debug.Log("ExtractSword");
+            DebugTools.StateText("ExtractSword");
             _timer = new Timer();
 
-            _animator.Play(Animator.StringToHash("Dash"));
-            _controller.Roll();
-            _attackSystem.AttackChancePreview(Color.white);
+         
         }
 
         public override void OnLogic()
@@ -42,5 +40,6 @@ namespace @_.Scripts.Player.State
         public override void OnExit()
         {
         }
+       
     }
 }

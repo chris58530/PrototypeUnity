@@ -12,11 +12,11 @@ namespace _.Scripts.Player.State
     {
         private readonly PlayerController _controller;
         private Timer _timer;
-        private PlayerAttackSystem _attackSystem;
+        private AttackSystem _attackSystem;
         private Animator _animator;
 
         public Roll(PlayerController controller,
-            Animator animator, PlayerAttackSystem attackSystem,
+            Animator animator, AttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
         {
@@ -33,6 +33,8 @@ namespace _.Scripts.Player.State
             _animator.Play(Animator.StringToHash("Dash"));
 
             _controller.Roll();
+            
+            //這方法是attacksystem的父類，不確定這樣呼叫好不好
             _attackSystem.ResetChance();
 
         }

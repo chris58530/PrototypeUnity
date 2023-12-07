@@ -12,12 +12,12 @@ namespace _.Scripts.Player.State
 
         private Animator _animator;
         private Timer _timer;
-        private PlayerAttackSystem _attackSystem;
+        private AttackSystem _attackSystem;
         private PlayerBase _playerBase;
 
         public Hurt(PlayerInput playerInput,
             PlayerController playerController,
-            Animator animator, PlayerAttackSystem attackSystem
+            Animator animator, AttackSystem attackSystem
             , PlayerBase playerBase,
             bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
@@ -31,7 +31,6 @@ namespace _.Scripts.Player.State
         public override void OnEnter()
         {
             DebugTools.StateText("Hurt");
-            PlayerActions.onPlayerHurt?.Invoke();
             _playerBase.getHurt = false;
         }
 
