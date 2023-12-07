@@ -12,6 +12,7 @@ namespace _.Scripts.Player
         public float chanceTime;
         public int ultimateCount = 0;
         [SerializeField] private GameObject ultimateweapon;
+        [SerializeField] private GameObject attackChancePreview;
 
         public bool CanDoUltimate => playerBase.currentSkillValue.Value >= 3;
 
@@ -47,6 +48,10 @@ namespace _.Scripts.Player
             {
                 finishUltimate = true;
             });
+        }
+        public void AttackChancePreview(Color color)
+        {
+            attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
         }
     }
 }

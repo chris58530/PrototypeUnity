@@ -21,8 +21,8 @@ namespace @_.Scripts.Player.State
         {
             _input = playerInput;
             _controller = playerController;
-            _animator = animator;            _ultimateSystem = ultimateSystem;
-
+            _animator = animator;
+            _ultimateSystem = ultimateSystem;
         }
 
         public override void OnEnter()
@@ -31,7 +31,7 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
             _ultimateSystem.StartChanceTime();
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
-
+            _ultimateSystem.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()

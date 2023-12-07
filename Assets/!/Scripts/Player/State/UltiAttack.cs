@@ -32,6 +32,8 @@ namespace _.Scripts.Player.State
             _timer = new Timer();
             _ultimateSystem.UseUltimate();
             _animator.Play("UltimateAttack");
+            _ultimateSystem.AttackChancePreview(Color.white);
+
         }
 
         public override void OnLogic()
