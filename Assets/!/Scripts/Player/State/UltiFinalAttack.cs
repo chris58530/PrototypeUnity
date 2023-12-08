@@ -31,6 +31,7 @@ namespace @_.Scripts.Player.State
             _ultimateSystem.UseFinalUltimate();
             _animator.Play("UltimateAttack");
             _ultimateSystem.AttackChancePreview(Color.white);
+            _controller.Roll();
 
         }
 

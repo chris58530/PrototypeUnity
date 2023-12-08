@@ -9,9 +9,11 @@ namespace _.Scripts.Player
         protected IDisposable lastAttack;
     
         protected PlayerBase playerBase;
+        protected PlayerSword playerSword;
         protected virtual void Awake()
         {
             playerBase = GetComponent<PlayerBase>();
+            playerSword = GetComponent<PlayerSword>();
         }
         protected Vector3 GetDirection()
         {

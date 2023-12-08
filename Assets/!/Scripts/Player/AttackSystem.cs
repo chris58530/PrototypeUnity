@@ -16,14 +16,14 @@ namespace _.Scripts.Player
         [Header("Attack Setting")] //
         [SerializeField]
         public float attackTime;
-
-        [SerializeField] public float chanceTime;
+       
         [SerializeField] private GameObject weapon;
         [SerializeField] private GameObject attackChancePreview;
         [SerializeField] private float decreaseSkillTime;
         [SerializeField] private float decreaseSkillSpeed;
 
-
+        [Header("Sword Setting")] //
+        [SerializeField] public float chargeTime;
 
         public void NoSword()
         {
@@ -31,6 +31,8 @@ namespace _.Scripts.Player
             swordModle.transform.rotation = new Quaternion(90, 0, 0, 0);
             swordModle.transform.position += new Vector3(0, 5, 0);
             hasSword = false;
+            
+            playerSword.Charge(chargeTime,playerBase.currentShieldValue.Value);
         }
         public void Attack(float t)
         {
@@ -64,6 +66,8 @@ namespace _.Scripts.Player
                 swordModle.transform.position = swordParent.transform.position;
                 swordModle.transform.rotation = swordParent.transform.rotation;
                 hasSword = true;
+
+                playerBase.currentShieldValue.Value = playerSword.PickUpAndGetValue();
             }
         }
     }

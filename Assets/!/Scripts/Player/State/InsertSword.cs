@@ -40,9 +40,7 @@ namespace @_.Scripts.Player.State
             if (_insertTime > 2)
             {
                 fsm.StateCanExit();
-
                 _attackSystem.NoSword();
-                _playerBase.currentShieldValue.Value = 3;
             }
             else if (Input.GetKeyUp(KeyCode.Q))
             {

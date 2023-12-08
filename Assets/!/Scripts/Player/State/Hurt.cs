@@ -30,14 +30,22 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
+            _timer = new Timer();
+
             DebugTools.StateText("Hurt");
             _playerBase.getHurt = false;
+            if (_playerBase.currentShieldValue.Value <= 0)
+                _attackSystem.NoSword();
         }
 
         public override void OnLogic()
         {
+            // if (_timer.Elapsed > 1)
+            //     fsm.StateCanExit();
+            
             if (_input.Move)
                 _controller.Move(_input);
+
             _controller.Fall();
         }
 

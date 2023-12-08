@@ -31,6 +31,7 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("UltimateAttack");
             _timer = new Timer();
             _ultimateSystem.UseUltimate();
+            _controller.Roll();
             _animator.Play("UltimateAttack");
             _ultimateSystem.AttackChancePreview(Color.white);
 
