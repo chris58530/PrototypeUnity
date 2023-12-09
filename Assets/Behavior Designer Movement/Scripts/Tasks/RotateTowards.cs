@@ -28,11 +28,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         [Tooltip("If target is null then use the target rotation")]
         public SharedVector3 targetRotation;
 
-        public Quaternion offset;
 
         public override TaskStatus OnUpdate()
         {
-            var rotation = Target() *offset;
+            var rotation = Target();
             // Return a task status of success once we are done rotating
             if (Quaternion.Angle(transform.rotation, rotation) < rotationEpsilon.Value)
             {
