@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
+[TaskCategory("Enemy")]
 
-public class SwitchTag : Action
+public class CollisionAttack : Action
 {
     public bool canHurt;
     
@@ -11,7 +12,7 @@ public class SwitchTag : Action
     {
         if (canHurt)
             transform.tag = "Enemy";
-        else  transform.tag = "Defualt";
+        else  transform.tag = "Default";
         
     }
 

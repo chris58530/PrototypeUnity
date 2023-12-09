@@ -33,10 +33,10 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerActions.onHitPlayer += ShakeCamera;
+        PlayerActions.onPlayerHurt += ShakeCamera;
     }
     private void OnDisable()
     {
-        PlayerActions.onHitPlayer -= ShakeCamera;
+        PlayerActions.onPlayerHurt -= ShakeCamera;
     }
 }

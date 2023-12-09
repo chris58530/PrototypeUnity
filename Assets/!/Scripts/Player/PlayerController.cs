@@ -40,15 +40,7 @@ namespace _.Scripts.Player
         {
             _controller = GetComponent<CharacterController>();
         }
-        public void WeakMove(PlayerInput input)
-        {
-            Vector2 getInput = input.MoveVector;
-            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
-            Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
-            _controller.Move(dir * (weakWalkSpeed * (Time.deltaTime)));
-        }
-
+      
 
         public void Move(PlayerInput input)
         {
@@ -62,6 +54,7 @@ namespace _.Scripts.Player
 
         public void Roll()
         {
+            transform.tag = "Undamaged";
             #region PerformDash
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -96,6 +89,8 @@ namespace _.Scripts.Player
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+            transform.tag = "Player";
+
         }
         public void Fall()
         {

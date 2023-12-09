@@ -6,19 +6,14 @@ using UnityEngine;
 
 public class BossABomb : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector]public Transform target;
 
-    private void OnEnable()
-    {
-    }
-
-    private void Update()
-    {
-        //增加曲線
-    }
+  
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.CompareTag("Sword"))
+            Destroy(gameObject);
         if (!other.gameObject.CompareTag("Player"))return;
             Destroy(gameObject);
     }

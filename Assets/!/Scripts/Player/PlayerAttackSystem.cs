@@ -13,7 +13,7 @@ namespace _.Scripts.Player
         protected virtual void Awake()
         {
             playerBase = GetComponent<PlayerBase>();
-            playerSword = GetComponent<PlayerSword>();
+            playerSword = GetComponentInChildren<PlayerSword>();
         }
         protected Vector3 GetDirection()
         {

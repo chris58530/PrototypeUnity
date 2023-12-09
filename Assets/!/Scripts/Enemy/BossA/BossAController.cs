@@ -34,10 +34,12 @@ namespace @_.Scripts.Enemy.BossA
         {
             //do somthing
         }
+
         public void RemoveShield()
         {
             //do somthing
         }
+
         public void ThrowSmallBomb(Vector3 target)
         {
             var obj = Instantiate(smallBomb, _smallBombPoint.position, Quaternion.identity);
@@ -46,7 +48,7 @@ namespace @_.Scripts.Enemy.BossA
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                objRB.velocity = offset*300;
+                objRB.velocity = offset * 150;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
@@ -80,7 +82,7 @@ namespace @_.Scripts.Enemy.BossA
             float speed = distanceToTarget / jumpTime; // Calculate speed based on distance
 
             Vector3 destination = new Vector3(player.position.x, player.position.y, player.position.z);
-            StartCoroutine(JumpToPlayerRoutine(destination, jumpTime, speed));
+            // StartCoroutine(JumpToPlayerRoutine(destination, jumpTime, speed));
         }
 
         IEnumerator JumpToPlayerRoutine(Vector3 destination, float time, float speed)
@@ -108,13 +110,13 @@ namespace @_.Scripts.Enemy.BossA
 
         private void OnTriggerEnter(Collider other)
         {
-         
-           
+            if (transform.CompareTag("Default")) return;
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             if (other.gameObject.layer != 6) return;
 
             damageObj.OnTakeDamage(10);
-            PlayerActions.onHitPlayer?.Invoke();
+            PlayerActions.onPlayerHurt?.Invoke();
+            
             Debug.Log($"{other.name} get {10} damage");
         }
     }

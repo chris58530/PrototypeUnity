@@ -57,11 +57,12 @@ namespace _.Scripts.Player
 
         public void OnTakeDamage(float value)
         {
+            if (transform.CompareTag("Undamaged")) return;
+            PlayerActions.onPlayerHurt?.Invoke();
             if (currentShieldValue.Value > 0)
             {
                 currentShieldValue.Value -= 1;
             }
-
             else
             {
                 currentHpValue.Value -= value;
@@ -77,14 +78,19 @@ namespace _.Scripts.Player
         private void OnEnable()
         {
             PlayerActions.onHitEnemy += SetSkillValue;
-            PlayerActions.onHitPlayer += ResetSkillValue;
+            PlayerActions.onPlayerHurt += ResetSkillValue;
         }
 
+        public void OnKnock(Transform trans)
+        {
+            Vector3 offset = (transform.position - trans.position).normalized;
+
+        }
 
         private void OnDisable()
         {
             PlayerActions.onHitEnemy -= SetSkillValue;
-            PlayerActions.onHitPlayer -= ResetSkillValue;
+            PlayerActions.onPlayerHurt -= ResetSkillValue;
         }
     }
 }

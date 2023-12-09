@@ -51,4 +51,26 @@ namespace _.Scripts.Enemy.TypeA
             controller.ShakeTail();
         }
     }
+
+    public class TailRotate : BossAAction
+    {
+        public SharedGameObject target;
+        public Vector3 offset;
+        public float rotateSpeed;
+
+        public override void OnStart()
+        {
+        }
+
+        public override TaskStatus OnUpdate()
+        {
+          
+            return TaskStatus.Success;
+            return TaskStatus.Running;
+        }
+
+        public override void OnEnd()
+        {
+        }
+    }
 }

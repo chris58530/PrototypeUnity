@@ -73,7 +73,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.InsertSword, new InsertSword(
-                    _input, _controller, animator, _attackSystem,_playerBase, true));
+                    _input, _controller, animator, _attackSystem, _playerBase, true));
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
                     _input, _controller, animator, false));
@@ -146,6 +146,8 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
 
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
@@ -153,7 +155,8 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
 
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
@@ -161,7 +164,8 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
             #endregion
 
 
@@ -185,9 +189,9 @@ namespace _.Scripts.Player.State
 
             _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
-                transition => _ultimateSystem.ultimateCount <= 5 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount <= 4 && _input.IsPressedUltimateAttack);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFinalAttack,
-                transition => _ultimateSystem.ultimateCount > 5 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount > 4 && _input.IsPressedUltimateAttack);
 
             #endregion
 

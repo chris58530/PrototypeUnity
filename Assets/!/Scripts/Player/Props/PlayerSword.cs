@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UniRx;
-
 public class PlayerSword : MonoBehaviour
 {
     public int maxShieldValue;
@@ -13,6 +12,7 @@ public class PlayerSword : MonoBehaviour
 
     public void Charge(float chargeTime,float currentValue)
     {
+      
         currentShieldValue = (int)currentValue;
         _chargeDisposable = Observable.Interval(TimeSpan.FromSeconds(chargeTime))
             .Where(_ => currentShieldValue < maxShieldValue)

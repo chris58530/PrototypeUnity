@@ -58,7 +58,9 @@ namespace _.Scripts.Enemy.BossA
             else
                 hpImage.color = Color.red;
         }
-
+        public void OnKnock(Transform trans)
+        {
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("RemoveShield"))
