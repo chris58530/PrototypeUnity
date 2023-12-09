@@ -3,13 +3,10 @@ using _.Scripts.Enemy.TypeA;
 using BehaviorDesigner.Runtime.Tasks;
 using UniRx;
 using UnityEngine;
-
-namespace @_.Scripts.Enemy.BossA
+[TaskCategory("BossA")]
+public class ThrowJuggleBomb : BossAAction
 {
-    [TaskCategory("BossA")]
-    public class ThrowSmallBomb : BossAAction
-    {
-
+ 
         private float _startTime;
         private Vector3 _target;
 
@@ -17,7 +14,7 @@ namespace @_.Scripts.Enemy.BossA
         {
             var position = player.position;
             _target = new Vector3(position.x, position.y, position.z);
-            controller.ThrowSmallBomb(_target);
+            controller.ThrowJuggleBomb(_target);
         }
 
         public override TaskStatus OnUpdate()
@@ -30,5 +27,5 @@ namespace @_.Scripts.Enemy.BossA
         public override void OnEnd()
         {
         }
-    }
+  
 }

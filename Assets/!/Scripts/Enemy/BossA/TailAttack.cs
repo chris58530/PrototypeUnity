@@ -66,7 +66,6 @@ namespace _.Scripts.Enemy.TypeA
         {
           
             return TaskStatus.Success;
-            return TaskStatus.Running;
         }
 
         public override void OnEnd()

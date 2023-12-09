@@ -14,11 +14,16 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private GameObject previewObject;
 
+        [Header("Juggle Bomb Setting")] //.
+        [SerializeField]
+        private GameObject juggleBomb;
+
+
         [Header("Throw Small Bomb Setting")] //.
         [SerializeField]
         private GameObject smallBomb;
 
-        [SerializeField] private Transform _smallBombPoint;
+        [SerializeField] private Transform smallBombPoint;
 
         [Header("ThrowBomb Setting")] //.
         [SerializeField]
@@ -40,11 +45,25 @@ namespace @_.Scripts.Enemy.BossA
             //do somthing
         }
 
+        public void ThrowJuggleBomb(Vector3 target)
+        {
+            var obj = Instantiate(juggleBomb, target + new Vector3(0,50,0), Quaternion.identity);
+            Rigidbody objRB = obj.GetComponent<Rigidbody>();
+            Vector3 offset = -(obj.transform.position - target).normalized;
+            Destroy(obj, 3);
+            Observable.EveryUpdate().Subscribe(_ =>
+            {
+                objRB.velocity = offset * 150;
+                // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
+            }).AddTo(obj);
+        }
+
         public void ThrowSmallBomb(Vector3 target)
         {
-            var obj = Instantiate(smallBomb, _smallBombPoint.position, Quaternion.identity);
+            var pos = smallBombPoint.position;
+            var obj = Instantiate(smallBomb, pos, Quaternion.identity);
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
-            Vector3 offset = -(_smallBombPoint.position - target).normalized;
+            Vector3 offset = -(pos - target).normalized;
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
@@ -116,7 +135,7 @@ namespace @_.Scripts.Enemy.BossA
 
             damageObj.OnTakeDamage(10);
             PlayerActions.onPlayerHurt?.Invoke();
-            
+
             Debug.Log($"{other.name} get {10} damage");
         }
     }
