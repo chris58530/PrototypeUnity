@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _.Scripts.Event;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -10,6 +11,12 @@ namespace @_.Scripts.Enemy.BossA
 {
     public class BossAController : EnemyController
     {
+        [Header("Explode Setting")] //.
+        [SerializeField]
+        private GameObject smallExplode;
+
+        [SerializeField] private GameObject bigExplode;
+
         //生成物件類別
         [Header("Preview Setting")] //.
         [SerializeField]
@@ -48,14 +55,16 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowJuggleBomb(Vector3 target)
         {
-            var obj = Instantiate(juggleBomb, target + new Vector3(0, 50, 0),
+            target.x += Random.Range(-10, 10);
+            target.z += Random.Range(-10, 10);
+            var obj = Instantiate(smallBomb, target + new Vector3(0, 50, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(obj.transform.position - target).normalized;
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                objRB.velocity = offset * 150;
+                objRB.velocity = offset * 55;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
@@ -63,7 +72,8 @@ namespace @_.Scripts.Enemy.BossA
         public void ThrowSmallBomb(Vector3 target)
         {
             var pos = smallBombPoint.position;
-            var obj = Instantiate(smallBomb, pos,Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
+            var obj = Instantiate(smallBomb, pos,
+                Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(pos - target).normalized;
             Destroy(obj, 3);
