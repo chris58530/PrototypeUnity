@@ -4,6 +4,7 @@ using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace @_.Scripts.Enemy.BossA
 {
@@ -47,7 +48,8 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowJuggleBomb(Vector3 target)
         {
-            var obj = Instantiate(juggleBomb, target + new Vector3(0,50,0), Quaternion.identity);
+            var obj = Instantiate(juggleBomb, target + new Vector3(0, 50, 0),
+                Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(obj.transform.position - target).normalized;
             Destroy(obj, 3);
@@ -61,7 +63,7 @@ namespace @_.Scripts.Enemy.BossA
         public void ThrowSmallBomb(Vector3 target)
         {
             var pos = smallBombPoint.position;
-            var obj = Instantiate(smallBomb, pos, Quaternion.identity);
+            var obj = Instantiate(smallBomb, pos,Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(pos - target).normalized;
             Destroy(obj, 3);
@@ -86,11 +88,12 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowBomb(Vector3 target)
         {
-            var obj = Instantiate(bomb, transform.position + new Vector3(0, 100, 0), Quaternion.identity);
+            var obj = Instantiate(bomb, target + new Vector3(0, 100, 0),
+                Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 100 * Time.deltaTime);
+                obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 50 * Time.deltaTime);
             }).AddTo(obj);
         }
 
