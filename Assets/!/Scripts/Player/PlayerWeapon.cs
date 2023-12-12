@@ -17,7 +17,7 @@ namespace _.Scripts.Player
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
-            if (other.gameObject.layer != 7) return;
+            if (other.gameObject.layer != 7 ) return;
 
             damageObj.OnTakeDamage(attackValue);
             PlayerActions.onHitEnemy.Invoke(1);
