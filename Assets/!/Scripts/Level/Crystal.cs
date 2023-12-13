@@ -19,7 +19,6 @@ public class Crystal : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         _currentHp = maxHp;
-
     }
 
     public void OnTakeDamage(float value)

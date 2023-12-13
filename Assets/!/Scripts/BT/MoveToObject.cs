@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MoveToObject : EnemyAction
 {
-    public float Speed;
+    public SharedFloat Speed;
     public SharedFloat KeepDistance;
     public SharedGameObject Target;
     public bool trackPosY;
@@ -13,12 +13,12 @@ public class MoveToObject : EnemyAction
     public override void OnStart()
     {
         navMeshAgent.isStopped = false;
-        navMeshAgent.speed = 11;
+        navMeshAgent.speed = Speed.Value;
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (Vector3.SqrMagnitude(transform.position - Target.Value.transform.position) < KeepDistance.Value)
+        if (Vector3.Distance(transform.position, Target.Value.transform.position) < KeepDistance.Value)
         {
             return TaskStatus.Success;
         }
@@ -36,6 +36,5 @@ public class MoveToObject : EnemyAction
     public override void OnEnd()
     {
         navMeshAgent.isStopped = true;
-    
     }
 }
