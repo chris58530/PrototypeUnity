@@ -28,7 +28,6 @@ namespace _.Scripts.Player.State
         NoSwordHurt,
         NoSwordRoll,
         NoSwordWalk,
-        ExtractSword
     }
 
     public enum SuperState

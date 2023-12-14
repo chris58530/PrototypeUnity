@@ -16,14 +16,20 @@ namespace _.Scripts.Player
         [Header("Attack Setting")] //
         [SerializeField]
         public float attackTime;
-       
+
         [SerializeField] private GameObject weapon;
         [SerializeField] private GameObject attackChancePreview;
         [SerializeField] private float decreaseSkillTime;
         [SerializeField] private float decreaseSkillSpeed;
 
         [Header("Sword Setting")] //
-        [SerializeField] public float chargeTime;
+        [SerializeField]
+        public float chargeTime;
+
+        private void Start()
+        {
+            weapon.SetActive(false);
+        }
 
         public void NoSword()
         {
@@ -31,9 +37,11 @@ namespace _.Scripts.Player
             swordModle.transform.rotation = new Quaternion(90, 0, 0, 0);
             swordModle.transform.position += new Vector3(0, 5, 0);
             hasSword = false;
-            
-            playerSword.Charge(chargeTime,playerBase.currentShieldValue.Value);
+            weapon.SetActive(true);
+
+            playerSword.Charge(chargeTime, playerBase.currentShieldValue.Value);
         }
+
         public void Attack(float t)
         {
             lastAttack?.Dispose();
@@ -48,6 +56,7 @@ namespace _.Scripts.Player
                 .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
             weapon.SetActive(true);
         }
+
         public void CancelAttack()
         {
             weapon.SetActive(false);
@@ -58,15 +67,16 @@ namespace _.Scripts.Player
             attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.CompareTag("Sword") && !hasSword)
+            //test
+            if (other.gameObject.CompareTag("Sword") && !hasSword && Input.GetKey(KeyCode.E))
             {
                 swordModle.transform.parent = swordParent.transform;
                 swordModle.transform.position = swordParent.transform.position;
                 swordModle.transform.rotation = swordParent.transform.rotation;
                 hasSword = true;
-
+                weapon.SetActive(false);
                 playerBase.currentShieldValue.Value = playerSword.PickUpAndGetValue();
             }
         }

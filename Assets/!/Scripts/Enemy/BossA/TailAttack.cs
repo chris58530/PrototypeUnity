@@ -1,5 +1,4 @@
 using System;
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UniRx;
 using UnityEngine;
@@ -49,27 +48,6 @@ namespace _.Scripts.Enemy.TypeA
             navMeshAgent.enabled = true;
             animator.Play("TailAttack");
             controller.ShakeTail();
-        }
-    }
-
-    public class TailRotate : BossAAction
-    {
-        public SharedGameObject target;
-        public Vector3 offset;
-        public float rotateSpeed;
-
-        public override void OnStart()
-        {
-        }
-
-        public override TaskStatus OnUpdate()
-        {
-          
-            return TaskStatus.Success;
-        }
-
-        public override void OnEnd()
-        {
         }
     }
 }

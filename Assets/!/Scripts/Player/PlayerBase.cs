@@ -20,11 +20,17 @@ namespace _.Scripts.Player
         [HideInInspector] public ReactiveProperty<float> currentShieldValue = new ReactiveProperty<float>();
 
         public bool getHurt;
-
+        [SerializeField] private float hurtCD;
+        private IDisposable _hurtCd;
+        [SerializeField]private bool _canHurt = true;
         private void Start()
         {
             Initialize();
-            currentHpValue.Skip(1).Subscribe(_ => { getHurt = true; }).AddTo(this);
+            currentHpValue.Skip(1).Subscribe(_ =>
+            {
+                getHurt = true;
+                
+            }).AddTo(this);
         }
 
         void Initialize()
@@ -58,6 +64,13 @@ namespace _.Scripts.Player
         public void OnTakeDamage(float value)
         {
             if (transform.CompareTag("Undamaged")) return;
+            if(!_canHurt) return;
+            _canHurt = false;
+            _hurtCd = Observable.EveryUpdate()
+                .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(_ =>
+                {
+                    _canHurt = true;
+                });
             PlayerActions.onPlayerHurt?.Invoke();
             if (currentShieldValue.Value > 0)
             {
@@ -71,6 +84,10 @@ namespace _.Scripts.Player
             }
         }
 
+        public void OnKnock(Transform trans)
+        {
+            Vector3 offset = (transform.position - trans.position).normalized;
+        }
         public void OnDied()
         {
         }
@@ -81,11 +98,7 @@ namespace _.Scripts.Player
             PlayerActions.onPlayerHurt += ResetSkillValue;
         }
 
-        public void OnKnock(Transform trans)
-        {
-            Vector3 offset = (transform.position - trans.position).normalized;
-
-        }
+      
 
         private void OnDisable()
         {

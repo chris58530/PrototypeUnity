@@ -27,6 +27,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
 
         [Tooltip("If target is null then use the target rotation")]
         public SharedVector3 targetRotation;
+        public Vector3 offset;
 
 
         public override TaskStatus OnUpdate()
@@ -51,7 +52,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                 return Quaternion.Euler(targetRotation.Value);
             }
 
-            var position = target.Value.transform.position - transform.position;
+            var position = (target.Value.transform.position+offset) - transform.position;
             if (onlyY.Value)
             {
                 position.y = 0;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using _.Scripts.Event;
 using UniRx;
 using UniRx.Triggers;
@@ -41,7 +42,7 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private AnimationCurve jumpToPlayerCurve;
 
-        [SerializeField] private GameObject damageCollider;
+        [SerializeField] private GameObject[] damageCollider;
 
         public void ResetShield()
         {
@@ -53,10 +54,26 @@ namespace @_.Scripts.Enemy.BossA
             //do somthing
         }
 
+        public void OpenAttack()
+        {
+            for (int i = 0; i < damageCollider.Length; i++)
+            {
+                damageCollider[i].tag = "Enemy";
+            }
+        }
+
+        public void CloseAttack()
+        {
+            for (int i = 0; i < damageCollider.Length; i++)
+            {
+                damageCollider[i].tag = "Default";
+            }
+        }
+
         public void ThrowJuggleBomb(Vector3 target)
         {
-            target.x += Random.Range(-10, 10);
-            target.z += Random.Range(-10, 10);
+            target.x += Random.Range(-5, 5);
+            target.z += Random.Range(-5, 5);
             var obj = Instantiate(smallBomb, target + new Vector3(0, 50, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();

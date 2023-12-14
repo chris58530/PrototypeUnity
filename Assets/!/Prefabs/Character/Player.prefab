@@ -253,6 +253,8 @@ MonoBehaviour:
   currentShieldValue:
     value: 0
   getHurt: 0
+  hurtCD: 0
+  _canHurt: 1
 --- !u!114 &5715834888313830782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdbd9e3a84342829abd75673865a44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 50
-  rotateSpeed: 50
+  walkSpeed: 25
+  rotateSpeed: 20
   weakWalkSpeed: 20
   rollTime: 0.2
   dashSpeed: 100
