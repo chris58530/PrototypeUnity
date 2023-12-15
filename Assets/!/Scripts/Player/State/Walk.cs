@@ -11,16 +11,18 @@ namespace _.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private readonly Animator _animator;
+        private AttackSystem _attackSystem;
 
         public Walk(
             PlayerInput playerInput,
-            PlayerController controller, Animator animator,
+            PlayerController controller, Animator animator, AttackSystem attackSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _input = playerInput;
             _controller = controller;
             _animator = animator;
+            _attackSystem = attackSystem;
         }
 
         public override void OnEnter()
@@ -28,6 +30,8 @@ namespace _.Scripts.Player.State
             //debug
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "Walk";
+            _animator.CrossFade(Animator.StringToHash("Walk"), 0.5f);
+            _attackSystem.ResetChance();
         }
 
         public override void OnLogic()

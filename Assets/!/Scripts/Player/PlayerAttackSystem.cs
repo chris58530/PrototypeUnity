@@ -43,6 +43,7 @@ namespace _.Scripts.Player
         }
         public void ResetChance()
         {
+
             lastAttack?.Dispose();
             chanceDisposable?.Dispose();
         }

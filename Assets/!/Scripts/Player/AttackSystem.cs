@@ -17,6 +17,9 @@ namespace _.Scripts.Player
         [SerializeField]
         public float attackTime;
 
+        [SerializeField] public int attackCount = 0;
+        [SerializeField] private float chanceTime;
+        [SerializeField] public bool finishAttack;
         [SerializeField] private GameObject weapon;
         [SerializeField] private GameObject attackChancePreview;
         [SerializeField] private float decreaseSkillTime;
@@ -49,18 +52,35 @@ namespace _.Scripts.Player
 
             if (IsInvoking(nameof(DecreaseSkill)))
                 CancelInvoke(nameof(DecreaseSkill));
-
+            
+            //接技
+            if (attackCount < 2)
+                attackCount++;
+            else attackCount = 0;
 
             transform.LookAt(GetDirection());
+            
+            chanceDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
+                .First().Subscribe(_ =>
+                {
+                    finishAttack = true;            
+                    attackCount = 0;
+
+                });
+            
             lastAttack = Observable.EveryUpdate().First()
                 .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
+            
             weapon.SetActive(true);
         }
 
         public void CancelAttack()
         {
-            weapon.SetActive(false);
+            weapon.SetActive(false);            
+
         }
+
+      
 
         public void AttackChancePreview(Color color)
         {

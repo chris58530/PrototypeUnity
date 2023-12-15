@@ -31,8 +31,9 @@ namespace _.Scripts.Player.State
             //debug
             DebugTools.StateText("Idle");
             _attackSystem.AttackChancePreview(Color.white);
-
-            _animator.CrossFade(Animator.StringToHash("Idle"), 2f);
+            _attackSystem.ResetChance();
+            _attackSystem.finishAttack = false;   
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.5f);
         }
 
         public override void OnLogic()

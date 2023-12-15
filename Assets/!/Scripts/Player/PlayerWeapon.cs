@@ -12,7 +12,7 @@ namespace _.Scripts.Player
         [SerializeField] private int attackValue;
         private void Start()
         {
-            transform.parent = GameObject.Find("Sword").transform;
+            transform.parent = GameObject.Find("SwordPoint").transform;
         }
         private void OnTriggerEnter(Collider other)
         {

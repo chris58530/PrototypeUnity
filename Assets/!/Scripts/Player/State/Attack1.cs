@@ -11,6 +11,7 @@ namespace _.Scripts.Player.State
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
+        private float aniTime;
 
         public Attack1(PlayerInput playerInput,
             PlayerController playerController,
@@ -30,20 +31,19 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("AttackFirst");
             _timer = new Timer();
             _animator.Play(Animator.StringToHash("Attack1"));
-            float aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
+            aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
             _attackSystem.Attack(aniTime);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _attackSystem.attackTime)
+            if (_timer.Elapsed > aniTime)
                 fsm.StateCanExit();
         }
 
         public override void OnExit()
         {
             _attackSystem.CancelAttack();
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }
 }

@@ -14,11 +14,7 @@ namespace _.Scripts.Player
     {
         [SerializeField] private float walkSpeed;
         [SerializeField] private float rotateSpeed;
-
-       
-        [Header("Weak Setting")] [SerializeField]
-        private float weakWalkSpeed;
-
+        
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
 

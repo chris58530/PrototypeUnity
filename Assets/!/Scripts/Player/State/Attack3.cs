@@ -12,6 +12,7 @@ namespace @_.Scripts.Player.State
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
+        private float aniTime;
 
         public Attack3(PlayerInput playerInput,
             PlayerController playerController,
@@ -33,13 +34,13 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
             _animator.CrossFade(Animator.StringToHash("Attack3"), 0.1f);
             _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
+            aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
 
-            Debug.Log(_animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _attackSystem.attackTime)
+            if (_timer.Elapsed > aniTime)
                 fsm.StateCanExit();
         }
 
@@ -48,7 +49,6 @@ namespace @_.Scripts.Player.State
             _attackSystem.CancelAttack();
 
 
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }
 }
