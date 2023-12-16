@@ -8,13 +8,16 @@ using UniRx;
 using Observable = UniRx.Observable;
 using TimeSpan = System.TimeSpan;
 
-public class Crystal : MonoBehaviour, IDamageable
+public class Crystal : TaskObject, IDamageable
 {
+
     [SerializeField] private int maxHp;
     private int _currentHp;
     [SerializeField] private bool canRelife;
     [SerializeField] private float relifeTime;
     private Collider _collider;
+
+
 
     private void OnEnable()
     {
@@ -38,12 +41,12 @@ public class Crystal : MonoBehaviour, IDamageable
     {
         if (_collider == null)
             _collider = GetComponent<Collider>();
-        
+        isDone = true;
         _collider.isTrigger = true;
-        //debug
+        //debugs
         this.GetComponent<MeshRenderer>().enabled = false;
-        
-        if(!canRelife)return;
+
+        if (!canRelife) return;
         Observable.EveryUpdate()
             .Delay(TimeSpan.FromSeconds(relifeTime))
             .First()
@@ -52,6 +55,7 @@ public class Crystal : MonoBehaviour, IDamageable
                 _currentHp = maxHp;
                 this.GetComponent<MeshRenderer>().enabled = true;
                 _collider.isTrigger = false;
+                isDone = false;
             }).AddTo(this);
     }
 }
