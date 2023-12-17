@@ -17,6 +17,7 @@ namespace _.Scripts.Player.State
         UltiChance,
         UltiFinalAttack,
         Chance1,
+        Chance1ToIdle,
         Chance2,
         Chance3,
         Hurt,
@@ -75,7 +76,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, _playerBase, true));
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
-                    _input, _controller, animator, _attackSystem,false));
+                    _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Roll, new Roll(
                     _controller, animator, _attackSystem, true));
@@ -100,6 +101,9 @@ namespace _.Scripts.Player.State
             _normalState.AddState(
                 PlayerState.Chance1, new Chance1(
                     _input, _controller, animator, _attackSystem, false));
+            _normalState.AddState(
+                PlayerState.Chance1ToIdle, new Chance1ToIdle(
+                    _input, _controller, animator, _attackSystem, true));
 
             _normalState.AddState(
                 PlayerState.Chance2, new Chance2(
@@ -127,7 +131,7 @@ namespace _.Scripts.Player.State
             //Walk
             _normalState.AddTwoWayTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-    
+
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Attack1,
@@ -146,9 +150,11 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Attack3, PlayerState.Chance3);
             _normalState.AddTransition(PlayerState.Attack3, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-
+            //extra
+            _normalState.AddTransition(PlayerState.Chance1ToIdle, PlayerState.Idle);
+            
             //AttackChance
-            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Idle,
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Chance1ToIdle,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Attack2,
                 transition => _input.IsPressedAttack);
@@ -210,7 +216,7 @@ namespace _.Scripts.Player.State
 
             _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
-                transition => _ultimateSystem.ultimateCount <4 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount < 4 && _input.IsPressedUltimateAttack);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFinalAttack,
                 transition => _ultimateSystem.ultimateCount >= 4 && _input.IsPressedUltimateAttack);
 
