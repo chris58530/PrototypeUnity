@@ -210,9 +210,9 @@ namespace _.Scripts.Player.State
 
             _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
-                transition => _ultimateSystem.ultimateCount <= 4 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount <4 && _input.IsPressedUltimateAttack);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFinalAttack,
-                transition => _ultimateSystem.ultimateCount > 4 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount >= 4 && _input.IsPressedUltimateAttack);
 
             #endregion
 

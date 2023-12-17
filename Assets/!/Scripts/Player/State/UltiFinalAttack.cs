@@ -29,7 +29,7 @@ namespace @_.Scripts.Player.State
             DebugTools.StateText("UltiFinalAttack");
             _timer = new Timer();
             _ultimateSystem.UseFinalUltimate();
-            _animator.Play("UltimateAttack");
+            _animator.Play("UltimateFinalAttack");
             _ultimateSystem.AttackChancePreview(Color.white);
             _controller.Roll();
 
@@ -37,8 +37,10 @@ namespace @_.Scripts.Player.State
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _ultimateSystem.ultimateTime)
+            if (_timer.Elapsed >_animator.GetCurrentAnimatorClipInfo(0).Length)
+            {_ultimateSystem.finishUltimate = true;
                 fsm.StateCanExit();
+            }
         }
 
         public override void OnExit()
