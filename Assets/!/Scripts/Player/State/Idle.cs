@@ -33,7 +33,7 @@ namespace _.Scripts.Player.State
             _attackSystem.AttackChancePreview(Color.white);
             _attackSystem.ResetChance();
             _attackSystem.finishAttack = false;   
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.5f);
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
 
         public override void OnLogic()

@@ -29,6 +29,8 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             DebugTools.StateText("NoSwordHurt");
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.5f);
+
             _playerBase.getHurt = false;
         }
 

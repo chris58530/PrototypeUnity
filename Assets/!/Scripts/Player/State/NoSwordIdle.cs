@@ -25,8 +25,8 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("NoSwordIdle");
+            _animator.CrossFade(Animator.StringToHash("EmptyIdle"), 0.5f);
 
-            _animator.CrossFade(Animator.StringToHash("Idle"), 2f);
         }
 
         public override void OnLogic()

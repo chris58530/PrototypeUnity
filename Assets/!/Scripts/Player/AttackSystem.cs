@@ -37,8 +37,7 @@ namespace _.Scripts.Player
         public void NoSword()
         {
             swordModle.transform.parent = null;
-            swordModle.transform.rotation = new Quaternion(90, 0, 0, 0);
-            swordModle.transform.position += new Vector3(0, 5, 0);
+      
             hasSword = false;
             weapon.SetActive(true);
 

@@ -163,7 +163,7 @@ namespace _.Scripts.Player.State
 
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
-            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Idle,
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Roll,
                 transition => _input.IsPressedRoll);

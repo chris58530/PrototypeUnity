@@ -24,7 +24,8 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-          
+            _animator.CrossFade(Animator.StringToHash("EmptyRun"), 0.5f);
+
             DebugTools.StateText("NoSwordWalk");
         }
 

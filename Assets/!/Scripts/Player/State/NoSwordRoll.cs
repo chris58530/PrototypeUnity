@@ -27,7 +27,8 @@ namespace @_.Scripts.Player.State
             DebugTools.StateText("NoSwordRoll");
             _timer = new Timer();
 
-            _animator.Play(Animator.StringToHash("Dash"));
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.5f);
+
             _controller.Roll();
             _attackSystem.AttackChancePreview(Color.white);
         }

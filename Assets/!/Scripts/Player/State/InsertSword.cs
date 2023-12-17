@@ -31,13 +31,15 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("InsertSword");
+            _animator.CrossFade(Animator.StringToHash("InsertSword"), 0.1f);
+
             _insertTime = 0;
         }
 
         public override void OnLogic()
         {
             _insertTime += Time.deltaTime;
-            if (_insertTime > 2)
+            if (_insertTime > 0.8f)
             {
                 fsm.StateCanExit();
                 _attackSystem.NoSword();
