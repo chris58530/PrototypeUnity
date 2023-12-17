@@ -21,7 +21,7 @@ public class IntroManager : MonoBehaviour
             {
                 damage++;
                 Debug.Log(damage);
-                if (damage >= 10)
+                if (damage >= 1)
                     playableDirector.Play();
             }
         }).AddTo(this);
