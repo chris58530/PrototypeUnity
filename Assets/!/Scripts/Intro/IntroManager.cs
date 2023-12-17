@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using TimeSpan = MagicaCloth2.TimeSpan;
 
 public class IntroManager : MonoBehaviour
 {
     [SerializeField] private GameObject destroyObject;
-
+    public PlayableDirector playableDirector;
     private void Start()
     {
         int damage = 0;
@@ -19,12 +20,12 @@ public class IntroManager : MonoBehaviour
             if (collider1.gameObject.CompareTag("Sword"))
             {
                 damage++;
+                Debug.Log(damage);
                 if (damage >= 10)
-                    Destroy(destroyObject);
+                    playableDirector.Play();
             }
         }).AddTo(this);
-
-        destroyObject.OnDestroyAsObservable().Subscribe(_ => { SwitchScene(); }).AddTo(this);
+destroyObject.OnDisableAsObservable().Subscribe(_ => { SwitchScene(); }).AddTo(this);
     }
 
     public void SwitchScene()
