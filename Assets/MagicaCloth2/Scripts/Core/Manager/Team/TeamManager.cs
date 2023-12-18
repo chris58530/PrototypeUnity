@@ -298,7 +298,7 @@ namespace MagicaCloth2
             /// <summary>
             /// 接続しているマッピングメッシュへデータへのインデックスセット(最大15まで)
             /// </summary>
-            //public FixedList32Bytes<short> mappingDataIndexSet;
+            public FixedList32Bytes<short> mappingDataIndexSet;
 
             //-----------------------------------------------------------------
             /// <summary>
@@ -421,7 +421,7 @@ namespace MagicaCloth2
 
             public int EdgeCount => proxyEdgeChunk.dataLength;
 
-            //public int MappingCount => mappingDataIndexSet.Length;
+            public int MappingCount => mappingDataIndexSet.Length;
 
             /// <summary>
             /// 初期スケール（ｘ軸のみで判定、均等スケールしか認めていない）
@@ -491,11 +491,6 @@ namespace MagicaCloth2
             public int VertexCount => mappingCommonChunk.dataLength;
         }
         public ExNativeArray<MappingData> mappingDataArray;
-
-        /// <summary>
-        /// チームごとのマッピングメッシュIDリスト（チームごとに最大31まで)
-        /// </summary>
-        public ExNativeArray<FixedList64Bytes<short>> teamMappingIndexArray;
 
         /// <summary>
         /// チーム全体の最大更新回数
@@ -573,14 +568,12 @@ namespace MagicaCloth2
             teamDataArray?.Dispose();
             teamWindArray?.Dispose();
             mappingDataArray?.Dispose();
-            teamMappingIndexArray?.Dispose();
             parameterArray?.Dispose();
             centerDataArray?.Dispose();
 
             teamDataArray = null;
             teamWindArray = null;
             mappingDataArray = null;
-            teamMappingIndexArray = null;
             parameterArray = null;
             centerDataArray = null;
 
@@ -610,7 +603,6 @@ namespace MagicaCloth2
             teamDataArray = new ExNativeArray<TeamData>(capacity);
             teamWindArray = new ExNativeArray<TeamWindData>(capacity);
             mappingDataArray = new ExNativeArray<MappingData>(capacity);
-            teamMappingIndexArray = new ExNativeArray<FixedList64Bytes<short>>(capacity);
             parameterArray = new ExNativeArray<ClothParameters>(capacity);
             centerDataArray = new ExNativeArray<InertiaConstraint.CenterData>(capacity);
 
@@ -618,7 +610,6 @@ namespace MagicaCloth2
             var gteam = new TeamData();
             teamDataArray.Add(gteam);
             teamWindArray.Add(new TeamWindData());
-            teamMappingIndexArray.Add(new FixedList64Bytes<short>());
             parameterArray.Add(new ClothParameters());
             centerDataArray.Add(new InertiaConstraint.CenterData());
 
@@ -680,9 +671,6 @@ namespace MagicaCloth2
             wind.movingWind.time = -Define.System.WindMaxTime;
             teamWindArray.Add(wind);
 
-            // マッピングメッシュ
-            teamMappingIndexArray.Add(new FixedList64Bytes<short>());
-
             // パラメータ
             parameterArray.Add(clothParams);
 
@@ -720,7 +708,6 @@ namespace MagicaCloth2
             var c = new DataChunk(teamId);
             teamDataArray.RemoveAndFill(c);
             teamWindArray.RemoveAndFill(c);
-            teamMappingIndexArray.RemoveAndFill(c, new FixedList64Bytes<short>());
             parameterArray.Remove(c);
             centerDataArray.Remove(c);
 
@@ -768,11 +755,6 @@ namespace MagicaCloth2
         public ref TeamData GetTeamDataRef(int teamId)
         {
             return ref teamDataArray.GetRef(teamId);
-        }
-
-        public ref FixedList64Bytes<short> GetTeamMappingRef(int teamId)
-        {
-            return ref teamMappingIndexArray.GetRef(teamId);
         }
 
         public ref ClothParameters GetParametersRef(int teamId)
@@ -1628,6 +1610,8 @@ namespace MagicaCloth2
                                 windMain *= attenuation;
                                 break;
                         }
+                        if (windMain < 0.01f)
+                            continue;
 
                         // 計算する風として登録する
                         var windInfo = new TeamWindInfo()
@@ -2049,8 +2033,6 @@ namespace MagicaCloth2
 
                     sb.Clear();
 
-                    var mappingList = teamMappingIndexArray[i];
-
                     var cprocess = GetClothProcess(i);
                     if (cprocess == null)
                     {
@@ -2068,8 +2050,7 @@ namespace MagicaCloth2
                         continue;
                     }
 
-                    //sb.AppendLine($"ID:{i} [{cprocess.Name}] state:0x{cprocess.GetStateFlag().Value:X}, Flag:0x{tdata.flag.Value:X}, Particle:{tdata.ParticleCount}, Collider:{cprocess.ColliderCapacity} Proxy:{tdata.proxyMeshType}, Mapping:{tdata.MappingCount}");
-                    sb.AppendLine($"ID:{i} [{cprocess.Name}] state:0x{cprocess.GetStateFlag().Value:X}, Flag:0x{tdata.flag.Value:X}, Particle:{tdata.ParticleCount}, Collider:{cprocess.ColliderCapacity} Proxy:{tdata.proxyMeshType}, Mapping:{mappingList.Length}");
+                    sb.AppendLine($"ID:{i} [{cprocess.Name}] state:0x{cprocess.GetStateFlag().Value:X}, Flag:0x{tdata.flag.Value:X}, Particle:{tdata.ParticleCount}, Collider:{cprocess.ColliderCapacity} Proxy:{tdata.proxyMeshType}, Mapping:{tdata.MappingCount}");
                     sb.AppendLine($"  -centerTransformIndex {tdata.centerTransformIndex}");
                     sb.AppendLine($"  -centerWorldPosition {tdata.centerWorldPosition}");
                     sb.AppendLine($"  -initScale {tdata.initScale}");
@@ -2096,17 +2077,12 @@ namespace MagicaCloth2
                     sb.AppendLine($"  -colliderCount {tdata.colliderCount}");
 
                     // mapping情報
-                    //var teamMapping = teamMappingIndexArray[i];
-                    //sb.AppendLine($"  *Mapping Count {tdata.MappingCount}");
-                    sb.AppendLine($"  *Mapping Count {mappingList.Length}");
-                    //if (tdata.MappingCount > 0)
-                    if (mappingList.Length > 0)
+                    sb.AppendLine($"  *Mapping Count {tdata.MappingCount}");
+                    if (tdata.MappingCount > 0)
                     {
-                        //for (int j = 0; j < tdata.MappingCount; j++)
-                        for (int j = 0; j < mappingList.Length; j++)
+                        for (int j = 0; j < tdata.MappingCount; j++)
                         {
-                            //int mid = tdata.mappingDataIndexSet[j];
-                            int mid = mappingList[j];
+                            int mid = tdata.mappingDataIndexSet[j];
                             var mdata = mappingDataArray[mid];
                             sb.AppendLine($"  *Mapping Mid:{mid}, Vertex:{mdata.VertexCount}");
                             sb.AppendLine($"    -teamId:{mdata.teamId}");

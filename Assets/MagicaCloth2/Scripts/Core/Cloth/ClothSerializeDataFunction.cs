@@ -54,7 +54,7 @@ namespace MagicaCloth2
                     // レンダラーの最大数
                     if (sourceRenderers.Count > Define.System.MaxRendererCount)
                     {
-                        verificationResult.SetError(Define.Result.SerializeData_Over31Renderers);
+                        verificationResult.SetError(Define.Result.SerializeData_Over15Renderers);
                         return false;
                     }
                     break;

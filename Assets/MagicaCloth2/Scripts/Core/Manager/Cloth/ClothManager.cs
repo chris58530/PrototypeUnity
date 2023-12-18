@@ -49,9 +49,8 @@ namespace MagicaCloth2
             rendererVisibleDict.Clear();
 
             // 更新処理
-            MagicaManager.afterEarlyUpdateDelegate -= OnEarlyClothUpdate;
-            MagicaManager.afterLateUpdateDelegate -= OnAfterLateUpdate;
-            MagicaManager.beforeLateUpdateDelegate -= OnBeforeLateUpdate;
+            MagicaManager.afterEarlyUpdateDelegate -= EarlyClothUpdate;
+            MagicaManager.afterLateUpdateDelegate -= StartClothUpdate;
         }
 
         public void EnterdEditMode()
@@ -68,9 +67,8 @@ namespace MagicaCloth2
             // 作業バッファ
 
             // 更新処理
-            MagicaManager.afterEarlyUpdateDelegate += OnEarlyClothUpdate;
-            MagicaManager.afterLateUpdateDelegate += OnAfterLateUpdate;
-            MagicaManager.beforeLateUpdateDelegate += OnBeforeLateUpdate;
+            MagicaManager.afterEarlyUpdateDelegate += EarlyClothUpdate;
+            MagicaManager.afterLateUpdateDelegate += StartClothUpdate;
 
             isValid = true;
         }
@@ -138,7 +136,7 @@ namespace MagicaCloth2
         /// <summary>
         /// フレーム開始時に実行される更新処理
         /// </summary>
-        void OnEarlyClothUpdate()
+        void EarlyClothUpdate()
         {
             if (MagicaManager.Team.ActiveTeamCount > 0)
             {
@@ -153,26 +151,15 @@ namespace MagicaCloth2
             }
         }
 
-        void OnBeforeLateUpdate()
-        {
-            if (MagicaManager.Time.updateLocation == TimeManager.UpdateLocation.BeforeLateUpdate)
-                ClothUpdate();
-        }
-
-        void OnAfterLateUpdate()
-        {
-            if (MagicaManager.Time.updateLocation == TimeManager.UpdateLocation.AfterLateUpdate)
-                ClothUpdate();
-        }
 
         //=========================================================================================
         static readonly ProfilerMarker startClothUpdateMainProfiler = new ProfilerMarker("StartClothUpdate.Main");
         static readonly ProfilerMarker startClothUpdateScheduleProfiler = new ProfilerMarker("StartClothUpdate.Schedule");
 
         /// <summary>
-        /// クロスコンポーネントの更新
+        /// クロスコンポーネントの更新開始
         /// </summary>
-        void ClothUpdate()
+        void StartClothUpdate()
         {
             if (MagicaManager.IsPlaying() == false)
                 return;
