@@ -2,6 +2,7 @@ using System;
 using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Player
 {
@@ -20,7 +21,7 @@ namespace _.Scripts.Player
         [SerializeField] public int attackCount = 0;
         [SerializeField] private float chanceTime;
         [SerializeField] public bool finishAttack;
-        [SerializeField] private GameObject weapon;
+        [SerializeField] private GameObject weaponCollider;
         [SerializeField] private GameObject attackChancePreview;
         [SerializeField] private float decreaseSkillTime;
         [SerializeField] private float decreaseSkillSpeed;
@@ -29,17 +30,14 @@ namespace _.Scripts.Player
         [SerializeField]
         public float chargeTime;
 
-        private void Start()
-        {
-            weapon.SetActive(false);
-        }
+      
 
         public void NoSword()
         {
             swordModle.transform.parent = null;
-      
+
             hasSword = false;
-            weapon.SetActive(true);
+            weaponCollider.SetActive(true);
 
             playerSword.Charge(chargeTime, playerBase.currentShieldValue.Value);
         }
@@ -51,35 +49,32 @@ namespace _.Scripts.Player
 
             if (IsInvoking(nameof(DecreaseSkill)))
                 CancelInvoke(nameof(DecreaseSkill));
-            
+
             //接技
             if (attackCount < 2)
                 attackCount++;
             else attackCount = 0;
 
             transform.LookAt(GetDirection());
-            
+
             chanceDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ =>
                 {
-                    finishAttack = true;            
+                    finishAttack = true;
                     attackCount = 0;
-
                 });
-            
-            lastAttack = Observable.EveryUpdate().First()
-                .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
-            
-            weapon.SetActive(true);
+//一段時間沒打就損失魔力條
+            // lastAttack = Observable.EveryUpdate().First()
+            //     .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
+
+            weaponCollider.SetActive(true);
         }
 
         public void CancelAttack()
         {
-            weapon.SetActive(false);            
-
+            weaponCollider.SetActive(false);
         }
 
-      
 
         public void AttackChancePreview(Color color)
         {
@@ -95,7 +90,7 @@ namespace _.Scripts.Player
                 swordModle.transform.position = swordParent.transform.position;
                 swordModle.transform.rotation = swordParent.transform.rotation;
                 hasSword = true;
-                weapon.SetActive(false);
+                weaponCollider.SetActive(false);
                 playerBase.currentShieldValue.Value = playerSword.PickUpAndGetValue();
             }
         }

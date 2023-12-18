@@ -14,7 +14,7 @@ namespace _.Scripts.Player
         [SerializeField] private GameObject ultimateweapon;
         [SerializeField] private GameObject attackChancePreview;
 
-        public bool CanDoUltimate => playerBase.currentSkillValue.Value >= 0;
+        public bool CanDoUltimate => playerBase.currentSkillValue.Value >= 6;
 
 
         public void UseUltimate()
@@ -39,6 +39,12 @@ namespace _.Scripts.Player
             transform.LookAt(GetDirection());
             ultimateweapon.SetActive(true);
             ultimateCount = 0;
+        }
+
+        public void CancelUltimate()
+        {
+            ultimateweapon.SetActive(false);
+
         }
 
         public void StartChanceTime()

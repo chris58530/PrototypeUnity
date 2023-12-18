@@ -32,19 +32,21 @@ namespace @_.Scripts.Player.State
             _animator.Play("UltimateFinalAttack");
             _ultimateSystem.AttackChancePreview(Color.white);
             _controller.Roll();
-
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed >_animator.GetCurrentAnimatorClipInfo(0).Length)
-            {_ultimateSystem.finishUltimate = true;
+            if (_timer.Elapsed > _animator.GetCurrentAnimatorClipInfo(0).Length)
+            {
+                _ultimateSystem.finishUltimate = true;
                 fsm.StateCanExit();
             }
         }
 
         public override void OnExit()
         {
+            _ultimateSystem.CancelUltimate();
+
             _ultimateSystem.finishUltimate = false;
 
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);

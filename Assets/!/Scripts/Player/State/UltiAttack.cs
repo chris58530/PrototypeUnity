@@ -45,6 +45,7 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
+            _ultimateSystem.CancelUltimate();
         }
     }
 }

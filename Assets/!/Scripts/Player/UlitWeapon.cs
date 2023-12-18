@@ -1,18 +1,16 @@
-using System;
 using _.Scripts.Event;
-using _.Scripts.Tools;
 using TMPro;
 using UnityEngine;
-using UniRx;
 
 namespace _.Scripts.Player
 {
-    public class PlayerWeapon : MonoBehaviour
+    public class UlitWeapon : Weapon
     {
-        [SerializeField] private int attackValue;
         private void Start()
         {
             transform.parent = GameObject.Find("SwordPoint").transform;
+            transform.gameObject.SetActive(false);
+
         }
         private void OnTriggerEnter(Collider other)
         {
