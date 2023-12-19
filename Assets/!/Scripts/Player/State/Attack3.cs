@@ -34,6 +34,7 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
             _animator.CrossFade(Animator.StringToHash("Attack3"), 0.1f);
             _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
+            _attackSystem.IncreaseSwordLevel();
             aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
 
         }

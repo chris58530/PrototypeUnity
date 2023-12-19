@@ -17,9 +17,9 @@ namespace _.Scripts.Tools
             tmp.text = t.ToString();
         }
 
-        public static void SkillText(float t)
+        public static void LevelText(float t)
         {
-            TMP_Text tmp = GameObject.Find("SkillText").GetComponent<TMP_Text>();
+            TMP_Text tmp = GameObject.Find("LevelText").GetComponent<TMP_Text>();
             tmp.text = t.ToString();
         }
         public static void ShieldText(float t)

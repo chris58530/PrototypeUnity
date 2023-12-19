@@ -9,7 +9,7 @@ namespace _.Scripts.Player
     public class AttackSystem : PlayerAttackSystem
     {
         [Header("No Sword Setting")] [SerializeField]
-        private GameObject swordModle;
+        private GameObject swordPoint;
 
         public bool hasSword;
         [SerializeField] private GameObject swordParent;
@@ -30,11 +30,12 @@ namespace _.Scripts.Player
         [SerializeField]
         public float chargeTime;
 
-      
+        [SerializeField] private float[] swordScaleValue;
+
 
         public void NoSword()
         {
-            swordModle.transform.parent = null;
+            swordPoint.transform.parent = null;
 
             hasSword = false;
             weaponCollider.SetActive(true);
@@ -63,11 +64,29 @@ namespace _.Scripts.Player
                     finishAttack = true;
                     attackCount = 0;
                 });
-//一段時間沒打就損失魔力條
+            //一段時間沒打就損失魔力條
             // lastAttack = Observable.EveryUpdate().First()
             //     .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
 
             weaponCollider.SetActive(true);
+            weaponCollider.transform.localScale = swordPoint.transform.localScale;
+        }
+
+        public void IncreaseSwordLevel()
+        {
+            int swordLevel = playerBase.currentSwordLevelValue.Value++;
+            if (swordLevel >= swordScaleValue.Length) return;
+            Debug.Log(swordLevel);
+            float scale = swordScaleValue[swordLevel];
+            swordPoint.transform.localScale = new Vector3(scale, scale, scale);
+        }
+
+        public void DiscreaseSwordLevel(int count)
+        {
+
+            playerBase.currentSwordLevelValue.Value = count;
+            float scale = swordScaleValue[count];
+            swordPoint.transform.localScale = new Vector3(scale, scale, scale);
         }
 
         public void CancelAttack()
@@ -86,9 +105,9 @@ namespace _.Scripts.Player
             //test
             if (other.gameObject.CompareTag("Sword") && !hasSword && Input.GetKey(KeyCode.E))
             {
-                swordModle.transform.parent = swordParent.transform;
-                swordModle.transform.position = swordParent.transform.position;
-                swordModle.transform.rotation = swordParent.transform.rotation;
+                swordPoint.transform.parent = swordParent.transform;
+                swordPoint.transform.position = swordParent.transform.position;
+                swordPoint.transform.rotation = swordParent.transform.rotation;
                 hasSword = true;
                 weaponCollider.SetActive(false);
                 playerBase.currentShieldValue.Value = playerSword.PickUpAndGetValue();

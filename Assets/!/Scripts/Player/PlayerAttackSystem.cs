@@ -31,15 +31,15 @@ namespace _.Scripts.Player
         }
         protected void DecreaseSkill() //Invoke Mathod
         {
-            if (playerBase.currentSkillValue.Value > 0)
+            if (playerBase.currentSwordLevelValue.Value > 0)
             {
-                playerBase.currentSkillValue.Value -= 1;
+                playerBase.currentSwordLevelValue.Value -= 1;
             }
         }
 
         protected void ResetSkill()
         {
-            playerBase.currentSkillValue.Value = 0;
+            playerBase.currentSwordLevelValue.Value = 0;
         }
         public void ResetChance()
         {

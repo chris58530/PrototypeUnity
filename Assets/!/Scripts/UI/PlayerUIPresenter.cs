@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace _.Scripts.UI
 {
-    public class UIPresenter : Singleton<UIPresenter>
+    public class PlayerUIPresenter : Singleton<PlayerUIPresenter>
     {
         private PlayerBase _player;
         private ContextView _view;
@@ -28,10 +28,10 @@ namespace _.Scripts.UI
                 _view.UpdateHp(_player.currentHpValue.Value, _player.maxHpValue);
             }).AddTo(this);
 
-            _player.currentSkillValue.Subscribe(_ =>
+            _player.currentSwordLevelValue.Subscribe(_ =>
             {
-                DebugTools.SkillText(_player.currentSkillValue.Value);
-                _view.UpdateSkill(_player.currentSkillValue.Value, _player.maxSkillValue);
+                DebugTools.LevelText(_player.currentSwordLevelValue.Value);
+                _view.UpdateLevel(_player.currentSwordLevelValue.Value, _player.maxSwordLevelValue);
             }).AddTo(this);
             _player.currentShieldValue.Subscribe(_ =>
             {

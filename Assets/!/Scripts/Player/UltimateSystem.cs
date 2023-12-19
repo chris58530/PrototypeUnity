@@ -14,7 +14,7 @@ namespace _.Scripts.Player
         [SerializeField] private GameObject ultimateweapon;
         [SerializeField] private GameObject attackChancePreview;
 
-        public bool CanDoUltimate => playerBase.currentSkillValue.Value >= 6;
+        public bool CanDoUltimate => playerBase.currentSwordLevelValue.Value == playerBase.maxSwordLevelValue;
 
 
         public void UseUltimate()
@@ -24,7 +24,7 @@ namespace _.Scripts.Player
             ResetChance();
 
             ultimateCount += 1;
-            playerBase.currentSkillValue.Value = 0;
+            playerBase.currentSwordLevelValue.Value = 0;
             transform.LookAt(GetDirection());
             //加入位移
             ultimateweapon.SetActive(true);

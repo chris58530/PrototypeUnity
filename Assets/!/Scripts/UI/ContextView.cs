@@ -13,7 +13,7 @@ namespace _.Scripts.UI
             hpImage.fillAmount = current / max;
         }
 
-        public void UpdateSkill(float current, float max)
+        public void UpdateLevel(float current, float max)
         {
             skillImage.fillAmount = current / max;
         }
