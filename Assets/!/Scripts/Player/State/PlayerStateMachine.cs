@@ -82,7 +82,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Roll, new Roll(
-                    _controller, animator, _attackSystem, true));
+                    _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Hurt, new Hurt(
                     _input, _controller, animator, _attackSystem, _playerBase, false));
@@ -123,7 +123,7 @@ namespace _.Scripts.Player.State
                 transition => Input.GetKey(KeyCode.Q));
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Roll,
+            _normalState.AddTransition(PlayerState.Idle, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack1,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 0);
@@ -132,9 +132,17 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2);
             //Walk
-            _normalState.AddTwoWayTransition(PlayerState.Walk, PlayerState.Roll,
+            _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
-
+            
+            //Roll
+            _normalState.AddTransition(PlayerState.Roll, PlayerState.RollAttack,
+                transition => _input.IsPressedAttack);
+            _normalState.AddTransition(PlayerState.Roll, PlayerState.Idle,
+                transition => _controller.finsihRoll);
+            //RollAttack
+            _normalState.AddTransition(PlayerState.RollAttack, PlayerState.Idle);
+            
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Attack1,

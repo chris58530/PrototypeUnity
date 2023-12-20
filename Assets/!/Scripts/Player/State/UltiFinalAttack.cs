@@ -55,7 +55,7 @@ namespace @_.Scripts.Player.State
 
             _ultimateSystem.finishUltimate = false;
 
-            _attackSystem.DiscreaseSwordLevel(0);
+            _attackSystem.SetSwordLevel(0);
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }

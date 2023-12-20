@@ -30,7 +30,7 @@ namespace _.Scripts.Player
 
         public bool IsGround => _controller.isGrounded;
         private CharacterController _controller;
-
+        public bool finsihRoll;
 
         private void Awake()
         {
@@ -50,6 +50,7 @@ namespace _.Scripts.Player
 
         public void Roll()
         {
+            finsihRoll = false;
             transform.tag = "Undamaged";
             #region PerformDash
 
@@ -69,6 +70,7 @@ namespace _.Scripts.Player
 
             StartCoroutine(Roll(dashDirection, dashTime));
         }
+        
 
         IEnumerator Roll(Vector3 dashDirection, float time)
         {
@@ -84,8 +86,10 @@ namespace _.Scripts.Player
                 // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;
+                
             }
             transform.tag = "Player";
+            finsihRoll = true;
 
         }
         public void Fall()

@@ -10,6 +10,7 @@ namespace @_.Scripts.Player.State
         private Timer _timer;
         private AttackSystem _attackSystem;
         private Animator _animator;
+        private float aniTime;
 
         public RollAttack(PlayerController controller,
             Animator animator, AttackSystem attackSystem,
@@ -23,27 +24,23 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-            DebugTools.StateText("Roll");
+            DebugTools.StateText("RollAttack");
             _timer = new Timer();
-            
-            _animator.Play(Animator.StringToHash("Dash"));
+            _animator.CrossFade(Animator.StringToHash("Attack1"), 0.1f);
 
-            _controller.Roll();
-            _attackSystem.ResetChance();
-
+            aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
+            _attackSystem.Attack(aniTime);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.rollTime )
+            if (_timer.Elapsed > aniTime)
                 fsm.StateCanExit();
             _controller.Fall();
-
         }
 
         public override void OnExit()
         {
-            
         }
     }
 }

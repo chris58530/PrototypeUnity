@@ -32,7 +32,7 @@ namespace @_.Scripts.Player.State
             //debug
             DebugTools.StateText("InsertSword");
             _animator.CrossFade(Animator.StringToHash("InsertSword"), 0.1f);
-            _attackSystem.DiscreaseSwordLevel(0);
+            _attackSystem.SetSwordLevel(0);
 
             _insertTime = 0;
         }

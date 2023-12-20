@@ -31,7 +31,8 @@ namespace _.Scripts.Player.State
         {
             DebugTools.StateText("AttackFirst");
             _timer = new Timer();
-            _animator.Play(Animator.StringToHash("Attack1"));
+            _animator.CrossFade(Animator.StringToHash("Attack1"), 0.1f);
+
             aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
             _attackSystem.Attack(aniTime);
         }

@@ -61,7 +61,6 @@ namespace _.Scripts.Player
             _canHurt = false;
             _hurtCd = Observable.EveryUpdate()
                 .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(_ => { _canHurt = true; });
-            PlayerActions.onPlayerHurt?.Invoke();
             if (currentShieldValue.Value > 0)
             {
                 currentShieldValue.Value -= 1;
@@ -85,13 +84,11 @@ namespace _.Scripts.Player
 
         private void OnEnable()
         {
-            PlayerActions.onPlayerHurt += ResetSkillValue;
         }
 
 
         private void OnDisable()
         {
-            PlayerActions.onPlayerHurt -= ResetSkillValue;
         }
     }
 }

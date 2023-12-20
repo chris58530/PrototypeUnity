@@ -32,6 +32,10 @@ namespace _.Scripts.Player
 
         [SerializeField] private float[] swordScaleValue;
 
+        private void Start()
+        {
+            SetSwordLevel(1);
+        }
 
         public void NoSword()
         {
@@ -50,9 +54,9 @@ namespace _.Scripts.Player
 
             if (IsInvoking(nameof(DecreaseSkill)))
                 CancelInvoke(nameof(DecreaseSkill));
-            
-            float scale = swordScaleValue[swordLevel];
-            PlayerActions.onPlayerAttackEffect.Invoke(attackCount,scale);
+
+
+            PlayerActions.onPlayerAttackEffect.Invoke(attackCount, scale);
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
                 attackCount++;
@@ -72,28 +76,26 @@ namespace _.Scripts.Player
 
             weaponCollider.SetActive(true);
             weaponCollider.transform.localScale = swordPoint.transform.localScale;
-            
-         
-            
         }
 
         private int swordLevel;
+        private float scale;
+
         public void IncreaseSwordLevel()
         {
-            if(playerBase.currentSwordLevelValue.Value>=swordScaleValue.Length)return;
-            
-          swordLevel = playerBase.currentSwordLevelValue.Value++;
+            if (playerBase.currentSwordLevelValue.Value >= swordScaleValue.Length) return;
+
+            swordLevel = playerBase.currentSwordLevelValue.Value++;
             if (swordLevel >= swordScaleValue.Length) return;
             Debug.Log(swordLevel);
-            float scale = swordScaleValue[swordLevel];
+            scale = swordScaleValue[swordLevel];
             swordPoint.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        public void DiscreaseSwordLevel(int count)
+        public void SetSwordLevel(int count)
         {
-
             playerBase.currentSwordLevelValue.Value = count;
-            float scale = swordScaleValue[count];
+            scale = swordScaleValue[count];
             swordPoint.transform.localScale = new Vector3(scale, scale, scale);
         }
 
