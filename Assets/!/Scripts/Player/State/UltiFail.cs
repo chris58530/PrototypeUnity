@@ -4,7 +4,7 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class UltiFinalAttack : StateBase<PlayerState>
+    public class UltiFail : StateBase<PlayerState>
     {
         private readonly Animator _animator;
         private readonly PlayerInput _input;
@@ -13,7 +13,7 @@ namespace @_.Scripts.Player.State
         private UltimateSystem _ultimateSystem;
         private AttackSystem _attackSystem;
 
-        public UltiFinalAttack(PlayerInput playerInput,
+        public UltiFail(PlayerInput playerInput,
             PlayerController playerController,
             Animator animator, UltimateSystem ultimateSystem,
             AttackSystem attackSystem,
@@ -29,32 +29,24 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
-            DebugTools.StateText("UltiFinalAttack");
+            DebugTools.StateText("UltiFial");
             _timer = new Timer();
-            _ultimateSystem.UseFinalUltimate();
-            _ultimateSystem.AttackChancePreview(Color.white);
-            _controller.Roll();
-
-            _animator.Play("UltimateFinalAttack");
+            _ultimateSystem.AttackChancePreview(Color.red);
+            Debug.Log("--------接大招失敗!--------");
+            _ultimateSystem.finishUltimate = true;
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _animator.GetCurrentAnimatorClipInfo(0).Length)
-            {
-                Debug.Log("finishUltimate = true");
-
-                _ultimateSystem.finishUltimate = true;
-                fsm.StateCanExit();
-            }
         }
 
         public override void OnExit()
         {
-            _ultimateSystem.CancelUltimate();
-
+            Debug.Log("--------ResetUltimate!--------");
+            _ultimateSystem.UltimateTimer(false);
             _ultimateSystem.finishUltimate = false;
-
+            _ultimateSystem.ultimateCount = 0;
+            
             _attackSystem.DiscreaseSwordLevel(0);
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
