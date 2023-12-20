@@ -1,3 +1,4 @@
+using _.Scripts.Event;
 using _.Scripts.Tools;
 using _.Scripts.UI;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace @_.Scripts.Player.State
             _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
             _attackSystem.IncreaseSwordLevel();
             aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
+
 
         }
 

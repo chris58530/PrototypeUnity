@@ -50,7 +50,9 @@ namespace _.Scripts.Player
 
             if (IsInvoking(nameof(DecreaseSkill)))
                 CancelInvoke(nameof(DecreaseSkill));
-
+            
+            float scale = swordScaleValue[swordLevel];
+            PlayerActions.onPlayerAttackEffect.Invoke(attackCount,scale);
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
                 attackCount++;
@@ -70,13 +72,17 @@ namespace _.Scripts.Player
 
             weaponCollider.SetActive(true);
             weaponCollider.transform.localScale = swordPoint.transform.localScale;
+            
+         
+            
         }
 
+        private int swordLevel;
         public void IncreaseSwordLevel()
         {
             if(playerBase.currentSwordLevelValue.Value>=swordScaleValue.Length)return;
             
-            int swordLevel = playerBase.currentSwordLevelValue.Value++;
+          swordLevel = playerBase.currentSwordLevelValue.Value++;
             if (swordLevel >= swordScaleValue.Length) return;
             Debug.Log(swordLevel);
             float scale = swordScaleValue[swordLevel];

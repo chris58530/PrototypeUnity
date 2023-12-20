@@ -19,10 +19,8 @@ public class BossABomb : MonoBehaviour
             // 销毁当前脚本所附加的游戏对象
             Destroy(gameObject);
         }
-        if(other.gameObject.CompareTag("Sword"))
-            Destroy(gameObject);
-        if (!other.gameObject.CompareTag("Player"))return;
-            Destroy(gameObject);
+
+     
     }
 
     private void OnDestroy()

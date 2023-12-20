@@ -56,7 +56,6 @@ namespace _.Scripts.Player.State
         private StateMachine<SuperState, PlayerState, string> _noSwordState;
 
 
-        public bool ultiFail;
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
@@ -225,6 +224,8 @@ namespace _.Scripts.Player.State
             _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance,
                 transition =>_ultimateSystem.finishUltiAttack);
             
+            _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFail,
+                transition => _ultimateSystem.finishUltimate);
          
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
                 transition => _ultimateSystem.ultimateCount < 3 && _input.IsPressedUltimateAttack);

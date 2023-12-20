@@ -33,9 +33,7 @@ namespace _.Scripts.Player.State
             _animator.Play(Animator.StringToHash("Dash"));
 
             _controller.Roll();
-            
-            //這方法是attacksystem的父類，不確定這樣呼叫好不好
-            _attackSystem.ResetChance();
+
 
         }
 
@@ -49,7 +47,9 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            
+                        
+            // //這方法是attacksystem的父類，不確定這樣呼叫好不好
+            // _attackSystem.ResetChance();
         }
     }
 }
