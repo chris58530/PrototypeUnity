@@ -13,9 +13,11 @@ namespace _.Scripts.Player.State
         Attack1,
         Attack2,
         Attack3,
+        AttackFail,
         UltiAttack,
         UltiChance,
         UltiFinalAttack,
+        UltiFail,
         Chance1,
         Chance1ToIdle,
         Chance2,
@@ -53,6 +55,8 @@ namespace _.Scripts.Player.State
         private StateMachine<SuperState, PlayerState, string> _ultimateState;
         private StateMachine<SuperState, PlayerState, string> _noSwordState;
 
+
+        public bool ultiFail;
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
@@ -203,22 +207,29 @@ namespace _.Scripts.Player.State
 
             _ultimateState = new StateMachine<SuperState, PlayerState, string>();
 
-
-            _ultimateState.AddState(
-                PlayerState.UltiAttack, new UltiAttack(
-                    _input, _controller, animator, _ultimateSystem, true));
-            _ultimateState.AddState(
-                PlayerState.UltiFinalAttack, new UltiFinalAttack(
-                    _input, _controller, animator, _ultimateSystem, true));
             _ultimateState.AddState(
                 PlayerState.UltiChance, new UltiChance(
                     _input, _controller, animator, _ultimateSystem, false));
-
-            _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance);
+            _ultimateState.AddState(
+                PlayerState.UltiAttack, new UltiAttack(
+                    _input, _controller, animator, _ultimateSystem, false));
+            _ultimateState.AddState(
+                PlayerState.UltiFinalAttack, new UltiFinalAttack(
+                    _input, _controller, animator, _ultimateSystem, _attackSystem,true));
+            _ultimateState.AddState(
+                PlayerState.UltiFail, new UltiFail(
+                    _input, _controller, animator, _ultimateSystem, _attackSystem,false));
+            
+            _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiFail,
+                transition =>_input.IsPressedUltimateAttack);
+            _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance,
+                transition =>_ultimateSystem.finishUltiAttack);
+            
+         
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
-                transition => _ultimateSystem.ultimateCount < 4 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount < 3 && _input.IsPressedUltimateAttack);
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFinalAttack,
-                transition => _ultimateSystem.ultimateCount >= 4 && _input.IsPressedUltimateAttack);
+                transition => _ultimateSystem.ultimateCount >= 3 && _input.IsPressedUltimateAttack);
 
             #endregion
 
@@ -271,6 +282,7 @@ namespace _.Scripts.Player.State
 
             _fsm.AddTwoWayTransition(SuperState.Normal, SuperState.NoSword,
                 transitionon => !_attackSystem.hasSword);
+            
 
 
             // _fsm.AddTriggerTransition("Award", new Transition<SuperState>(SuperState.Weak, SuperState.Normal));

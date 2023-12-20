@@ -5,7 +5,7 @@ namespace _.Scripts.Player
 {
     public  class PlayerAttackSystem: MonoBehaviour
     {
-        protected IDisposable chanceDisposable;
+        protected IDisposable chanceTimer;
         protected IDisposable lastAttack;
     
         protected PlayerBase playerBase;
@@ -45,7 +45,7 @@ namespace _.Scripts.Player
         {
 
             lastAttack?.Dispose();
-            chanceDisposable?.Dispose();
+            chanceTimer?.Dispose();
         }
         private void OnDisable()
         {

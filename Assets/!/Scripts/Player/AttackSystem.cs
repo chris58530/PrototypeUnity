@@ -46,19 +46,19 @@ namespace _.Scripts.Player
         public void Attack(float t)
         {
             lastAttack?.Dispose();
-            chanceDisposable?.Dispose();
+            chanceTimer?.Dispose();
 
             if (IsInvoking(nameof(DecreaseSkill)))
                 CancelInvoke(nameof(DecreaseSkill));
 
-            //接技
+            //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
                 attackCount++;
             else attackCount = 0;
 
             transform.LookAt(GetDirection());
 
-            chanceDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
+            chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ =>
                 {
                     finishAttack = true;
@@ -74,6 +74,8 @@ namespace _.Scripts.Player
 
         public void IncreaseSwordLevel()
         {
+            if(playerBase.currentSwordLevelValue.Value>=swordScaleValue.Length)return;
+            
             int swordLevel = playerBase.currentSwordLevelValue.Value++;
             if (swordLevel >= swordScaleValue.Length) return;
             Debug.Log(swordLevel);
