@@ -17,8 +17,8 @@ namespace _.Scripts.Player
 
         public float maxUltimateValue;
         [HideInInspector] public ReactiveProperty<float> currentUltimateValue = new ReactiveProperty<float>();
-        public float maxShieldValue;
-        [HideInInspector] public ReactiveProperty<float> currentShieldValue = new ReactiveProperty<float>();
+        public int maxShieldValue;
+        [HideInInspector] public ReactiveProperty<int> currentShieldValue = new ReactiveProperty<int>();
 
         public bool getHurt;
         [SerializeField] private float hurtCD;

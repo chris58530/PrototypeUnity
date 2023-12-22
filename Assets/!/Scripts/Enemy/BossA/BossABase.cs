@@ -5,6 +5,7 @@ using _.Scripts.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy.BossA
 {
@@ -12,6 +13,7 @@ namespace _.Scripts.Enemy.BossA
     public class BossABase : Enemy, IDamageable
     {
         public Image hpImage;
+        public Image hardHpImage;
 
         [SerializeField] private float maxHp;
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
@@ -24,7 +26,7 @@ namespace _.Scripts.Enemy.BossA
 
             IsShield(true);
 
-            _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
+            _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; hardHpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
         }
 
         void Initialize()
@@ -54,11 +56,18 @@ namespace _.Scripts.Enemy.BossA
         public void IsShield(bool b)
         {
             if (b)
-                hpImage.color = Color.gray;
+            {
+                hardHpImage.enabled = true;
+                hpImage.enabled = false;
+            }
+
             else
-                hpImage.color = Color.red;
+            {
+                hardHpImage.enabled = false;
+                hpImage.enabled = true;
+            }
         }
-       
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("RemoveShield"))

@@ -11,13 +11,13 @@ namespace _.Scripts.UI
     public class PlayerUIPresenter : Singleton<PlayerUIPresenter>
     {
         private PlayerBase _player;
-        private ContextView _view;
+        private PlayerUIView _view;
 
         protected override void Awake()
         {
             base.Awake();
             _player = FindObjectOfType<PlayerBase>();
-            _view = FindObjectOfType<ContextView>();
+            _view = FindObjectOfType<PlayerUIView>();
         }
 
         private void Start()
@@ -36,6 +36,8 @@ namespace _.Scripts.UI
             _player.currentShieldValue.Subscribe(_ =>
             {
                 DebugTools.ShieldText(_player.currentShieldValue.Value);
+                _view.UpdateSheld(_player.currentShieldValue.Value);
+
             }).AddTo(this);
        
         }
