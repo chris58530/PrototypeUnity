@@ -31,7 +31,6 @@ namespace _.Scripts.Player.State
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "Walk";
             _animator.CrossFade(Animator.StringToHash("Walk"), 0.5f);
-            _attackSystem.ResetChance();
         }
 
         public override void OnLogic()

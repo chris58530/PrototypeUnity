@@ -30,7 +30,6 @@ namespace _.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("Idle");
-            _attackSystem.ResetChance();
             _attackSystem.finishAttack = false;   
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.3f);
         }
@@ -42,7 +41,6 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
 
         }
     }

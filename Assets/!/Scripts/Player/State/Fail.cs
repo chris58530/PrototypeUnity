@@ -4,18 +4,15 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class InsertSword : StateBase<PlayerState>
+    public class Fail : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private AttackSystem _attackSystem;
-        private PlayerBase _playerBase;
-        private float _insertTime;
 
-        public InsertSword(PlayerInput playerInput,
+        public Fail(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem,
-            PlayerBase playerBase,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -24,38 +21,23 @@ namespace @_.Scripts.Player.State
             _controller = playerController;
             _animator = animator;
             _attackSystem = attackSystem;
-            _playerBase = playerBase;
         }
 
         public override void OnEnter()
         {
             //debug
-            DebugTools.StateText("InsertSword");
-            _animator.CrossFade(Animator.StringToHash("InsertSword"), 0.1f);
-            _attackSystem.SetSwordLevel(0);
-            _attackSystem.AttackChancePreview(Color.red);
-
-            _insertTime = 0;
+            DebugTools.StateText("Fail");
+            _attackSystem.Fail();
         }
 
         public override void OnLogic()
         {
-            _insertTime += Time.deltaTime;
-            if (_insertTime > 0.8f)
-            {
-                fsm.StateCanExit();
-                _attackSystem.NoSword();
-            }
-            else if (Input.GetKeyUp(KeyCode.Q))
-            {
-                fsm.StateCanExit();
-            }
-
             _controller.Fall();
         }
 
         public override void OnExit()
         {
+            _attackSystem.attackCount = 0;
         }
     }
 }

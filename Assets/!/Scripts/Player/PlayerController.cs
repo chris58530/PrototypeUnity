@@ -17,7 +17,8 @@ namespace _.Scripts.Player
         
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
-
+        public bool finsihRoll;
+        private IDisposable _rollTimer;
         [Header("Dash Setting")] [SerializeField]
         public float dashSpeed;
 
@@ -30,7 +31,6 @@ namespace _.Scripts.Player
 
         public bool IsGround => _controller.isGrounded;
         private CharacterController _controller;
-        public bool finsihRoll;
 
         private void Awake()
         {
@@ -51,6 +51,7 @@ namespace _.Scripts.Player
         public void Roll()
         {
             finsihRoll = false;
+            _rollTimer?.Dispose();
             transform.tag = "Undamaged";
             #region PerformDash
 
@@ -68,6 +69,10 @@ namespace _.Scripts.Player
 
             #endregion
 
+            _rollTimer= Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(rollTime)).Subscribe(_ =>
+            {
+                finsihRoll = true;
+            }).AddTo(this); 
             StartCoroutine(Roll(dashDirection, dashTime));
         }
         
@@ -75,21 +80,17 @@ namespace _.Scripts.Player
         IEnumerator Roll(Vector3 dashDirection, float time)
         {
             Vector3 endPosition = transform.position + dashDirection * dashDistance;
-            // transform.LookAt(endPosition);
 
             float elapsedTime = 0f;
 
             while (elapsedTime < time)
             {
                 _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
-                // transform.Translate(endPosition * (dashSpeed * Time.deltaTime));
-                // transform.position = Vector3.Lerp(transform.position, endPosition, elapsedTime / dashTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;
                 
             }
             transform.tag = "Player";
-            finsihRoll = true;
 
         }
         public void Fall()

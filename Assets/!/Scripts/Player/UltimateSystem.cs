@@ -23,7 +23,7 @@ namespace _.Scripts.Player
         {
             Debug.Log("UltiAttack");
 
-            ResetChance();
+            swordLevelTimer.Dispose();
 
             ultimateCount += 1;
             //重製等級

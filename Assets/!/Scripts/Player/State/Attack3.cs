@@ -13,7 +13,6 @@ namespace @_.Scripts.Player.State
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
-        private float aniTime;
 
         public Attack3(PlayerInput playerInput,
             PlayerController playerController,
@@ -34,24 +33,19 @@ namespace @_.Scripts.Player.State
 
             _timer = new Timer();
             _animator.CrossFade(Animator.StringToHash("Attack3"), 0.1f);
-            _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
+            _attackSystem.Attack();
             _attackSystem.IncreaseSwordLevel();
-            aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
-
-
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > aniTime)
+            if (_timer.Elapsed > _attackSystem.AttackTime(2))
                 fsm.StateCanExit();
         }
 
         public override void OnExit()
         {
             _attackSystem.CancelAttack();
-
-
         }
     }
 }

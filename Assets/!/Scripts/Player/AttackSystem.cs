@@ -16,7 +16,7 @@ namespace _.Scripts.Player
 
         [Header("Attack Setting")] //
         [SerializeField]
-        public float attackTime;
+        public float[] attackTime;
 
         [SerializeField] public int attackCount = 0;
         [SerializeField] private float chanceTime;
@@ -30,11 +30,29 @@ namespace _.Scripts.Player
         [SerializeField]
         public float chargeTime;
 
+        [SerializeField] private float swordResetTime;
+        [Header("Fail Setting")] //
+        [SerializeField]
+        public float failTime;
+
+        public bool finsihFail;
+        private IDisposable _failTimer;
+
+
         [SerializeField] private float[] swordScaleValue;
 
         private void Start()
         {
             SetSwordLevel(1);
+        }
+
+        public void Fail()
+        {
+            finsihFail = false;
+            _failTimer = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(failTime)).Subscribe(_ =>
+            {
+                finsihFail = true;
+            }).AddTo(this);
         }
 
         public void NoSword()
@@ -47,15 +65,11 @@ namespace _.Scripts.Player
             playerSword.Charge(chargeTime, playerBase.currentShieldValue.Value);
         }
 
-        public void Attack(float t)
+        public void Attack()
         {
-            lastAttack?.Dispose();
             chanceTimer?.Dispose();
 
-            if (IsInvoking(nameof(DecreaseSkill)))
-                CancelInvoke(nameof(DecreaseSkill));
-
-
+            //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, scale);
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
@@ -65,11 +79,7 @@ namespace _.Scripts.Player
             transform.LookAt(GetDirection());
 
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
-                .First().Subscribe(_ =>
-                {
-                    finishAttack = true;
-                    attackCount = 0;
-                });
+                .First().Subscribe(_ => { finishAttack = true; });
             //一段時間沒打就損失魔力條
             // lastAttack = Observable.EveryUpdate().First()
             //     .Subscribe(_ => { InvokeRepeating(nameof(DecreaseSkill), decreaseSkillTime, decreaseSkillSpeed); });
@@ -78,18 +88,31 @@ namespace _.Scripts.Player
             weaponCollider.transform.localScale = swordPoint.transform.localScale;
         }
 
+        public float AttackTime(int count)
+        {
+            float time = 0;
+            time = attackTime[count];
+            Debug.Log(time);
+            return time;
+        }
+
         private int swordLevel;
         private float scale;
 
         public void IncreaseSwordLevel()
         {
+            swordLevelTimer?.Dispose();
             if (playerBase.currentSwordLevelValue.Value >= swordScaleValue.Length) return;
 
             swordLevel = playerBase.currentSwordLevelValue.Value++;
             if (swordLevel >= swordScaleValue.Length) return;
-            Debug.Log(swordLevel);
             scale = swordScaleValue[swordLevel];
             swordPoint.transform.localScale = new Vector3(scale, scale, scale);
+            
+            swordLevelTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(swordResetTime)).First().Subscribe(_ =>
+            {
+                SetSwordLevel(0);
+            }).AddTo(this);
         }
 
         public void SetSwordLevel(int count)

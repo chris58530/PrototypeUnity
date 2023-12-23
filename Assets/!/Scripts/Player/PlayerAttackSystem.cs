@@ -6,8 +6,8 @@ namespace _.Scripts.Player
     public  class PlayerAttackSystem: MonoBehaviour
     {
         protected IDisposable chanceTimer;
-        protected IDisposable lastAttack;
-    
+        protected IDisposable swordLevelTimer;
+
         protected PlayerBase playerBase;
         protected PlayerSword playerSword;
         protected virtual void Awake()
@@ -29,27 +29,10 @@ namespace _.Scripts.Player
             }
             return hitpoint;
         }
-        protected void DecreaseSkill() //Invoke Mathod
-        {
-            if (playerBase.currentSwordLevelValue.Value > 0)
-            {
-                playerBase.currentSwordLevelValue.Value -= 1;
-            }
-        }
 
-        protected void ResetSkill()
-        {
-            playerBase.currentSwordLevelValue.Value = 0;
-        }
-        public void ResetChance()
-        {
 
-            lastAttack?.Dispose();
-            chanceTimer?.Dispose();
-        }
-        private void OnDisable()
-        {
-            if (IsInvoking(nameof(DecreaseSkill))) CancelInvoke(nameof(DecreaseSkill));
-        }
+   
+   
+       
     }
 }

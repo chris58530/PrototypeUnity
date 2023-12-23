@@ -12,7 +12,6 @@ namespace _.Scripts.Player.State
         private readonly PlayerController _controller;
         private Timer _timer;
         private AttackSystem _attackSystem;
-        private float aniTime;
 
         public Attack2(PlayerInput playerInput,
             PlayerController playerController,
@@ -32,14 +31,13 @@ namespace _.Scripts.Player.State
 
             _timer = new Timer();
             _animator.CrossFade(Animator.StringToHash("Attack2"), 0.1f);
-            _attackSystem.Attack(_animator.GetCurrentAnimatorClipInfo(0).Length);
-            aniTime = _animator.GetCurrentAnimatorClipInfo(0).Length;
+            _attackSystem.Attack();
 
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > aniTime)
+            if (_timer.Elapsed >  _attackSystem.AttackTime(1))
                 fsm.StateCanExit();
         }
 

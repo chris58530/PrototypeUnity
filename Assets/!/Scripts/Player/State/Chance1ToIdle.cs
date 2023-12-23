@@ -29,7 +29,6 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
 
             DebugTools.StateText("Chance1ToIdle");
-            _attackSystem.AttackChancePreview(Color.yellow);
             _animator.CrossFade(Animator.StringToHash("Q1toIDLE"),0f);
 
         }
