@@ -2727,13 +2727,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 25
-  rotateSpeed: 20
-  rollTime: 0.5
+  rotateSpeed: 10
+  rollTime: 1
+  finsihRoll: 0
   dashSpeed: 50
   dashDistance: 15
   dashTime: 0.3
   gravity: -300
-  finsihRoll: 0
 --- !u!114 &5715834888313830752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2749,7 +2749,10 @@ MonoBehaviour:
   swordPoint: {fileID: 5767223698824850357}
   hasSword: 1
   swordParent: {fileID: 7003807359207173870}
-  attackTime: 0.1
+  attackTime:
+  - 0.5
+  - 0.75
+  - 1.2
   attackCount: 0
   chanceTime: 2
   finishAttack: 0
@@ -2757,7 +2760,10 @@ MonoBehaviour:
   attackChancePreview: {fileID: 5767223698535378182}
   decreaseSkillTime: 3
   decreaseSkillSpeed: 3
-  chargeTime: 1
+  chargeTime: 2
+  swordResetTime: 4
+  failTime: 0
+  finsihFail: 0
   swordScaleValue:
   - 1
   - 1.2

@@ -25,7 +25,7 @@ namespace _.Scripts.Player
 
             swordLevelTimer.Dispose();
 
-            ultimateCount += 1;
+            ultimateCount ++;
             //重製等級
             playerBase.currentSwordLevelValue.Value = 0;
             transform.LookAt(GetDirection());

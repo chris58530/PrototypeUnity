@@ -164,7 +164,6 @@ namespace @_.Scripts.Enemy.BossA
             if (other.gameObject.layer != 6) return;
 
             damageObj.OnTakeDamage(10);
-            PlayerActions.onPlayerHurt?.Invoke();
 
             Debug.Log($"{other.name} get {10} damage");
         }

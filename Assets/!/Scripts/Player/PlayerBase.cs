@@ -22,7 +22,7 @@ namespace _.Scripts.Player
 
         public bool getHurt;
         [SerializeField] private float hurtCD;
-        private IDisposable _hurtCd;
+        private IDisposable _hurtTimer;
         [SerializeField] private bool _canHurt = true;
 
         private void Start()
@@ -58,8 +58,9 @@ namespace _.Scripts.Player
         {
             if (transform.CompareTag("Undamaged")) return;
             if (!_canHurt) return;
+            _hurtTimer?.Dispose();
             _canHurt = false;
-            _hurtCd = Observable.EveryUpdate()
+            _hurtTimer = Observable.EveryUpdate()
                 .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(_ => { _canHurt = true; });
             if (currentShieldValue.Value > 0)
             {
@@ -71,6 +72,8 @@ namespace _.Scripts.Player
                 if (currentHpValue.Value >= maxHpValue)
                     currentHpValue.Value = maxHpValue;
             }
+            PlayerActions.onPlayerHurt?.Invoke();
+
         }
 
         public void OnKnock(Transform trans)
