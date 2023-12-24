@@ -40,7 +40,7 @@ namespace @_.Scripts.Player.State
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _animator.GetCurrentAnimatorClipInfo(0).Length)
+            if (_timer.Elapsed > 1f)
             {
                 Debug.Log("finishUltimate = true");
 
