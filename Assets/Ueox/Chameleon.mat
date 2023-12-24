@@ -26,8 +26,10 @@ Material:
   - _EMISSION
   - _HALFTONESHAPE_DOT
   - _NORMALMAP
+  - _SPECGLOSSMAP
   m_InvalidKeywords:
   - _GLOSSYREFLECTIONS_OFF
+  - _SPECULARHIGHLIGHTS_OFF
   - _STEPVIARAMPTEXTURE_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -108,7 +110,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ffc63121e337b834f91fc867873c0c7f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularClipMask:
@@ -199,7 +201,7 @@ Material:
     - _SpecSource: 0
     - _SpecularClipStrength: 0
     - _SpecularFalloff: 0.5
-    - _SpecularHighlights: 1
+    - _SpecularHighlights: 0
     - _SpecularSize: 0.25
     - _SpherizeNormalEnabled: 0
     - _SrcBlend: 1
@@ -224,6 +226,6 @@ Material:
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.12263676, g: 0.12263676, b: 0.12263676, a: 0.5}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
