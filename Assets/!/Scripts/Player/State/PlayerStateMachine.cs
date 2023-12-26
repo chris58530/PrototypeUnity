@@ -73,7 +73,7 @@ namespace _.Scripts.Player.State
 
             _normalState.AddState(
                 PlayerState.Idle, new Idle(
-                    _input, _controller, animator, _attackSystem, false));
+                    _input, _controller, animator, _attackSystem, _ultimateSystem,false));
             _normalState.AddState(
                 PlayerState.Fail, new Fail(
                     _input, _controller, animator, _attackSystem, false));

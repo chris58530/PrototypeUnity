@@ -23,8 +23,7 @@ namespace _.Scripts.Player
         [SerializeField] public bool finishAttack;
         [SerializeField] private GameObject weaponCollider;
         [SerializeField] private GameObject attackChancePreview;
-        [SerializeField] private float decreaseSkillTime;
-        [SerializeField] private float decreaseSkillSpeed;
+   
 
         [Header("Sword Setting")] //
         [SerializeField]

@@ -13,9 +13,11 @@ namespace _.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private AttackSystem _attackSystem;
+        private UltimateSystem _ultimateSystem;
 
         public Idle(PlayerInput playerInput,
-            PlayerController playerController, Animator animator, AttackSystem attackSystem,
+            PlayerController playerController, Animator animator,
+            AttackSystem attackSystem, UltimateSystem ultimateSystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -24,6 +26,8 @@ namespace _.Scripts.Player.State
             _controller = playerController;
             _animator = animator;
             _attackSystem = attackSystem;
+            _ultimateSystem = ultimateSystem;
+
         }
 
         public override void OnEnter()
@@ -31,6 +35,8 @@ namespace _.Scripts.Player.State
             //debug
             DebugTools.StateText("Idle");
             _attackSystem.finishAttack = false;   
+            _ultimateSystem.finishUltimate = false;
+
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.3f);
         }
 

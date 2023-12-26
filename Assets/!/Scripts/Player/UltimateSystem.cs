@@ -26,9 +26,12 @@ namespace _.Scripts.Player
             swordLevelTimer?.Dispose();
 
             ultimateCount ++;
+            
             //重製等級
             playerBase.currentSwordLevelValue.Value = 0;
+            
             transform.LookAt(GetDirection());
+            
             ultimateweapon.SetActive(true);
         }
 
@@ -36,7 +39,7 @@ namespace _.Scripts.Player
 
         public void UltimateTimer(bool isCaculate)
         {
-            if (!isCaculate) _ultiTimer.Dispose();
+             _ultiTimer?.Dispose();
 
             _ultiTimer = Observable.EveryUpdate().Where(_=>isCaculate)
                 .First().Delay(TimeSpan.FromSeconds(ultimateTime))
@@ -50,8 +53,9 @@ namespace _.Scripts.Player
         public void UseFinalUltimate()
         {
             Debug.Log("UltiFinalAttack");
-
+            
             chanceTimer?.Dispose();
+            swordLevelTimer?.Dispose();
 
             transform.LookAt(GetDirection());
             ultimateweapon.SetActive(true);
