@@ -20,7 +20,6 @@ namespace _.Scripts.Player
 
         public void UseUltimate()
         {
-            Debug.Log("UltiAttack");
 
                
             DisposeTimer();
@@ -46,14 +45,12 @@ namespace _.Scripts.Player
                 .First().Delay(TimeSpan.FromSeconds(ultimateTime))
                 .Subscribe(_ =>
                 {
-                    Debug.Log("finishUltimate = true");
                     finishUltiAttack = true;
                 });
         }
 
         public void UseFinalUltimate()
         {
-            Debug.Log("UltiFinalAttack");
             DisposeTimer();
           
 
@@ -83,7 +80,6 @@ namespace _.Scripts.Player
         {
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime)).First().Subscribe(_ =>
             {
-                Debug.Log("finishUltimate = true");
                 isFail = true;
             });
         }
