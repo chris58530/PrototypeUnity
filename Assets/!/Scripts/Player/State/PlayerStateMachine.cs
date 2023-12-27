@@ -243,7 +243,7 @@ namespace _.Scripts.Player.State
                 transition => _ultimateSystem.finishUltiAttack);
 
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFail,
-                transition => _ultimateSystem.finishUltimate);
+                transition => _ultimateSystem.isFail);
 
             _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
                 transition => _ultimateSystem.ultimateCount < 3 && _input.IsPressedUltimateAttack);

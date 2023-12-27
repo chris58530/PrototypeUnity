@@ -14,16 +14,17 @@ namespace _.Scripts.Player
         public int ultimateCount = 0;
         [SerializeField] private GameObject ultimateweapon;
         [SerializeField] private GameObject attackChancePreview;
-
+        public bool isFail;
         public bool CanDoUltimate => playerBase.currentSwordLevelValue.Value >= playerBase.maxSwordLevelValue;
-        public bool failUltimate;
         public bool finishUltiAttack;
 
         public void UseUltimate()
         {
             Debug.Log("UltiAttack");
 
-            swordLevelTimer?.Dispose();
+               
+            DisposeTimer();
+
 
             ultimateCount ++;
             
@@ -53,13 +54,11 @@ namespace _.Scripts.Player
         public void UseFinalUltimate()
         {
             Debug.Log("UltiFinalAttack");
-            
-            chanceTimer?.Dispose();
-            swordLevelTimer?.Dispose();
+            DisposeTimer();
+          
 
             transform.LookAt(GetDirection());
             ultimateweapon.SetActive(true);
-            ultimateCount = 0;
         }
 
         public void CancelUltimate()
@@ -67,12 +66,25 @@ namespace _.Scripts.Player
             ultimateweapon.SetActive(false);
         }
 
-        public void StartChanceTime()
+        public void Fail()
+        {
+            DisposeTimer();
+            finishUltimate = true;
+            ultimateCount = 0;
+            
+        }
+
+        public void DisposeTimer()
+        {
+            chanceTimer?.Dispose();
+            swordLevelTimer?.Dispose();
+        }
+        public void UltiChanceTimer()
         {
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime)).First().Subscribe(_ =>
             {
                 Debug.Log("finishUltimate = true");
-                finishUltimate = true;
+                isFail = true;
             });
         }
 

@@ -29,11 +29,15 @@ namespace @_.Scripts.Player.State
 
         public override void OnEnter()
         {
+            Debug.Log("--------接大招失敗!--------");
             DebugTools.StateText("UltiFial");
             _timer = new Timer();
+            _ultimateSystem.isFail = false;
             _ultimateSystem.AttackChancePreview(Color.red);
-            Debug.Log("--------接大招失敗!--------");
-            _ultimateSystem.finishUltimate = true;
+            _ultimateSystem.CancelUltimate();
+            _ultimateSystem.UltimateTimer(false);
+            _ultimateSystem.Fail();
+
         }
 
         public override void OnLogic()
@@ -43,11 +47,9 @@ namespace @_.Scripts.Player.State
         public override void OnExit()
         {
             Debug.Log("--------ResetUltimate!--------");
-            _ultimateSystem.UltimateTimer(false);
-            _ultimateSystem.finishUltimate = false;
-            _ultimateSystem.ultimateCount = 0;
             _attackSystem.SetSwordLevel(0);
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
+            _ultimateSystem.finishUltimate = false;
+            _ultimateSystem.finishUltiAttack = false;
         }
     }
 }

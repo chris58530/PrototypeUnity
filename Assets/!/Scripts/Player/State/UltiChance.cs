@@ -29,9 +29,9 @@ namespace @_.Scripts.Player.State
         {
             DebugTools.StateText("UltiChance");
             _timer = new Timer();
-            _ultimateSystem.StartChanceTime();
+            _ultimateSystem.UltiChanceTimer();
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
-            _ultimateSystem.AttackChancePreview(Color.yellow);
+            _ultimateSystem.AttackChancePreview(Color.green);
         }
 
         public override void OnLogic()

@@ -10,8 +10,8 @@ namespace @_.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private Timer _timer;
-        private UltimateSystem _ultimateSystem;
-        private AttackSystem _attackSystem;
+        private readonly UltimateSystem _ultimateSystem;
+        private readonly AttackSystem _attackSystem;
 
         public UltiFinalAttack(PlayerInput playerInput,
             PlayerController playerController,
@@ -34,7 +34,6 @@ namespace @_.Scripts.Player.State
             _ultimateSystem.UseFinalUltimate();
             _ultimateSystem.AttackChancePreview(Color.white);
             _controller.Roll();
-
             _animator.Play("UltimateFinalAttack");
         }
 
@@ -53,10 +52,13 @@ namespace @_.Scripts.Player.State
         {
             _ultimateSystem.CancelUltimate();
 
-            _ultimateSystem.finishUltimate = false;
 
+            Debug.Log("--------ResetUltimate!--------");
+            _ultimateSystem.UltimateTimer(false);
+            _ultimateSystem.finishUltimate = false;
+            _ultimateSystem.finishUltiAttack = false;
+            _ultimateSystem.ultimateCount = 0;
             _attackSystem.SetSwordLevel(0);
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.1f);
         }
     }
 }

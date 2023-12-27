@@ -27,16 +27,16 @@ namespace _.Scripts.Player.State
             _animator = animator;
             _attackSystem = attackSystem;
             _ultimateSystem = ultimateSystem;
-
         }
 
         public override void OnEnter()
         {
             //debug
-            DebugTools.StateText("Idle");
-            _attackSystem.finishAttack = false;   
+            _attackSystem.finishAttack = false;
             _ultimateSystem.finishUltimate = false;
+            _ultimateSystem.finishUltiAttack = false;
 
+            DebugTools.StateText("Idle");
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.3f);
         }
 
@@ -47,7 +47,6 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-
         }
     }
 }
