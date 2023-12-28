@@ -81,7 +81,7 @@ namespace @_.Scripts.Enemy.BossA
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                objRB.velocity = offset * 55;
+                objRB.velocity = offset * 35;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
@@ -96,7 +96,7 @@ namespace @_.Scripts.Enemy.BossA
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                objRB.velocity = offset * 150;
+                objRB.velocity = offset * 100;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
