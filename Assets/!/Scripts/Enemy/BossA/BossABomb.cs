@@ -26,6 +26,6 @@ public class BossABomb : MonoBehaviour
     private void OnDestroy()
     {
         var obg = Instantiate(explode, transform.position, Quaternion.identity);
-        Destroy(obg.gameObject,0.2f);
+        Destroy(obg.gameObject,2f);
     }
 }
