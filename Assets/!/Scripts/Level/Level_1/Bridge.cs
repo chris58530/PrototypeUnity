@@ -7,17 +7,11 @@ using UnityEngine.Serialization;
 
 public class Bridge : MonoBehaviour
 {
-    [SerializeField] private GameObject openedBrige;
-    [SerializeField] private GameObject closedBrige;
+    [SerializeField] private GameObject brige;
 
     [SerializeField] private TaskObject[] taskObj;
 
-    private void Start()
-    {
-
-        openedBrige.SetActive(false);
-        closedBrige.SetActive(true);
-    }
+    
 
     private void LateUpdate()
     {
@@ -38,7 +32,6 @@ public class Bridge : MonoBehaviour
 
     void OpenBridge()
     {
-        openedBrige.SetActive(true);
-        closedBrige.SetActive(false);
+        brige.GetComponent<Animator>().Play("PutDownBridge");
     }
 }
