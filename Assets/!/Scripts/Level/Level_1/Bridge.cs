@@ -27,7 +27,12 @@ public class Bridge : MonoBehaviour
             if (task.isDone) checkCount++;
         }
 
-        if (checkCount >= taskObj.Length) OpenBridge();
+        if (checkCount >= taskObj.Length) StartCoroutine(OpenBridgeAfterDelay(1.0f));
+    }
+       IEnumerator OpenBridgeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OpenBridge();
     }
 
     void OpenBridge()
