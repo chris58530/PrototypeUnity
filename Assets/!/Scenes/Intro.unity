@@ -328,6 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 138262819}
   - component: {fileID: 138262821}
+  - component: {fileID: 138262822}
   - component: {fileID: 138262820}
   m_Layer: 0
   m_Name: boatMask
@@ -371,7 +372,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d21c808431cbd348b003defde86817f, type: 2}
+  - {fileID: 2100000, guid: 007ecacf2bf555245bccc1287afc45b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -401,6 +402,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138262818}
   m_Mesh: {fileID: 8675452379081041382, guid: 864b9d418d78cc34fa52bcd60e37a4c1, type: 3}
+--- !u!114 &138262822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138262818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7695848b4e87da442bc087a5b20c1d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjMasked: []
 --- !u!1001 &150257315
 PrefabInstance:
   m_ObjectHideFlags: 0
