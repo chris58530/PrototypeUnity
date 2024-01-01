@@ -61,7 +61,7 @@ namespace _.Scripts.Player
             hasSword = false;
             weaponCollider.SetActive(true);
 
-            playerSword.Charge(chargeTime, playerBase.currentShieldValue.Value);
+            attackWeapon.Charge(chargeTime, playerBase.currentShieldValue.Value);
         }
 
         public void Attack()
@@ -142,7 +142,7 @@ namespace _.Scripts.Player
                 swordPoint.transform.rotation = swordParent.transform.rotation;
                 hasSword = true;
                 weaponCollider.SetActive(false);
-                playerBase.currentShieldValue.Value = playerSword.PickUpAndGetValue();
+                playerBase.currentShieldValue.Value = attackWeapon.PickUpAndGetValue();
             }
         }
     }

@@ -1,16 +1,17 @@
 using _.Scripts.Interface;
 using _.Scripts.Player.Props;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy
 {
-    public class AbilityContainer : MonoBehaviour, IAbsorbable
+    public class AbilityContainer : MonoBehaviour, IAbilityContainer
     {
-        public SwordAbility.Ability ability;
+       public AbilityWeapon.AbilityType abilityType;
 
-        public SwordAbility.Ability ReturnAbility()
+        public AbilityWeapon.AbilityType GetAbility()
         {
-            return ability;
+            return abilityType;
         }
     }
 }

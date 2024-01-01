@@ -9,11 +9,11 @@ namespace _.Scripts.Player
         protected IDisposable swordLevelTimer;
 
         protected PlayerBase playerBase;
-        protected PlayerSword playerSword;
+        protected AttackWeapon attackWeapon;
         protected virtual void Awake()
         {
             playerBase = GetComponent<PlayerBase>();
-            playerSword = GetComponentInChildren<PlayerSword>();
+            attackWeapon = GetComponentInChildren<AttackWeapon>();
         }
         protected Vector3 GetDirection()
         {
