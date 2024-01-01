@@ -26,7 +26,7 @@ Material:
   - _GLOSSINESS_FROM_BASE_ALPHA
   - _HALFTONESHAPE_DOT
   - _NORMALMAP
-  - _SPECULAR_COLOR
+  - _SPECGLOSSMAP
   m_InvalidKeywords:
   - _SPECULARHIGHLIGHTS_OFF
   - _STEPVIARAMPTEXTURE_ON
@@ -41,11 +41,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: fb9e045536fe7a84ca98236b119fb600, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c16b88c7cd65604e976de3ee673270f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 35b21e075058de04da434d8b64f2d09c, type: 3}
+        m_Texture: {fileID: 2800000, guid: da2458ddd242d014b912ad3f4f28608d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -89,7 +89,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: fb9e045536fe7a84ca98236b119fb600, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c16b88c7cd65604e976de3ee673270f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -109,7 +109,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cab0b95ffd5955b44aaa8cc22ed6ad59, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularClipMask:
@@ -225,6 +225,6 @@ Material:
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.54512286, g: 0.56607825, b: 0.6603774, a: 0}
-    - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 0.5}
+    - _SpecColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
