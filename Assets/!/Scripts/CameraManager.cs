@@ -8,12 +8,12 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
   
-    private CinemachineVirtualCamera _virtualCamera;
-    private CinemachineBasicMultiChannelPerlin _perlinNoise;
+    [SerializeField]private CinemachineVirtualCamera _virtualCamera;
+    [SerializeField]    private CinemachineBasicMultiChannelPerlin _perlinNoise;
 
     private void Awake()
     {
-        _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        // _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
         _perlinNoise = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }

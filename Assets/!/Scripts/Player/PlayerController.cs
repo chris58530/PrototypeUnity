@@ -6,6 +6,7 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 namespace _.Scripts.Player
 {
@@ -45,6 +46,7 @@ namespace _.Scripts.Player
             Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
+            
         }
 
 
@@ -74,6 +76,10 @@ namespace _.Scripts.Player
                 finsihRoll = true;
             }).AddTo(this); 
             StartCoroutine(Roll(dashDirection, dashTime));
+            
+            //Audio
+            AudioManager.Instance.PlaySFX("Dash");
+
         }
         
 

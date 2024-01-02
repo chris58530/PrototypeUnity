@@ -23,13 +23,14 @@ namespace _.Scripts.Player
         [SerializeField] public bool finishAttack;
         [SerializeField] private GameObject weaponCollider;
         [SerializeField] private GameObject attackChancePreview;
-   
+
 
         [Header("Sword Setting")] //
         [SerializeField]
         public float chargeTime;
 
         [SerializeField] private float swordResetTime;
+
         [Header("Fail Setting")] //
         [SerializeField]
         public float failTime;
@@ -70,6 +71,19 @@ namespace _.Scripts.Player
 
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, scale);
+            //audio
+            if (attackCount == 0)
+                AudioManager.Instance.PlaySFX("Attack1");
+            if (attackCount == 1)
+                AudioManager.Instance.PlaySFX("Attack2");
+            if (attackCount == 2)
+            {
+                Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(0.2f)).Subscribe(_ =>
+                {
+                    AudioManager.Instance.PlaySFX("Attack3");
+                }).AddTo(this);
+            }
+
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
                 attackCount++;
@@ -91,7 +105,6 @@ namespace _.Scripts.Player
         {
             float time = 0;
             time = attackTime[count];
-            Debug.Log(time);
             return time;
         }
 
@@ -107,11 +120,9 @@ namespace _.Scripts.Player
             if (swordLevel >= swordScaleValue.Length) return;
             scale = swordScaleValue[swordLevel];
             swordPoint.transform.localScale = new Vector3(scale, scale, scale);
-            
-            swordLevelTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(swordResetTime)).First().Subscribe(_ =>
-            {
-                SetSwordLevel(0);
-            }).AddTo(this);
+
+            swordLevelTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(swordResetTime)).First()
+                .Subscribe(_ => { SetSwordLevel(0); }).AddTo(this);
         }
 
         public void SetSwordLevel(int count)

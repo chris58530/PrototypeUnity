@@ -45,12 +45,17 @@ namespace _.Scripts.Enemy.BossA
             else
                 _currentHp.Value -= value;
 
-            if (_currentHp.Value <= 0) OnDied();
+            if (_currentHp.Value <= 0)
+            {
+                Debug.Log("死亡");
+                OnDied();
+            }
         }
 
         public void OnDied()
         {
-            bt.SendEvent("OnDied");
+            bt.enabled = false;
+            gameObject.GetComponentInChildren<Animator>().Play("Die");
         }
 
         public void IsShield(bool b)
