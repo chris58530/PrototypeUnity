@@ -54,7 +54,7 @@ namespace _.Scripts.Player
         {
             finsihRoll = false;
             _rollTimer?.Dispose();
-            transform.tag = "Undamaged";
+            // transform.tag = "Undamaged";
             #region PerformDash
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);

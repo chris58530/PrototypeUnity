@@ -3,6 +3,7 @@ using _.Scripts.Event;
 using _.Scripts.Tools;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace _.Scripts.Player
@@ -71,6 +72,10 @@ namespace _.Scripts.Player
                 currentHpValue.Value -= value;
                 if (currentHpValue.Value >= maxHpValue)
                     currentHpValue.Value = maxHpValue;
+                if (currentHpValue.Value <= 0)
+                {
+                    OnDied();
+                }
             }
             PlayerActions.onPlayerHurt?.Invoke();
 
@@ -83,6 +88,15 @@ namespace _.Scripts.Player
 
         public void OnDied()
         {
+            Destroy(gameObject);
+            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(1)).Subscribe(_ =>
+            {
+                string currentSceneName = SceneManager.GetActiveScene().name;
+
+                // 使用當前場景的名稱重新載入場景
+                SceneManager.LoadScene(currentSceneName);
+            });
+
         }
 
         private void OnEnable()
