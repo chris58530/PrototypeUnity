@@ -31,6 +31,8 @@ namespace _.Scripts.Player.State
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "Walk";
             _animator.CrossFade(Animator.StringToHash("Walk"), 0.5f);
+            AudioManager.Instance.PlaySFX2("Walk");
+
         }
 
         public override void OnLogic()
@@ -44,6 +46,8 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
+            AudioManager.Instance.StopPlaySFX2();
+
         }
     }
 }
