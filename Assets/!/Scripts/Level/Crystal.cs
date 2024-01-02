@@ -11,14 +11,12 @@ using Unity.VisualScripting;
 
 public class Crystal : TaskObject, IDamageable
 {
-
     [SerializeField] private int maxHp;
     private int _currentHp;
     [SerializeField] private bool canRelife;
     [SerializeField] private float relifeTime;
     [SerializeField] private GameObject detroyCrystal;
     private Collider _collider;
-
 
 
     private void OnEnable()
@@ -47,7 +45,8 @@ public class Crystal : TaskObject, IDamageable
         isDone = true;
         _collider.isTrigger = true;
         //debugs
-        Instantiate(detroyCrystal, transform.position, transform.rotation);
+        GameObject obj = Instantiate(detroyCrystal, transform.position, transform.rotation);
+        Destroy(obj, 4);
         this.gameObject.active = false;
 
         if (!canRelife) return;
