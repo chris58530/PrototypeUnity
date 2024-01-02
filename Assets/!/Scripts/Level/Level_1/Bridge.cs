@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Level;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,9 +12,8 @@ public class Bridge : MonoBehaviour
 
     [SerializeField] private TaskObject[] taskObj;
 
-    
 
-    private void LateUpdate()
+    private void Update()
     {
         //改用事件呼叫
         CheckTask();
@@ -27,16 +27,18 @@ public class Bridge : MonoBehaviour
             if (task.isDone) checkCount++;
         }
 
-        if (checkCount >= taskObj.Length) StartCoroutine(OpenBridgeAfterDelay(1.0f));
-    }
-       IEnumerator OpenBridgeAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        OpenBridge();
-    }
+        if (checkCount >= taskObj.Length)
+        {
 
-    void OpenBridge()
-    {
-        brige.GetComponent<Animator>().Play("PutDownBridge");
+            Observable.EveryUpdate().First().Subscribe(_ =>
+            {
+                brige.GetComponent<Animator>().Play("PutDownBridge");
+                AudioManager.Instance.PlaySFX("PullingController");
+
+                AudioManager.Instance.PlaySFX("OpenBridge");
+                Debug.Log("ppppppppppppppppppppppp");
+                Destroy(gameObject);
+            }).AddTo(this);
+        }
     }
 }

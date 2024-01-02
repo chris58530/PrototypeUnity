@@ -11,7 +11,6 @@ public class AudioManager:Singleton<AudioManager>
 
     private void Start()
     {
-        PlayBGM("BGM");
     }
     public void PlayBGM(string name)
     {
