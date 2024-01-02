@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.Utilities;
 using UniRx;
 using Observable = UniRx.Observable;
 using TimeSpan = System.TimeSpan;
+using Unity.VisualScripting;
 
 public class Crystal : TaskObject, IDamageable
 {
@@ -27,6 +28,7 @@ public class Crystal : TaskObject, IDamageable
 
     public void OnTakeDamage(float value)
     {
+        Debug.Log("1234569");
         if (_currentHp > 1)
         {
             _currentHp--;
@@ -46,6 +48,7 @@ public class Crystal : TaskObject, IDamageable
         _collider.isTrigger = true;
         //debugs
         Instantiate(detroyCrystal, transform.position, transform.rotation);
+        this.gameObject.active = false;
 
         if (!canRelife) return;
         Observable.EveryUpdate()
@@ -54,7 +57,7 @@ public class Crystal : TaskObject, IDamageable
             .Subscribe(_ =>
             {
                 _currentHp = maxHp;
-                this.GetComponent<MeshRenderer>().enabled = true;
+                this.gameObject.active = true;
                 _collider.isTrigger = false;
                 isDone = false;
             }).AddTo(this);
