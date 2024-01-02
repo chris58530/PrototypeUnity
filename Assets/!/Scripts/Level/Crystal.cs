@@ -46,7 +46,7 @@ public class Crystal : TaskObject, IDamageable
         _collider.isTrigger = true;
         //debugs
         GameObject obj = Instantiate(detroyCrystal, transform.position, transform.rotation);
-        Destroy(obj, 4);
+        Destroy(obj, 5);
         this.gameObject.active = false;
 
         if (!canRelife) return;
