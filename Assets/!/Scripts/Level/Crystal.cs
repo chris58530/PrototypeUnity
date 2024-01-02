@@ -15,6 +15,7 @@ public class Crystal : TaskObject, IDamageable
     private int _currentHp;
     [SerializeField] private bool canRelife;
     [SerializeField] private float relifeTime;
+    [SerializeField] private GameObject detroyCrystal;
     private Collider _collider;
 
 
@@ -44,7 +45,7 @@ public class Crystal : TaskObject, IDamageable
         isDone = true;
         _collider.isTrigger = true;
         //debugs
-        this.GetComponent<MeshRenderer>().enabled = false;
+        Instantiate(detroyCrystal, transform.position, transform.rotation);
 
         if (!canRelife) return;
         Observable.EveryUpdate()
