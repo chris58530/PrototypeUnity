@@ -9,9 +9,10 @@ using UnityEngine.Serialization;
 public class Bridge : MonoBehaviour
 {
     [SerializeField] private GameObject brige;
+        [SerializeField] private GameObject puller;
 
     [SerializeField] private TaskObject[] taskObj;
-
+    [SerializeField] private bool isPull = false;
 
     private void Update()
     {
@@ -29,16 +30,36 @@ public class Bridge : MonoBehaviour
 
         if (checkCount >= taskObj.Length)
         {
-
+             if (!isPull)
+        {
             Observable.EveryUpdate().First().Subscribe(_ =>
             {
-                brige.GetComponent<Animator>().Play("PutDownBridge");
+                if (!isPull)
+                {
+                puller.GetComponent<Animator>().Play("PullDown");
                 AudioManager.Instance.PlaySFX("PullingController");
+                isPull = true; // 設置標誌，表示已經播放過 PullingController 音效
+                }
 
-                AudioManager.Instance.PlaySFX("OpenBridge");
-                Debug.Log("ppppppppppppppppppppppp");
-                Destroy(gameObject);
+                Observable.Timer(TimeSpan.FromSeconds(2)).Subscribe(__ =>
+                {
+                    brige.GetComponent<Animator>().Play("PutDownBridge");
+                    AudioManager.Instance.PlaySFX("OpenBridge");
+                    Debug.Log("ppppppppppppppppppppppp");
+                    Destroy(gameObject);
+                }).AddTo(this);
+
             }).AddTo(this);
+        }
+            // Observable.EveryUpdate().First().Subscribe(_ =>
+            // {
+            //     brige.GetComponent<Animator>().Play("PutDownBridge");
+            //     AudioManager.Instance.PlaySFX("PullingController");
+
+            //     AudioManager.Instance.PlaySFX("OpenBridge");
+            //     Debug.Log("ppppppppppppppppppppppp");
+            //     Destroy(gameObject);
+            // }).AddTo(this);
         }
     }
 }
