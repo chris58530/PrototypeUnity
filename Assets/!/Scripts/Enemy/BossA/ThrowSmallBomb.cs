@@ -15,9 +15,7 @@ namespace @_.Scripts.Enemy.BossA
 
         public override void OnStart()
         {
-            var position = player.position;
-            _target = new Vector3(position.x, position.y, position.z);
-            controller.ThrowSmallBomb(_target);
+            controller.ThrowSmallBomb();
         }
 
         public override TaskStatus OnUpdate()

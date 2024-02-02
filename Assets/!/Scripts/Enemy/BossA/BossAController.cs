@@ -86,17 +86,16 @@ namespace @_.Scripts.Enemy.BossA
             }).AddTo(obj);
         }
 
-        public void ThrowSmallBomb(Vector3 target)
+        public void ThrowSmallBomb()
         {
             var pos = smallBombPoint.position;
-            var obj = Instantiate(smallBomb, pos,
-                Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
+            var obj = Instantiate(smallBomb, pos, transform.rotation);
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
-            Vector3 offset = -(pos - target).normalized;
+
             Destroy(obj, 3);
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                objRB.velocity = offset * 150;
+                objRB.velocity = objRB.transform.forward * 100;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
         }
