@@ -18,6 +18,7 @@ namespace _.Scripts.Player.State
         UltiChance,
         UltiFinalAttack,
         UltiFail,
+        InsertSword,
         Chance1,
         Chance1ToIdle,
         Chance2,
@@ -25,18 +26,10 @@ namespace _.Scripts.Player.State
         Hurt,
         Roll,
         RollAttack,
-        InsertSword,
-
-        NoSwordIdle,
-        NoSwordHurt,
-        NoSwordRoll,
-        NoSwordWalk,
     }
 
     public enum SuperState
     {
-        Ultimate,
-        NoSword,
         Normal,
         Dead
     }
@@ -47,13 +40,10 @@ namespace _.Scripts.Player.State
         private PlayerController _controller;
         private AttackSystem _attackSystem;
         private PlayerBase _playerBase;
-        private UltimateSystem _ultimateSystem;
         [SerializeField] private Animator animator;
 
         private StateMachine<SuperState, string> _fsm;
         private StateMachine<SuperState, PlayerState, string> _normalState;
-        private StateMachine<SuperState, PlayerState, string> _ultimateState;
-        private StateMachine<SuperState, PlayerState, string> _noSwordState;
 
 
         private void Awake()
@@ -62,7 +52,6 @@ namespace _.Scripts.Player.State
             _controller = GetComponent<PlayerController>();
             _attackSystem = GetComponent<AttackSystem>();
             _playerBase = GetComponent<PlayerBase>();
-            _ultimateSystem = GetComponent<UltimateSystem>();
         }
 
         private void Start()
@@ -70,16 +59,14 @@ namespace _.Scripts.Player.State
             #region Normal state
 
             _normalState = new StateMachine<SuperState, PlayerState, string>();
-
             _normalState.AddState(
                 PlayerState.Idle, new Idle(
-                    _input, _controller, animator, _attackSystem, _ultimateSystem,false));
+                    _input, _controller, animator, _attackSystem, false));
+
             _normalState.AddState(
                 PlayerState.Fail, new Fail(
                     _input, _controller, animator, _attackSystem, false));
-            _normalState.AddState(
-                PlayerState.InsertSword, new InsertSword(
-                    _input, _controller, animator, _attackSystem, _playerBase, true));
+
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
                     _input, _controller, animator, _attackSystem, false));
@@ -117,13 +104,14 @@ namespace _.Scripts.Player.State
             _normalState.AddState(
                 PlayerState.Chance3, new Chance3(
                     _input, _controller, animator, _playerBase, _attackSystem, false));
-
+            _normalState.AddState(
+                PlayerState.InsertSword, new InsertSword(
+                    _input, _controller, animator, _attackSystem, _playerBase, true));
 
             //Idle
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
-            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Roll,
@@ -134,13 +122,13 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 1);
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2);
+            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
             //Walk
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
 
-            //Roll
-            // _normalState.AddTransition(PlayerState.Roll, PlayerState.RollAttack,
-            //     transition => _input.IsPressedAttack);
+
             _normalState.AddTransition(PlayerState.Roll, PlayerState.Fail,
                 transition => _controller.finsihRoll);
             //RollAttack
@@ -176,11 +164,13 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-            _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Walk,
                 transition => _input.Move);
-
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
+            
+            
+            
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Fail,
@@ -189,10 +179,11 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-            _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Walk,
                 transition => _input.Move);
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
 
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
@@ -202,11 +193,11 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-            _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Walk,
                 transition => _input.Move);
-
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
+                transition => Input.GetKey(KeyCode.Q));
 
             //Faill
             _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,
@@ -218,89 +209,17 @@ namespace _.Scripts.Player.State
 
 
             //=========================================================================
-
-
-            #region Ultimate state
-
-            _ultimateState = new StateMachine<SuperState, PlayerState, string>();
-
-            _ultimateState.AddState(
-                PlayerState.UltiChance, new UltiChance(
-                    _input, _controller, animator, _ultimateSystem, false));
-            _ultimateState.AddState(
-                PlayerState.UltiAttack, new UltiAttack(
-                    _input, _controller, animator, _ultimateSystem, false));
-            _ultimateState.AddState(
-                PlayerState.UltiFinalAttack, new UltiFinalAttack(
-                    _input, _controller, animator, _ultimateSystem, _attackSystem, true));
-            _ultimateState.AddState(
-                PlayerState.UltiFail, new UltiFail(
-                    _input, _controller, animator, _ultimateSystem, _attackSystem, false));
-
-            _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiFail,
-                transition => _input.IsPressedUltimateAttack);
-            _ultimateState.AddTransition(PlayerState.UltiAttack, PlayerState.UltiChance,
-                transition => _ultimateSystem.finishUltiAttack);
-
-            _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFail,
-                transition => _ultimateSystem.isFail);
-
-            _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiAttack,
-                transition => _ultimateSystem.ultimateCount < 3 && _input.IsPressedUltimateAttack);
-            _ultimateState.AddTransition(PlayerState.UltiChance, PlayerState.UltiFinalAttack,
-                transition => _ultimateSystem.ultimateCount >= 3 && _input.IsPressedUltimateAttack);
-
-            #endregion
-
-            #region No Sword State
-
-            _noSwordState = new StateMachine<SuperState, PlayerState, string>();
-            _noSwordState.AddState(
-                PlayerState.NoSwordIdle, new NoSwordIdle(
-                    _input, _controller, animator, false));
-            _noSwordState.AddState(
-                PlayerState.NoSwordRoll, new NoSwordRoll(
-                    _controller, animator, _attackSystem, true));
-            // _noSwordState.AddState(
-            //     PlayerState.ExtractSword, new ExtractSword(
-            //         _controller, animator, _attackSystem, true));
-
-            _noSwordState.AddState(
-                PlayerState.NoSwordHurt, new NoSwordHurt(
-                    _input, _controller, animator, _playerBase, false));
-            _noSwordState.AddState(
-                PlayerState.NoSwordWalk, new NoSwordWalk(
-                    _input, _controller, animator, false));
-
-            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordWalk,
-                transition => _input.Move);
-            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordHurt,
-                transition => _playerBase.getHurt);
-            _noSwordState.AddTwoWayTransition(PlayerState.NoSwordIdle, PlayerState.NoSwordRoll,
-                transition => _input.IsPressedRoll);
-
-            _noSwordState.AddTransition(PlayerState.NoSwordWalk, PlayerState.NoSwordRoll,
-                transition => _input.IsPressedRoll);
-            _noSwordState.AddTransition(PlayerState.NoSwordWalk, PlayerState.NoSwordHurt,
-                transition => _playerBase.getHurt);
-
-            #endregion
-
-            //=========================================================================
             //Initialize fsm
             _fsm = new StateMachine<SuperState, string>();
             _fsm.AddState(SuperState.Normal, _normalState);
-            _fsm.AddState(SuperState.NoSword, _noSwordState);
-            _fsm.AddState(SuperState.Ultimate, _ultimateState);
+
             _fsm.AddState(SuperState.Dead, new Dead(animator, false));
+            _fsm.AddTwoWayTransition(SuperState.Normal, SuperState.Dead,
+                transition => Input.GetKey(KeyCode.P));
 
-            _fsm.AddTransition(SuperState.Normal, SuperState.Ultimate,
-                transition => _input.IsPressedUltimateAttack && _ultimateSystem.CanDoUltimate);
-            _fsm.AddTransition(SuperState.Ultimate, SuperState.Normal,
-                transition => _ultimateSystem.finishUltimate);
 
-            _fsm.AddTwoWayTransition(SuperState.Normal, SuperState.NoSword,
-                transitionon => !_attackSystem.hasSword);
+            //_fsm.AddTwoWayTransition(SuperState.Normal, SuperState.NoSword,
+            //transitionon => !_attackSystem.hasSword);
 
 
             // _fsm.AddTriggerTransition("Award", new Transition<SuperState>(SuperState.Weak, SuperState.Normal));

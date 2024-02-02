@@ -31,8 +31,7 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("InsertSword");
-            _animator.CrossFade(Animator.StringToHash("InsertSword"), 0.1f);
-            _attackSystem.SetSwordLevel(0);
+            _animator.CrossFade(Animator.StringToHash("UseAbility"), 0.1f);
             _attackSystem.AttackChancePreview(Color.red);
 
             _insertTime = 0;
@@ -44,7 +43,6 @@ namespace @_.Scripts.Player.State
             if (_insertTime > 0.8f)
             {
                 fsm.StateCanExit();
-                _attackSystem.NoSword();
             }
             else if (Input.GetKeyUp(KeyCode.Q))
             {

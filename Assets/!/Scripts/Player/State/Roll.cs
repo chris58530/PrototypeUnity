@@ -30,7 +30,7 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("Roll");
             _timer = new Timer();
             
-            _animator.Play(Animator.StringToHash("Dash"));
+            _animator.Play(Animator.StringToHash("Roll"));
 
             _controller.Roll();
 

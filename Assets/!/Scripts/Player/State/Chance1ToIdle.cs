@@ -28,8 +28,8 @@ namespace @_.Scripts.Player.State
         {
             _timer = new Timer();
 
-            DebugTools.StateText("Chance1ToIdle");
-            _animator.CrossFade(Animator.StringToHash("Q1toIDLE"),0f);
+            DebugTools.StateText("Q3toIdle");
+            _animator.CrossFade(Animator.StringToHash("Q3toIdle"),0f);
 
         }
 

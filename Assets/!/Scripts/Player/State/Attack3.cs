@@ -32,9 +32,9 @@ namespace @_.Scripts.Player.State
 
 
             _timer = new Timer();
-            _animator.CrossFade(Animator.StringToHash("Attack3"), 0.1f);
+            _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
             _attackSystem.Attack();
-            _attackSystem.IncreaseSwordLevel();
+            
         }
 
         public override void OnLogic()

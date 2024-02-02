@@ -34,8 +34,8 @@ namespace _.Scripts.Player.State
 
             DebugTools.StateText("Hurt");
             _playerBase.getHurt = false;
-            if (_playerBase.currentShieldValue.Value <= 0)
-                _attackSystem.NoSword();
+            _animator.CrossFade(Animator.StringToHash("Hurt"), 0.1f);
+         
         }
 
         public override void OnLogic()
