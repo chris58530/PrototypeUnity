@@ -19,7 +19,6 @@ namespace _.Scripts.Player
         [SerializeField] private GameObject attackChancePreview;
 
 
-      
         [Header("Fail Setting")] //
         [SerializeField]
         public float failTime;
@@ -28,8 +27,6 @@ namespace _.Scripts.Player
         private IDisposable _failTimer;
 
 
-
-   
         public void Fail()
         {
             finsihFail = false;
@@ -39,25 +36,19 @@ namespace _.Scripts.Player
             }).AddTo(this);
         }
 
-   
 
         public void Attack()
         {
             chanceTimer?.Dispose();
 
-         
+
             //audio
             if (attackCount == 0)
                 AudioManager.Instance.PlaySFX("Attack1");
-            if (attackCount == 1)
+            else if (attackCount == 1)
                 AudioManager.Instance.PlaySFX("Attack2");
-            if (attackCount == 2)
-            {
-                Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(0.2f)).Subscribe(_ =>
-                {
-                    AudioManager.Instance.PlaySFX("Attack3");
-                }).AddTo(this);
-            }
+            else if (attackCount == 2)
+                AudioManager.Instance.PlaySFX("Attack3");
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
@@ -68,7 +59,7 @@ namespace _.Scripts.Player
 
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ => { finishAttack = true; });
-       
+
             weaponCollider.SetActive(true);
         }
 
@@ -78,6 +69,7 @@ namespace _.Scripts.Player
             time = attackTime[count];
             return time;
         }
+
         public void CancelAttack()
         {
             weaponCollider.SetActive(false);
@@ -88,7 +80,5 @@ namespace _.Scripts.Player
         {
             attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
         }
-
-      
     }
 }

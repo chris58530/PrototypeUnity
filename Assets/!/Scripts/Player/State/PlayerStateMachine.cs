@@ -123,7 +123,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2);
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+                transition =>_input.IsPressedAbility);
             //Walk
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
@@ -167,7 +167,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+                transition => _input.IsPressedAbility);
             
             
             
@@ -183,7 +183,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+                transition => _input.IsPressedAbility);
 
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
@@ -197,7 +197,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
-                transition => Input.GetKey(KeyCode.Q));
+                transition => _input.IsPressedAbility);
 
             //Faill
             _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,

@@ -11,7 +11,7 @@ namespace _.Scripts.Player
 
         public bool IsPressedRoll => _input.Player.Roll.WasPressedThisFrame();
         public bool IsPressedAttack => _input.Player.Attack.WasPressedThisFrame();
-        public bool IsPressedUltimateAttack => _input.Player.AttackUltimate.WasPressedThisFrame();
+        public bool IsPressedAbility => _input.Player.Ability.WasPressedThisFrame();
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 
         private void Awake()

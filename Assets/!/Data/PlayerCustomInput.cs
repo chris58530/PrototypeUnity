@@ -55,7 +55,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AttackUltimate"",
+                    ""name"": ""Ability"",
                     ""type"": ""Button"",
                     ""id"": ""32c92456-7d0e-4348-b424-38bd2c03576b"",
                     ""expectedControlType"": ""Button"",
@@ -215,7 +215,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AttackUltimate"",
+                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -229,7 +229,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_AttackUltimate = m_Player.FindAction("AttackUltimate", throwIfNotFound: true);
+        m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -294,7 +294,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_AttackUltimate;
+    private readonly InputAction m_Player_Ability;
     public struct PlayerActions
     {
         private @PlayerCustomInput m_Wrapper;
@@ -302,7 +302,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @AttackUltimate => m_Wrapper.m_Player_AttackUltimate;
+        public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,9 +321,9 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @AttackUltimate.started += instance.OnAttackUltimate;
-            @AttackUltimate.performed += instance.OnAttackUltimate;
-            @AttackUltimate.canceled += instance.OnAttackUltimate;
+            @Ability.started += instance.OnAbility;
+            @Ability.performed += instance.OnAbility;
+            @Ability.canceled += instance.OnAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -337,9 +337,9 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @AttackUltimate.started -= instance.OnAttackUltimate;
-            @AttackUltimate.performed -= instance.OnAttackUltimate;
-            @AttackUltimate.canceled -= instance.OnAttackUltimate;
+            @Ability.started -= instance.OnAbility;
+            @Ability.performed -= instance.OnAbility;
+            @Ability.canceled -= instance.OnAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -362,6 +362,6 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnAttackUltimate(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
     }
 }
