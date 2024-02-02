@@ -41,7 +41,8 @@ namespace _.Scripts.Player
         {
             chanceTimer?.Dispose();
 
-
+            //sword effect
+            PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
             //audio
             if (attackCount == 0)
                 AudioManager.Instance.PlaySFX("Attack1");
