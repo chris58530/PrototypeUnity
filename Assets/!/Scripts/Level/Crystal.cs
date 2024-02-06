@@ -26,7 +26,7 @@ public class Crystal : TaskObject, IDamageable
 
     public void OnTakeDamage(float value)
     {
-        Debug.Log("1234569");
+        Debug.Log($"{this.name+" "+"on take damage"}");
         if (_currentHp > 1)
         {
             _currentHp--;
