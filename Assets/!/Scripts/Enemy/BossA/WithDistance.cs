@@ -7,7 +7,6 @@ namespace _.Scripts.Enemy.TypeA
     public class WithDistance : Conditional
     {
         public SharedGameObject player;
-        public SharedTransform thisTransform;
         public float distance;
 
         public override void OnStart()
@@ -16,13 +15,9 @@ namespace _.Scripts.Enemy.TypeA
 
         public override TaskStatus OnUpdate()
         {
-            if (Vector3.Distance(transform.position, player.Value.transform.position) <= distance)
+            if (Vector3.Magnitude(transform.position - player.Value.transform.position) < distance)
                 return TaskStatus.Success;
-            else
-            {
-                return TaskStatus.Failure;
-
-            }
+            return TaskStatus.Failure;
         }
 
         public override void OnEnd()
