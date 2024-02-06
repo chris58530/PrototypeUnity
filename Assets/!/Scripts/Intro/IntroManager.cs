@@ -30,6 +30,6 @@ destroyObject.OnDisableAsObservable().Subscribe(_ => { SwitchScene(); }).AddTo(t
 
     public void SwitchScene()
     {
-        SceneManager.LoadScene("level1");
+        SceneManager.LoadScene("Level 1");
     }
 }
