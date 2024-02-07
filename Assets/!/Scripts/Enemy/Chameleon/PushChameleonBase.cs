@@ -28,7 +28,7 @@ namespace @_.Scripts.Enemy.Chameleon
             _currentHp.Value = maxHp;
         }
 
-        public void OnTakeDamage(float value)
+        public void OnTakeDamage(int value)
         {
             bt.SendEvent("GetHurt");
             _currentHp.Value -= value;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using _.Scripts.Ability;
 using _.Scripts.Interface;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UniRx;
 
 namespace @_.Scripts.Player.Props
 {
@@ -22,17 +22,36 @@ namespace @_.Scripts.Player.Props
 
         private void Start()
         {
-            ChangeAbility(AbilityType.Strength);
+            ChangeAbility(AbilityType.None);
         }
+
+        private void Update()
+        {
+            ExecuteAblilty();
+            if (Input.GetMouseButtonDown(1)) ChangeAbility(AbilityType.Strength);
+        }
+
 
         private void ChangeAbility(AbilityType getAbility)
         {
+            if (_currentAbilityBase != null)
+                _currentAbilityBase.QuitAbilityAlgorithm();
+
             foreach (var ability in abilityBase)
             {
                 if (ability.abilityType == getAbility)
                 {
                     _currentAbilityBase = ability;
                     attackValue = _currentAbilityBase.damage;
+                    attackAction = _currentAbilityBase.TriggerEffect;
+                    _currentAbilityBase.StartAbility();
+                    Observable.EveryUpdate().First()
+                        .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
+                        .Subscribe(_ =>
+                        {
+                            _currentAbilityBase.QuitAbilityAlgorithm();
+                            ChangeAbility(AbilityType.None);
+                        }).AddTo(this);
                     Debug.Log(_currentAbilityBase.name);
                     return;
                 }

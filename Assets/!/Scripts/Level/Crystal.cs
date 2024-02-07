@@ -24,7 +24,7 @@ public class Crystal : TaskObject, IDamageable
         _currentHp = maxHp;
     }
 
-    public void OnTakeDamage(float value)
+    public void OnTakeDamage(int value)
     {
         Debug.Log($"{this.name+" "+"on take damage"}");
         if (_currentHp > 1)

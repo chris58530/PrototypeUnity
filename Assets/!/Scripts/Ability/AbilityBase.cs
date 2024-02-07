@@ -11,6 +11,10 @@ namespace @_.Scripts.Ability
          public AbilityWeapon.AbilityType abilityType;
 
         public int damage;
+        public int lifeTime;
         public abstract void AbilityAlgorithm ();
+        public abstract void StartAbility ();
+        public abstract void QuitAbilityAlgorithm();
+        public abstract void TriggerEffect(Collider other);
     }
 }

@@ -14,7 +14,7 @@ namespace @_.Scripts.Enemy.BossA
         public override void OnStart()
         {
             bossBase.isShielded = true;
-            controller.ResetShield();
+            bossBase.ResetShield();
             bossBase.IsShield(true);
         }
 

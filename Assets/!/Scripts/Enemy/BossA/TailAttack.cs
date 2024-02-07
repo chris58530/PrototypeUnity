@@ -46,7 +46,6 @@ namespace _.Scripts.Enemy.TypeA
         public override void OnEnd()
         {
             navMeshAgent.enabled = true;
-            animator.Play("TailAttack");
             controller.ShakeTail();
         }
     }

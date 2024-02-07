@@ -26,7 +26,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         {
             var position = Target();
             // Return a task status of success once we've reached the target
-            Debug.Log(Vector3.Magnitude(transform.position - position));
             if (Vector3.Magnitude(transform.position - position) < arriveDistance.Value) {
                 return TaskStatus.Success;
             }

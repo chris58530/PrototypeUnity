@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Event;
+using _.Scripts.Interface;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace @_.Scripts.Enemy.BossA
 {
     public class BossAController : EnemyController
     {
+     
         [Header("Explode Setting")] //.
         [SerializeField]
         private GameObject smallExplode;
@@ -166,5 +169,7 @@ namespace @_.Scripts.Enemy.BossA
 
             Debug.Log($"{other.name} get {10} damage");
         }
+
+       
     }
 }

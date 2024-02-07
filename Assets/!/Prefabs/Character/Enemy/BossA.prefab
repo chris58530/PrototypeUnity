@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 7352935332682747590}
   - component: {fileID: 7352935332682747591}
   - component: {fileID: 7352935332682747584}
+  - component: {fileID: 839070499}
   m_Layer: 7
   m_Name: Base
   m_TagString: Default
@@ -824,19 +825,25 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
-        (1)","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
-        (2)","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
-        (3)","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
-        (4)","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MiddlePoint","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"CompareAttackInt","IsShared":true,"Int32mValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
+        (1)","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
+        (2)","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
+        (3)","IsShared":true,"GameObjectmValue":5},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Point
+        (4)","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MiddlePoint","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"CompareAttackInt","IsShared":true,"Int32mValue":1}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
+        - {fileID: 0}
         - {fileID: 8628950189052468868}
         - {fileID: 8686312586810354152}
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -858,6 +865,7 @@ MonoBehaviour:
   hardHpImage: {fileID: 0}
   maxHp: 300
   isShielded: 1
+  shieldValue: 0
 --- !u!114 &7352935332682747584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +928,27 @@ MonoBehaviour:
   - {fileID: 6430789209146122947}
   - {fileID: 7312729595213254372}
   - {fileID: 2535435007967071503}
+--- !u!95 &839070499
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8686312586810354152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8863464134613541845
 PrefabInstance:
   m_ObjectHideFlags: 0

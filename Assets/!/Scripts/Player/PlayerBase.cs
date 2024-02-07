@@ -55,7 +55,7 @@ namespace _.Scripts.Player
 
     
 
-        public void OnTakeDamage(float value)
+        public void OnTakeDamage(int value)
         {
             if (transform.CompareTag("Undamaged")) return;
             if (!_canHurt) return;

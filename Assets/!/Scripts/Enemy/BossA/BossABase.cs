@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 namespace _.Scripts.Enemy.BossA
 {
     [RequireComponent(typeof(BossAController))]
-    public class BossABase : Enemy, IDamageable
+    public class BossABase : Enemy, IDamageable, IShieldable
     {
         public Image hpImage;
         public Image hardHpImage;
@@ -19,6 +19,10 @@ namespace _.Scripts.Enemy.BossA
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
         public bool isShielded;
 
+        [Header("Shield Setting")] //.
+        [SerializeField]
+        private int shieldValue;
+
         private void Start()
         {
             Initialize();
@@ -26,7 +30,16 @@ namespace _.Scripts.Enemy.BossA
 
             IsShield(true);
 
-            _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; hardHpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
+            _currentHp.Subscribe(_ =>
+            {
+                hpImage.fillAmount = _currentHp.Value / maxHp;
+                hardHpImage.fillAmount = _currentHp.Value / maxHp;
+            }).AddTo(this);
+        }
+
+        private void Update()
+        {
+            if (shieldValue <= 0) bt.SendEvent("Remove_Shield_Event");
         }
 
         void Initialize()
@@ -35,7 +48,7 @@ namespace _.Scripts.Enemy.BossA
         }
 
 
-        public void OnTakeDamage(float value)
+        public void OnTakeDamage(int value)
         {
             if (isShielded)
             {
@@ -47,9 +60,22 @@ namespace _.Scripts.Enemy.BossA
 
             if (_currentHp.Value <= 0)
             {
-                Debug.Log("死亡");
+                Debug.Log("Boss A Die");
                 OnDied();
             }
+        }
+
+        public void OnTakeShield(int removeValue)
+        {
+            shieldValue -= removeValue;
+            Debug.Log("shieldValue - 1");
+
+          
+        }
+
+        public void ResetShield()
+        {
+            shieldValue = 3;
         }
 
         public void OnDied()
@@ -77,7 +103,6 @@ namespace _.Scripts.Enemy.BossA
         {
             if (other.gameObject.CompareTag("RemoveShield"))
             {
-                bt.SendEvent("BombHurt");
             }
         }
     }
