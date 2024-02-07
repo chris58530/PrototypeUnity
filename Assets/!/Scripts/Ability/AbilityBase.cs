@@ -9,7 +9,6 @@ namespace @_.Scripts.Ability
     public abstract class AbilityBase : ScriptableObject
     {
          public AbilityWeapon.AbilityType abilityType;
-
         public int damage;
         public int lifeTime;
         public abstract void AbilityAlgorithm ();
