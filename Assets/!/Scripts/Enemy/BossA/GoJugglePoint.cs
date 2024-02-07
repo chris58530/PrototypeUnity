@@ -37,6 +37,8 @@ namespace @_.Scripts.Enemy.TypeA
 
         public override void OnEnd()
         {
+            navMeshAgent.isStopped = true;
+
         }
 
         SharedGameObject GetFarthestPoint()

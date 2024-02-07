@@ -10,7 +10,7 @@ public class SetAttackInt : EnemyAction
     
     public override void OnStart()
     {
-        attackInt = attackInt1212;
+        attackInt.Value = attackInt1212.Value;
     }
 
     public override TaskStatus OnUpdate()
