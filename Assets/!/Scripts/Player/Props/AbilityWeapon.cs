@@ -28,7 +28,7 @@ namespace @_.Scripts.Player.Props
         private void Update()
         {
             ExecuteAblilty();
-            if (Input.GetMouseButtonDown(1)) ChangeAbility(AbilityType.Strength);
+            if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.Strength);
         }
 
 
@@ -52,7 +52,8 @@ namespace @_.Scripts.Player.Props
                             _currentAbilityBase.QuitAbilityAlgorithm();
                             ChangeAbility(AbilityType.None);
                         }).AddTo(this);
-                    Debug.Log(_currentAbilityBase.name);
+                    Debug.Log(_currentAbilityBase.name);    
+                    
                     return;
                 }
             }

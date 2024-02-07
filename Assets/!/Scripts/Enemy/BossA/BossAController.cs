@@ -14,7 +14,6 @@ namespace @_.Scripts.Enemy.BossA
 {
     public class BossAController : EnemyController
     {
-     
         [Header("Explode Setting")] //.
         [SerializeField]
         private GameObject smallExplode;
@@ -28,8 +27,7 @@ namespace @_.Scripts.Enemy.BossA
 
         [Header("Juggle Bomb Setting")] //.
         [SerializeField]
-        private GameObject juggleBomb;
-
+        private GameObject[] juggleBomb;
 
         [Header("Throw Small Bomb Setting")] //.
         [SerializeField]
@@ -77,7 +75,8 @@ namespace @_.Scripts.Enemy.BossA
         {
             target.x += Random.Range(-5, 5);
             target.z += Random.Range(-5, 5);
-            var obj = Instantiate(smallBomb, target + new Vector3(0, 50, 0),
+            int randomInt = Random.Range(0, juggleBomb.Length);
+            var obj = Instantiate(juggleBomb[randomInt], target + new Vector3(0, 50, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(obj.transform.position - target).normalized;
@@ -169,7 +168,5 @@ namespace @_.Scripts.Enemy.BossA
 
             Debug.Log($"{other.name} get {10} damage");
         }
-
-       
     }
 }

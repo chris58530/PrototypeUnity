@@ -35,7 +35,6 @@ namespace @_.Scripts.Ability
             Debug.Log("QuitAbilityAlgorithm");
             effect.GetComponent<MeshRenderer>().enabled = false;
 
-            lifeTimer?.Dispose();
         }
 
         public override void TriggerEffect(Collider other)
@@ -46,9 +45,5 @@ namespace @_.Scripts.Ability
                 target.OnTakeShield(1);
         }
 
-        private void OnDisable()
-        {
-            QuitAbilityAlgorithm();
-        }
     }
 }
