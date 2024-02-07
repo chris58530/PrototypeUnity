@@ -52,7 +52,6 @@ namespace @_.Scripts.Enemy.BossA
 
         public void RemoveShield()
         {
-            //do somthing
         }
 
         public void OpenAttack()
