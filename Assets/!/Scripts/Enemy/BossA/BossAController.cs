@@ -14,9 +14,12 @@ namespace @_.Scripts.Enemy.BossA
 {
     public class BossAController : EnemyController
     {
-        [Header("Explode Setting")] //.
+        [Header("Before Big Bomb Tower")] //.
         [SerializeField]
-        private GameObject smallExplode;
+        private GameObject tower;
+
+        [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
+        private Transform towerPoint;
 
         [SerializeField] private GameObject bigExplode;
 
@@ -124,38 +127,19 @@ namespace @_.Scripts.Enemy.BossA
             }).AddTo(obj);
         }
 
-        //skill two 
-        public void JumpToPlayer(NavMeshAgent nav, Transform player, float jumpTime)
+        public void RaiseTheTower(bool isRaise)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, player.position);
-            float speed = distanceToTarget / jumpTime; // Calculate speed based on distance
-
-            Vector3 destination = new Vector3(player.position.x, player.position.y, player.position.z);
-            // StartCoroutine(JumpToPlayerRoutine(destination, jumpTime, speed));
-        }
-
-        IEnumerator JumpToPlayerRoutine(Vector3 destination, float time, float speed)
-        {
-            float t = 0;
-            while (t < time)
+            if (isRaise)
             {
-                t += Time.deltaTime;
-                float y = jumpToPlayerCurve.Evaluate(t);
+                tower.SetActive(true);
+                transform.parent = tower.transform;
+                tower.GetComponent<Animator>().Play("RaiseTower");
+                tower.GetComponent<BoxCollider>().enabled = true;
+            }else
+            tower.GetComponent<Animator>().Play("DropTower");
 
-                destination.y = y;
-                transform.position = Vector3.MoveTowards(transform.position, destination,
-                    speed * Time.deltaTime);
-
-                yield return null;
-            }
-
-            yield return null;
         }
 
-        public void ShakeTail()
-        {
-            //play animation 
-        }
 
         private void OnTriggerEnter(Collider other)
         {

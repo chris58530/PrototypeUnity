@@ -22,6 +22,12 @@ namespace _.Scripts.Enemy.BossA
         [Header("Shield Setting")] //.
         [SerializeField]
         private int shieldValue;
+        
+        //big bomb 
+        [Tooltip("How many times can throw and set the value ,form large number to small")]
+        [SerializeField] private int[] canThrowBigBombHp;
+        private float _lastHp;
+        private int _successTime;
 
         private void Start()
         {
@@ -35,6 +41,8 @@ namespace _.Scripts.Enemy.BossA
                 hpImage.fillAmount = _currentHp.Value / maxHp;
                 hardHpImage.fillAmount = _currentHp.Value / maxHp;
             }).AddTo(this);
+            
+            _lastHp = _currentHp.Value;
         }
 
         private void Update()
@@ -96,6 +104,15 @@ namespace _.Scripts.Enemy.BossA
             {
                 hardHpImage.enabled = false;
                 hpImage.enabled = true;
+            }
+        }
+
+        public void DetectCanThrowBigBomb()
+        {
+            if (_currentHp.Value < canThrowBigBombHp[_successTime])
+            {
+                bt.SendEvent("Big_Bomb_Event");
+                _successTime++;
             }
         }
 
