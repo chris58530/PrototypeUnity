@@ -1,3 +1,4 @@
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
@@ -12,10 +13,10 @@ namespace @_.Scripts.Player.State
         private AttackSystem _attackSystem;
         private PlayerBase _playerBase;
         private float _insertTime;
-
+        private AbilitySystem _abilitySystem;
         public InsertSword(PlayerInput playerInput,
-            PlayerController playerController, Animator animator, AttackSystem attackSystem,
-            PlayerBase playerBase,
+            PlayerController playerController, Animator animator, AttackSystem attackSystem
+            ,AbilitySystem abilitySystem,PlayerBase playerBase,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -24,9 +25,11 @@ namespace @_.Scripts.Player.State
             _controller = playerController;
             _animator = animator;
             _attackSystem = attackSystem;
+            _abilitySystem = abilitySystem;
             _playerBase = playerBase;
         }
 
+       
         public override void OnEnter()
         {
             //debug
@@ -35,6 +38,7 @@ namespace @_.Scripts.Player.State
             _attackSystem.AttackChancePreview(Color.red);
 
             _insertTime = 0;
+            _abilitySystem.Attack();
         }
 
         public override void OnLogic()
@@ -54,6 +58,8 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
+            _abilitySystem.CancelAttack();
+
         }
     }
 }

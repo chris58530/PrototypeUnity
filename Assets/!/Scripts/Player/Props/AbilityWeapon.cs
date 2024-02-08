@@ -17,20 +17,31 @@ namespace @_.Scripts.Player.Props
             Ice
         }
 
-        [SerializeField] private List<AbilityBase> abilityBase = new List<AbilityBase>();
+        [SerializeField, Header("Put the sword model to here")]
+        private GameObject swordTransform;
+
+        [Tooltip("Put all the ability scriptable object to list")] [SerializeField]
+        private List<AbilityBase> abilityBase = new List<AbilityBase>();
+
         private AbilityBase _currentAbilityBase;
+
 
         private void Start()
         {
+            transform.parent = swordTransform.transform;
             ChangeAbility(AbilityType.None);
         }
 
         private void Update()
         {
-            ExecuteAblilty();
+            //for test
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.Strength);
         }
 
+        public void ExecuteAblilty()
+        {
+            _currentAbilityBase.AbilityAlgorithm();
+        }
 
         private void ChangeAbility(AbilityType getAbility)
         {
@@ -52,8 +63,8 @@ namespace @_.Scripts.Player.Props
                             _currentAbilityBase.QuitAbilityAlgorithm();
                             ChangeAbility(AbilityType.None);
                         }).AddTo(this);
-                    Debug.Log(_currentAbilityBase.name);    
-                    
+
+                    Debug.Log(_currentAbilityBase.name);
                     return;
                 }
             }
@@ -62,10 +73,6 @@ namespace @_.Scripts.Player.Props
             ChangeAbility(AbilityType.None);
         }
 
-        public void ExecuteAblilty()
-        {
-            _currentAbilityBase.AbilityAlgorithm();
-        }
 
         private void OnTriggerEnter(Collider other)
         {

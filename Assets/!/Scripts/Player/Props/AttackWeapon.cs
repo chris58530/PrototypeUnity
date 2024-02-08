@@ -1,39 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using _.Scripts.Player;
 using TMPro;
 using UnityEngine;
-using UniRx;
 
-public class AttackWeapon : Weapon
+namespace @_.Scripts.Player.Props
 {
-    [SerializeField, Header("Put the sword model to here")]
-    private GameObject swordTransform;
-
-    private void Start()
+    public class AttackWeapon : Weapon
     {
-        transform.parent = swordTransform.transform;
-        transform.gameObject.SetActive(false);
+        [SerializeField, Header("Put the sword model to here")]
+        private GameObject swordTransform;
 
-    }
+        private void Start()
+        {
+            transform.parent = swordTransform.transform;
+            transform.gameObject.SetActive(false);
 
-    private void Update()
-    {
+        }
 
-    }
+        private void Update()
+        {
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
-        if (other.gameObject.layer != 7) return;
+        }
 
-        damageObj.OnTakeDamage(attackValue);
-        Debug.Log("攻擊了 : " + attackValue);
-        attackAction?.Invoke(other);       
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
+            if (other.gameObject.layer != 7) return;
 
-        //dubug
-        TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
-        t.text = (attackValue).ToString();
+            damageObj.OnTakeDamage(attackValue);
+            Debug.Log("攻擊了 : " + attackValue);
+            attackAction?.Invoke(other);       
+
+            //dubug
+            TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
+            t.text = (attackValue).ToString();
+        }
     }
 }
+

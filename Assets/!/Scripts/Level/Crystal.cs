@@ -4,7 +4,7 @@ using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 
-public class Crystal : MonoBehaviour,IAbilityContainer
+public class Crystal : MonoBehaviour
 {
     [SerializeField] private int maxHp;
     private int _currentHp;
@@ -38,9 +38,5 @@ public class Crystal : MonoBehaviour,IAbilityContainer
      Destroy(gameObject);
     }
 
-    public AbilityWeapon.AbilityType GetAbility()
-    {
-        OnDied();
-        return AbilityWeapon.AbilityType.Strength;
-    }
+  
 }

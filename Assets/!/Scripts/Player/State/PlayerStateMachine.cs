@@ -1,5 +1,6 @@
 using System;
 using _.Scripts.Event;
+using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 using UnityHFSM;
@@ -39,6 +40,7 @@ namespace _.Scripts.Player.State
         private PlayerInput _input;
         private PlayerController _controller;
         private AttackSystem _attackSystem;
+        private AbilitySystem _abilitySystem;
         private PlayerBase _playerBase;
         [SerializeField] private Animator animator;
 
@@ -51,6 +53,7 @@ namespace _.Scripts.Player.State
             _input = GetComponent<PlayerInput>();
             _controller = GetComponent<PlayerController>();
             _attackSystem = GetComponent<AttackSystem>();
+            _abilitySystem = GetComponent<AbilitySystem>();
             _playerBase = GetComponent<PlayerBase>();
         }
 
@@ -106,7 +109,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _playerBase, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.InsertSword, new InsertSword(
-                    _input, _controller, animator, _attackSystem, _playerBase, true));
+                    _input, _controller, animator, _attackSystem,_abilitySystem, _playerBase, true));
 
             //Idle
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
