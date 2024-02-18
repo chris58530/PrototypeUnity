@@ -20,7 +20,7 @@ public class BossATower : MonoBehaviour, IDamageable
     {
         GetComponent<BoxCollider>().enabled = false;
         //set Boss A parent to null 
-        if (transform.GetChild(0))
+        if (transform.childCount > 0)
             transform.GetChild(0).transform.parent = null;
         //call BT send event "DestroyTower"
         if (bt != null) bt.SendEvent("DestroyTower");
@@ -28,7 +28,6 @@ public class BossATower : MonoBehaviour, IDamageable
         {
             Debug.LogWarning("BossA_Tower have no Bt");
         }
-
     }
 
     private void OnTriggerEnter(Collider other)

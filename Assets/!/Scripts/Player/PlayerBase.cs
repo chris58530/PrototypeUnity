@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _.Scripts.Event;
 using _.Scripts.Tools;
 using UniRx;
@@ -8,23 +9,22 @@ using UnityEngine.Serialization;
 
 namespace _.Scripts.Player
 {
-    public class PlayerBase : MonoBehaviour, IDamageable
+    public class PlayerBase : MonoBehaviour, IDamageable, IKnockable
     {
         public float maxHpValue;
         [HideInInspector] public ReactiveProperty<float> currentHpValue = new ReactiveProperty<float>();
-        
-        public int maxSwordLevelValue;
-        [HideInInspector] public ReactiveProperty<int> currentSwordLevelValue = new ReactiveProperty<int>();
 
-        public float maxUltimateValue;
-        [HideInInspector] public ReactiveProperty<float> currentUltimateValue = new ReactiveProperty<float>();
-        public int maxShieldValue;
-        [HideInInspector] public ReactiveProperty<int> currentShieldValue = new ReactiveProperty<int>();
 
         public bool getHurt;
         [SerializeField] private float hurtCD;
         private IDisposable _hurtTimer;
-        [SerializeField] private bool _canHurt = true;
+        [SerializeField] private float knockTime;
+        private CharacterController _controller;
+
+        private void Awake()
+        {
+            _controller = GetComponent<CharacterController>();
+        }
 
         private void Start()
         {
@@ -35,56 +35,51 @@ namespace _.Scripts.Player
         void Initialize()
         {
             currentHpValue.Value = maxHpValue;
-            currentSwordLevelValue.Value = 0;
-            currentUltimateValue.Value = 0;
-            currentShieldValue.Value = maxShieldValue;
         }
 
-
-        public void SetSkillValue(int value)
-        {
-            currentSwordLevelValue.Value += value;
-            if (currentSwordLevelValue.Value >= maxSwordLevelValue)
-                currentSwordLevelValue.Value = maxSwordLevelValue;
-        }
-
-        public void ResetSkillValue()
-        {
-            currentSwordLevelValue.Value = 0;
-        }
-
-    
 
         public void OnTakeDamage(int value)
         {
-            if (transform.CompareTag("Undamaged")) return;
-            if (!_canHurt) return;
             _hurtTimer?.Dispose();
-            _canHurt = false;
-            _hurtTimer = Observable.EveryUpdate()
-                .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(_ => { _canHurt = true; });
-            if (currentShieldValue.Value > 0)
-            {
-                currentShieldValue.Value -= 1;
-            }
-            else
-            {
-                currentHpValue.Value -= value;
-                if (currentHpValue.Value >= maxHpValue)
-                    currentHpValue.Value = maxHpValue;
-                if (currentHpValue.Value <= 0)
-                {
-                    OnDied();
-                }
-            }
-            PlayerActions.onPlayerHurt?.Invoke();
+            _hurtTimer = Observable.EveryUpdate().First()
+                .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(
+                    _ => { transform.gameObject.layer = LayerMask.NameToLayer("Player");}
+                ).AddTo(this);
 
+            currentHpValue.Value -= value;
+            if (currentHpValue.Value >= maxHpValue)
+                currentHpValue.Value = maxHpValue;
+            if (currentHpValue.Value <= 0)
+            {
+                OnDied();
+            }
+
+            transform.gameObject.layer = LayerMask.NameToLayer("UnDamageable");
+            
+            PlayerActions.onPlayerHurt?.Invoke();
         }
+
 
         public void OnKnock(Transform trans)
         {
-            Vector3 offset = (transform.position - trans.position).normalized;
+            Vector3 dir = (transform.position - trans.position).normalized;
+            StartCoroutine(Knock(dir));
         }
+
+        IEnumerator Knock(Vector3 trans)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < knockTime)
+            {
+                _controller.Move(trans);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            getHurt = false;
+        }
+
 
         public void OnDied()
         {
@@ -96,7 +91,6 @@ namespace _.Scripts.Player
                 // 使用當前場景的名稱重新載入場景
                 SceneManager.LoadScene(currentSceneName);
             });
-
         }
 
         private void OnEnable()

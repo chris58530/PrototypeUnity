@@ -28,17 +28,7 @@ namespace _.Scripts.UI
                 _view.UpdateHp(_player.currentHpValue.Value, _player.maxHpValue);
             }).AddTo(this);
 
-            _player.currentSwordLevelValue.Subscribe(_ =>
-            {
-                DebugTools.LevelText(_player.currentSwordLevelValue.Value);
-                _view.UpdateLevel(_player.currentSwordLevelValue.Value, _player.maxSwordLevelValue);
-            }).AddTo(this);
-            _player.currentShieldValue.Subscribe(_ =>
-            {
-                DebugTools.ShieldText(_player.currentShieldValue.Value);
-                _view.UpdateSheld(_player.currentShieldValue.Value);
-
-            }).AddTo(this);
+         
        
         }
     }

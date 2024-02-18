@@ -1,10 +1,10 @@
+using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace @_.Scripts.Enemy.Chameleon
-{
-    public class ChameleonBase : Enemy, IDamageable
+
+public class ChameleonBase : Enemy, IDamageable
     {
         public Image hpImage;
 
@@ -29,8 +29,6 @@ namespace @_.Scripts.Enemy.Chameleon
 
             if (_currentHp.Value <= 0) OnDied();
         }
-
-
         public void OnDied()
         {
             bt.SendEvent("OnDied");
@@ -38,4 +36,3 @@ namespace @_.Scripts.Enemy.Chameleon
 
    
     }
-}

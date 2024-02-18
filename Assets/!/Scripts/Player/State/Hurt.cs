@@ -33,19 +33,16 @@ namespace _.Scripts.Player.State
             _timer = new Timer();
 
             DebugTools.StateText("Hurt");
-            _playerBase.getHurt = false;
             _animator.CrossFade(Animator.StringToHash("Hurt"), 0.1f);
-         
+
         }
 
         public override void OnLogic()
         {
             // if (_timer.Elapsed > 1)
             //     fsm.StateCanExit();
-            
-            if (_input.Move)
-                _controller.Move(_input);
-
+            Debug.Log("huting");
+           
             _controller.Fall();
         }
 

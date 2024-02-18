@@ -9,7 +9,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
         [Tooltip("The GameObject that the task operates on. If null the task GameObject is used.")]
         public SharedGameObject targetGameObject;
         [Tooltip("The position of the new GameObject")]
-        public SharedVector3 position;
+        public SharedGameObject position;
         [Tooltip("The rotation of the new GameObject")]
         public SharedQuaternion rotation = Quaternion.identity;
         [SharedRequired]
@@ -18,7 +18,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
 
         public override TaskStatus OnUpdate()
         {
-            storeResult.Value = GameObject.Instantiate(targetGameObject.Value, position.Value, rotation.Value) as GameObject;
+            storeResult.Value = GameObject.Instantiate(targetGameObject.Value, position.Value.transform.position, rotation.Value) as GameObject;
 
             return TaskStatus.Success;
         }
@@ -26,7 +26,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
         public override void OnReset()
         {
             targetGameObject = null;
-            position = Vector3.zero;
+            position = null;
             rotation = Quaternion.identity;
         }
     }

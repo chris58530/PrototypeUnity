@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.ProBuilder;
 
 namespace _.Scripts.Event
@@ -8,6 +9,7 @@ namespace _.Scripts.Event
     {
         public static Action onPlayerDead;
         public static Action onPlayerHurt;
+        public static Action<Transform> onPlayerKnock;
 
         public static Action<float> onPlayerAttack;
         //第幾個、縮放大小

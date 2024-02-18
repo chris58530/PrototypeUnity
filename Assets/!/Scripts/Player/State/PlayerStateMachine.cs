@@ -114,7 +114,6 @@ namespace _.Scripts.Player.State
             //Idle
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
                 transition => _input.Move);
-
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Roll,
