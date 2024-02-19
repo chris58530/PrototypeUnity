@@ -27,6 +27,7 @@ namespace _.Scripts.Player.State
             _playerBase = playerBase;
             _input = playerInput;
         }
+        //WHEN PlayerBase.OnKnock FININSH getHurt = false; STATE EXIT
 
         public override void OnEnter()
         {
@@ -41,7 +42,6 @@ namespace _.Scripts.Player.State
         {
             // if (_timer.Elapsed > 1)
             //     fsm.StateCanExit();
-            Debug.Log("huting");
            
             _controller.Fall();
         }

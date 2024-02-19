@@ -14,7 +14,9 @@ namespace _.Scripts.Event
         public static Action<float> onPlayerAttack;
         //第幾個、縮放大小
         public static Action<int,float> onPlayerAttackEffect;
+        
         public static Action<float> onHitEnemy;
+        
         public static Action<int> onUseAbility; 
     }
 }

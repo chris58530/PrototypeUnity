@@ -14,7 +14,8 @@ namespace @_.Scripts.Player.Props
             None,
             Strength,
             Fire,
-            Ice
+            Ice,
+            MakeObject
         }
 
         [SerializeField, Header("Put the sword model to here")]
@@ -36,6 +37,7 @@ namespace @_.Scripts.Player.Props
         {
             //for test
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.Strength);
+            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
         }
 
         public void ExecuteAblilty()
