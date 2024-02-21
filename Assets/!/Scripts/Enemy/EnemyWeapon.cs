@@ -10,7 +10,11 @@ public class EnemyWeapon : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Enemy layer
+        if (other.gameObject.layer != 6) return;
         if (other.gameObject.layer ==LayerMask.NameToLayer("UnDamageable")) return;
+        
+        
 
         Damage(other);
         Knock(other);

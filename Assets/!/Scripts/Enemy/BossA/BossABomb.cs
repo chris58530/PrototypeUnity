@@ -7,7 +7,6 @@ using UnityEngine;
 public class BossABomb : MonoBehaviour
 {
     [SerializeField] private GameObject explode;
-    [HideInInspector]public Transform target;
     public LayerMask groundLayer;
 
   
