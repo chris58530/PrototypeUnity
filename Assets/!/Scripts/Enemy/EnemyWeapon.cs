@@ -6,23 +6,18 @@ using UnityEngine;
 public class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] private int attackValue;
+    [SerializeField] private LayerMask mask;
 
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //Enemy layer
-        if (other.gameObject.layer != 6) return;
-        if (other.gameObject.layer ==LayerMask.NameToLayer("UnDamageable")) return;
-        
-        
+        if ((mask & (1 << other.gameObject.layer)) == 0)return;
 
-        Damage(other);
-        Knock(other);
+            Damage(other);
+            Knock(other);
     }
 
     void Damage(Collider other)
     {
-
         if (!other.TryGetComponent<IDamageable>(out var obj)) return;
 
         obj.OnTakeDamage(attackValue);
@@ -32,7 +27,6 @@ public class EnemyWeapon : MonoBehaviour
 
     void Knock(Collider other)
     {
-
         if (!other.TryGetComponent<IKnockable>(out var obj)) return;
 
         obj.OnKnock(this.transform);

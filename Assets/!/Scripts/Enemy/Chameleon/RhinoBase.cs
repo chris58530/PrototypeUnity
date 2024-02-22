@@ -1,11 +1,15 @@
 using System;
 using _.Scripts.Enemy;
+using _.Scripts.Interface;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class RhinoBase : Enemy, IDamageable
+public class RhinoBase : Enemy, IDamageable,IShieldable
 {
+    [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")]
+    [SerializeField] private bool isShield = true;
     public Image hpImage;
 
     [SerializeField] private float maxHp;
@@ -24,6 +28,8 @@ public class RhinoBase : Enemy, IDamageable
 
     public void OnTakeDamage(int value)
     {
+        if(isShield)return;
+        
         bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
 
@@ -34,11 +40,17 @@ public class RhinoBase : Enemy, IDamageable
         bt.SendEvent("OnDied");
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay(Collision other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
         {
             bt.SendEvent("OnStun");
+            Debug.Log($"{this.name} get stun");
         }
+    }
+
+    public void OnTakeShield(int removeValue)
+    {
+        isShield = false;
     }
 }

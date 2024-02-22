@@ -15,7 +15,6 @@ namespace _.Scripts.Ability
 
         public override void StartAbility()
         {
-            Debug.Log("Start None Ability");
 
         }
 

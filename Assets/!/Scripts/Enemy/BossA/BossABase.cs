@@ -17,15 +17,16 @@ namespace _.Scripts.Enemy.BossA
 
         [SerializeField] private float maxHp;
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-        public bool isShielded;
+        [Tooltip(" behaviour tree control")] public bool isShielded; 
 
         [Header("Shield Setting")] //.
         [SerializeField]
         private int shieldValue;
-        
+
         //big bomb 
-        [Tooltip("How many times can throw and set the value ,form large number to small")]
-        [SerializeField] private int[] canThrowBigBombHp;
+        [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
+        private int[] canThrowBigBombHp;
+
         private float _lastHp;
         private int _successTime;
 
@@ -41,7 +42,7 @@ namespace _.Scripts.Enemy.BossA
                 hpImage.fillAmount = _currentHp.Value / maxHp;
                 hardHpImage.fillAmount = _currentHp.Value / maxHp;
             }).AddTo(this);
-            
+
             _lastHp = _currentHp.Value;
         }
 
@@ -77,8 +78,6 @@ namespace _.Scripts.Enemy.BossA
         {
             shieldValue -= removeValue;
             Debug.Log("shieldValue - 1");
-
-          
         }
 
         public void ResetShield()

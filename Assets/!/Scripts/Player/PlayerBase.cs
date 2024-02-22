@@ -11,6 +11,8 @@ namespace _.Scripts.Player
 {
     public class PlayerBase : MonoBehaviour, IDamageable, IKnockable
     {
+        [Header("CAN BE HURT for test")] [SerializeField]
+        private bool canHurt;
         public float maxHpValue;
         [HideInInspector] public ReactiveProperty<float> currentHpValue = new ReactiveProperty<float>();
 
@@ -40,6 +42,8 @@ namespace _.Scripts.Player
 
         public void OnTakeDamage(int value)
         {
+            if(!canHurt)return;
+
             _hurtTimer?.Dispose();
             _hurtTimer = Observable.EveryUpdate().First()
                 .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(
@@ -62,6 +66,7 @@ namespace _.Scripts.Player
 
         public void OnKnock(Transform trans)
         {
+            if(!canHurt)return;
             Vector3 dir = (transform.position - trans.position).normalized;
             StartCoroutine(Knock(dir));
         }

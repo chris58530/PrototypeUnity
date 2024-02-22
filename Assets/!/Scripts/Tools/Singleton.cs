@@ -14,7 +14,6 @@ namespace _.Scripts.Tools
             else
             {
                 instance = (T)this;
-                Debug.Log($"Singleton ({typeof(T).Name}) has been Created");
             }
             
         }
@@ -27,7 +26,6 @@ namespace _.Scripts.Tools
         {
             if (instance == this)
                 instance = null;
-            Debug.Log($"Singleton ({typeof(T).Name}) has been destroyed");
         }
     }
 }

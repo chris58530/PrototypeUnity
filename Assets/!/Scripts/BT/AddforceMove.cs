@@ -10,24 +10,26 @@ public class AddforceMove : EnemyAction
     public float distance;
     public float time;
 
-    private bool _isSuccess;
+    private float _timer;
 
     public override void OnStart()
     {
+        _timer = 0;
+        rb.velocity = Vector3.zero;
         rb.isKinematic = false;
         rb.AddForce(transform.forward * distance);
-        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(time)).First().Subscribe(_ =>
-        {
-            rb.isKinematic = true;
-            rb.velocity = Vector3.zero;
-            _isSuccess = true;
-        }).AddTo(this.gameObject);
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (_isSuccess)
+        _timer += Time.deltaTime;
+        if (_timer >= time)
+        {
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
             return TaskStatus.Success;
+        }
+
         return TaskStatus.Running;
     }
 
