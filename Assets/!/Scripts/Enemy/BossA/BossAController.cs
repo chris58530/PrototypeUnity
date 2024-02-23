@@ -75,8 +75,8 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowJuggleBomb(Vector3 target)
         {
-            target.x += Random.Range(-5, 5);
-            target.z += Random.Range(-5, 5);
+            target.x += Random.Range(-10, 10);
+            target.z += Random.Range(-10, 10);
             int randomInt = Random.Range(0, juggleBomb.Length);
             var obj = Instantiate(juggleBomb[randomInt], target + new Vector3(0, 50, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));

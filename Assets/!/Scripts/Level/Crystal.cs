@@ -4,26 +4,27 @@ using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 
-public class Crystal : MonoBehaviour
+public class Crystal : MonoBehaviour, IDamageable
 {
     [SerializeField] private int maxHp;
     private int _currentHp;
-    [SerializeField] private bool canRelife;
+    [SerializeField] private GameObject detroyCrystalParticle;
+
+    [Header("If can relife ")] [SerializeField]
+    private bool canRelife;
+
     [SerializeField] private float relifeTime;
-    [SerializeField] private GameObject detroyCrystal;
     private Collider _collider;
 
 
     private void OnEnable()
     {
         _currentHp = maxHp;
-        Destroy(gameObject,5);
-
     }
 
     public void OnTakeDamage(int value)
     {
-        Debug.Log($"{this.name+" "+"on take damage"}");
+        Debug.Log($"{this.name + " " + "on take damage"}");
         if (_currentHp > 1)
         {
             _currentHp--;
@@ -31,12 +32,10 @@ public class Crystal : MonoBehaviour
         else OnDied();
     }
 
-  
 
     public void OnDied()
     {
-     Destroy(gameObject);
+        Instantiate(detroyCrystalParticle, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
-
-  
 }

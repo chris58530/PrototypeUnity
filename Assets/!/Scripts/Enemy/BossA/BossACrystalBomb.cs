@@ -5,21 +5,31 @@ namespace @_.Scripts.Enemy.BossA
     public class BossACrystalBomb : MonoBehaviour
     {
         [SerializeField] private GameObject crystal;
+        [SerializeField] private GameObject explo;
         [HideInInspector] public Transform target;
-        public LayerMask groundLayer;
 
 
         private void OnTriggerEnter(Collider other)
-        {
-            if (groundLayer == (groundLayer | (1 << other.gameObject.layer)))
-            {
-                Destroy(gameObject);
-            }
+        {            SpawnExplo(other);
+
+            SpawnCrystal(other);
         }
 
-        private void OnDestroy()
+        void SpawnCrystal(Collider other)
         {
-            var obg = Instantiate(crystal, transform.position, Quaternion.identity);
+            if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
+
+
+            Instantiate(crystal, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
+        void SpawnExplo(Collider other)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+
+            Instantiate(explo, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }
