@@ -23,6 +23,13 @@ namespace _.Scripts.Enemy.BossA
         [SerializeField]
         private int shieldValue;
 
+        [SerializeField] private Material bodydMaterial;
+        [SerializeField] private Texture bodyShieldTex;
+        [SerializeField] private Texture bodySRemovehieldTex;
+
+        [SerializeField] private Material elseMaterial;
+        [SerializeField] private Texture elseShieldTex;
+        [SerializeField] private Texture elseRemoveShieldTex;
         //big bomb 
         [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
         private int[] canThrowBigBombHp;
@@ -97,12 +104,21 @@ namespace _.Scripts.Enemy.BossA
             {
                 hardHpImage.enabled = true;
                 hpImage.enabled = false;
+                
+                //SET SHADER
+                bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
+                elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+
             }
 
             else
             {
                 hardHpImage.enabled = false;
                 hpImage.enabled = true;
+                
+                //SET SHADER
+                bodydMaterial.SetTexture("_BaseMap",bodySRemovehieldTex);
+                elseMaterial.SetTexture("_BaseMap",elseRemoveShieldTex);
             }
         }
 
@@ -120,6 +136,13 @@ namespace _.Scripts.Enemy.BossA
             if (other.gameObject.CompareTag("RemoveShield"))
             {
             }
+        }
+
+        private void OnEnable()
+        {
+            //RESET SHADER
+            bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
+            elseMaterial.SetTexture("_BaseMap",elseShieldTex);
         }
     }
 }
