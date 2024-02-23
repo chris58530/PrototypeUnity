@@ -18,6 +18,8 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private GameObject tower;
 
+        [SerializeField] private Animator towerAni;
+
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
         private Transform towerPoint;
 
@@ -132,12 +134,15 @@ namespace @_.Scripts.Enemy.BossA
             if (isRaise)
             {
                 tower.SetActive(true);
-                transform.parent = tower.transform;
-                tower.GetComponent<Animator>().Play("RaiseTower");
+                transform.parent = towerPoint.transform;
+                towerAni.Play("RaiseTower");
                 tower.GetComponent<BoxCollider>().enabled = true;
-            }else
-            tower.GetComponent<Animator>().Play("DropTower");
-
+            }
+            else
+            {
+                transform.parent = null;
+                towerAni.Play("DropTower");
+            }
         }
 
 
