@@ -6,6 +6,7 @@ public class DamageableObject : MonoBehaviour, IDamageable
     [SerializeField] private int hp;
     [SerializeField] private Animator objectAni;
     [SerializeField] private Collider objectCollider;
+    [SerializeField] private GameObject cloneObject;
 
 
     public void OnTakeDamage(int value)
@@ -21,6 +22,14 @@ public class DamageableObject : MonoBehaviour, IDamageable
             objectAni.Play("Die");
             Destroy(gameObject, 3);
             return;
+        }
+
+        if (cloneObject != null)
+        {
+            Instantiate(cloneObject, transform.position, transform.rotation);
+            Destroy(gameObject);
+            return;
+
         }
 
         objectCollider.enabled = false;

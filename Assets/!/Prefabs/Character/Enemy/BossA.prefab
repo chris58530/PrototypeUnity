@@ -869,6 +869,12 @@ MonoBehaviour:
   maxHp: 100
   isShielded: 1
   shieldValue: 3
+  bodydMaterial: {fileID: 2100000, guid: cf5a648b505ed4247ab01d6886ca1031, type: 2}
+  bodyShieldTex: {fileID: 2800000, guid: 874c815854afcd94ebc09a9ceb4efa08, type: 3}
+  bodySRemovehieldTex: {fileID: 2800000, guid: cbfe365ae7c0dba4ea2481d635fba30b, type: 3}
+  elseMaterial: {fileID: 2100000, guid: 871f321731992bf44b685293ed0477b3, type: 2}
+  elseShieldTex: {fileID: 2800000, guid: 77afde6ef7874eb42b73b427e115c226, type: 3}
+  elseRemoveShieldTex: {fileID: 2800000, guid: 3788abda0c9147e489d9f20c0c1b8314, type: 3}
   canThrowBigBombHp: 50000000320000001e0000000a000000
 --- !u!114 &7352935332682747584
 MonoBehaviour:
@@ -888,8 +894,9 @@ MonoBehaviour:
   previewObject: {fileID: 3659787618249965714, guid: 83ac1c5db921bb84bb8fe5d34924c285,
     type: 3}
   juggleBomb:
-  - {fileID: 3659787618249965714, guid: 04079b1f8b1769b4cb74d2ab8b73a37a, type: 3}
-  - {fileID: 3659787618249965714, guid: ecda47c96e8668c4fadc580d9e72bb7a, type: 3}
+  - {fileID: 3659787618249965714, guid: b702e1e6b7781a343ae41e0fa7f0201c, type: 3}
+  - {fileID: 3659787618249965714, guid: fbc2b33a1a1b8374398b0af960f8f2cc, type: 3}
+  - {fileID: 3659787618249965714, guid: 7683f997ce4c8464896f31d25f2c6653, type: 3}
   smallBomb: {fileID: 3659787618249965714, guid: 04079b1f8b1769b4cb74d2ab8b73a37a,
     type: 3}
   smallBombPoint: {fileID: 4415452779496349376}
@@ -7711,6 +7718,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &2535435007967071503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6354285640711515866, guid: 9dc748a6de52d7443a8591d48595f8e6,
@@ -7743,6 +7753,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &2617099358327247973 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2355215842575009872, guid: 9dc748a6de52d7443a8591d48595f8e6,
@@ -7775,6 +7788,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &6430789209146122947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6755512563185762026, guid: 9dc748a6de52d7443a8591d48595f8e6,
@@ -7807,6 +7823,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &7312729595213254372 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7026370259432886991, guid: 9dc748a6de52d7443a8591d48595f8e6,
@@ -7839,6 +7858,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &8628950189052468868 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9dc748a6de52d7443a8591d48595f8e6,

@@ -8,7 +8,7 @@ public class Crystal : MonoBehaviour, IDamageable
 {
     [SerializeField] private int maxHp;
     private int _currentHp;
-    [SerializeField] private GameObject detroyCrystalParticle;
+    [SerializeField] private GameObject detroyCrystalObject;
 
     [Header("If can relife ")] [SerializeField]
     private bool canRelife;
@@ -35,7 +35,8 @@ public class Crystal : MonoBehaviour, IDamageable
 
     public void OnDied()
     {
-        Instantiate(detroyCrystalParticle, transform.position, transform.rotation);
+        if(detroyCrystalObject==null)return;
+        Instantiate(detroyCrystalObject, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

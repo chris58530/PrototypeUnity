@@ -15,10 +15,7 @@ namespace _.Scripts.Player.State
         Attack2,
         Attack3,
         Fail,
-        UltiAttack,
-        UltiChance,
-        UltiFinalAttack,
-        UltiFail,
+  
         InsertSword,
         Chance1,
         Chance1ToIdle,
