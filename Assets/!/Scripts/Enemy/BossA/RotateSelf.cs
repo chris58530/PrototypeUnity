@@ -8,6 +8,7 @@ using TimeSpan = System.TimeSpan;
 
 public class RotateSelf : EnemyAction
 {
+    public SharedGameObject rotateTarget;
     public SharedFloat rotateSpeed;
     public SharedFloat time;
     private float caculateTime;
@@ -25,7 +26,7 @@ public class RotateSelf : EnemyAction
 
         float rotation = rotateSpeed.Value * Time.deltaTime;
 
-        transform.Rotate(Vector3.up, rotation);
+        rotateTarget.Value.transform.Rotate(Vector3.up, rotation);
 
 
         return TaskStatus.Running;

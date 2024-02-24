@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UniRx;
 using UnityEngine;
 
 public class BossABomb : MonoBehaviour
@@ -9,13 +10,19 @@ public class BossABomb : MonoBehaviour
     [SerializeField] private GameObject explode;
     public LayerMask groundLayer;
 
-  
+    
+    private bool _readyToCollision;
+    private void Start()
+    {
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.1f)).First().Subscribe(_ => _readyToCollision = true)
+            .AddTo(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        if(!_readyToCollision)return;
         if (groundLayer == (groundLayer | (1 << other.gameObject.layer)))
         {
-            // 销毁当前脚本所附加的游戏对象
             Destroy(gameObject);
         }
 
