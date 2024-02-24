@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &-7998831298490287061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
@@ -90,8 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d270602c943c61f45a3c2f6e9685032b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
-  _height: 10
+  _speed: 10
 --- !u!1001 &2381337551332155120
 PrefabInstance:
   m_ObjectHideFlags: 0

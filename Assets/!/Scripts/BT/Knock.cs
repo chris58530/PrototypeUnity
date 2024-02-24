@@ -1,29 +1,29 @@
 using System;
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UniRx;
 using UnityEngine;
 
-public class AddforceMove : EnemyAction
+public class Knock : EnemyAction
 {
     //MAKE GAMEOBJECT ADDFORCE TO MOVE ADD VELOCITY == 0 WHEN TIME END
     public float distance;
     public float time;
 
-    private float _timer;
+    private bool isSuccess;
 
     public override void OnStart()
     {
-        _timer = 0;
+        isSuccess = false;
         rb.velocity = Vector3.zero;
         rb.isKinematic = false;
-        rb.velocity=(transform.forward * distance);
+        rb.velocity = (transform.forward * distance);
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(time)).Subscribe(_ => { isSuccess = true; })
+            .AddTo(gameObject);
     }
 
     public override TaskStatus OnUpdate()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= time)
+        if (isSuccess)
         {
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
@@ -35,6 +35,6 @@ public class AddforceMove : EnemyAction
 
     public override void OnEnd()
     {
-      
+    
     }
 }

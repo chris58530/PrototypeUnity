@@ -48,7 +48,7 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private AnimationCurve jumpToPlayerCurve;
 
-        [SerializeField] private GameObject[] damageCollider;
+        [SerializeField] private Collider[] damageCollider;
 
         public void ResetShield()
         {
@@ -63,7 +63,7 @@ namespace @_.Scripts.Enemy.BossA
         {
             for (int i = 0; i < damageCollider.Length; i++)
             {
-                damageCollider[i].tag = "Enemy";
+                damageCollider[i].enabled = true;
             }
         }
 
@@ -71,7 +71,8 @@ namespace @_.Scripts.Enemy.BossA
         {
             for (int i = 0; i < damageCollider.Length; i++)
             {
-                damageCollider[i].tag = "Default";
+                damageCollider[i].enabled = false;
+
             }
         }
 
