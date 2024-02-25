@@ -35,7 +35,7 @@ namespace @_.Scripts.Enemy.BossA
 
         [Header("Juggle Bomb Setting")] //.
         [SerializeField]
-        private GameObject[] juggleBomb;
+        private GameObject juggleBomb;
 
         [Header("Throw Small Bomb Setting")] //.
         [SerializeField]
@@ -82,8 +82,7 @@ namespace @_.Scripts.Enemy.BossA
         {
             target.x += Random.Range(-10, 10);
             target.z += Random.Range(-10, 10);
-            int randomInt = Random.Range(0, juggleBomb.Length);
-            var obj = Instantiate(juggleBomb[randomInt], target + new Vector3(0, 50, 0),
+            var obj = Instantiate(juggleBomb, target + new Vector3(0, 50, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             Vector3 offset = -(obj.transform.position - target).normalized;
@@ -97,8 +96,8 @@ namespace @_.Scripts.Enemy.BossA
 
         public void ThrowSmallBomb()
         {
-            var pos = smallBombPoint.position;
-            var obj = Instantiate(smallBomb, pos, transform.rotation);
+            var pos = smallBombPoint;
+            var obj = Instantiate(smallBomb, pos.position,pos.rotation );
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
 
             Destroy(obj, 3);
