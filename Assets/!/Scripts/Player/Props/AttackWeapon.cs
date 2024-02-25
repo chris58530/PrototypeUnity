@@ -12,7 +12,7 @@ namespace @_.Scripts.Player.Props
         private void Start()
         {
             transform.parent = swordTransform.transform;
-            transform.gameObject.SetActive(false);
+            transform.GetComponent<Collider>().enabled = false;
 
         }
 
