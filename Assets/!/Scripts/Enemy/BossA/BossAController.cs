@@ -5,6 +5,8 @@ using _.Scripts.Event;
 using _.Scripts.Interface;
 using UniRx;
 using UniRx.Triggers;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -23,7 +25,8 @@ namespace @_.Scripts.Enemy.BossA
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
         private Transform towerPoint;
 
-        [SerializeField] private GameObject bigExplode;
+        [SerializeField] private GameObject brokenTower;
+
 
         //生成物件類別
         [Header("Preview Setting")] //.
@@ -72,7 +75,6 @@ namespace @_.Scripts.Enemy.BossA
             for (int i = 0; i < damageCollider.Length; i++)
             {
                 damageCollider[i].enabled = false;
-
             }
         }
 
@@ -142,6 +144,10 @@ namespace @_.Scripts.Enemy.BossA
             else
             {
                 transform.parent = null;
+                Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
+                GameObject obj = Instantiate(brokenTower, tower.transform.position + brokenTowerOffset,
+                    quaternion.identity);
+                Destroy(obj, 3);
                 towerAni.Play("DropTower");
             }
         }
