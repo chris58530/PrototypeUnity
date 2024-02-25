@@ -44,15 +44,11 @@ namespace @_.Scripts.Player.State
         public override void OnLogic()
         {
             _insertTime += Time.deltaTime;
-            if (_insertTime > 0.8f)
+            if (_insertTime > _abilitySystem.insertTime)
             {
                 fsm.StateCanExit();
             }
-            else if (Input.GetKeyUp(KeyCode.Q))
-            {
-                fsm.StateCanExit();
-            }
-
+       
             _controller.Fall();
         }
 

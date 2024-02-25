@@ -7,6 +7,8 @@ namespace @_.Scripts.Player.Props
 {
     public class AbilitySystem : PlayerAttackSystem
     {
+        [Header("Insert state exit time")]
+        public float insertTime;
         private AbilityWeapon _abilityWeapon;
         private BoxCollider _abilityWeaponCollider;
 

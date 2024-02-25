@@ -126,6 +126,8 @@ namespace _.Scripts.Player.State
             //Walk
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll);
+            _normalState.AddTransition(PlayerState.Walk, PlayerState.InsertSword,
+                transition =>_input.IsPressedAbility);
 
 
             _normalState.AddTransition(PlayerState.Roll, PlayerState.Fail,
