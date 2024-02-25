@@ -6,6 +6,7 @@ using UnityEngine;
 public class MoveTo : EnemyAction
 {
     public float speed;
+    //arrive distance
     public float distance;
     public SharedGameObject Target;
     private Vector3 GoTarget;
