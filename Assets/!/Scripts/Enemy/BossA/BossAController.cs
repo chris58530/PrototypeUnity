@@ -24,7 +24,7 @@ namespace @_.Scripts.Enemy.BossA
 
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
         private Transform towerPoint;
-
+        [SerializeField] private GameObject raiseTower;
         [SerializeField] private GameObject brokenTower;
 
 
@@ -138,6 +138,10 @@ namespace @_.Scripts.Enemy.BossA
                 tower.SetActive(true);
                 transform.parent = towerPoint.transform;
                 towerAni.Play("RaiseTower");
+                Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
+                GameObject obj = Instantiate(brokenTower, tower.transform.position + brokenTowerOffset,
+                    quaternion.identity);
+                Destroy(obj, 3);
                 tower.GetComponent<BoxCollider>().enabled = true;
             }
             else
