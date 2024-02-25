@@ -160,7 +160,7 @@ namespace _.Scripts.Enemy.BossA
             bodydMaterial.EnableKeyword("_EMISSION");
             elseMaterial.EnableKeyword("_EMISSION");
             bombMaterial.EnableKeyword("_EMISSION");
-            yield return new WaitForSeconds(0.1f); // 等待閃爍持續時間
+            yield return new WaitForSeconds(0.08f); // 等待閃爍持續時間
             bodydMaterial.DisableKeyword("_EMISSION");
             elseMaterial.DisableKeyword("_EMISSION");
             bombMaterial.DisableKeyword("_EMISSION");
