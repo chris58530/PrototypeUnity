@@ -61,7 +61,7 @@ namespace _.Scripts.Player
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ => { finishAttack = true; });
 
-            weaponCollider.SetActive(true);
+            weaponCollider.GetComponent<Collider>().enabled = true;
         }
 
         public float AttackTime(int count)
@@ -73,7 +73,7 @@ namespace _.Scripts.Player
 
         public void CancelAttack()
         {
-            weaponCollider.SetActive(false);
+            weaponCollider.GetComponent<Collider>().enabled = false;
         }
 
 

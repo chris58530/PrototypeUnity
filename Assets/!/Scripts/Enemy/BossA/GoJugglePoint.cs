@@ -26,8 +26,10 @@ namespace @_.Scripts.Enemy.TypeA
         public override TaskStatus OnUpdate()
         {
             if (Vector3.Distance(transform.position, farthestPoint.Value.transform.position) < KeepDistance.Value)
-            {
+            {                navMeshAgent.isStopped = true;
+
                 return TaskStatus.Success;
+
             }
 
             navMeshAgent.SetDestination(farthestPoint.Value.transform.position);
@@ -37,7 +39,6 @@ namespace @_.Scripts.Enemy.TypeA
 
         public override void OnEnd()
         {
-            navMeshAgent.isStopped = true;
 
         }
 
