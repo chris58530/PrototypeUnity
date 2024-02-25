@@ -32,7 +32,9 @@ namespace @_.Scripts.Player.State
 
 
             _timer = new Timer();
-            _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
+            // _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
+            _animator.Play("Q3");
+
             _attackSystem.Attack();
             
         }
@@ -45,6 +47,9 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
+
+
             _attackSystem.CancelAttack();
         }
     }

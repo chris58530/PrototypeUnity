@@ -13,13 +13,8 @@ namespace @_.Scripts.Player.Props
         {
             transform.parent = swordTransform.transform;
             transform.GetComponent<Collider>().enabled = false;
-
         }
 
-        private void Update()
-        {
-
-        }
 
         private void OnTriggerEnter(Collider other)
         {

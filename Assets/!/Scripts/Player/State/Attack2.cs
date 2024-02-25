@@ -30,7 +30,8 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("AttackSecond");
 
             _timer = new Timer();
-            _animator.CrossFade(Animator.StringToHash("Q2"), 0.1f);
+            // _animator.CrossFade(Animator.StringToHash("Q2"), 0.1f);
+            _animator.Play("Q2");
             _attackSystem.Attack();
 
         }
