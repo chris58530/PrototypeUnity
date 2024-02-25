@@ -24,8 +24,8 @@ namespace @_.Scripts.Enemy.BossA
 
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
         private Transform towerPoint;
-        [SerializeField] private GameObject raiseTower;
-        [SerializeField] private GameObject brokenTower;
+        [SerializeField] private ParticleSystem  raiseTower;
+        [SerializeField] private ParticleSystem  brokenTower;
 
 
         //生成物件類別
@@ -139,18 +139,14 @@ namespace @_.Scripts.Enemy.BossA
                 transform.parent = towerPoint.transform;
                 towerAni.Play("RaiseTower");
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
-                GameObject obj = Instantiate(brokenTower, tower.transform.position + brokenTowerOffset,
-                    quaternion.identity);
-                Destroy(obj, 3);
+                raiseTower.Play();
                 tower.GetComponent<BoxCollider>().enabled = true;
             }
             else
             {
                 transform.parent = null;
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
-                GameObject obj = Instantiate(brokenTower, tower.transform.position + brokenTowerOffset,
-                    quaternion.identity);
-                Destroy(obj, 3);
+                brokenTower.Play();
                 towerAni.Play("DropTower");
             }
         }
