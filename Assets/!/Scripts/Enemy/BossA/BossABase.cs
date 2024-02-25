@@ -30,6 +30,9 @@ namespace _.Scripts.Enemy.BossA
         [SerializeField] private Material elseMaterial;
         [SerializeField] private Texture elseShieldTex;
         [SerializeField] private Texture elseRemoveShieldTex;
+        
+        //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
+        [SerializeField] private Material bombMaterial;
         //big bomb 
         [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
         private int[] canThrowBigBombHp;
@@ -69,10 +72,17 @@ namespace _.Scripts.Enemy.BossA
             if (isShielded)
             {
                 _currentHp.Value -= value / 5;
+                ///////////////coldwater///////////////////////
+                StartCoroutine(OnTakeDamageCoroutine());
             }
 
             else
+            {
                 _currentHp.Value -= value;
+                ///////////////coldwater///////////////////////
+                StartCoroutine(OnTakeDamageCoroutine());
+            }
+                
 
             if (_currentHp.Value <= 0)
             {
@@ -143,6 +153,17 @@ namespace _.Scripts.Enemy.BossA
             //RESET SHADER
             bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
             elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+        }
+
+        IEnumerator OnTakeDamageCoroutine()
+        {
+            bodydMaterial.EnableKeyword("_EMISSION");
+            elseMaterial.EnableKeyword("_EMISSION");
+            bombMaterial.EnableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.1f); // 等待閃爍持續時間
+            bodydMaterial.DisableKeyword("_EMISSION");
+            elseMaterial.DisableKeyword("_EMISSION");
+            bombMaterial.DisableKeyword("_EMISSION");
         }
     }
 }
