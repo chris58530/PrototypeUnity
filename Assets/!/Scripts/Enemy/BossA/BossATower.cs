@@ -10,6 +10,11 @@ public class BossATower : MonoBehaviour, IDamageable
     [SerializeField] private BehaviorTree bt;
     [SerializeField] private GameObject towerObj;
 
+    private void Start()
+    {
+        GetComponent<Collider>().enabled = false;
+    }
+
     public void OnTakeDamage(int value)
     {
         hp -= value;

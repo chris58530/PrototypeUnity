@@ -41,6 +41,7 @@ public class CameraManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        _perlinNoise.m_AmplitudeGain = 0;
         PlayerActions.onPlayerHurt -= ShakeCamera_Hurt;
         PlayerActions.onHitEnemy -= ShakeCamera_HitEnemy;
     }

@@ -2636,6 +2636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossA
       objectReference: {fileID: 0}
+    - target: {fileID: 1911698246759705060, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3110043021768749367, guid: f9d6cbf64ba599448825f89a0b3e29df,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2939,15 +2944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Sword
       objectReference: {fileID: 0}
-    - target: {fileID: 5767223698232274353, guid: efd14440ccebf1b40a35b4bcab778964,
+    - target: {fileID: 5715834888313830783, guid: efd14440ccebf1b40a35b4bcab778964,
         type: 3}
-      propertyPath: keepTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5767223698232274353, guid: efd14440ccebf1b40a35b4bcab778964,
-        type: 3}
-      propertyPath: slowSpeed
-      value: 0.5
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
@@ -3831,7 +3831,7 @@ BoxCollider:
   m_GameObject: {fileID: 1603661405}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 15.328989, y: 29.03055, z: 1}
   m_Center: {x: -0.35624504, y: 11.360274, z: 0}

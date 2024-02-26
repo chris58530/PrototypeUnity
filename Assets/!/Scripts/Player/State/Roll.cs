@@ -33,6 +33,7 @@ namespace _.Scripts.Player.State
             _animator.Play(Animator.StringToHash("Roll"));
 
             _controller.Roll();
+            _attackSystem.Fail();
 
 
         }
@@ -47,7 +48,8 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-                        
+            _attackSystem.attackCount = 0;
+
             // //這方法是attacksystem的父類，不確定這樣呼叫好不好
             // _attackSystem.ResetChance();
         }
