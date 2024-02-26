@@ -18,25 +18,31 @@ public class CameraManager : MonoBehaviour
         _perlinNoise = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    void ShakeCamera()
+    void ShakeCamera_Hurt()
     {
-        StartCoroutine(nameof(TogglePerlinNoiseAmplitude));
+        StartCoroutine(TogglePerlinNoiseAmplitude(5,0.2f));
+    }
+    void ShakeCamera_HitEnemy()
+    {
+        StartCoroutine(TogglePerlinNoiseAmplitude(1.5f,0.1f));
     }
 
-    private IEnumerator TogglePerlinNoiseAmplitude()
+    private IEnumerator TogglePerlinNoiseAmplitude(float amplitude,float sceonds)
     {
-        float amplitude = 5;
         _perlinNoise.m_AmplitudeGain = amplitude;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(sceonds);
         _perlinNoise.m_AmplitudeGain = 0;
     }
 
     private void OnEnable()
     {
-        PlayerActions.onPlayerHurt += ShakeCamera;
+        PlayerActions.onPlayerHurt += ShakeCamera_Hurt;
+        PlayerActions.onHitEnemy += ShakeCamera_HitEnemy;
     }
     private void OnDisable()
     {
-        PlayerActions.onPlayerHurt -= ShakeCamera;
+        _perlinNoise.m_AmplitudeGain = 0;
+        PlayerActions.onPlayerHurt -= ShakeCamera_Hurt;
+        PlayerActions.onHitEnemy -= ShakeCamera_HitEnemy;
     }
 }

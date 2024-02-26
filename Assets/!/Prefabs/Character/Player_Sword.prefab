@@ -1442,8 +1442,8 @@ MonoBehaviour:
   currentHpValue:
     value: 0
   getHurt: 0
-  hurtCD: 1
-  knockTime: 0.25
+  hurtCD: 0.1
+  knockTime: 0.1
 --- !u!114 &5715834888313830782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdbd9e3a84342829abd75673865a44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 15
+  walkSpeed: 18
   rotateSpeed: 10
   rollTime: 0.2
   finsihRoll: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   - 0.5
   - 0.5
   attackCount: 0
-  chanceTime: 2
+  chanceTime: 1.5
   finishAttack: 0
   weaponCollider: {fileID: 5767223698558647052}
   attackChancePreview: {fileID: 5767223698535378182}
@@ -1668,7 +1668,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5767223698558647052}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -7249,5 +7249,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c93f25ec4d79c746801281124202ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowSpeed: 0.7
-  keepTime: 0.3
+  slowSpeed: 0.5
+  keepTime: 0.1
