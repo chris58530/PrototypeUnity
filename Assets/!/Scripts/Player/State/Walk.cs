@@ -30,7 +30,7 @@ namespace _.Scripts.Player.State
             //debug
             TMP_Text t = GameObject.Find("StateText").GetComponent<TMP_Text>();
             t.text = "Walk";
-            _animator.CrossFade(Animator.StringToHash("Walk"), 0.5f);
+            _animator.CrossFade(Animator.StringToHash("Walk"), 0.1f);
             AudioManager.Instance.PlaySFX2("Walk");
 
         }
