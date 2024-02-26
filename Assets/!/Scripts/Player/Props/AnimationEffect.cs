@@ -27,7 +27,7 @@ public class AnimationEffect : MonoBehaviour
         PlayerActions.onHitEnemy -= SlowAnimaiotnSpeed;
     }
 
-    void SlowAnimaiotnSpeed(float time)
+    void SlowAnimaiotnSpeed()
     {
         _ani.speed = slowSpeed;
         Time.timeScale = slowSpeed;
