@@ -19146,6 +19146,75 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &514193384
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 186.05182
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.00084
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.407385
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150264, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708658805558150267, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: m_Name
+      value: BossA
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9d6cbf64ba599448825f89a0b3e29df, type: 3}
 --- !u!1 &525014809
 GameObject:
   m_ObjectHideFlags: 0
@@ -37666,7 +37735,7 @@ PrefabInstance:
     - target: {fileID: 5715834888313830770, guid: efd14440ccebf1b40a35b4bcab778964,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5715834888313830770, guid: efd14440ccebf1b40a35b4bcab778964,
         type: 3}
@@ -70456,7 +70525,7 @@ PrefabInstance:
     - target: {fileID: 901844509990045392, guid: a72ca7732fa6eca4d95370f89ce74fc8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 901844509990045392, guid: a72ca7732fa6eca4d95370f89ce74fc8,
         type: 3}
@@ -71018,7 +71087,7 @@ PrefabInstance:
     - target: {fileID: 5091159906177739167, guid: 658c3bea86826bb49bccb472fed22346,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5091159906177739167, guid: 658c3bea86826bb49bccb472fed22346,
         type: 3}
@@ -71484,6 +71553,7 @@ MonoBehaviour:
   elseMaterial: {fileID: 0}
   elseShieldTex: {fileID: 0}
   elseRemoveShieldTex: {fileID: 0}
+  bombMaterial: {fileID: 0}
   canThrowBigBombHp: 
 --- !u!114 &6578643406074940820
 MonoBehaviour:
@@ -71500,11 +71570,11 @@ MonoBehaviour:
   tower: {fileID: 0}
   towerAni: {fileID: 0}
   towerPoint: {fileID: 0}
-  bigExplode: {fileID: 0}
+  raiseTower: {fileID: 0}
+  brokenTower: {fileID: 0}
   previewObject: {fileID: 3659787618249965714, guid: 83ac1c5db921bb84bb8fe5d34924c285,
     type: 3}
-  juggleBomb:
-  - {fileID: 0}
+  juggleBomb: {fileID: 0}
   smallBomb: {fileID: 3659787618249965714, guid: 04079b1f8b1769b4cb74d2ab8b73a37a,
     type: 3}
   smallBombPoint: {fileID: 0}
@@ -71569,7 +71639,7 @@ PrefabInstance:
     - target: {fileID: 8830941650670516779, guid: ac9a5313ec3c70f43ad65bc651675990,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8830941650670516779, guid: ac9a5313ec3c70f43ad65bc651675990,
         type: 3}
