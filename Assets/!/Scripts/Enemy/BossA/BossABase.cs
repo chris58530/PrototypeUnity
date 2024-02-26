@@ -168,11 +168,11 @@ namespace _.Scripts.Enemy.BossA
         IEnumerator OnTakeDamageCoroutine()
         {
             bodydMaterial.SetInt("_Surface_EMISSION", 1);
-            elseMaterial.EnableKeyword("_EMISSION");
+            elseMaterial.SetInt("_Surface_EMISSION", 1);
             bombMaterial.EnableKeyword("_EMISSION");
             yield return new WaitForSeconds(0.08f); // 等待閃爍持續時間
             bodydMaterial.SetInt("_Surface_EMISSION", 0);
-            elseMaterial.DisableKeyword("_EMISSION");
+            elseMaterial.SetInt("_Surface_EMISSION", 0);
             bombMaterial.DisableKeyword("_EMISSION");
         }
         IEnumerator TransitionFloatValue(float startValue, float endValue, float duration)
