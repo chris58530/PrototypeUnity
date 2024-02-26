@@ -33,6 +33,8 @@ namespace _.Scripts.Enemy.BossA
         
         //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;
+        [SerializeField] private Material bigBombMaterial;
+
         //big bomb 
         [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
         private int[] canThrowBigBombHp;
