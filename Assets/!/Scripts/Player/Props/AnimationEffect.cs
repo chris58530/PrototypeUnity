@@ -31,7 +31,6 @@ public class AnimationEffect : MonoBehaviour
     {
         _ani.speed = slowSpeed;
         Time.timeScale = slowSpeed;
-        Debug.Log("slow aniamtion");
         Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(keepTime)).Subscribe(_ =>
         {
             _ani.speed = 1;

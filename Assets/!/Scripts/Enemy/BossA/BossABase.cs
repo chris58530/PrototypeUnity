@@ -33,6 +33,8 @@ namespace _.Scripts.Enemy.BossA
         
         //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;
+        [SerializeField] private Material bigBombMaterial;
+
         //big bomb 
         [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
         private int[] canThrowBigBombHp;
@@ -110,14 +112,18 @@ namespace _.Scripts.Enemy.BossA
 
         public void IsShield(bool b)
         {
+            float minValue = -5f;
+            float maxValue = 5f;
+            float transitionDuration = 2f;
             if (b)
             {
                 hardHpImage.enabled = true;
                 hpImage.enabled = false;
                 
                 //SET SHADER
-                bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
-                elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+                // bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
+                // elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+                StartCoroutine(TransitionFloatValue(maxValue, minValue, transitionDuration));
 
             }
 
@@ -125,10 +131,14 @@ namespace _.Scripts.Enemy.BossA
             {
                 hardHpImage.enabled = false;
                 hpImage.enabled = true;
+                /// 
                 
-                //SET SHADER
-                bodydMaterial.SetTexture("_BaseMap",bodySRemovehieldTex);
-                elseMaterial.SetTexture("_BaseMap",elseRemoveShieldTex);
+
+                // //SET SHADER
+                // bodydMaterial.SetTexture("_BaseMap",bodySRemovehieldTex);
+                // elseMaterial.SetTexture("_BaseMap",elseRemoveShieldTex);
+                StartCoroutine(TransitionFloatValue(minValue, maxValue, transitionDuration));
+
             }
         }
 
@@ -157,13 +167,33 @@ namespace _.Scripts.Enemy.BossA
 
         IEnumerator OnTakeDamageCoroutine()
         {
-            bodydMaterial.EnableKeyword("_EMISSION");
+            bodydMaterial.SetInt("_Surface_EMISSION", 1);
             elseMaterial.EnableKeyword("_EMISSION");
             bombMaterial.EnableKeyword("_EMISSION");
             yield return new WaitForSeconds(0.08f); // 等待閃爍持續時間
-            bodydMaterial.DisableKeyword("_EMISSION");
+            bodydMaterial.SetInt("_Surface_EMISSION", 0);
             elseMaterial.DisableKeyword("_EMISSION");
             bombMaterial.DisableKeyword("_EMISSION");
         }
+        IEnumerator TransitionFloatValue(float startValue, float endValue, float duration)
+    {
+        float timer = 0.0f;
+        
+        while (timer < duration)
+        {
+            // 線性插值計算當前值
+            float currentValue = Mathf.Lerp(startValue, endValue, timer / duration);
+
+            // 將當前值設置到 Shader 的 float 屬性中
+            bodydMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
+            elseMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
+
+            // 增加計時器
+            timer += Time.deltaTime;
+
+            // 等待下一個更新周期
+            yield return null;
+        }
+    }
     }
 }

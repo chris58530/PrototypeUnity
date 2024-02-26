@@ -25,7 +25,6 @@ public class MoveTo : EnemyAction
     {
         if (Vector3.Distance(transform.position, GoTarget) < distance)
         {
-            navMeshAgent.isStopped = true;
 
             return TaskStatus.Success;
         }
