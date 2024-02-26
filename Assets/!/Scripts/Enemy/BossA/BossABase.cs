@@ -17,7 +17,7 @@ namespace _.Scripts.Enemy.BossA
 
         [SerializeField] private float maxHp;
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-        [Tooltip(" behaviour tree control")] public bool isShielded; 
+        [Tooltip(" behaviour tree control")] public bool isShielded;
 
         [Header("Shield Setting")] //.
         [SerializeField]
@@ -30,7 +30,7 @@ namespace _.Scripts.Enemy.BossA
         [SerializeField] private Material elseMaterial;
         [SerializeField] private Texture elseShieldTex;
         [SerializeField] private Texture elseRemoveShieldTex;
-        
+
         //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;
         [SerializeField] private Material bigBombMaterial;
@@ -84,7 +84,7 @@ namespace _.Scripts.Enemy.BossA
                 ///////////////coldwater///////////////////////
                 StartCoroutine(OnTakeDamageCoroutine());
             }
-                
+
 
             if (_currentHp.Value <= 0)
             {
@@ -119,26 +119,16 @@ namespace _.Scripts.Enemy.BossA
             {
                 hardHpImage.enabled = true;
                 hpImage.enabled = false;
-                
-                //SET SHADER
-                // bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
-                // elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+
+
                 StartCoroutine(TransitionFloatValue(maxValue, minValue, transitionDuration));
-
             }
-
             else
             {
                 hardHpImage.enabled = false;
                 hpImage.enabled = true;
-                /// 
-                
 
-                // //SET SHADER
-                // bodydMaterial.SetTexture("_BaseMap",bodySRemovehieldTex);
-                // elseMaterial.SetTexture("_BaseMap",elseRemoveShieldTex);
                 StartCoroutine(TransitionFloatValue(minValue, maxValue, transitionDuration));
-
             }
         }
 
@@ -151,6 +141,21 @@ namespace _.Scripts.Enemy.BossA
             }
         }
 
+        public void BigBombTransition(bool isAppeared)
+        {
+            float minValue = -1f;
+            float maxValue = 1f;
+            float current = bigBombMaterial.GetFloat("__Surface_Dissolove");
+            if (isAppeared)
+            {
+                StartCoroutine(BigBomb_TransitionFloatValue(maxValue, minValue, 5));
+
+            }
+            else 
+                StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 2));
+
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("RemoveShield"))
@@ -161,8 +166,8 @@ namespace _.Scripts.Enemy.BossA
         private void OnEnable()
         {
             //RESET SHADER
-            bodydMaterial.SetTexture("_BaseMap",bodyShieldTex);
-            elseMaterial.SetTexture("_BaseMap",elseShieldTex);
+            bodydMaterial.SetTexture("_BaseMap", bodyShieldTex);
+            elseMaterial.SetTexture("_BaseMap", elseShieldTex);
         }
 
         IEnumerator OnTakeDamageCoroutine()
@@ -175,25 +180,47 @@ namespace _.Scripts.Enemy.BossA
             elseMaterial.SetInt("_Surface_EMISSION", 0);
             bombMaterial.DisableKeyword("_EMISSION");
         }
+
         IEnumerator TransitionFloatValue(float startValue, float endValue, float duration)
-    {
-        float timer = 0.0f;
-        
-        while (timer < duration)
         {
-            // 線性插值計算當前值
-            float currentValue = Mathf.Lerp(startValue, endValue, timer / duration);
+            float timer = 0.0f;
 
-            // 將當前值設置到 Shader 的 float 屬性中
-            bodydMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
-            elseMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
+            while (timer < duration)
+            {
+                // 線性插值計算當前值
+                float currentValue = Mathf.Lerp(startValue, endValue, timer / duration);
 
-            // 增加計時器
-            timer += Time.deltaTime;
+                // 將當前值設置到 Shader 的 float 屬性中
+                bodydMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
+                elseMaterial.SetFloat("_Surface_DiffuseDissolve", currentValue);
 
-            // 等待下一個更新周期
-            yield return null;
+                // 增加計時器
+                timer += Time.deltaTime;
+
+                // 等待下一個更新周期
+                yield return null;
+            }
         }
-    }
+
+        IEnumerator BigBomb_TransitionFloatValue(float startValue, float endValue, float duration)
+        {
+            Debug.Log("start disslove");
+            float timer = 0.0f;
+
+            while (timer < duration)
+            {
+                // 線性插值計算當前值
+                float currentValue = Mathf.Lerp(startValue, endValue, timer / duration);
+
+                // 將當前值設置到 Shader 的 float 屬性中
+                bigBombMaterial.SetFloat("__Surface_Dissolove", currentValue);
+
+                // 增加計時器
+                timer += Time.deltaTime;
+
+                // 等待下一個更新周期
+                yield return null;
+            }
+        }
     }
 }
