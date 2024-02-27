@@ -140,10 +140,10 @@ namespace @_.Scripts.Enemy.BossA
                 towerAni.Play("RaiseTower");
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
                 raiseTower.Play();
-                tower.GetComponent<BoxCollider>().enabled = true;
             }
             else
             {
+                
                 transform.parent = null;
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
                 brokenTower.Play();
