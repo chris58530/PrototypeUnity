@@ -48,11 +48,13 @@ namespace _.Scripts.Player
                 AudioManager.Instance.PlaySFX("Attack1");
             else if (attackCount == 1)
                 AudioManager.Instance.PlaySFX("Attack2");
+            else if (attackCount == 2)
+                AudioManager.Instance.PlaySFX("Attack3");
             // else if (attackCount == 2)
-            //     AudioManager.Instance.PlaySFX("Attack3");
+            //     AudioManager.Instance.PlaySFX("Attack3");c
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
-            if (attackCount < 1)
+            if (attackCount < 2)
                 attackCount++;
             else attackCount = 0;
 

@@ -34,7 +34,7 @@ namespace _.Scripts.Player.State
          
 
             DebugTools.StateText("Idle");
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.2f);
         }
 
         public override void OnLogic()

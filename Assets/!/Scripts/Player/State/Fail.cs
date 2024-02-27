@@ -27,6 +27,7 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("Fail");
+
             _attackSystem.Fail();
         }
 

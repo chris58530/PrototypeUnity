@@ -28,15 +28,15 @@ namespace @_.Scripts.Player.State
         {
             _timer = new Timer();
 
-            DebugTools.StateText("Q3toIdle");
-            _animator.CrossFade(Animator.StringToHash("Q3toIdle"),0f);
+            DebugTools.StateText("Q1ToIdle");
+            _animator.CrossFade(Animator.StringToHash("Q1ToIdle"),0f);
 
         }
 
         public override void OnLogic()
         {
          
-            if (_timer.Elapsed >0.3f)
+            if (_timer.Elapsed >0.2f)
                 fsm.StateCanExit();
 
             _controller.Fall();
@@ -44,6 +44,7 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
+
             _attackSystem.AttackChancePreview(Color.white);
         }
     }
