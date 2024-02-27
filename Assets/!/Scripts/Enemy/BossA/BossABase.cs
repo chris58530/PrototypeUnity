@@ -163,13 +163,21 @@ namespace _.Scripts.Enemy.BossA
             }
         }
 
+        private void OnEnable()
+        {
+            bodydMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
+            elseMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
+            bigBombMaterial.SetFloat("__Surface_Dissolove", -1);
+        }
+
         private void OnDisable()
         {
-            //RESET SHADER
+            //RESET SHADERs
         
             
             bodydMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
             elseMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
+            bigBombMaterial.SetFloat("__Surface_Dissolove", -1);
         }
 
         IEnumerator OnTakeDamageCoroutine()
