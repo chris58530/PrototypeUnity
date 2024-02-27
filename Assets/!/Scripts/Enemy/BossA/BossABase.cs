@@ -17,7 +17,7 @@ namespace _.Scripts.Enemy.BossA
 
         [SerializeField] private float maxHp;
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-        [Tooltip(" behaviour tree control")] public bool isShielded;
+        [Tooltip(" behaviour tree control")] public bool isShielded=true;
 
         [Header("Shield Setting")] //.
         [SerializeField]
@@ -47,7 +47,6 @@ namespace _.Scripts.Enemy.BossA
             Initialize();
 
 
-            IsShield(true);
 
             _currentHp.Subscribe(_ =>
             {
@@ -146,13 +145,14 @@ namespace _.Scripts.Enemy.BossA
             float minValue = -1f;
             float maxValue = 1f;
             float current = bigBombMaterial.GetFloat("__Surface_Dissolove");
+            StopCoroutine(BigBomb_TransitionFloatValue(0,0,0));
             if (isAppeared)
             {
-                StartCoroutine(BigBomb_TransitionFloatValue(maxValue, minValue, 5));
+                StartCoroutine(BigBomb_TransitionFloatValue(0.3f, minValue, 10));
 
             }
             else 
-                StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 2));
+                StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 1f));
 
         }
 
@@ -163,11 +163,13 @@ namespace _.Scripts.Enemy.BossA
             }
         }
 
-        private void OnEnable()
+        private void OnDisable()
         {
             //RESET SHADER
-            bodydMaterial.SetTexture("_BaseMap", bodyShieldTex);
-            elseMaterial.SetTexture("_BaseMap", elseShieldTex);
+        
+            
+            bodydMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
+            elseMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
         }
 
         IEnumerator OnTakeDamageCoroutine()

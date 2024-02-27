@@ -123,7 +123,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: f2e34ccbbf4383c408f8a8e617a1132f, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &37326527
 GameObject:
   m_ObjectHideFlags: 3
@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &72288869
 Transform:
   m_ObjectHideFlags: 0
@@ -406,8 +406,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186499838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: -170.8, z: -2.4832}
-  m_LocalScale: {x: 114.547455, y: 342.36853, z: 106.30688}
+  m_LocalPosition: {x: 2, y: -26.227, z: -2.4832}
+  m_LocalScale: {x: 114.547455, y: 53.530045, z: 106.30688}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1654344446}
@@ -1856,8 +1856,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792734352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3, y: -3.1, z: -6.6}
-  m_LocalScale: {x: 120.3411, y: -3.823718, z: 120.3411}
+  m_LocalPosition: {x: 2.3, y: -2.9188, z: -6.6}
+  m_LocalScale: {x: 120.3411, y: -4.0049624, z: 120.3411}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 72288869}
@@ -4872,12 +4872,12 @@ PrefabInstance:
         (4)","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MiddlePoint","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RaiseTower
         (1)","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"CompareAttackInt","IsShared":true,"Int32mValue":1},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"BigBombPointTrans","IsShared":true,"TransformmValue":9},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SpawnMiniom","IsShared":true,"GameObjectmValue":10},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"MiddlePointTrans","IsShared":true,"TransformmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MiniomSpawnPoint
         (1)","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MiniomSpawnPoint
-        (2)","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Boss_BigBomb_CM","IsShared":true,"GameObjectmValue":14}]}'
+        (2)","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Boss_BigBomb_CM","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Tower","IsShared":true,"CollidermValue":15}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 7352935332682747590, guid: f9d6cbf64ba599448825f89a0b3e29df,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7352935332682747590, guid: f9d6cbf64ba599448825f89a0b3e29df,
         type: 3}
@@ -4939,6 +4939,11 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[14]
       value: 
       objectReference: {fileID: 963825339361510584}
+    - target: {fileID: 7352935332682747590, guid: f9d6cbf64ba599448825f89a0b3e29df,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[15]
+      value: 
+      objectReference: {fileID: 1603661407}
     - target: {fileID: 7352935332682747591, guid: f9d6cbf64ba599448825f89a0b3e29df,
         type: 3}
       propertyPath: hpImage
@@ -8291,7 +8296,7 @@ GameObject:
   - component: {fileID: 1603661407}
   - component: {fileID: 1603661411}
   m_Layer: 12
-  m_Name: RaiseTower (1)
+  m_Name: 'RaiseTower '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
