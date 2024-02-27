@@ -27,6 +27,7 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("Fail");
+            // _animator.CrossFade(Animator.StringToHash("Idle"), 0.6f);
 
             _attackSystem.Fail();
         }

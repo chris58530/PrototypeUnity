@@ -29,27 +29,32 @@ namespace _.Scripts.Player.State
         {
             DebugTools.StateText("Roll");
             _timer = new Timer();
-            
+
             _animator.Play(Animator.StringToHash("Roll"));
 
             _controller.Roll();
             _attackSystem.Fail();
-
-
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > _controller.rollTime )
-                fsm.StateCanExit();
-            _controller.Fall();
+            if (_timer.Elapsed > _controller.rollTime - 0.005f)
+            {
+                // _animator.CrossFade(Animator.StringToHash("Roll_to_walk"),0);
 
+
+            }
+            else if (_timer.Elapsed > _controller.rollTime)
+            {
+                fsm.StateCanExit();
+            }
+
+            _controller.Fall();
         }
 
         public override void OnExit()
         {
             _attackSystem.attackCount = 0;
-            // _animator.Play(Animator.StringToHash("Finsih Roll"));
 
             // //這方法是attacksystem的父類，不確定這樣呼叫好不好
             // _attackSystem.ResetChance();

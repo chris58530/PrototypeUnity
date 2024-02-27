@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface ITaskResult 
 {
-   
+    public  void DoResult()
+    {
+    }
 }

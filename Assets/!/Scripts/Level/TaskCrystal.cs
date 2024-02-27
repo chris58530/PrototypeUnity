@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Task;
 using MagicaCloth2;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
@@ -26,7 +27,7 @@ public class TaskCrystal : TaskObject, IDamageable
 
     public void OnTakeDamage(int value)
     {
-        Debug.Log($"{this.name+" "+"on take damage"}");
+        Debug.Log($"{this.name + " " + "on take damage"}");
         if (_currentHp > 1)
         {
             _currentHp--;
@@ -42,8 +43,10 @@ public class TaskCrystal : TaskObject, IDamageable
     {
         if (_collider == null)
             _collider = GetComponent<Collider>();
-        isDone = true;
         _collider.isTrigger = true;
+        
+        isDone = true;
+        TaskManager.checkTaskAction?.Invoke();
         //debugs
         GameObject obj = Instantiate(detroyCrystal, transform.position, transform.rotation);
         Destroy(obj, 5);
@@ -55,10 +58,11 @@ public class TaskCrystal : TaskObject, IDamageable
             .First()
             .Subscribe(_ =>
             {
+              
+                
                 _currentHp = maxHp;
                 this.gameObject.active = true;
                 _collider.isTrigger = false;
-                isDone = false;
             }).AddTo(this);
     }
 }

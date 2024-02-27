@@ -32,6 +32,8 @@ namespace @_.Scripts.Player.State
             //debug
             DebugTools.StateText("ChanceThird");
             _attackSystem.AttackChancePreview(Color.yellow);
+            _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
+
         }
 
         public override void OnLogic()

@@ -1,4 +1,5 @@
 using System;
+using _.Scripts.Task;
 using UnityEngine;
 
 namespace _.Scripts.Level
@@ -11,7 +12,6 @@ namespace _.Scripts.Level
         private void Start()
         {
             reviewPanel.SetActive(false);
-
         }
 
         private void OnTriggerStay(Collider other)
@@ -22,6 +22,8 @@ namespace _.Scripts.Level
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     isDone = true;
+                    TaskManager.checkTaskAction?.Invoke();
+
                     Puller.GetComponent<Animator>().Play("PullDown");
                 }
             }
@@ -31,8 +33,7 @@ namespace _.Scripts.Level
         {
             if (other.gameObject.layer == 6)
             {
-                    reviewPanel.SetActive(false);
-                    isDone = false;
+                reviewPanel.SetActive(false);
             }
         }
     }
