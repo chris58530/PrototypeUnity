@@ -29,6 +29,12 @@ namespace @_.Scripts.Enemy.BossA
 
 
         //生成物件類別
+        [Header("BreakTower Setting")] //.
+        [SerializeField]
+        private GameObject BreakTowerPrefab;
+        [SerializeField]
+        private Transform BreakTowerPoint;
+
         [Header("Preview Setting")] //.
         [SerializeField]
         private GameObject previewObject;
@@ -143,10 +149,12 @@ namespace @_.Scripts.Enemy.BossA
             }
             else
             {
-                
                 transform.parent = null;
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
-                brokenTower.Play();
+                GameObject breakTowerInstance = Instantiate(BreakTowerPrefab, BreakTowerPoint.position, Quaternion.identity);
+                Destroy(breakTowerInstance, 5f);
+
+                // brokenTower.Play();
                 towerAni.Play("DropTower");
             }
         }

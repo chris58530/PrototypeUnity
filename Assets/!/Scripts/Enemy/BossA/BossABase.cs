@@ -184,11 +184,11 @@ namespace _.Scripts.Enemy.BossA
         {
             bodydMaterial.SetInt("_Surface_EMISSION", 1);
             elseMaterial.SetInt("_Surface_EMISSION", 1);
-            bombMaterial.EnableKeyword("_EMISSION");
+            bombMaterial.SetInt("_Surface_EMISSION", 1);
             yield return new WaitForSeconds(0.08f); // 等待閃爍持續時間
             bodydMaterial.SetInt("_Surface_EMISSION", 0);
             elseMaterial.SetInt("_Surface_EMISSION", 0);
-            bombMaterial.DisableKeyword("_EMISSION");
+            bombMaterial.SetInt("_Surface_EMISSION", 0);
         }
 
         IEnumerator TransitionFloatValue(float startValue, float endValue, float duration)
