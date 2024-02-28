@@ -8,8 +8,7 @@ using UnityEngine.UI;
 
 public class KeyMonsterBase : Enemy, IDamageable
 {
-    [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")]
-    [SerializeField] private bool isShield = true;
+ 
     public Image hpImage;
 
     [SerializeField] private float maxHp;
@@ -28,7 +27,7 @@ public class KeyMonsterBase : Enemy, IDamageable
 
     public void OnTakeDamage(int value)
     {
-        if(isShield)return;
+       
         
         bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
@@ -42,15 +41,8 @@ public class KeyMonsterBase : Enemy, IDamageable
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        {
-            bt.SendEvent("OnStun");
-            Debug.Log($"{this.name} get stun");
-        }
+      
     }
 
-    public void OnTakeShield(int removeValue)
-    {
-        isShield = false;
-    }
+   
 }

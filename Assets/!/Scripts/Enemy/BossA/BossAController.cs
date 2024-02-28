@@ -49,6 +49,7 @@ namespace @_.Scripts.Enemy.BossA
 
         [SerializeField] private Transform smallBombPoint;
 
+       [SerializeField] private ParticleSystem smallBombParticle;
         [Header("ThrowBomb Setting")] //.
         [SerializeField]
         private GameObject bomb;
@@ -112,6 +113,9 @@ namespace @_.Scripts.Enemy.BossA
                 objRB.velocity = objRB.transform.forward * 50;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
+            
+            //特效
+            smallBombParticle.Play();
         }
 
         public void PreviewThrow(Transform target)

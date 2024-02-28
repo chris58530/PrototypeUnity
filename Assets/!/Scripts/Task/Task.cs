@@ -7,7 +7,7 @@ namespace _.Scripts.Task
     public class Task
     {
         public string name;
-        public TaskObject[] taskObjects;
+        public GameObject[] taskObjects;
         public GameObject[] taskResults;
     }
 }

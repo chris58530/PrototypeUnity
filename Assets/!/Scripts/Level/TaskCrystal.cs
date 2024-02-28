@@ -10,7 +10,7 @@ using Observable = UniRx.Observable;
 using TimeSpan = System.TimeSpan;
 using Unity.VisualScripting;
 
-public class TaskCrystal : TaskObject, IDamageable
+public class TaskCrystal : MonoBehaviour,ITaskObject, IDamageable
 {
     [SerializeField] private int maxHp;
     private int _currentHp;
@@ -35,9 +35,6 @@ public class TaskCrystal : TaskObject, IDamageable
         else OnDied();
     }
 
-    public void OnKnock(Transform trans)
-    {
-    }
 
     public void OnDied()
     {
@@ -65,4 +62,6 @@ public class TaskCrystal : TaskObject, IDamageable
                 _collider.isTrigger = false;
             }).AddTo(this);
     }
+
+    public bool isDone { get; set; }
 }

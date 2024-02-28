@@ -47,9 +47,10 @@ namespace _.Scripts.Task
 
                 foreach (var taskObj in t.taskObjects)
                 {
-                    if (taskObj.isDone)
+                    if (taskObj.TryGetComponent<ITaskObject>(out var obj))
                     {
-                        doneCount++;
+                        if (obj.isDone)
+                            doneCount++;
                     }
                 }
 
@@ -58,12 +59,13 @@ namespace _.Scripts.Task
                     Debug.Log($"任務 {t.name} 已完成)");
                     foreach (var results in t.taskResults)
                     {
-                        if(results.TryGetComponent<ITaskResult>(out var r))
+                        if (results.TryGetComponent<ITaskResult>(out var r))
                         {
                             r.DoResult();
                         }
                     }
-                }else    Debug.Log($"任務 {t.name} 還沒完成)");
+                }
+                else Debug.Log($"任務 {t.name} 還沒完成)");
             }
         }
     }
