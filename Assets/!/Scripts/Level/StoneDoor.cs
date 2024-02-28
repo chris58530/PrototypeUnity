@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneDoor : MonoBehaviour
+public class StoneDoor : MonoBehaviour,IDamageable
 {
-    private void OnTriggerEnter(Collider other)
+ 
+    public void OnTakeDamage(int value)
     {
-        if (other.gameObject.CompareTag("RemoveShield"))
-            Destroy(gameObject);
+        OnDied();
+    }
+
+    public void OnDied()
+    {
+        Destroy(gameObject);
     }
 }

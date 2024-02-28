@@ -2,6 +2,7 @@ using System;
 using _.Scripts.Enemy;
 using _.Scripts.Interface;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,13 +40,19 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
         bt.SendEvent("OnDied");
     }
 
-    private void OnCollisionStay(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
         {
             bt.SendEvent("OnStun");
-            Debug.Log($"{this.name} get stun");
+            Debug.Log($"{this.name} get stun collision on{other.gameObject.name}" );
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+       
+        
     }
 
     public void OnTakeShield(int removeValue)
