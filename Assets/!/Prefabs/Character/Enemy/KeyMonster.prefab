@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377935318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.91, z: 0.89}
-  m_LocalScale: {x: 3.3751118, y: 4.809534, z: 3.3751118}
+  m_LocalPosition: {x: 0, y: 2.91, z: 1.54}
+  m_LocalScale: {x: 2.971161, y: 4.2339044, z: 2.971161}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5902329517855383674}
@@ -625,7 +625,8 @@ GameObject:
   - component: {fileID: 5902329517855383677}
   - component: {fileID: 6882769807413921950}
   - component: {fileID: 2034712047617236536}
-  - component: {fileID: 5617847635865396719}
+  - component: {fileID: 1075568717}
+  - component: {fileID: 1075568718}
   m_Layer: 7
   m_Name: Base
   m_TagString: Enemy
@@ -731,21 +732,20 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":0}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
-        - {fileID: 0}
         - {fileID: 5902329517855384453}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &5617847635865396719
+--- !u!114 &1075568717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -754,12 +754,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5902329517855384453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdcdfec7065e4ceebb3c0010dcd3ea60, type: 3}
+  m_Script: {fileID: 11500000, guid: b70877b93e16e6647bc7bedc7bb80ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShield: 1
   hpImage: {fileID: 2817155786727670999}
-  maxHp: 1
+  maxHp: 10
+--- !u!114 &1075568718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902329517855384453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a346b1c3c84dc964694e2906d78b8bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5902329517897954122
 GameObject:
   m_ObjectHideFlags: 0

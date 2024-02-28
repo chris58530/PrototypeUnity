@@ -27,8 +27,6 @@ public class KeyMonsterBase : Enemy, IDamageable
 
     public void OnTakeDamage(int value)
     {
-       
-        
         bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
 
@@ -38,11 +36,4 @@ public class KeyMonsterBase : Enemy, IDamageable
     {
         bt.SendEvent("OnDied");
     }
-
-    private void OnCollisionStay(Collision other)
-    {
-      
-    }
-
-   
 }

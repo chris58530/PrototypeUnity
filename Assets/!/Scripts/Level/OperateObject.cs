@@ -22,7 +22,7 @@ namespace _.Scripts.Level
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     isDone = true;
-                    TaskManager.checkTaskAction?.Invoke();
+                    TaskManager.checkTaskAction?.Invoke(0);
 
                     Puller.GetComponent<Animator>().Play("PullDown");
                 }

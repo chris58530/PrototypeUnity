@@ -43,7 +43,7 @@ public class TaskCrystal : MonoBehaviour,ITaskObject, IDamageable
         _collider.isTrigger = true;
         
         isDone = true;
-        TaskManager.checkTaskAction?.Invoke();
+        TaskManager.checkTaskAction?.Invoke(0);
         //debugs
         GameObject obj = Instantiate(detroyCrystal, transform.position, transform.rotation);
         Destroy(obj, 5);

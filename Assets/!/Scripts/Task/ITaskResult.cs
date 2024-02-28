@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITaskResult 
+public interface ITaskResult
 {
-    public  void DoResult()
-    {
-    }
+    public void DoResult();
+
 }

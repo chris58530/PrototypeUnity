@@ -6,9 +6,9 @@ namespace _.Scripts.Task
 {
     public class TaskManager : MonoBehaviour
     {
-        public static Action checkTaskAction;
+        public static Action<int> checkTaskAction;
 
-        [SerializeField] private Task[] task;
+        [SerializeField] public Task[] task;
 
         private void OnEnable()
         {
@@ -20,53 +20,35 @@ namespace _.Scripts.Task
             checkTaskAction -= Check;
         }
 
-        private void Update()
+        public void Check(int taskCount)
         {
-            // if (Input.GetKeyDown(KeyCode.I))
-            // {
-            //     foreach (var t in task)
-            //     {
-            //         Debug.Log($"任務 {t.name} 已完成)");
-            //         foreach (var results in t.taskResults)
-            //         {
-            //             if(results.TryGetComponent<ITaskResult>(out var r))
-            //             {
-            //                 r.DoResult();
-            //             }
-            //         }
-            //     }
-            // }
-        }
+            int doneCount = 0;
+            Task t = task[taskCount];
+            
+            int taskObjectsCount = t.taskObjects.Length;
+          
 
-        public void Check()
-        {
-            foreach (var t in task)
+            foreach (var taskObj in  t.taskObjects)
             {
-                int doneCount = 0;
-                int taskObjectsCount = t.taskObjects.Length;
-
-                foreach (var taskObj in t.taskObjects)
+                if (taskObj.TryGetComponent<ITaskObject>(out var obj))
                 {
-                    if (taskObj.TryGetComponent<ITaskObject>(out var obj))
-                    {
-                        if (obj.isDone)
-                            doneCount++;
-                    }
-                }
-
-                if (doneCount >= taskObjectsCount)
-                {
-                    Debug.Log($"任務 {t.name} 已完成)");
-                    foreach (var results in t.taskResults)
-                    {
-                        if (results.TryGetComponent<ITaskResult>(out var r))
-                        {
-                            r.DoResult();
-                        }
-                    }
-                }
-                else Debug.Log($"任務 {t.name} 還沒完成)");
+                    if (obj.isDone)
+                        doneCount++;
+                }else Debug.Log($"物件 {taskObj.name} 不是任務物件)");
             }
+            
+            if (doneCount >= taskObjectsCount)
+            {
+                Debug.Log($"任務 {t.name} 已完成)");
+                foreach (var results in t.taskResults)
+                {
+                    if (results.TryGetComponent<ITaskResult>(out var r))
+                    {
+                        r.DoResult();
+                    }else Debug.Log($"物件 {results.name} 不是任務物件)");
+                }
+            }
+            else Debug.Log($"任務 {t.name} 還沒完成)");
         }
     }
 }
