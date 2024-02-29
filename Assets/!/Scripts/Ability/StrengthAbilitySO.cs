@@ -26,7 +26,6 @@ namespace @_.Scripts.Ability
         {
             // effect = GameObject.Find("StrengthAbilityEffect");
             effect.EnableKeyword("_EMISSION");
-
         }
 
         public override void QuitAbilityAlgorithm()
@@ -42,5 +41,10 @@ namespace @_.Scripts.Ability
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
         }
+
+        // private void OnDisable()
+        // {
+        //     QuitAbilityAlgorithm();
+        // }
     }
 }

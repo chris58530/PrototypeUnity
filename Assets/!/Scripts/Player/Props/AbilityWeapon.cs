@@ -83,5 +83,11 @@ namespace @_.Scripts.Player.Props
                 ChangeAbility(getAbility.GetAbility());
             }
         }
+
+        private void OnDisable()
+        {
+            if (_currentAbilityBase != null)
+                _currentAbilityBase.QuitAbilityAlgorithm();
+        }
     }
 }

@@ -7,7 +7,7 @@ public class DamageableObject : MonoBehaviour, IDamageable
     [SerializeField] private Animator objectAni;
     [SerializeField] private Collider objectCollider;
     [SerializeField] private GameObject cloneObject;
-
+    [SerializeField] private Vector3 cloneObjectOffset;
 
     public void OnTakeDamage(int value)
     {
@@ -26,7 +26,7 @@ public class DamageableObject : MonoBehaviour, IDamageable
 
         if (cloneObject != null)
         {
-            Instantiate(cloneObject, transform.position, transform.rotation);
+            Instantiate(cloneObject, transform.position+cloneObjectOffset, transform.rotation);
             Destroy(gameObject);
             return;
 
