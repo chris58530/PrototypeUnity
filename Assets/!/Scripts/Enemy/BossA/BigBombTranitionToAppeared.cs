@@ -1,8 +1,5 @@
 using _.Scripts.Enemy.TypeA;
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using Cinemachine.Editor;
-using UnityEngine;
 
 [TaskCategory("BossA")]
 public class BigBombTranitionToAppeared : BossAAction

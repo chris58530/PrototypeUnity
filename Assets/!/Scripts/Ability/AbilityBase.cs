@@ -1,7 +1,6 @@
 using System;
 using _.Scripts.Player.Props;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace @_.Scripts.Ability
 {

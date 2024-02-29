@@ -3,7 +3,6 @@ using _.Scripts.Interface;
 using _.Scripts.Player.Props;
 using UnityEngine;
 using UniRx;
-using Unity.VisualScripting;
 
 namespace @_.Scripts.Ability
 {

@@ -1,7 +1,6 @@
 using _.Scripts.Interface;
 using _.Scripts.Player.Props;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy
 {
