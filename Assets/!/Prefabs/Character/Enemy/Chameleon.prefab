@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 4879717815101265100}
   - component: {fileID: 1855947370}
   - component: {fileID: 1855947371}
+  - component: {fileID: 2114686488}
   m_Layer: 7
   m_Name: Base
   m_TagString: Enemy
@@ -518,13 +519,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 4261587844258568325}
-  ChameleonMat: {fileID: 2100000, guid: 2ad30ccc51b21b440a47f4ce1224282a, type: 2}
+  maxHp: 50
+  onTakeDamagedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2114686488}
+        m_TargetAssemblyTypeName: EnemyEffect, Assembly-CSharp
+        m_MethodName: SetEmission
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2114686488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608660213036220375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a073ae9f52284ed4ea2287248d22be75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   EmssionMat: {fileID: 2100000, guid: 03f48b4847ec07d4b9ab4e7206b0945b, type: 2}
   OringinMat: {fileID: 2100000, guid: 2ad30ccc51b21b440a47f4ce1224282a, type: 2}
   Body: {fileID: 2132586827263380422}
   Neck: {fileID: 7673313429801083076}
   Weapon: {fileID: 1842381480591179618}
-  maxHp: 50
 --- !u!1 &5608660213044951734
 GameObject:
   m_ObjectHideFlags: 0

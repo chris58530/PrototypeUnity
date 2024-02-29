@@ -24,12 +24,10 @@ namespace _.Scripts.Enemy.BossA
         private int shieldValue;
 
         [SerializeField] private Material bodydMaterial;
-        [SerializeField] private Texture bodyShieldTex;
-        [SerializeField] private Texture bodySRemovehieldTex;
+     
 
         [SerializeField] private Material elseMaterial;
-        [SerializeField] private Texture elseShieldTex;
-        [SerializeField] private Texture elseRemoveShieldTex;
+    
 
         //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;

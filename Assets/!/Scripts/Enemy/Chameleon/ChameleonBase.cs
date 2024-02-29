@@ -4,22 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 //coldwater
 using System.Collections;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 
 public class ChameleonBase : Enemy, IDamageable
 {
     public Image hpImage;
-    //coldawter
-    public Material ChameleonMat;
-    [SerializeField] private Material EmssionMat;
-    [SerializeField] private Material OringinMat;
-    [SerializeField] private Renderer Body;
-    [SerializeField] private Renderer Neck;
-    [SerializeField] private Renderer Weapon;
+
+   
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-
+    [SerializeField] private UnityEvent onTakeDamagedEvent;
+    [SerializeField] private UnityEvent onDiedEvent;
     private void Start()
     {
         Initialize();
@@ -33,27 +31,17 @@ public class ChameleonBase : Enemy, IDamageable
 
     public void OnTakeDamage(int value)
     {
+        onTakeDamagedEvent?.Invoke();
         bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
-        //coldwater
-        Body.material = EmssionMat;
-        Neck.material = EmssionMat;
-        Weapon.material = EmssionMat;
-        Invoke("ResetMaterial", 0.2f);
-
+      
         if (_currentHp.Value <= 0) OnDied();
     }
+
     public void OnDied()
     {
+        onDiedEvent?.Invoke();
         bt.SendEvent("OnDied");
     }
 
-    //coldwater
-    public void ResetMaterial()
-    {
-        Body.material = OringinMat;
-        Neck.material = OringinMat;
-        Weapon.material = OringinMat;
-    }
-
-}
+ }
