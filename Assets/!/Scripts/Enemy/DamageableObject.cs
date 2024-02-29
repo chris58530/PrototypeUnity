@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -34,5 +35,21 @@ public class DamageableObject : MonoBehaviour, IDamageable
 
         objectCollider.enabled = false;
         Destroy(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        BossABomb.bossABigBombEvent += BossABigBombDie;
+
+    }
+
+    public void BossABigBombDie()
+    {
+        OnDied();
+        
+    }
+    private void OnDisable()
+    {
+        BossABomb.bossABigBombEvent -= BossABigBombDie;
     }
 }

@@ -2,7 +2,7 @@ using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-//coldwater
+
 using System.Collections;
 using UnityEngine.Events;
 using UnityEngine.Serialization;

@@ -13,6 +13,7 @@ public class BossABomb : MonoBehaviour
 
 
     private bool _readyToCollision;
+    public static Action bossABigBombEvent;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class BossABomb : MonoBehaviour
 
     private void OnDestroy()
     {
+        bossABigBombEvent?.Invoke();
         Vector3 offset = new Vector3(transform.position.x, 0, transform.position.z);
         var obg = Instantiate(explode, offset, Quaternion.identity);
 

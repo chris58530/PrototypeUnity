@@ -5,6 +5,7 @@ using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class RhinoBase : Enemy, IDamageable,IShieldable
 {
@@ -14,11 +15,15 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
+    [SerializeField] private UnityEvent onTakeDamagedEvent;
+    [SerializeField] private UnityEvent onStunEvent;
+    [SerializeField] private UnityEvent onDiedEvent;
 
     private void Start()
     {
         Initialize();
         _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
+        BossABomb.bossABigBombEvent += BossABigBombDie;
     }
 
     void Initialize()
@@ -38,6 +43,7 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
     public void OnDied()
     {
         bt.SendEvent("OnDied");
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,14 +55,21 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-       
-        
-    }
 
     public void OnTakeShield(int removeValue)
     {
         isShield = false;
+    }
+
+    public void BossABigBombDie()
+    {
+        // bt.SendEvent("OnDied");
+        
+        Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        BossABomb.bossABigBombEvent -= BossABigBombDie;
     }
 }

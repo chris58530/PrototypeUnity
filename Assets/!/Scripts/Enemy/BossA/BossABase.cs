@@ -154,12 +154,7 @@ namespace _.Scripts.Enemy.BossA
 
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("RemoveShield"))
-            {
-            }
-        }
+  
 
         private void OnEnable()
         {

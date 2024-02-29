@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StoneDoor : MonoBehaviour,IDamageable
 {
- 
+    [SerializeField] private GameObject destroyObj;
     public void OnTakeDamage(int value)
     {
         OnDied();
@@ -13,6 +13,6 @@ public class StoneDoor : MonoBehaviour,IDamageable
 
     public void OnDied()
     {
-        Destroy(gameObject);
+        Destroy(destroyObj);
     }
 }
