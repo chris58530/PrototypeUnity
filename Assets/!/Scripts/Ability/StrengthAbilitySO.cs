@@ -10,7 +10,7 @@ namespace @_.Scripts.Ability
     [CreateAssetMenu(fileName = "StrengthAbilityData", menuName = "Ability/StrengthAbility", order = 2)]
     public class StrengthAbilitySO : AbilityBase
     {
-        private GameObject effect;
+        [SerializeField] private Material effect;
         private IDisposable lifeTimer;
 
 
@@ -18,23 +18,21 @@ namespace @_.Scripts.Ability
         {
             //Hold this ability will do 
 
-            effect.GetComponent<MeshRenderer>().enabled = true;
 
             Debug.Log("Use Strength Ability");
         }
 
         public override void StartAbility()
         {
-            effect = GameObject.Find("StrengthAbilityEffect");
-            effect.GetComponent<MeshRenderer>().enabled = false;
-        
+            // effect = GameObject.Find("StrengthAbilityEffect");
+            effect.EnableKeyword("_EMISSION");
+
         }
 
         public override void QuitAbilityAlgorithm()
         {
+            effect.DisableKeyword("_EMISSION");
             Debug.Log("QuitAbilityAlgorithm");
-            effect.GetComponent<MeshRenderer>().enabled = false;
-
         }
 
         public override void TriggerEffect(Collider other)
@@ -44,6 +42,5 @@ namespace @_.Scripts.Ability
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
         }
-
     }
 }
