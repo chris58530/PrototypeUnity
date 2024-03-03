@@ -1,14 +1,14 @@
 using System;
 using _.Scripts.Enemy;
 using _.Scripts.Interface;
+using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class KeyMonsterBase : Enemy, IDamageable
+public class KeyMonsterBase : Enemy, IDamageable, ITaskResult
 {
- 
     public Image hpImage;
 
     [SerializeField] private float maxHp;
@@ -28,12 +28,20 @@ public class KeyMonsterBase : Enemy, IDamageable
     public void OnTakeDamage(int value)
     {
         bt.SendEvent("GetHurt");
-        _currentHp.Value -= value;
 
-        if (_currentHp.Value <= 0) OnDied();
     }
+
     public void OnDied()
     {
         bt.SendEvent("OnDied");
+    }
+
+    public void DoResult()
+    {
+        OnDied();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
     }
 }

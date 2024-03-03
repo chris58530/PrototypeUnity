@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class KeyDoor : MonoBehaviour, ITaskResult
 {
+    [SerializeField] private GameObject door;
     private void Start()
     {
         this.tag = "KeyDoor";
@@ -13,6 +14,6 @@ public class KeyDoor : MonoBehaviour, ITaskResult
     public void DoResult()
     {
         Debug.Log("Key Door Open");
-        gameObject.SetActive(false);
+        door.gameObject.SetActive(false);
     }
 }
