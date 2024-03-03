@@ -17,7 +17,7 @@ public class Key : MonoBehaviour, ITaskObject
         {
             Debug.Log("touch door");
             isDone = true;
-            Observable.EveryUpdate().First().Subscribe(_ => { TaskManager.checkTaskAction?.Invoke(1); }).AddTo(this);
+            TaskManager.checkTaskAction?.Invoke(1);
         }
     }
 }
