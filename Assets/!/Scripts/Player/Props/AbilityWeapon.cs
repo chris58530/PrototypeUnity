@@ -16,7 +16,8 @@ namespace @_.Scripts.Player.Props
             Fire,
             Ice,
             MakeObject,
-            Key
+            Key,
+            FakeKey,
         }
 
         [SerializeField, Header("Put the sword model to here")]
@@ -29,6 +30,7 @@ namespace @_.Scripts.Player.Props
         private GameObject _currentInMouthObject;
 
         [SerializeField] private Transform inMouthObjectTransform;
+        [SerializeField] private Transform quitAbilityObjectTransform;
         private IDisposable _abilityTimer;
 
         private void Start()
@@ -43,6 +45,7 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.Strength);
             if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
             if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.Key);
+            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.FakeKey);
         }
 
         public void ExecuteAblilty()
@@ -50,12 +53,12 @@ namespace @_.Scripts.Player.Props
             _currentAbilityBase.AbilityAlgorithm();
         }
 
-        private void ChangeAbility(AbilityType getAbility)
+        public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
             
             if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm();
+                _currentAbilityBase.QuitAbilityAlgorithm(quitAbilityObjectTransform);
             
             if (_currentInMouthObject != null)
                 Destroy(_currentInMouthObject);
@@ -84,7 +87,6 @@ namespace @_.Scripts.Player.Props
                         .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
                         .Subscribe(_ =>
                         {
-                            _currentAbilityBase.QuitAbilityAlgorithm();
                             ChangeAbility(AbilityType.None);
                         }).AddTo(this);
 
@@ -110,7 +112,7 @@ namespace @_.Scripts.Player.Props
         private void OnDisable()
         {
             if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm();
+                _currentAbilityBase.QuitAbilityAlgorithm(quitAbilityObjectTransform);
         }
     }
 }
