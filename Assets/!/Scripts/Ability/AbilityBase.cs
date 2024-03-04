@@ -15,7 +15,7 @@ namespace @_.Scripts.Ability
 
         public abstract void AbilityAlgorithm();
         public abstract void StartAbility();
-        public abstract void QuitAbilityAlgorithm();
+        public abstract void QuitAbilityAlgorithm(Transform transform);
         public abstract void TriggerEffect(Collider other);
     }
 }

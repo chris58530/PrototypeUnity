@@ -21,13 +21,14 @@ namespace @_.Scripts.Player.Props
 
         private void OnTriggerEnter(Collider other)
         {
+            attackAction?.Invoke(other);
+
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             //Enemy layer
             if (other.gameObject.layer != 7) return;
 
             damageObj.OnTakeDamage(attackValue);
             Debug.Log("攻擊了 : " + attackValue);
-            attackAction?.Invoke(other);
             PlayerActions.onHitEnemy?.Invoke();
             //dubug
             TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();

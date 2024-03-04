@@ -10,6 +10,7 @@ using Observable = UniRx.Observable;
 public class Key : MonoBehaviour, ITaskObject
 {
     public bool isDone { get; set; }
+    [SerializeField] private int taskNumber;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +18,7 @@ public class Key : MonoBehaviour, ITaskObject
         {
             Debug.Log("touch door");
             isDone = true;
-            TaskManager.checkTaskAction?.Invoke(1);
+            TaskManager.checkTaskAction?.Invoke(taskNumber);
         }
     }
 }

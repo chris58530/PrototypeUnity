@@ -18,7 +18,7 @@ namespace _.Scripts.Ability
 
         }
 
-        public override void QuitAbilityAlgorithm()
+        public override void QuitAbilityAlgorithm(Transform transform)
         {
             
         }
