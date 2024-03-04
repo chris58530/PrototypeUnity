@@ -19,6 +19,7 @@ namespace _.Scripts.Player
         [SerializeField] private GameObject attackChancePreview;
 
 
+
         [Header("Fail Setting")] //
         [SerializeField]
         public float failTime;
@@ -45,13 +46,23 @@ namespace _.Scripts.Player
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
             //audio
             if (attackCount == 0)
+            {
                 AudioManager.Instance.PlaySFX("Attack1");
+                // if (isHeammer)
+                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q1);
+            }
             else if (attackCount == 1)
+            {
                 AudioManager.Instance.PlaySFX("Attack2");
+                // if (isHeammer)
+                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q2);
+            }
             else if (attackCount == 2)
+            {
                 AudioManager.Instance.PlaySFX("Attack3");
-            // else if (attackCount == 2)
-            //     AudioManager.Instance.PlaySFX("Attack3");c
+                // if (isHeammer)
+                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q3);
+            }
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)

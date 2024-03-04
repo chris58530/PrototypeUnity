@@ -1,6 +1,7 @@
 using _.Scripts.Interface;
 using _.Scripts.Player.Props;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy
 {
@@ -9,17 +10,26 @@ namespace _.Scripts.Enemy
         public AbilityWeapon.AbilityType abilityType;
         [SerializeField] private GameObject afterDestroyObject;
         [SerializeField] private Vector3 offSet;
+        [SerializeField] private bool canGetAbilty;
 
         public AbilityWeapon.AbilityType GetAbility()
         {
-            FadeOut();
+            if (!canGetAbilty)
+                return AbilityWeapon.AbilityType.None;
 
+            FadeOut();
             return abilityType;
+        }
+
+        public void SetCanGetAbility()
+        {
+            canGetAbilty = true;
         }
 
         void FadeOut()
         {
-            Instantiate(afterDestroyObject, transform.position + offSet, transform.rotation);
+            if (afterDestroyObject != null)
+                Instantiate(afterDestroyObject, transform.position + offSet, transform.rotation);
             Destroy(gameObject);
         }
     }

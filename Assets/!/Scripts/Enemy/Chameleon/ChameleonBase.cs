@@ -16,7 +16,6 @@ public class ChameleonBase : Enemy, IDamageable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
-
     private void Start()
     {
         Initialize();

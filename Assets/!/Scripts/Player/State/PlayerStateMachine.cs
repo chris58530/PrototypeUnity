@@ -40,7 +40,6 @@ namespace _.Scripts.Player.State
         private AbilitySystem _abilitySystem;
         private PlayerBase _playerBase;
         [SerializeField] private Animator animator;
-        [SerializeField] private Animator heammerAnimator;
 
         private StateMachine<SuperState, string> _fsm;
         private StateMachine<SuperState, PlayerState, string> _normalState;

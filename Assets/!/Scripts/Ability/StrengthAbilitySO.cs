@@ -12,7 +12,6 @@ namespace @_.Scripts.Ability
         [SerializeField] private Material effect;
         private IDisposable lifeTimer;
 
-
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do 
@@ -23,13 +22,15 @@ namespace @_.Scripts.Ability
 
         public override void StartAbility()
         {
-            // effect = GameObject.Find("StrengthAbilityEffect");
-            effect.EnableKeyword("_EMISSION");
+            if (effect != null)
+                effect.EnableKeyword("_EMISSION");
         }
 
         public override void QuitAbilityAlgorithm()
         {
-            effect.DisableKeyword("_EMISSION");
+            if (effect != null)
+                effect.DisableKeyword("_EMISSION");
+            //產生對應物件 噴出原始怪物
             Debug.Log("QuitAbilityAlgorithm");
         }
 

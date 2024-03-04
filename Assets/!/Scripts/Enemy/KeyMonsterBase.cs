@@ -1,9 +1,9 @@
 using System;
 using _.Scripts.Enemy;
-using _.Scripts.Interface;
-using _.Scripts.Player.Props;
+
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -13,7 +13,9 @@ public class KeyMonsterBase : Enemy, IDamageable, ITaskResult
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-
+    [SerializeField] private UnityEvent onTakeDamagedEvent;
+    [SerializeField] private UnityEvent onStunEvent;
+    [SerializeField] private UnityEvent onDiedEvent;
     private void Start()
     {
         Initialize();
@@ -28,12 +30,14 @@ public class KeyMonsterBase : Enemy, IDamageable, ITaskResult
     public void OnTakeDamage(int value)
     {
         bt.SendEvent("GetHurt");
+        onTakeDamagedEvent?.Invoke();
 
     }
 
     public void OnDied()
     {
         bt.SendEvent("OnDied");
+        
     }
 
     public void DoResult()

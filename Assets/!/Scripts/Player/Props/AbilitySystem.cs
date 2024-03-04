@@ -7,11 +7,9 @@ namespace @_.Scripts.Player.Props
 {
     public class AbilitySystem : PlayerAttackSystem
     {
-        [Header("Insert state exit time")]
-        public float insertTime;
+        [Header("Insert state exit time")] public float insertTime;
         private AbilityWeapon _abilityWeapon;
         private BoxCollider _abilityWeaponCollider;
-
         private void Awake()
         {
             _abilityWeapon = GetComponentInChildren<AbilityWeapon>();
@@ -32,6 +30,7 @@ namespace @_.Scripts.Player.Props
         {
             transform.LookAt(GetDirection());
             _abilityWeaponCollider.enabled = true;
+            AbilityWeaponAnimator.Instance?.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
         }
 
         public void CancelAttack()
