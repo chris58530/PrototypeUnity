@@ -6,6 +6,7 @@ namespace @_.Scripts.Ability
 
     public class KeyAbilitySO : AbilityBase
     {
+        public GameObject keyMonster;
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do 
