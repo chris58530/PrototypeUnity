@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _.Scripts.Event;
 using _.Scripts.Tools;
+using _.Scripts.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,8 +14,8 @@ namespace _.Scripts.Player
     {
         [Header("CAN BE HURT for test")] [SerializeField]
         private bool canHurt;
-        public float maxHpValue;
-        [HideInInspector] public ReactiveProperty<float> currentHpValue = new ReactiveProperty<float>();
+        public int maxHpValue;
+        [HideInInspector] public ReactiveProperty<int> currentHpValue = new ReactiveProperty<int>();
 
 
         public bool getHurt;
@@ -22,9 +23,13 @@ namespace _.Scripts.Player
         private IDisposable _hurtTimer;
         [SerializeField] private float knockTime;
         private CharacterController _controller;
+        
+        private HeartTest _view;
 
         private void Awake()
         {
+            _view = FindObjectOfType<HeartTest>();
+
             _controller = GetComponent<CharacterController>();
         }
 
@@ -32,6 +37,11 @@ namespace _.Scripts.Player
         {
             Initialize();
             currentHpValue.Skip(1).Subscribe(_ => { getHurt = true; }).AddTo(this);
+            currentHpValue.Subscribe(_ =>
+            {
+                DebugTools.HpText(currentHpValue.Value);
+                _view.UpdateHearts(currentHpValue.Value);
+            }).AddTo(this);
         }
 
         void Initialize()
@@ -88,7 +98,7 @@ namespace _.Scripts.Player
 
         public void OnDied()
         {
-            Destroy(gameObject);
+            GetComponentInChildren<Animator>().Play("Died");
             Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(1)).Subscribe(_ =>
             {
                 string currentSceneName = SceneManager.GetActiveScene().name;
@@ -98,13 +108,6 @@ namespace _.Scripts.Player
             });
         }
 
-        private void OnEnable()
-        {
-        }
-
-
-        private void OnDisable()
-        {
-        }
+  
     }
 }

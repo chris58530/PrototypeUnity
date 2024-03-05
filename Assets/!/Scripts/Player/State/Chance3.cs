@@ -11,7 +11,8 @@ namespace @_.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private PlayerBase _playerBase;
-        private AttackSystem _attackSystem;
+        private AttackSystem _attackSystem;        private Timer _timer;
+
 
         public Chance3(PlayerInput playerInput,
             PlayerController playerController,
@@ -30,15 +31,16 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
+            _timer = new Timer();
             DebugTools.StateText("ChanceThird");
             _attackSystem.AttackChancePreview(Color.yellow);
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
-
         }
 
         public override void OnLogic()
         {
- 
+            if (_timer.Elapsed > 0.5f) fsm.StateCanExit();
+
             if (_input.Move)
                 _controller.Move(_input);
 

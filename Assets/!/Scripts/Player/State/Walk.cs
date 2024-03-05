@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityHFSM;
 using System;
+using _.Scripts.Event;
 using TMPro;
 using UniRx;
 
@@ -32,7 +33,7 @@ namespace _.Scripts.Player.State
             t.text = "Walk";
             _animator.CrossFade(Animator.StringToHash("Walk"), 0.2f);
             AudioManager.Instance.PlaySFX2("Walk");
-
+            PlayerActions.onPlayerWalk?.Invoke(true);
         }
 
         public override void OnLogic()
@@ -47,6 +48,8 @@ namespace _.Scripts.Player.State
         public override void OnExit()
         {
             AudioManager.Instance.StopPlaySFX2();
+            PlayerActions.onPlayerWalk?.Invoke(false);
+
 
         }
     }

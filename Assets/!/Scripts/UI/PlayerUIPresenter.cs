@@ -11,13 +11,13 @@ namespace _.Scripts.UI
     public class PlayerUIPresenter : Singleton<PlayerUIPresenter>
     {
         private PlayerBase _player;
-        private PlayerUIView _view;
+        private PlayerUI _view;
 
         protected override void Awake()
         {
             base.Awake();
             _player = FindObjectOfType<PlayerBase>();
-            _view = FindObjectOfType<PlayerUIView>();
+            _view = FindObjectOfType<PlayerUI>();
         }
 
         private void Start()
