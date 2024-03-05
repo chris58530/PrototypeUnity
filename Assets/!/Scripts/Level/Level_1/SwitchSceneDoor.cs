@@ -8,11 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class SwitchSceneDoor : MonoBehaviour
 {
+    [SerializeField] private int number;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.SwitchScene(1);
+            GameManager.Instance.SwitchScene(number);
         }
     }
 }
