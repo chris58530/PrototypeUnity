@@ -9,6 +9,7 @@ namespace _.Scripts.Event
     {
         public static Action onPlayerDead;
         public static Action onPlayerHurt;
+        public static Action<bool> onPlayerWalk;
         public static Action<Transform> onPlayerKnock;
 
         public static Action<float> onPlayerAttack;

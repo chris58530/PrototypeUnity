@@ -103,7 +103,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Chance3, new Chance3(
-                    _input, _controller, animator, _playerBase, _attackSystem, false));
+                    _input, _controller, animator, _playerBase, _attackSystem, true));
             _normalState.AddState(
                 PlayerState.InsertSword, new InsertSword(
                     _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));

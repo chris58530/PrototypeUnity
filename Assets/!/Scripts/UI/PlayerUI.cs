@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _.Scripts.UI
 {
-    public class PlayerUIView : MonoBehaviour
+    public class PlayerUI : MonoBehaviour
     {
         [SerializeField] private Image hpImage;
         [SerializeField] private Image skillImage;
