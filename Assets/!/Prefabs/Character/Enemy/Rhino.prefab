@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8502104d1f6c3940933d1345f2596ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackValue: 10
   mask:
     serializedVersion: 2
     m_Bits: 4288
@@ -234,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5902329517267411448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -676,6 +675,15 @@ MonoBehaviour:
   isShield: 1
   hpImage: {fileID: 2817155786727670999}
   maxHp: 1
+  onTakeDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &531740666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8502104d1f6c3940933d1345f2596ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackValue: 10
   mask:
     serializedVersion: 2
     m_Bits: 4288
