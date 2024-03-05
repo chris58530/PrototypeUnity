@@ -14,6 +14,7 @@ namespace _.Scripts.Player
     {
         [Header("CAN BE HURT for test")] [SerializeField]
         private bool canHurt;
+
         public int maxHpValue;
         [HideInInspector] public ReactiveProperty<int> currentHpValue = new ReactiveProperty<int>();
 
@@ -23,7 +24,7 @@ namespace _.Scripts.Player
         private IDisposable _hurtTimer;
         [SerializeField] private float knockTime;
         private CharacterController _controller;
-        
+
         private HeartTest _view;
 
         private void Awake()
@@ -52,12 +53,12 @@ namespace _.Scripts.Player
 
         public void OnTakeDamage(int value)
         {
-            if(!canHurt)return;
+            if (!canHurt) return;
 
             _hurtTimer?.Dispose();
             _hurtTimer = Observable.EveryUpdate().First()
                 .Delay(TimeSpan.FromSeconds(hurtCD)).Subscribe(
-                    _ => { transform.gameObject.layer = LayerMask.NameToLayer("Player");}
+                    _ => { transform.gameObject.layer = LayerMask.NameToLayer("Player"); }
                 ).AddTo(this);
 
             currentHpValue.Value -= value;
@@ -69,14 +70,14 @@ namespace _.Scripts.Player
             }
 
             transform.gameObject.layer = LayerMask.NameToLayer("UnDamageable");
-            
+
             PlayerActions.onPlayerHurt?.Invoke();
         }
 
 
         public void OnKnock(Transform trans)
         {
-            if(!canHurt)return;
+            if (!canHurt) return;
             Vector3 dir = (transform.position - trans.position).normalized;
             StartCoroutine(Knock(dir));
         }
@@ -98,16 +99,9 @@ namespace _.Scripts.Player
 
         public void OnDied()
         {
-            GetComponentInChildren<Animator>().Play("Died");
-            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(1)).Subscribe(_ =>
-            {
-                string currentSceneName = SceneManager.GetActiveScene().name;
-
-                // 使用當前場景的名稱重新載入場景
-                SceneManager.LoadScene(currentSceneName);
-            });
+            // GetComponentInChildren<Animator>().Play("Died");
+            GetComponent<Collider>().enabled = false;
+            GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-  
     }
 }
