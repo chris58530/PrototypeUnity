@@ -25,7 +25,7 @@ namespace _.Scripts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(KeyCode.O))
             {
                 SystemActions.onSwitchScene?.Invoke();
                 Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ =>

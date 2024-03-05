@@ -34,6 +34,14 @@ namespace _.Scripts.Player
             _controller = GetComponent<CharacterController>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                canHurt = !canHurt;
+            }
+        }
+
         private void Start()
         {
             Initialize();

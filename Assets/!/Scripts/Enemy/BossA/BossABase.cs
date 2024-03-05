@@ -5,7 +5,6 @@ using _.Scripts.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
-using UnityEditor.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy.BossA

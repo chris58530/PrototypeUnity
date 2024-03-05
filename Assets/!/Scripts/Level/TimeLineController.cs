@@ -22,7 +22,7 @@ public class TimeLineController : Singleton<TimeLineController>
 
         if (Input.GetKey(KeyCode.Q))
         {
-            _currentDirector.time += 10.05f;
+            _currentDirector.time += 0.05f;
         }
     }
 

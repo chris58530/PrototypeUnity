@@ -14,7 +14,7 @@ public class BossAEndEvelator : MonoBehaviour
         {
             StartCoroutine(MoveDownCoroutine(5));
             other.transform.parent = transform;
-            GameManager.Instance.SwitchScene(2);
+            GameManager.Instance.SwitchScene(4);
         }
     }
 
