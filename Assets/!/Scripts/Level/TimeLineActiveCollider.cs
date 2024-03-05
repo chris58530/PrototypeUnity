@@ -6,13 +6,11 @@ using UnityEngine.Playables;
 
 public class TimeLineActiveCollider : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector introTimeLineManager;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            introTimeLineManager.Play();
+            TimeLineController.Instance.PlayTimeLine(1);
             Destroy(gameObject);
         }
     }

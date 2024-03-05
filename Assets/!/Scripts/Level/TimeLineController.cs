@@ -1,18 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Tools;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class TimeLineController : MonoBehaviour
+public class TimeLineController : Singleton<TimeLineController>
 {
-    [SerializeField] private PlayableDirector _director;
+    [SerializeField] private PlayableDirector introDirector;
+    [SerializeField] private PlayableDirector endDirector;
     [SerializeField] private BehaviorTree quackTree;
-
+    private PlayableDirector _currentDirector;
     private void Update()
     {
-        if (_director.duration - 5 <= _director.time)
+        if (_currentDirector.duration - 2 <= _currentDirector.time)
         {
             SetCanFight();
             return;
@@ -20,10 +22,24 @@ public class TimeLineController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
         {
-            _director.time += 0.05f;
+            _currentDirector.time += 10.05f;
         }
     }
 
+    public void PlayTimeLine(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                _currentDirector = introDirector;
+                _currentDirector.Play();
+                break;
+            case 2:
+                _currentDirector = endDirector;
+                _currentDirector.Play();
+                break;
+        }
+    }
     public void SetCanFight()
     {
         SharedBool isFighting = true;

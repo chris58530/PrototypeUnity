@@ -5,6 +5,7 @@ using _.Scripts.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UnityEditor.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace _.Scripts.Enemy.BossA
@@ -12,22 +13,23 @@ namespace _.Scripts.Enemy.BossA
     [RequireComponent(typeof(BossAController))]
     public class BossABase : Enemy, IDamageable, IShieldable
     {
+        [SerializeField] private Animator ani;
         public Image hpImage;
         public Image hardHpImage;
 
         [SerializeField] private float maxHp;
         private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
-        [Tooltip(" behaviour tree control")] public bool isShielded=true;
+        [Tooltip(" behaviour tree control")] public bool isShielded = true;
 
         [Header("Shield Setting")] //.
         [SerializeField]
         private int shieldValue;
 
         [SerializeField] private Material bodydMaterial;
-     
+
 
         [SerializeField] private Material elseMaterial;
-    
+
 
         //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;
@@ -43,7 +45,6 @@ namespace _.Scripts.Enemy.BossA
         private void Start()
         {
             Initialize();
-
 
 
             _currentHp.Subscribe(_ =>
@@ -103,8 +104,9 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnDied()
         {
+            ani.Play("Die");
+            GetComponent<AbilityContainer>().SetCanGetAbility();
             bt.enabled = false;
-            gameObject.GetComponentInChildren<Animator>().Play("Die");
         }
 
         public void IsShield(bool b)
@@ -143,18 +145,15 @@ namespace _.Scripts.Enemy.BossA
             float minValue = -1f;
             float maxValue = 1f;
             float current = bigBombMaterial.GetFloat("__Surface_Dissolove");
-            StopCoroutine(BigBomb_TransitionFloatValue(0,0,0));
+            StopCoroutine(BigBomb_TransitionFloatValue(0, 0, 0));
             if (isAppeared)
             {
                 StartCoroutine(BigBomb_TransitionFloatValue(0.3f, minValue, 10));
-
             }
-            else 
-                StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 1f));
-
+            else
+                StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 0.5f));
         }
 
-  
 
         private void OnEnable()
         {
@@ -166,8 +165,8 @@ namespace _.Scripts.Enemy.BossA
         private void OnDisable()
         {
             //RESET SHADERs
-        
-            
+
+
             bodydMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
             elseMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
             bigBombMaterial.SetFloat("__Surface_Dissolove", -1);
