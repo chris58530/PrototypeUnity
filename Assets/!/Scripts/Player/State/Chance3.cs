@@ -11,7 +11,8 @@ namespace @_.Scripts.Player.State
         private readonly PlayerInput _input;
         private readonly PlayerController _controller;
         private PlayerBase _playerBase;
-        private AttackSystem _attackSystem;        private Timer _timer;
+        private AttackSystem _attackSystem;
+        private Timer _timer;
 
 
         public Chance3(PlayerInput playerInput,
@@ -42,7 +43,10 @@ namespace @_.Scripts.Player.State
             if (_timer.Elapsed > 0.5f) fsm.StateCanExit();
 
             if (_input.Move)
+            {
+                _animator.CrossFade(Animator.StringToHash("Walk"), 0.2f);
                 _controller.Move(_input);
+            }else
 
             _controller.Fall();
         }
