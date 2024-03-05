@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
 {
   
     [SerializeField]private CinemachineVirtualCamera _virtualCamera;
-    [SerializeField]    private CinemachineBasicMultiChannelPerlin _perlinNoise;
+     private CinemachineBasicMultiChannelPerlin _perlinNoise;
 
     private void Awake()
     {

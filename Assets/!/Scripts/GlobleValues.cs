@@ -6,14 +6,12 @@ using UnityEngine;
 public class GlobleValues : MonoBehaviour
 {
     [SerializeField] private SharedGameObject player;
+    [SerializeField] private SharedBool canfight = true;
     void Start()
     {
         GlobalVariables.Instance.SetVariable("Player", player);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
