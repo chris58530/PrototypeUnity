@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1377935319}
   - component: {fileID: 1377935320}
   - component: {fileID: 1377935321}
-  - component: {fileID: 2128078232}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: RemoveShield
@@ -62,19 +61,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 4288
---- !u!114 &2128078232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377935318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a346b1c3c84dc964694e2906d78b8bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskNumber: 0
 --- !u!1 &911713307567759894
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5902329517746710245}
+  - component: {fileID: 2008833330}
   m_Layer: 0
   m_Name: FakeKeyMonster
   m_TagString: Untagged
@@ -625,6 +612,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2008833330
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902329517746710244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5902329517855384453
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,8 +768,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!114 &1075568717
 MonoBehaviour:
   m_ObjectHideFlags: 0
