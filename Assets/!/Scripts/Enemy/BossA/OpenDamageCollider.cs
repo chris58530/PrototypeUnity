@@ -4,26 +4,23 @@ using BehaviorDesigner.Runtime.Tasks;
 namespace @_.Scripts.Enemy.BossA
 {
     [TaskCategory("BossA")]
-    public class CollisionAttack : BossAAction
+    public class OpenDamageCollider : BossAAction
     {
+        public bool tail;
+        public bool head;
         public bool canHurt;
 
         public override void OnStart()
         {
-            if (canHurt)
-                controller.OpenAttack();
-            else controller.CloseAttack();
+            if (tail)
+                controller.OpenTailAttack(canHurt);
+            if (head)
+                controller.OpenHeadAttack(canHurt);
         }
 
         public override TaskStatus OnUpdate()
         {
             return TaskStatus.Success;
-
-            return TaskStatus.Running;
-        }
-
-        public override void OnEnd()
-        {
         }
     }
 }

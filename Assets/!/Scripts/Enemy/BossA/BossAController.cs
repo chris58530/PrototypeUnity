@@ -24,16 +24,17 @@ namespace @_.Scripts.Enemy.BossA
 
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
         private Transform towerPoint;
-        [SerializeField] private ParticleSystem  raiseTower;
-        [SerializeField] private ParticleSystem  brokenTower;
+
+        [SerializeField] private ParticleSystem raiseTower;
+        [SerializeField] private ParticleSystem brokenTower;
 
 
         //生成物件類別
         [Header("BreakTower Setting")] //.
         [SerializeField]
         private GameObject BreakTowerPrefab;
-        [SerializeField]
-        private Transform BreakTowerPoint;
+
+        [SerializeField] private Transform BreakTowerPoint;
 
         [Header("Preview Setting")] //.
         [SerializeField]
@@ -49,40 +50,30 @@ namespace @_.Scripts.Enemy.BossA
 
         [SerializeField] private Transform smallBombPoint;
 
-       [SerializeField] private ParticleSystem smallBombParticle;
+        [SerializeField] private ParticleSystem smallBombParticle;
+
         [Header("ThrowBomb Setting")] //.
         [SerializeField]
         private GameObject bomb;
 
-        [Header("Shake Tail Setting")] //.
-        [SerializeField]
-        private AnimationCurve jumpToPlayerCurve;
 
-        [SerializeField] private Collider[] damageCollider;
+        [SerializeField] private Collider[] tailDamageCollider;
+        [SerializeField] private Collider[] headDamageCollider;
 
-        public void ResetShield()
+        public static Action onRaiseTower;
+        public static Action onDownTower;
+
+
+        public void OpenTailAttack(bool isOpen)
         {
-            //do somthing
+            for (int i = 0; i < tailDamageCollider.Length; i++)
+                tailDamageCollider[i].enabled = isOpen;
         }
 
-        public void RemoveShield()
+        public void OpenHeadAttack(bool isOpen)
         {
-        }
-
-        public void OpenAttack()
-        {
-            for (int i = 0; i < damageCollider.Length; i++)
-            {
-                damageCollider[i].enabled = true;
-            }
-        }
-
-        public void CloseAttack()
-        {
-            for (int i = 0; i < damageCollider.Length; i++)
-            {
-                damageCollider[i].enabled = false;
-            }
+            for (int i = 0; i < headDamageCollider.Length; i++)
+                headDamageCollider[i].enabled = isOpen;
         }
 
         public void ThrowJuggleBomb(Vector3 target)
@@ -104,7 +95,7 @@ namespace @_.Scripts.Enemy.BossA
         public void ThrowSmallBomb()
         {
             var pos = smallBombPoint;
-            var obj = Instantiate(smallBomb, pos.position,pos.rotation );
+            var obj = Instantiate(smallBomb, pos.position, pos.rotation);
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
 
             Destroy(obj, 3);
@@ -113,7 +104,7 @@ namespace @_.Scripts.Enemy.BossA
                 objRB.velocity = objRB.transform.forward * 50;
                 // obj.transform.position = Vector3.MoveTowards(obj.transform.position, offset, 300 * Time.deltaTime);
             }).AddTo(obj);
-            
+
             //特效
             smallBombParticle.Play();
         }
@@ -145,17 +136,19 @@ namespace @_.Scripts.Enemy.BossA
         {
             if (isRaise)
             {
+                onRaiseTower?.Invoke();
                 tower.SetActive(true);
-                transform.parent = towerPoint.transform;
                 towerAni.Play("RaiseTower");
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
                 raiseTower.Play();
             }
             else
             {
-                transform.parent = null;
+                onDownTower?.Invoke();
+
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
-                GameObject breakTowerInstance = Instantiate(BreakTowerPrefab, BreakTowerPoint.position, Quaternion.identity);
+                GameObject breakTowerInstance =
+                    Instantiate(BreakTowerPrefab, BreakTowerPoint.position, Quaternion.identity);
                 Destroy(breakTowerInstance, 5f);
 
                 // brokenTower.Play();

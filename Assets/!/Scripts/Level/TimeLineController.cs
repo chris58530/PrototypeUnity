@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Tools;
 using BehaviorDesigner.Runtime;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -12,8 +13,11 @@ public class TimeLineController : Singleton<TimeLineController>
     [SerializeField] private PlayableDirector endDirector;
     [SerializeField] private BehaviorTree quackTree;
     private PlayableDirector _currentDirector;
+
     private void Update()
     {
+        if (_currentDirector == null) return;
+        
         if (_currentDirector.duration - 2 <= _currentDirector.time)
         {
             SetCanFight();
@@ -22,7 +26,8 @@ public class TimeLineController : Singleton<TimeLineController>
 
         if (Input.GetKey(KeyCode.Q))
         {
-            _currentDirector.time += 0.05f;
+            // _currentDirector.time += 0.05f;
+            _currentDirector.time += 1.05f;
         }
     }
 
@@ -40,6 +45,7 @@ public class TimeLineController : Singleton<TimeLineController>
                 break;
         }
     }
+
     public void SetCanFight()
     {
         SharedBool isFighting = true;

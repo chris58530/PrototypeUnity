@@ -9,19 +9,14 @@ namespace @_.Scripts.Enemy.BossA
         public override void OnStart()
         {
             bossBase.isShielded = false;
-            controller.RemoveShield();
             bossBase.IsShield(false);
         }
 
         public override TaskStatus OnUpdate()
         {
             return TaskStatus.Success;
-
-            return TaskStatus.Running;
         }
 
-        public override void OnEnd()
-        {
-        }
+    
     }
 }
