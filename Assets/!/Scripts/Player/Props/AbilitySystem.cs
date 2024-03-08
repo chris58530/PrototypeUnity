@@ -1,6 +1,7 @@
 using System;
 using _.Scripts.Interface;
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 namespace @_.Scripts.Player.Props
@@ -10,6 +11,7 @@ namespace @_.Scripts.Player.Props
         [Header("Insert state exit time")] public float insertTime;
         private AbilityWeapon _abilityWeapon;
         private BoxCollider _abilityWeaponCollider;
+
         private void Awake()
         {
             _abilityWeapon = GetComponentInChildren<AbilityWeapon>();
@@ -28,9 +30,12 @@ namespace @_.Scripts.Player.Props
 
         public void Attack()
         {
-            transform.LookAt(GetDirection());
-            _abilityWeaponCollider.enabled = true;
-            AbilityWeaponAnimator.Instance?.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
+            Observable.EveryFixedUpdate().First().Delay(TimeSpan.FromSeconds(0.04f)).Subscribe(_ =>
+            {
+                transform.LookAt(GetDirection());
+                _abilityWeaponCollider.enabled = true;
+                AbilityWeaponAnimator.Instance?.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
+            }).AddTo(this);
         }
 
         public void CancelAttack()

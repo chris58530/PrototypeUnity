@@ -48,11 +48,11 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        {
-            bt.SendEvent("OnStun");
-            Debug.Log($"{this.name} get stun collision on{other.gameObject.name}" );
-        }
+        // if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        // {
+        //     bt.SendEvent("OnStun");
+        //     Debug.Log($"{this.name} get stun collision on{other.gameObject.name}" );
+        // }
     }
 
 

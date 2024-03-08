@@ -35,6 +35,7 @@ namespace @_.Scripts.Player.State
             //debug
             DebugTools.StateText("InsertSword");
             _animator.CrossFade(Animator.StringToHash("UseAbility"), 0.1f);
+            _animator.Play("UseAbility");
             _attackSystem.AttackChancePreview(Color.red);
 
             _insertTime = 0;
