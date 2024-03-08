@@ -72,7 +72,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Roll, new Roll(
-                    _controller, animator, _attackSystem, false));
+                    _input, _controller, animator, _attackSystem, false));
             _normalState.AddState(
                 PlayerState.Hurt, new Hurt(
                     _input, _controller, animator, _attackSystem, _playerBase, false));
@@ -173,8 +173,8 @@ namespace _.Scripts.Player.State
             //
             //
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
-                transition => _input.IsPressedAttack);     
-   
+                transition => _input.IsPressedAttack);
+
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Fail,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Roll,
@@ -195,7 +195,7 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
-            
+
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,

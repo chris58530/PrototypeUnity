@@ -15,11 +15,13 @@ namespace _.Scripts.Player
     {
         [SerializeField] private float walkSpeed;
         [SerializeField] private float rotateSpeed;
-        
+
         [Header("Roll Setting")] [SerializeField]
         public float rollTime;
+
         public bool finsihRoll;
         private IDisposable _rollTimer;
+
         [Header("Dash Setting")] [SerializeField]
         public float dashSpeed;
 
@@ -37,7 +39,7 @@ namespace _.Scripts.Player
         {
             _controller = GetComponent<CharacterController>();
         }
-      
+
 
         public void Move(PlayerInput input)
         {
@@ -46,7 +48,14 @@ namespace _.Scripts.Player
             Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
             _controller.Move(dir * (walkSpeed * (Time.deltaTime)));
+        }
 
+        public void FaceInputDireaction(PlayerInput input)
+        {
+            Vector2 getInput = input.MoveVector;
+            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
+            Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 1000 * Time.deltaTime);
         }
 
 
@@ -55,6 +64,7 @@ namespace _.Scripts.Player
             finsihRoll = false;
             _rollTimer?.Dispose();
             // transform.tag = "Undamaged";
+
             #region PerformDash
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -71,17 +81,16 @@ namespace _.Scripts.Player
 
             #endregion
 
-            _rollTimer= Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(rollTime)).Subscribe(_ =>
+            _rollTimer = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(rollTime)).Subscribe(_ =>
             {
                 finsihRoll = true;
-            }).AddTo(this); 
+            }).AddTo(this);
             StartCoroutine(Roll(dashDirection, dashTime));
-            
+
             //Audio
             AudioManager.Instance.PlaySFX("Dash");
-
         }
-        
+
 
         IEnumerator Roll(Vector3 dashDirection, float time)
         {
@@ -94,17 +103,15 @@ namespace _.Scripts.Player
                 _controller.Move(transform.forward * (dashSpeed * Time.deltaTime));
                 elapsedTime += Time.deltaTime;
                 yield return null;
-                
             }
-            transform.tag = "Player";
 
+            transform.tag = "Player";
         }
+
         public void Fall()
         {
             if (IsGround) return;
             _controller.Move(transform.up * (gravity * Time.deltaTime));
         }
-
-     
     }
 }

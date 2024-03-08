@@ -10,16 +10,20 @@ namespace _.Scripts.Player.State
 {
     public class Roll : StateBase<PlayerState>
     {
+        private readonly PlayerInput _input;
+
         private readonly PlayerController _controller;
         private Timer _timer;
-        private AttackSystem _attackSystem;
-        private Animator _animator;
+        private readonly AttackSystem _attackSystem;
+        private readonly Animator _animator;
 
-        public Roll(PlayerController controller,
+        public Roll(PlayerInput playerInput,
+            PlayerController controller,
             Animator animator, AttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
         {
+            _input = playerInput;
             _controller = controller;
             _animator = animator;
             _attackSystem = attackSystem;
@@ -33,7 +37,11 @@ namespace _.Scripts.Player.State
             _animator.Play(Animator.StringToHash("Roll"));
 
             _controller.Roll();
+
             _attackSystem.Fail();
+            
+            if (_input.Move)
+                _controller.FaceInputDireaction(_input);
         }
 
         public override void OnLogic()
@@ -41,8 +49,6 @@ namespace _.Scripts.Player.State
             if (_timer.Elapsed > _controller.rollTime - 0.005f)
             {
                 // _animator.CrossFade(Animator.StringToHash("Roll_to_walk"),0);
-
-
             }
             else if (_timer.Elapsed > _controller.rollTime)
             {
