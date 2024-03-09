@@ -171,19 +171,19 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1616.3837, y: 103.94589, z: 42.313694, w: 1}
+      - m_Value: {x: 42.313694, y: 299.55792, z: 1616.3837, w: 1}
         m_Name: BrightColor
         m_Overridden: 1
-      - m_Value: {x: 30.676407, y: 3.6175, z: 4.1585617, w: 1}
+      - m_Value: {x: 3.694018, y: 7.4390936, z: 30.676409, w: 1}
         m_Name: DarkColor
         m_Overridden: 1
-      - m_Value: {x: 117.53636, y: 19.508778, z: 12.75159, w: 1}
+      - m_Value: {x: 12.922845, y: 30.295563, z: 117.53638, w: 1}
         m_Name: ParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 985.359, y: 103.178925, z: 241.59586, w: 1}
+      - m_Value: {x: 103.178925, y: 242.66075, z: 985.359, w: 1}
         m_Name: FloatingParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 12.844469, y: 2.0339804, z: 1.3449702, w: 1}
+      - m_Value: {x: 1.3449702, y: 1.6798298, z: 12.844469, w: 1}
         m_Name: ImpactColor
         m_Overridden: 1
     m_Uint:
@@ -1121,7 +1121,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3edcc8f245082d4baf0c5b1e86d9e71, type: 2}
   - {fileID: 11400000, guid: 2b12eb1240c84b4449c1f396ceca2799, type: 2}
   - {fileID: 11400000, guid: 910ab5e48e2fb15409a9e69b6b0a67d1, type: 2}
+  - {fileID: 11400000, guid: 5fc4cdd54f7a3894989989a3390092f4, type: 2}
   inMouthObjectTransform: {fileID: 766103544}
+  quitAbilityObjectTransform: {fileID: 6237602225405585261}
 --- !u!1 &2434023633437217312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7749486768316944737}
   - component: {fileID: 7614749929158424706}
+  - component: {fileID: 795224831}
   m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
@@ -1178,6 +1181,19 @@ MonoBehaviour:
   - 0.15
   - 0.1
   - 0.2
+--- !u!114 &795224831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434023633437217312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782c0e061f17ef243a66c483be2abecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkParticle: {fileID: 8854043325486248868}
 --- !u!1 &2940573336115822101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1308,7 @@ GameObject:
   - component: {fileID: 5715834888313830782}
   - component: {fileID: 5715834888313830752}
   - component: {fileID: 1156654683}
+  - component: {fileID: 1973834528}
   m_Layer: 6
   m_Name: Player_Hammer
   m_TagString: Player
@@ -1343,7 +1360,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5715834888313830771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca5d2106ea795fd4b94ddb1f217f69be, type: 3}
   m_Name: 
@@ -1387,8 +1404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c1efbc84b9aa54bb75308ba1ebe1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canHurt: 0
-  maxHpValue: 100
+  canHurt: 1
+  maxHpValue: 5
   currentHpValue:
     value: 0
   getHurt: 0
@@ -1410,6 +1427,7 @@ MonoBehaviour:
   rotateSpeed: 10
   rollTime: 0.3
   finsihRoll: 0
+  blockRoll: 0
   dashSpeed: 50
   dashDistance: 15
   dashTime: 0.3
@@ -1450,6 +1468,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   insertTime: 0.65
+--- !u!95 &1973834528
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715834888313830771}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5715834889141235566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,19 +1938,19 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1616.3837, y: 103.94589, z: 42.313694, w: 1}
+      - m_Value: {x: 42.313694, y: 1508.6514, z: 1616.3837, w: 1}
         m_Name: BrightColor
         m_Overridden: 1
-      - m_Value: {x: 30.676407, y: 3.6175, z: 4.1585617, w: 1}
+      - m_Value: {x: 3.694018, y: 26.15404, z: 30.676409, w: 1}
         m_Name: DarkColor
         m_Overridden: 1
-      - m_Value: {x: 117.53636, y: 19.508778, z: 12.75159, w: 1}
+      - m_Value: {x: 12.922845, y: 92.17599, z: 117.53638, w: 1}
         m_Name: ParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 985.359, y: 103.178925, z: 241.59586, w: 1}
+      - m_Value: {x: 103.178925, y: 551.173, z: 985.359, w: 1}
         m_Name: FloatingParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 12.844469, y: 2.0339804, z: 1.3449702, w: 1}
+      - m_Value: {x: 1.3449702, y: 10.709671, z: 12.844469, w: 1}
         m_Name: ImpactColor
         m_Overridden: 1
     m_Uint:
@@ -2169,19 +2208,19 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1616.3837, y: 103.94589, z: 42.313694, w: 1}
+      - m_Value: {x: 42.313694, y: 597.56287, z: 1616.3837, w: 1}
         m_Name: BrightColor
         m_Overridden: 1
-      - m_Value: {x: 30.676407, y: 3.6175, z: 4.1585617, w: 1}
+      - m_Value: {x: 3.694018, y: 13.961573, z: 30.676409, w: 1}
         m_Name: DarkColor
         m_Overridden: 1
-      - m_Value: {x: 117.53636, y: 19.508778, z: 12.75159, w: 1}
+      - m_Value: {x: 12.922845, y: 57.65897, z: 117.53638, w: 1}
         m_Name: ParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 985.359, y: 103.178925, z: 241.59586, w: 1}
+      - m_Value: {x: 103.178925, y: 497.39227, z: 985.359, w: 1}
         m_Name: FloatingParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 12.844469, y: 2.0339804, z: 1.3449702, w: 1}
+      - m_Value: {x: 1.3449702, y: 3.8498313, z: 12.844469, w: 1}
         m_Name: ImpactColor
         m_Overridden: 1
     m_Uint:
@@ -2317,7 +2356,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

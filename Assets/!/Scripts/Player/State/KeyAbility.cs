@@ -5,7 +5,7 @@ using UnityHFSM;
 
 namespace @_.Scripts.Player.State
 {
-    public class InsertSword : StateBase<PlayerState>
+    public class KeyAbility : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
@@ -14,7 +14,7 @@ namespace @_.Scripts.Player.State
         private PlayerBase _playerBase;
         private float _insertTime;
         private AbilitySystem _abilitySystem;
-        public InsertSword(PlayerInput playerInput,
+        public KeyAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
             ,AbilitySystem abilitySystem,PlayerBase playerBase,
             bool needsExitTime,
@@ -33,11 +33,13 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
-            DebugTools.StateText("InsertSword");
+            DebugTools.StateText("KeyAbility");
             _animator.CrossFade(Animator.StringToHash("UseAbility"), 0.1f);
-            _animator.Play("UseAbility");
+            
+            
+            _animator.Play("KeyAbility");
+            
             _attackSystem.AttackChancePreview(Color.red);
-            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
 
             _insertTime = 0;
             _abilitySystem.Attack();

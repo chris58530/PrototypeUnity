@@ -23,7 +23,7 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm(Transform transform)
         {
-            Instantiate(keyMonster, transform.position, transform.rotation);
+            // Instantiate(keyMonster, transform.position, transform.rotation);
         }
 
         public override void TriggerEffect(Collider other)
@@ -31,11 +31,11 @@ namespace @_.Scripts.Ability
             //OnTrigger enemy will do 
             if (other.gameObject.CompareTag("KeyDoor"))
             {
-                Debug.Log("Use Key TriggerEffect ");
-
-                TaskManager.checkTaskAction?.Invoke(taskNumber);
-                AbilityWeapon weapon = FindObjectOfType<AbilityWeapon>();
-                weapon.ChangeAbility(AbilityWeapon.AbilityType.None);
+                // Debug.Log("Use Key TriggerEffect ");
+                //
+                // TaskManager.checkTaskAction?.Invoke(taskNumber);
+                // AbilityWeapon weapon = FindObjectOfType<AbilityWeapon>();
+                // weapon.ChangeAbility(AbilityWeapon.AbilityType.None);
             }
         }
     }

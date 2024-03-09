@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _.Scripts.Ability;
 using _.Scripts.Interface;
+using JetBrains.Annotations;
 using UnityEngine;
 using UniRx;
 
@@ -28,6 +29,8 @@ namespace @_.Scripts.Player.Props
 
         private AbilityBase _currentAbilityBase;
         private GameObject _currentInMouthObject;
+
+        public AbilityType currentAbility = AbilityType.None;
 
         [SerializeField] private Transform inMouthObjectTransform;
         [SerializeField] private Transform quitAbilityObjectTransform;
@@ -56,10 +59,10 @@ namespace @_.Scripts.Player.Props
         public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
-            
+
             if (_currentAbilityBase != null)
                 _currentAbilityBase.QuitAbilityAlgorithm(quitAbilityObjectTransform);
-            
+
             if (_currentInMouthObject != null)
                 Destroy(_currentInMouthObject);
 
@@ -71,8 +74,9 @@ namespace @_.Scripts.Player.Props
                     _currentAbilityBase = ability;
                     attackValue = _currentAbilityBase.damage;
                     attackAction = _currentAbilityBase.TriggerEffect;
+                    currentAbility = getAbility;
                     _currentAbilityBase.StartAbility();
-                    AbilityWeaponAnimator.Instance?.PlayerAnimation(_currentAbilityBase.animationName);
+                    AbilityWeaponAnimator.Instance?.PlayAnimation(_currentAbilityBase.animationName);
 
                     //生成 inMouthObject
 
@@ -85,10 +89,7 @@ namespace @_.Scripts.Player.Props
                     //計算何時取消能力
                     _abilityTimer = Observable.EveryUpdate().First()
                         .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
-                        .Subscribe(_ =>
-                        {
-                            ChangeAbility(AbilityType.None);
-                        }).AddTo(this);
+                        .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);
 
                     Debug.Log(_currentAbilityBase.name);
                     return;
@@ -103,6 +104,7 @@ namespace @_.Scripts.Player.Props
 
         private void OnTriggerEnter(Collider other)
         {
+            if (currentAbility != AbilityType.None) return;
             if (other.gameObject.TryGetComponent(out IAbilityContainer getAbility))
             {
                 ChangeAbility(getAbility.GetAbility());

@@ -27,7 +27,7 @@ public class AbilityWeaponAnimator : Singleton<AbilityWeaponAnimator>
     }
 
 
-    public void PlayerAnimation(AnimationName name)
+    public void PlayAnimation(AnimationName name)
     {
         if (animator == null) return;
         animator.Play(name.ToString());

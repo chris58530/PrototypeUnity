@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Player.Props;
 using _.Scripts.Task;
 using UniRx;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class Key : MonoBehaviour, ITaskObject
             Debug.Log("touch door");
             isDone = true;
             TaskManager.checkTaskAction?.Invoke(taskNumber);
+            GameObject.FindObjectOfType<AbilityWeapon>().ChangeAbility(AbilityWeapon.AbilityType.None);
         }
     }
 }

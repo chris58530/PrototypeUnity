@@ -13,6 +13,7 @@ namespace _.Scripts.Player
 
         public bool IsPressedAttack => _input.Player.Attack.WasPressedThisFrame();
         public bool IsPressedAbility => _input.Player.Ability.WasPressedThisFrame();
+        public bool IsReleasedAbility => _input.Player.Ability.WasReleasedThisFrame();
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 
 

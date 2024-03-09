@@ -22,7 +22,7 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm(Transform transform)
         {
-            Instantiate(fakeKeyMonster, transform.position, transform.rotation);
+            // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
         }
 
         public override void TriggerEffect(Collider other)

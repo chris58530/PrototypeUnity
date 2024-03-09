@@ -11,6 +11,7 @@ namespace @_.Scripts.Player.Props
         [Header("Insert state exit time")] public float insertTime;
         private AbilityWeapon _abilityWeapon;
         private BoxCollider _abilityWeaponCollider;
+        public AbilityWeapon.AbilityType GetCurrentAbility => _abilityWeapon.currentAbility;
 
         private void Awake()
         {
@@ -34,7 +35,6 @@ namespace @_.Scripts.Player.Props
             {
                 transform.LookAt(GetDirection());
                 _abilityWeaponCollider.enabled = true;
-                AbilityWeaponAnimator.Instance?.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
             }).AddTo(this);
         }
 
