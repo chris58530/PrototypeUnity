@@ -14,10 +14,10 @@ namespace _.Scripts
             SystemActions.onSceneStart?.Invoke();
         }
 
-        public void SwitchScene(int num)
+        public void SwitchScene(int num, float time)
         {
-            SystemActions.onSwitchScene?.Invoke();
-            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ =>
+            SystemActions.onSwitchScene?.Invoke(time);
+            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(time + 2)).Subscribe(_ =>
             {
                 SceneManager.LoadScene(num);
             }).AddTo(this);
@@ -27,7 +27,7 @@ namespace _.Scripts
         {
             if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(KeyCode.O))
             {
-                SystemActions.onSwitchScene?.Invoke();
+                SystemActions.onSwitchScene?.Invoke(1);
                 Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ =>
                 {
                     int currentSceneName = SceneManager.GetActiveScene().buildIndex;

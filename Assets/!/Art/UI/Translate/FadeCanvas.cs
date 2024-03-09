@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Event;
+using UniRx;
 using UnityEngine;
 
 public class FadeCanvas : MonoBehaviour
@@ -9,32 +11,15 @@ public class FadeCanvas : MonoBehaviour
     CanvasGroup canvasGroup;
 
 
-    // 測試
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            FadeInAnimation();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            FadeOutAnimation();
-        }
-    }
-
     void FadeInAnimation()
     {
-        if (ani == null) return;
         ani.SetTrigger("FadeIn");
-        Debug.Log("FadeIn");
     }
 
-    void FadeOutAnimation()
+    void FadeOutAnimation(float time)
     {
-        if (ani == null) return;
-        ani.SetTrigger("FadeOut");
-        Debug.Log("FadeOut");
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(time))
+            .Subscribe(_ => { ani.SetTrigger("FadeOut"); }).AddTo(this);
     }
 
     void Awake()

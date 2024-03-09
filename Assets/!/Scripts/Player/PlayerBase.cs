@@ -100,7 +100,6 @@ namespace _.Scripts.Player
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-
             getHurt = false;
         }
 
@@ -109,7 +108,7 @@ namespace _.Scripts.Player
         {
             // GetComponentInChildren<Animator>().Play("Died");
             GetComponent<Collider>().enabled = false;
-            GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex,0);
         }
     }
 }

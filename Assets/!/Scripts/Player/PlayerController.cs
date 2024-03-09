@@ -21,6 +21,7 @@ namespace _.Scripts.Player
 
         public bool finsihRoll;
         private IDisposable _rollTimer;
+        public bool blockRoll;
 
         [Header("Dash Setting")] [SerializeField]
         public float dashSpeed;
@@ -61,6 +62,7 @@ namespace _.Scripts.Player
 
         public void Roll()
         {
+
             finsihRoll = false;
             _rollTimer?.Dispose();
             // transform.tag = "Undamaged";

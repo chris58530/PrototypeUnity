@@ -13,7 +13,7 @@ public class SwitchSceneDoor : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.SwitchScene(number);
+            GameManager.Instance.SwitchScene(number,0);
         }
     }
 }
