@@ -1341,6 +1341,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb6cd873b49cc3947807d1c5160a87b2, type: 2}
   - {fileID: 11400000, guid: b3edcc8f245082d4baf0c5b1e86d9e71, type: 2}
   - {fileID: 11400000, guid: 2b12eb1240c84b4449c1f396ceca2799, type: 2}
+  currentAbility: 0
   inMouthObjectTransform: {fileID: 0}
   quitAbilityObjectTransform: {fileID: 0}
 --- !u!1 &2434023633437217312
@@ -1694,6 +1695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7860213412485999390}
+  isHammer: 0
 --- !u!114 &5715834888313830769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,6 +1731,7 @@ MonoBehaviour:
   rotateSpeed: 10
   rollTime: 0.2
   finsihRoll: 0
+  blockRoll: 0
   dashSpeed: 50
   dashDistance: 15
   dashTime: 0.3
@@ -1747,7 +1750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTime:
   - 0.5
-  - 0.5
+  - 0.3
   - 0.5
   attackCount: 0
   chanceTime: 1
