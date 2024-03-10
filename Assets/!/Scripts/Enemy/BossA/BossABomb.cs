@@ -36,6 +36,6 @@ public class BossABomb : MonoBehaviour
         Vector3 offset = new Vector3(transform.position.x, 0, transform.position.z);
         var obg = Instantiate(explode, offset, Quaternion.identity);
 
-        // Destroy(obg.gameObject,1.2f);
+        Destroy(obg.gameObject,0.3f);
     }
 }

@@ -31,6 +31,7 @@ namespace _.Scripts.Player.State
     public enum SuperState
     {
         Normal,
+        Hammer,
         Dead
     }
 
