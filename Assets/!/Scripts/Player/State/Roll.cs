@@ -61,6 +61,7 @@ namespace _.Scripts.Player.State
         public override void OnExit()
         {
             _attackSystem.attackCount = 0;
+            _animator.Play("Q1ToIdle");
 
             // //這方法是attacksystem的父類，不確定這樣呼叫好不好
             // _attackSystem.ResetChance();
