@@ -33,7 +33,7 @@ namespace @_.Scripts.Player.State
         public override void OnLogic()
         {
             if (_input.Move)
-            _controller.Move(_input);
+                _controller.Move(_input);
 
             _controller.Fall();
         }
