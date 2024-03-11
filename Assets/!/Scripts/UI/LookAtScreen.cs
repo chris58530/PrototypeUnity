@@ -10,5 +10,6 @@ public class LookAtScreen : MonoBehaviour
 
         transform.LookAt(transform.position + camPos.rotation * Vector3.back,
             camPos.rotation * Vector3.up);
+        Debug.Log("isworking");
     }
 }

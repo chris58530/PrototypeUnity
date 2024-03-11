@@ -25,12 +25,7 @@ namespace _.Scripts.Enemy.BossA
         private int shieldValue;
 
         [SerializeField] private Material bodydMaterial;
-
-
         [SerializeField] private Material elseMaterial;
-
-
-        //coldwaterzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx
         [SerializeField] private Material bombMaterial;
         [SerializeField] private Material bigBombMaterial;
 
@@ -38,8 +33,9 @@ namespace _.Scripts.Enemy.BossA
         [Tooltip("How many times can throw and set the value ,form large number to small")] [SerializeField]
         private int[] canThrowBigBombHp;
 
-        private float _lastHp;
         private int _successTime;
+
+        public static Action onHitSheild;
 
         private void Start()
         {
@@ -51,8 +47,6 @@ namespace _.Scripts.Enemy.BossA
                 hpImage.fillAmount = _currentHp.Value / maxHp;
                 hardHpImage.fillAmount = _currentHp.Value / maxHp;
             }).AddTo(this);
-
-            _lastHp = _currentHp.Value;
         }
 
         private void Update()
@@ -71,7 +65,7 @@ namespace _.Scripts.Enemy.BossA
             if (isShielded)
             {
                 _currentHp.Value -= value / 5;
-                ///////////////coldwater///////////////////////
+                //Play effect
                 StartCoroutine(OnTakeDamageCoroutine());
             }
 
@@ -93,6 +87,9 @@ namespace _.Scripts.Enemy.BossA
         public void OnTakeShield(int removeValue)
         {
             shieldValue -= removeValue;
+            
+            onHitSheild?.Invoke();
+
             Debug.Log("shieldValue - 1");
         }
 
@@ -164,8 +161,6 @@ namespace _.Scripts.Enemy.BossA
         private void OnDisable()
         {
             //RESET SHADERs
-
-
             bodydMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
             elseMaterial.SetFloat("_Surface_DiffuseDissolve", -5);
             bigBombMaterial.SetFloat("__Surface_Dissolove", -1);

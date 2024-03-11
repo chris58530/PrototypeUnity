@@ -18,11 +18,17 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
+    private ShieldUI _shieldUI;
+    protected override void Awake()
+    {
+        base.Awake();
+        _shieldUI = GetComponentInChildren<ShieldUI>();
+    }
 
     private void Start()
     {
         Initialize();
-        _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
+        // _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
         BossABomb.bossABigBombEvent += BossABigBombDie;
     }
 
@@ -33,7 +39,11 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
 
     public void OnTakeDamage(int value)
     {
-        if(isShield)return;
+        if(isShield)
+        {
+            _shieldUI.HitShield();
+            return;
+        }
         
         bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
@@ -58,6 +68,7 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
 
     public void OnTakeShield(int removeValue)
     {
+        _shieldUI.BreakShield(0);
         isShield = false;
     }
 
