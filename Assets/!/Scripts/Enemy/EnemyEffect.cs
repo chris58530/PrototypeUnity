@@ -13,6 +13,7 @@ public class EnemyEffect : MonoBehaviour
     [SerializeField] private Renderer[] _renderers;
   
     [SerializeField] private ParticleSystem stunParticle;
+    [SerializeField] private ParticleSystem absortableEffcet;
 
     public void SetEmission()
     {
@@ -40,6 +41,13 @@ public class EnemyEffect : MonoBehaviour
     public void OnStun()
     {
         stunParticle.Play();
+        absortableEffcet.Play();
+    }
+
+    public void OnDead()
+    {
+        stunParticle.Stop();
+        absortableEffcet.Stop();
     }
 
     IEnumerator TransitionFloatValue(float startValue, float endValue, float duration)
