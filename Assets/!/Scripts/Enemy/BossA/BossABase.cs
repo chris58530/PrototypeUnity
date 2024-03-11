@@ -34,8 +34,14 @@ namespace _.Scripts.Enemy.BossA
         private int[] canThrowBigBombHp;
 
         private int _successTime;
+        private ShieldUI _shieldUI;
 
-        public static Action onHitSheild;
+        protected override void Awake()
+        {
+            base.Awake();
+            _shieldUI = GetComponentInChildren<ShieldUI>();
+
+        }
 
         private void Start()
         {
@@ -64,7 +70,9 @@ namespace _.Scripts.Enemy.BossA
         {
             if (isShielded)
             {
+                _shieldUI.HitShield();
                 _currentHp.Value -= value / 5;
+
                 //Play effect
                 StartCoroutine(OnTakeDamageCoroutine());
             }
@@ -86,15 +94,14 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnTakeShield(int removeValue)
         {
+            _shieldUI.BreakShield(shieldValue-1);
             shieldValue -= removeValue;
-            
-            onHitSheild?.Invoke();
-
-            Debug.Log("shieldValue - 1");
         }
 
         public void ResetShield()
         {
+            _shieldUI.ResetShield();
+
             shieldValue = 3;
         }
 
@@ -131,7 +138,7 @@ namespace _.Scripts.Enemy.BossA
         {
             if (_currentHp.Value < canThrowBigBombHp[_successTime])
             {
-                bt.SendEvent("Big_Bomb_Event");
+                // bt.SendEvent("Big_Bomb_Event");
                 _successTime++;
             }
         }
