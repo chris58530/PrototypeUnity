@@ -1,55 +1,35 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 
 public class DamageableObject : MonoBehaviour, IDamageable
 {
+    [Tooltip("負責血量控制以及呼叫onTakeDamagedEvent和onDiedEvent")]
+    
     [SerializeField] private int hp;
-    [SerializeField] private Animator objectAni;
-    [SerializeField] private Collider objectCollider;
-    [SerializeField] private GameObject cloneObject;
-    [SerializeField] private Vector3 cloneObjectOffset;
+    
+    [SerializeField] private UnityEvent onTakeDamagedEvent;
+    [SerializeField] private UnityEvent onDiedEvent;
 
     public void OnTakeDamage(int value)
     {
+        onTakeDamagedEvent?.Invoke();
         hp -= 1;
         if (hp <= 0) OnDied();
     }
 
     public void OnDied()
     {
-        if (objectAni != null)
-        {
-            objectAni.Play("Die");
-            Destroy(gameObject, 3);
-            return;
-        }
+        onDiedEvent?.Invoke();
 
-        if (cloneObject != null)
-        {
-            Instantiate(cloneObject, transform.position+cloneObjectOffset, transform.rotation);
-            Destroy(gameObject);
-            return;
-
-        }
-
-        objectCollider.enabled = false;
-        Destroy(gameObject);
     }
 
     private void OnEnable()
     {
-        BossABomb.bossABigBombEvent += BossABigBombDie;
-
+        BossABomb.bossABigBombEvent += OnDied;
     }
 
-    public void BossABigBombDie()
-    {
-        OnDied();
-        
-    }
     private void OnDisable()
     {
-        BossABomb.bossABigBombEvent -= BossABigBombDie;
+        BossABomb.bossABigBombEvent -= OnDied;
     }
 }

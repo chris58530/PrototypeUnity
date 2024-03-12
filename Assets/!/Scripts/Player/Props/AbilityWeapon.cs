@@ -104,7 +104,7 @@ namespace @_.Scripts.Player.Props
 
         private void OnTriggerEnter(Collider other)
         {
-            if (currentAbility != AbilityType.None) return;
+            // if (currentAbility != AbilityType.None) return;
             if (other.gameObject.TryGetComponent(out IAbilityContainer getAbility))
             {
                 ChangeAbility(getAbility.GetAbility());

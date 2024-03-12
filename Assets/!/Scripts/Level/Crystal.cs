@@ -4,39 +4,56 @@ using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 
-public class Crystal : MonoBehaviour, IDamageable
+[RequireComponent(typeof(DamageableObject))]
+public class Crystal : MonoBehaviour
 {
-    [SerializeField] private int maxHp;
-    private int _currentHp;
     [SerializeField] private GameObject detroyCrystalObject;
+    [SerializeField] private Vector3 detroyCrystalObjectOffset;
+    [SerializeField] private ParticleSystem absortObject;
+    [SerializeField] private GameObject modelObject;
 
-    [Header("If can relife ")] [SerializeField]
-    private bool canRelife;
+
+    [SerializeField] private bool canRelife;
 
     [SerializeField] private float relifeTime;
-    private Collider _collider;
-
-
-    private void OnEnable()
-    {
-        _currentHp = maxHp;
-    }
-
-    public void OnTakeDamage(int value)
-    {
-        Debug.Log($"{this.name + " " + "on take damage"}");
-        if (_currentHp > 1)
-        {
-            _currentHp--;
-        }
-        else OnDied();
-    }
-
 
     public void OnDied()
     {
-        if(detroyCrystalObject==null)return;
-        Instantiate(detroyCrystalObject, transform.position, transform.rotation);
-        Destroy(gameObject);
+        GameObject obj=Instantiate(detroyCrystalObject, transform.position + detroyCrystalObjectOffset, transform.rotation);
+        Destroy(obj,3);
+        GetComponent<Collider>().enabled = false;
+        ReLife();
+    }
+
+    public void OnAbosrt()
+    {
+        absortObject.Play();
+        GetComponent<Collider>().enabled = false;
+
+        ReLife();
+    }
+
+    public void ReLife()
+    {
+        modelObject.SetActive(false);
+        if (!canRelife)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(relifeTime)).Subscribe(_ =>
+            {
+                modelObject.SetActive(true);
+
+                GetComponentInChildren<Animator>().Play("Grow");
+            })
+            .AddTo(this);
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(relifeTime + 1)).Subscribe(_ =>
+            {
+
+                GetComponent<Collider>().enabled = true;
+            })
+            .AddTo(this);
     }
 }

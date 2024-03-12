@@ -38,14 +38,14 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
     }
 
     public void OnTakeDamage(int value)
-    {
+    {        bt.SendEvent("OnTakeDamage");
+
         if(isShield)
         {
             _shieldUI.HitShield();
             return;
         }
         
-        bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
 
         if (_currentHp.Value <= 0) OnDied();

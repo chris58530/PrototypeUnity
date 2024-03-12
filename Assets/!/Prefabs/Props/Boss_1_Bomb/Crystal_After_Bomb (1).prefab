@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8994352068478606426}
   - component: {fileID: 569228885558426881}
+  - component: {fileID: -2307947417742575404}
   - component: {fileID: 1541598726}
   - component: {fileID: 1541598727}
-  - component: {fileID: -2307947417742575404}
+  - component: {fileID: 7164670170340837070}
   m_Layer: 7
   m_Name: Crystal_After_Bomb (1)
   m_TagString: Untagged
@@ -51,41 +52,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.170391, y: 6.4801188, z: 4.1316795}
   m_Center: {x: 0.23237991, y: 2.7400594, z: -1.2055898}
---- !u!114 &1541598726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326409785452870316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityType: 1
-  afterDestroyObject: {fileID: 8712357987437432953, guid: 119aafeb430d0534d9e7b24e592f014d,
-    type: 3}
-  offSet: {x: 0, y: 0, z: 0}
-  canGetAbilty: 1
---- !u!114 &1541598727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326409785452870316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61092d46680dba4d9b6661eccc30386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  objectAni: {fileID: 0}
-  objectCollider: {fileID: 569228885558426881}
-  cloneObject: {fileID: 6198761464721261357, guid: 9fc90b5c906b44142b9fbcf0f7c5334f,
-    type: 3}
-  cloneObjectOffset: {x: 0, y: 5, z: 0}
 --- !u!54 &-2307947417742575404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,6 +68,85 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1541598726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326409785452870316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityType: 1
+  canGetAbilty: 1
+  onGetAbiltyEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7164670170340837070}
+        m_TargetAssemblyTypeName: Crystal, Assembly-CSharp
+        m_MethodName: OnAbosrt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1541598727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326409785452870316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61092d46680dba4d9b6661eccc30386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  onTakeDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDiedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7164670170340837070}
+        m_TargetAssemblyTypeName: Crystal, Assembly-CSharp
+        m_MethodName: OnDied
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7164670170340837070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326409785452870316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f9917790a481ca3e4af6419e38154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detroyCrystalObject: {fileID: 6198761464721261357, guid: 9fc90b5c906b44142b9fbcf0f7c5334f,
+    type: 3}
+  detroyCrystalObjectOffset: {x: 0, y: 5, z: 0}
+  absortObject: {fileID: 198356075543343607}
+  modelObject: {fileID: 1869663014350730127}
+  canRelife: 1
+  relifeTime: 3
 --- !u!1001 &982044683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,7 +156,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1878065821641386, guid: 8976eaef3afe3f2499edb2dfc7e3f0ef, type: 3}
       propertyPath: m_Name
-      value: BombCrtstal_VFX
+      value: Crystal_AbsortEffect
       objectReference: {fileID: 0}
     - target: {fileID: 4711337195011250, guid: 8976eaef3afe3f2499edb2dfc7e3f0ef, type: 3}
       propertyPath: m_RootOrder
@@ -162,6 +207,12 @@ PrefabInstance:
 --- !u!4 &4711336749837497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4711337195011250, guid: 8976eaef3afe3f2499edb2dfc7e3f0ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 982044683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &198356075543343607 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198356074628506108, guid: 8976eaef3afe3f2499edb2dfc7e3f0ef,
     type: 3}
   m_PrefabInstance: {fileID: 982044683}
   m_PrefabAsset: {fileID: 0}
