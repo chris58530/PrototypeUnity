@@ -16,6 +16,7 @@ public class KeyMonsterBase : Enemy, IDamageable, ITaskResult
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
+    public bool isParty;
     private void Start()
     {
         Initialize();
