@@ -23,9 +23,9 @@ namespace _.Scripts.Enemy
             return abilityType;
         }
 
-        public void SetCanGetAbility()
+        public void SetCanGetAbility(bool canGet)
         {
-            canGetAbilty = true;
+            canGetAbilty = canGet;
         }
     }
 }

@@ -12,15 +12,15 @@ public class Crystal : MonoBehaviour
     [SerializeField] private ParticleSystem absortObject;
     [SerializeField] private GameObject modelObject;
 
-
-    [SerializeField] private bool canRelife;
+    public bool canRelife;
 
     [SerializeField] private float relifeTime;
 
     public void OnDied()
     {
-        GameObject obj=Instantiate(detroyCrystalObject, transform.position + detroyCrystalObjectOffset, transform.rotation);
-        Destroy(obj,3);
+        GameObject obj = Instantiate(detroyCrystalObject, transform.position + detroyCrystalObjectOffset,
+            transform.rotation);
+        Destroy(obj, 3);
         GetComponent<Collider>().enabled = false;
         ReLife();
     }
@@ -51,7 +51,6 @@ public class Crystal : MonoBehaviour
             .AddTo(this);
         Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(relifeTime + 1)).Subscribe(_ =>
             {
-
                 GetComponent<Collider>().enabled = true;
             })
             .AddTo(this);

@@ -108,7 +108,7 @@ namespace _.Scripts.Enemy.BossA
         public void OnDied()
         {
             ani.Play("Die");
-            GetComponent<AbilityContainer>().SetCanGetAbility();
+            GetComponent<AbilityContainer>().SetCanGetAbility(true);
             bt.enabled = false;
         }
 
@@ -141,6 +141,12 @@ namespace _.Scripts.Enemy.BossA
                 // bt.SendEvent("Big_Bomb_Event");
                 _successTime++;
             }
+        }
+
+        public void EndPerformance()
+        {
+            TimeLineController.Instance.PlayTimeLine(2);
+
         }
 
         public void BigBombTransition(bool isAppeared)

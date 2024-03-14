@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1377935320}
   - component: {fileID: 1377935321}
   - component: {fileID: 196476454}
-  - component: {fileID: 948272736}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: RemoveShield
@@ -64,19 +63,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4288
 --- !u!114 &196476454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377935318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a346b1c3c84dc964694e2906d78b8bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskNumber: 0
---- !u!114 &948272736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -531,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5902329517746710245}
-  - component: {fileID: 948272737}
+  - component: {fileID: 1272515751}
   m_Layer: 0
   m_Name: KeyMonster
   m_TagString: Untagged
@@ -557,7 +543,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &948272737
+--- !u!95 &1272515751
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -591,8 +577,9 @@ GameObject:
   - component: {fileID: 5902329517855383677}
   - component: {fileID: 6882769807413921950}
   - component: {fileID: 2034712047617236536}
-  - component: {fileID: 1075568717}
+  - component: {fileID: 350433202054048663}
   - component: {fileID: 1258395185}
+  - component: {fileID: 1075568717}
   m_Layer: 7
   m_Name: Base
   m_TagString: Enemy
@@ -676,7 +663,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5902329517855384453}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -697,7 +684,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"AnimatorObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"AttackCollider","IsShared":true,"CollidermValue":2},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"DoorLock","IsShared":true,"TransformmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DoorAnimation","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"UnderGround","IsShared":true,"Int32mValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"AnimatorObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"AttackCollider","IsShared":true,"CollidermValue":2},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"DoorLock","IsShared":true,"TransformmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DoorAnimation","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"UnderGround","IsShared":true,"Int32mValue":0},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanAttack","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -714,7 +701,7 @@ MonoBehaviour:
       Version: 1.7.7
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &1075568717
+--- !u!114 &350433202054048663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,17 +710,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5902329517855384453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b70877b93e16e6647bc7bedc7bb80ab0, type: 3}
+  m_Script: {fileID: 11500000, guid: d61092d46680dba4d9b6661eccc30386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpImage: {fileID: 2817155786727670999}
-  maxHp: 10
+  hp: 1
   onTakeDamagedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1258395185}
-        m_TargetAssemblyTypeName: _.Scripts.Enemy.AbilityContainer, Assembly-CSharp
-        m_MethodName: SetCanGetAbility
+      - m_Target: {fileID: 1075568717}
+        m_TargetAssemblyTypeName: KeyMonsterBase, Assembly-CSharp
+        m_MethodName: OnTakeDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -743,9 +729,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onStunEvent:
-    m_PersistentCalls:
-      m_Calls: []
   onDiedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -762,9 +745,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityType: 5
-  afterDestroyObject: {fileID: 0}
-  offSet: {x: 0, y: 0, z: 0}
-  canGetAbilty: 1
+  canGetAbilty: 0
+  onGetAbiltyEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1075568717}
+        m_TargetAssemblyTypeName: KeyMonsterBase, Assembly-CSharp
+        m_MethodName: OnGetAbiltyEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1075568717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902329517855384453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70877b93e16e6647bc7bedc7bb80ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5902329517897954122
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ public class BossAEndPerformance : MonoBehaviour
 {
     void Start()
     {
-        TimeLineController.Instance.PlayTimeLine(2);
 
     }
 }

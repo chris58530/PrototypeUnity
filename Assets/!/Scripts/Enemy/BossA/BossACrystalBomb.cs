@@ -22,7 +22,10 @@ namespace @_.Scripts.Enemy.BossA
 
             Vector3 offset = new Vector3(transform.position.x, 0, transform.position.z);
 
-           Instantiate(crystal[Random.Range(0, crystal.Length)], offset, Quaternion.identity);
+            Crystal crystalComponent =
+                Instantiate(crystal[Random.Range(0, crystal.Length)], offset, Quaternion.identity)
+                    .GetComponent<Crystal>();
+            crystalComponent.canRelife = false;
             Destroy(gameObject);
         }
 
@@ -31,9 +34,9 @@ namespace @_.Scripts.Enemy.BossA
             if (exploLayer != (exploLayer | (1 << other.gameObject.layer))) return;
 
 
-            GameObject obj =  Instantiate(explo, transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(explo, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            Destroy(obj,0.5f);
+            Destroy(obj, 0.5f);
         }
     }
 }
