@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 2034712047617236536}
   - component: {fileID: 531740665}
   - component: {fileID: 819885912782606956}
+  - component: {fileID: 834615429}
   m_Layer: 7
   m_Name: Base
   m_TagString: RemoveShield
@@ -597,7 +598,19 @@ MonoBehaviour:
       m_Calls: []
   onStunEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 834615429}
+        m_TargetAssemblyTypeName: _.Scripts.Enemy.AbilityContainer, Assembly-CSharp
+        m_MethodName: SetCanGetAbility
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDiedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -615,6 +628,35 @@ CapsuleCollider:
   m_Height: 10.760082
   m_Direction: 1
   m_Center: {x: 0, y: 5.5716662, z: -0.41683272}
+--- !u!114 &834615429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902329517855384453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityType: 7
+  canGetAbilty: 0
+  onGetAbiltyEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 531740665}
+        m_TargetAssemblyTypeName: RhinoBase, Assembly-CSharp
+        m_MethodName: OnDied
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5902329517897954122
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +943,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4768358833166867604}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &834615429
+--- !u!95 &8440338013499647400
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

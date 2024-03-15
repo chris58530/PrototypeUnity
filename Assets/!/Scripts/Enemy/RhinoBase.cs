@@ -1,16 +1,18 @@
 using System;
 using _.Scripts.Enemy;
 using _.Scripts.Interface;
+using BehaviorDesigner.Runtime;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class RhinoBase : Enemy, IDamageable,IShieldable
+public class RhinoBase : Enemy, IDamageable, IShieldable
 {
-    [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")]
-    [SerializeField] private bool isShield = true;
+    [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
+    private bool isShield = true;
+
     public Image hpImage;
 
     [SerializeField] private float maxHp;
@@ -19,6 +21,7 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
     private ShieldUI _shieldUI;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,44 +41,58 @@ public class RhinoBase : Enemy, IDamageable,IShieldable
     }
 
     public void OnTakeDamage(int value)
-    {        bt.SendEvent("OnTakeDamage");
+    {
+        onTakeDamagedEvent?.Invoke();
+        bt.SendEvent("OnTakeDamage");
 
-        if(isShield)
+        if (isShield)
         {
+           
             _shieldUI.HitShield();
             return;
         }
-        
-        _currentHp.Value -= value;
 
-        if (_currentHp.Value <= 0) OnDied();
+
+        if (_currentHp.Value <= 0)
+        {
+            OnDied();
+            return;
+        }
+
+        _currentHp.Value -= value;
+        if (_currentHp.Value <= 0)
+        {
+            OnStun();
+            onStunEvent?.Invoke();
+        }
     }
+
     public void OnDied()
     {
+        onDiedEvent?.Invoke();
+
         bt.SendEvent("OnDied");
-        Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnStun()
     {
-        // if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        // {
-        //     bt.SendEvent("OnStun");
-        //     Debug.Log($"{this.name} get stun collision on{other.gameObject.name}" );
-        // }
+        bt.SendEvent("OnStun");
     }
 
 
     public void OnTakeShield(int removeValue)
     {
         _shieldUI.BreakShield(0);
+        SharedBool _isShield = false;
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0)).Subscribe(_ => { bt.SetVariable("isShield", _isShield); })
+            .AddTo(this);
         isShield = false;
     }
 
     public void BossABigBombDie()
     {
         // bt.SendEvent("OnDied");
-        
+
         Destroy(gameObject);
     }
 

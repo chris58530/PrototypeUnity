@@ -19,6 +19,7 @@ namespace @_.Scripts.Player.Props
             MakeObject,
             Key,
             FakeKey,
+            BrokeWall,
         }
 
         [SerializeField, Header("Put the sword model to here")]
@@ -49,6 +50,7 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
             if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.Key);
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.FakeKey);
+            if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.BrokeWall);
         }
 
         public void ExecuteAblilty()
