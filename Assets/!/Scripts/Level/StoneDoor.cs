@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneDoor : MonoBehaviour, IDamageable
+public class StoneDoor : MonoBehaviour
 {
     [SerializeField] private GameObject destroyObj;
     [SerializeField] private ParticleSystem StoneBreakVFX;
@@ -14,14 +14,15 @@ public class StoneDoor : MonoBehaviour, IDamageable
         // if (StoneBreakVFX != null)
         //     Instantiate(StoneBreakVFX, transform.position, Quaternion.identity);
         StoneBreakVFX.Play();
-        AudioManager.Instance.PlaySFX("HitOnBigRock");
-        BoomStone.SetActive(true);
-        OnDied();
+// AudioManager.Instance.PlaySFX("HitOnBigRock");
+        // BoomStone.SetActive(true);
+
         
     }
 
-    public void OnDied()
+    public void Destroy()
     {
         Destroy(destroyObj);
+        Destroy(gameObject);
     }
 }

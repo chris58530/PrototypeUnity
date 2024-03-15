@@ -27,5 +27,10 @@ namespace _.Scripts.Enemy
         {
             canGetAbilty = canGet;
         }
+
+        public void DestroyGameObject()
+        {
+            Destroy(gameObject);
+        }
     }
 }

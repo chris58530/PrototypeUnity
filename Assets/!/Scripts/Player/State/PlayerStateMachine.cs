@@ -1,6 +1,7 @@
 using System;
 using _.Scripts.Event;
 using _.Scripts.Player.Props;
+using _.Scripts.Player.State.AbilityState;
 using UniRx;
 using UnityEngine;
 using UnityHFSM;
@@ -25,6 +26,8 @@ namespace _.Scripts.Player.State
         Roll,
         RollAttack,
 
+        StrengthAbility,
+        BreakWallAbility,
         KeyAbility,
     }
 
@@ -303,6 +306,14 @@ namespace _.Scripts.Player.State
             _hammerState.AddState(
                 PlayerState.KeyAbility, new KeyAbility(
                     _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+            _hammerState.AddState(
+                PlayerState.BreakWallAbility, new BreakWallAbility(
+                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+
+            _hammerState.AddState(
+                PlayerState.StrengthAbility, new StrengthAbility(
+                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+
 
             //Idle
             _hammerState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,

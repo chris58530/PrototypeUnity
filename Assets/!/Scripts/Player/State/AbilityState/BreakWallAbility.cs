@@ -3,9 +3,9 @@ using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
 
-namespace @_.Scripts.Player.State
+namespace @_.Scripts.Player.State.AbilityState
 {
-    public class KeyAbility : StateBase<PlayerState>
+    public class BreakWallAbility : StateBase<PlayerState>
     {
         private Animator _animator;
         private readonly PlayerInput _input;
@@ -14,7 +14,7 @@ namespace @_.Scripts.Player.State
         private PlayerBase _playerBase;
         private float _insertTime;
         private AbilitySystem _abilitySystem;
-        public KeyAbility(PlayerInput playerInput,
+        public BreakWallAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
             ,AbilitySystem abilitySystem,PlayerBase playerBase,
             bool needsExitTime,
