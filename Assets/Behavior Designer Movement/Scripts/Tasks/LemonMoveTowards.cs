@@ -24,7 +24,7 @@ public class LemonMoveTowards : Action
     {
         var position = Target();
         var distance = Vector3.Magnitude(transform.position - position);
-        _speed = distance * 2f;
+        _speed = distance * 1f;
      
         if (distance < arriveDistance.Value)
         {
