@@ -26,7 +26,7 @@ namespace @_.Scripts.Ability
                 effect.EnableKeyword("_EMISSION");
         }
 
-        public override void QuitAbilityAlgorithm(Transform transform)
+        public override void QuitAbilityAlgorithm()
         {
             if (effect != null)
                 effect.DisableKeyword("_EMISSION");

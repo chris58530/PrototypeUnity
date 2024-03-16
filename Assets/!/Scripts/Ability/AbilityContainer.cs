@@ -18,8 +18,14 @@ namespace _.Scripts.Enemy
         {
             if (!canGetAbilty)
                 return AbilityWeapon.AbilityType.None;
-            
+
             onGetAbiltyEvent?.Invoke();
+            return abilityType;
+        }
+
+//for check showing model not for change ability data SO
+        public AbilityWeapon.AbilityType CheckAbility()
+        {
             return abilityType;
         }
 

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using _.Scripts.Ability;
+using _.Scripts.Enemy;
 using _.Scripts.Interface;
 using JetBrains.Annotations;
 using UnityEngine;
 using UniRx;
+using UnityEngine.Serialization;
 
 namespace @_.Scripts.Player.Props
 {
@@ -25,16 +27,17 @@ namespace @_.Scripts.Player.Props
         [SerializeField, Header("Put the sword model to here")]
         private GameObject swordTransform;
 
-        [Tooltip("Put all the ability scriptable object to list")] [SerializeField]
-        private List<AbilityBase> abilityBase = new List<AbilityBase>();
+        [FormerlySerializedAs("abilityBase")]
+        [Tooltip("Put all the ability scriptable object to list")]
+        [SerializeField]
+        private List<AbilityBase> abilityBaseList = new List<AbilityBase>();
 
         private AbilityBase _currentAbilityBase;
-        private GameObject _currentInMouthObject;
 
         public AbilityType currentAbility = AbilityType.None;
 
-        [SerializeField] private Transform inMouthObjectTransform;
-        [SerializeField] private Transform quitAbilityObjectTransform;
+        [SerializeField] private GameObject[] inMouthObjectObjectList;
+
         private IDisposable _abilityTimer;
 
         private void Start()
@@ -46,11 +49,12 @@ namespace @_.Scripts.Player.Props
         private void Update()
         {
             //for test
-            if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.Strength);
-            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
-            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.Key);
-            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.FakeKey);
-            if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.BrokeWall);
+            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Strength);
+            // if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
+            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Key);
+            // if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.FakeKey);
+            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
+            if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
         }
 
         public void ExecuteAblilty()
@@ -63,14 +67,21 @@ namespace @_.Scripts.Player.Props
             _abilityTimer?.Dispose();
 
             if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm(quitAbilityObjectTransform);
+                _currentAbilityBase.QuitAbilityAlgorithm();
 
-            if (_currentInMouthObject != null)
-                Destroy(_currentInMouthObject);
+//make current ability containers gameObject visible 
 
-            foreach (var ability in abilityBase)
+            foreach (var abilityObject in inMouthObjectObjectList)
             {
-                //搜尋在身上的ability SO 資料 如果有就執行
+                if (abilityObject.GetComponent<IAbilityContainer>().CheckAbility() == getAbility)
+                    abilityObject.gameObject.SetActive(true);
+                else abilityObject.gameObject.SetActive(false);
+            }
+
+//check ability data SO is in abilityBaseList and accept the ability 
+
+            foreach (var ability in abilityBaseList)
+            {
                 if (ability.abilityType == getAbility)
                 {
                     _currentAbilityBase = ability;
@@ -80,15 +91,8 @@ namespace @_.Scripts.Player.Props
                     _currentAbilityBase.StartAbility();
                     AbilityWeaponAnimator.Instance?.PlayAnimation(_currentAbilityBase.animationName);
 
-                    //生成 inMouthObject
 
-                    _currentInMouthObject = Instantiate(_currentAbilityBase.inMouthObject,
-                        inMouthObjectTransform.position,
-                        inMouthObjectTransform.rotation);
-                    _currentInMouthObject.transform.parent = inMouthObjectTransform;
-
-
-                    //計算何時取消能力
+                    //caculate when the aiblity is over
                     _abilityTimer = Observable.EveryUpdate().First()
                         .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
                         .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);
@@ -97,9 +101,9 @@ namespace @_.Scripts.Player.Props
                     return;
                 }
             }
-            //搜尋在身上的ability SO 資料 如果沒有就換成 none
 
-            Debug.Log("null current ability");
+            //if the ability is null the change to abilityType none
+            Debug.LogError("null current ability");
             ChangeAbility(AbilityType.None);
         }
 
@@ -116,7 +120,7 @@ namespace @_.Scripts.Player.Props
         private void OnDisable()
         {
             if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm(quitAbilityObjectTransform);
+                _currentAbilityBase.QuitAbilityAlgorithm();
         }
     }
 }

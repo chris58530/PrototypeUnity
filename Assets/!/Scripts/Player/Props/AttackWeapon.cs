@@ -9,6 +9,8 @@ namespace @_.Scripts.Player.Props
         [SerializeField, Header("Put the sword model to here")]
         private GameObject swordTransform;
 
+        [SerializeField] private LayerMask mask;
+
         // [Header("On Hit Effect")] [SerializeField]
         // private ParticleSystem onHitEffect;
 
@@ -25,7 +27,7 @@ namespace @_.Scripts.Player.Props
 
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             //Enemy layer
-            if (other.gameObject.layer != 7) return;
+            if ((mask & (1 << other.gameObject.layer)) == 0) return;
 
             damageObj.OnTakeDamage(attackValue);
             Debug.Log("攻擊了 : " + attackValue);
@@ -36,6 +38,14 @@ namespace @_.Scripts.Player.Props
 
             // var closestPoint = other.bounds.ClosestPoint(transform.position);
             // Instantiate(onHitEffect, closestPoint, Quaternion.identity);
+        }
+
+        public void AddLayerFromMask(bool isAdd, string layerName)
+        {
+            if (isAdd)
+                mask |= LayerMask.GetMask(layerName);
+            else
+                mask &= ~LayerMask.GetMask(layerName);
         }
     }
 }

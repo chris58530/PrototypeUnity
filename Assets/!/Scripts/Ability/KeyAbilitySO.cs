@@ -21,9 +21,10 @@ namespace @_.Scripts.Ability
         {
         }
 
-        public override void QuitAbilityAlgorithm(Transform transform)
+        public override void QuitAbilityAlgorithm()
         {
             // Instantiate(keyMonster, transform.position, transform.rotation);
+            Debug.Log("------玩家血量加一!!------");
         }
 
         public override void TriggerEffect(Collider other)

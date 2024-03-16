@@ -1,3 +1,4 @@
+using _.Scripts.Player.Props;
 using UnityEngine;
 
 namespace @_.Scripts.Ability
@@ -14,20 +15,21 @@ namespace @_.Scripts.Ability
 
         public override void StartAbility()
         {
-            GameObject.Find("AttackCollider").tag = "RemoveShield";
+            GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(true,"Breakable");
         }
 
-        public override void QuitAbilityAlgorithm(Transform transform)
+        public override void QuitAbilityAlgorithm()
         {
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
-            GameObject.Find("AttackCollider").tag = "Sword";
+            GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false,"Breakable");
+
+            Debug.Log("------玩家血量加一!!------");
+
         }
 
         public override void TriggerEffect(Collider other)
         {
-            if (other.gameObject.TryGetComponent<StoneDoor>(out var door))
-            {
-            }
+          
         }
     }
 }

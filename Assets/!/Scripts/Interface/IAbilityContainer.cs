@@ -5,5 +5,6 @@ namespace @_.Scripts.Interface
     public interface IAbilityContainer
     {
         public AbilityWeapon.AbilityType GetAbility();
+        public AbilityWeapon.AbilityType CheckAbility();
     }
 }

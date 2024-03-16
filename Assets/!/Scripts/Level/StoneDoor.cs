@@ -16,8 +16,6 @@ public class StoneDoor : MonoBehaviour
         StoneBreakVFX.Play();
 // AudioManager.Instance.PlaySFX("HitOnBigRock");
         // BoomStone.SetActive(true);
-
-        
     }
 
     public void Destroy()
