@@ -30,7 +30,8 @@ namespace _.Scripts.Player.State
         StrengthAbility,
         BreakWallAbility,
         KeyAbility,
-        Fire,
+        FireAbility,
+        DashAbility,
     }
 
     public enum SuperState
@@ -323,8 +324,15 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
 
             _hammerState.AddState(
-                PlayerState.Fire, new FireAbility(
+                PlayerState.FireAbility, new FireAbility(
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
+            _hammerState.AddState(
+                PlayerState.DashAbility, new DashAbility(
+                    _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, false));
+            
+            
+            
+            
 
             //Idle
             _hammerState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
@@ -343,6 +351,9 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2 &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.None);
+            
+            
+            
 
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.KeyAbility,
                 transition => _input.IsPressedAttack &&
@@ -356,11 +367,29 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.QuityAbility,
                 transition => _input.IsPressedAbility &&
                               _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None);
+            
+            _hammerState.AddTransition(PlayerState.Idle, PlayerState.DashAbility,
+                transition => _input.IsPressedRoll &&
+                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
 
             _hammerState.AddTransition(PlayerState.InsertSword, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.KeyAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.QuityAbility, PlayerState.Idle);
+            _hammerState.AddTransition(PlayerState.DashAbility, PlayerState.Idle);
+            
+            
+            
+            
+            
             //Walk
+            _hammerState.AddTransition(PlayerState.Walk, PlayerState.DashAbility,
+                transition => _input.IsPressedRoll &&
+                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
+            
+            
+            
+            
+            
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
 

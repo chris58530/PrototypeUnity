@@ -11,7 +11,6 @@ namespace @_.Scripts.Ability
         public AbilityWeaponAnimator.AnimationName animationName;
         public int damage;
         public int lifeTime;
-        public GameObject inMouthObject;
 
         public abstract void AbilityAlgorithm();
         public abstract void StartAbility();

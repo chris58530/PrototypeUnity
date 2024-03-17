@@ -62,12 +62,11 @@ namespace _.Scripts.Player
 
         public void Roll()
         {
-
             finsihRoll = false;
             _rollTimer?.Dispose();
             // transform.tag = "Undamaged";
 
-            #region PerformDash
+            #region PerformRoll
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             LayerMask mask = 1 << LayerMask.NameToLayer("DashDetect");
@@ -108,6 +107,14 @@ namespace _.Scripts.Player
             }
 
             transform.tag = "Player";
+        }
+
+        public void Dash(float distance)
+        {
+            float originGravity = gravity;
+            gravity = 0;
+            _controller.Move(transform.forward * distance);
+            gravity = originGravity;
         }
 
         public void Fall()

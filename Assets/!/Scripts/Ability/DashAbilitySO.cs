@@ -4,16 +4,15 @@ using UnityEngine;
 
 namespace @_.Scripts.Ability
 {
-    [CreateAssetMenu(fileName = "FakeKeyAbilityData", menuName = "Ability/FakeKeyAbility", order = 6)]
-    public class FakeKeyAbilitySO : AbilityBase
+    [CreateAssetMenu(fileName = "DashAbilityData", menuName = "Ability/DashAbility", order = 6)]
+    public class DashAbilitySO : AbilityBase
     {
-        public GameObject fakeKeyMonster;
 
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do 
 
-            Debug.Log("Use Fake Key Ability");
+            Debug.Log("Use Dash Ability");
         }
 
         public override void StartAbility()
@@ -22,12 +21,10 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm()
         {
-            // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
         }
 
         public override void TriggerEffect(Collider other)
         {
-            //OnTrigger enemy will do 
        
         }
     }

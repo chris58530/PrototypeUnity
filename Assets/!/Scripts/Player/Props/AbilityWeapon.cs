@@ -20,7 +20,7 @@ namespace @_.Scripts.Player.Props
             Ice,
             MakeObject,
             Key,
-            FakeKey,
+            Dash,
             BrokeWall,
         }
 
@@ -49,12 +49,13 @@ namespace @_.Scripts.Player.Props
         private void Update()
         {
             //for test
-            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Strength);
-            // if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.MakeObject);
-            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Key);
-            // if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.FakeKey);
-            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
+
+            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
+            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
+
+            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
+            if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
         }
 
         public void ExecuteAblilty()

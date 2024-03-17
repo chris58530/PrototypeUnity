@@ -15,6 +15,12 @@ public class EnemyEffect : MonoBehaviour
     [SerializeField] private ParticleSystem stunParticle;
     [SerializeField] private ParticleSystem absortableEffcet;
 
+    private void Start()
+    {
+        stunParticle.Stop();
+        absortableEffcet.Stop();
+    }
+
     public void SetEmission()
     {
         for (int i = 0; i < _renderers.Length; i++)
