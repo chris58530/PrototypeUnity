@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TorchArea : MonoBehaviour
 {
+    
+    //Set goblin dash
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<IDashable>(out var target))

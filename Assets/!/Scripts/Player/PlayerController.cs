@@ -117,6 +117,22 @@ namespace _.Scripts.Player
             gravity = originGravity;
         }
 
+        public void FaceToMousePos()
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var layerMask = 1 << 9;
+            RaycastHit hit;
+            var hitpoint = Vector3.zero;
+            if (Physics.Raycast(ray, out hit, 1000, layerMask))
+            {
+                hitpoint = hit.point;
+                hitpoint.y = transform.position.y;
+                transform.LookAt(hitpoint);
+            }
+            transform.LookAt(hitpoint);
+
+        }
+
         public void Fall()
         {
             if (IsGround) return;

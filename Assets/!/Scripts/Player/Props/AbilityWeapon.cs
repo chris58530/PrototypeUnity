@@ -22,6 +22,7 @@ namespace @_.Scripts.Player.Props
             Key,
             Dash,
             BrokeWall,
+            Gun,
         }
 
         [SerializeField, Header("Put the sword model to here")]
@@ -56,11 +57,14 @@ namespace @_.Scripts.Player.Props
 
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
             if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
+            if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
         }
 
         public void ExecuteAblilty()
         {
             _currentAbilityBase.AbilityAlgorithm();
+          
+
         }
 
         public void ChangeAbility(AbilityType getAbility)

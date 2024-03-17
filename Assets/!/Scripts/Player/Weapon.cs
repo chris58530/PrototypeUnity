@@ -11,6 +11,7 @@ namespace _.Scripts.Player
     {
         protected static int attackValue;
         protected static Action<Collider> attackAction;
+      
 
     }
 }

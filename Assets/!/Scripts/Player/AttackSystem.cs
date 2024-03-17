@@ -40,6 +40,11 @@ namespace _.Scripts.Player
 
         public void Attack()
         {
+            UseNormalAttack();
+        }
+
+        private void UseNormalAttack()
+        {
             chanceTimer?.Dispose();
 
             //sword effect
@@ -94,5 +99,6 @@ namespace _.Scripts.Player
         {
             attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
         }
+        
     }
 }

@@ -7,7 +7,6 @@ namespace _.Scripts.Player
     public  class PlayerAttackSystem: MonoBehaviour
     {
         protected IDisposable chanceTimer;
-        protected IDisposable swordLevelTimer;
 
         protected PlayerBase playerBase;
         protected AttackWeapon attackWeapon;

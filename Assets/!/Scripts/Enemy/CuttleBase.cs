@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CuttleBase : Enemy, IDamageable
 {
-    public Image hpImage;
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
@@ -13,7 +12,6 @@ public class CuttleBase : Enemy, IDamageable
     private void Start()
     {
         Initialize();
-        _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
     }
 
     void Initialize()
@@ -32,12 +30,5 @@ public class CuttleBase : Enemy, IDamageable
     {
         bt.SendEvent("OnDied");
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-        {
-            bt.SendEvent("OnStun");
-        }
-    }
+   
 }

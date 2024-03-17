@@ -24,10 +24,6 @@ namespace @_.Scripts.Player.Props
             CancelAttack();
         }
 
-        private void Update()
-        {
-            _abilityWeapon.ExecuteAblilty();
-        }
 
         public void Attack()
         {
