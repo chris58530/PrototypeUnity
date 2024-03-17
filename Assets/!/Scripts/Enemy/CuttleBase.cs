@@ -3,7 +3,7 @@ using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-public class CuttleFishBase : Enemy, IDamageable
+public class CuttleBase : Enemy, IDamageable
 {
     public Image hpImage;
 
