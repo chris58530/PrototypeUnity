@@ -20,13 +20,17 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm()
         {
-            Debug.Log("------玩家血量加一!!------");
 
         }
         public override void TriggerEffect(Collider other)
         {
             //OnTrigger enemy will do 
-            Debug.Log("Use fire TriggerEffect ");
+            if (other.gameObject.TryGetComponent<Torch>(out var target))
+            {
+                target.OpenTorchLight();
+                Debug.Log("Use fire TriggerEffect ");
+            }
+
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4225277502203060870}
   - component: {fileID: 8357259670621782117}
   - component: {fileID: 7530024854187679089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,6 +115,39 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &2297592568663795410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2866150230088396088}
+  m_Layer: 7
+  m_Name: OpenFire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2866150230088396088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297592568663795410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4785791972462446469}
+  - {fileID: 8496698761929806948}
+  m_Father: {fileID: 5872834673436378672}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3694219498975756644
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,9 +159,8 @@ GameObject:
   - component: {fileID: 7714875145463795973}
   - component: {fileID: 4938125009217112541}
   - component: {fileID: 4059173870810332951}
-  - component: {fileID: 8266624329486522796}
-  m_Layer: 0
-  m_Name: Cube
+  m_Layer: 7
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,19 +231,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8266624329486522796
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3694219498975756644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4785791972462446470
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +242,8 @@ GameObject:
   - component: {fileID: 4785791972462446469}
   - component: {fileID: 4785791972462446468}
   - component: {fileID: 4785791972462446471}
-  m_Layer: 20
-  m_Name: FireMan (1)
+  m_Layer: 7
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,14 +258,14 @@ Transform:
   m_GameObject: {fileID: 4785791972462446470}
   m_LocalRotation: {x: -0.06138853, y: -0.704437, z: -0.704437, w: 0.06138853}
   m_LocalPosition: {x: 0, y: 1.3199997, z: 0}
-  m_LocalScale: {x: 0.60000014, y: 0.60000014, z: 0.6}
+  m_LocalScale: {x: 0.6000002, y: 0.6000002, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4225277502203060870}
   - {fileID: 7332061385321976509}
   - {fileID: 3204805811529055789}
-  m_Father: {fileID: 5872834673436378672}
-  m_RootOrder: 1
+  m_Father: {fileID: 2866150230088396088}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -170.039}
 --- !u!198 &4785791972462446468
 ParticleSystem:
@@ -5045,7 +5064,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5872834673436378672}
-  m_Layer: 0
+  - component: {fileID: 7235157487226238774}
+  - component: {fileID: 7946073416704273486}
+  - component: {fileID: 28007370267455465}
+  m_Layer: 7
   m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5065,10 +5087,178 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7714875145463795973}
-  - {fileID: 4785791972462446469}
+  - {fileID: 2866150230088396088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7235157487226238774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840473525080572425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4497213, y: 4.206712, z: 1.6827605}
+  m_Center: {x: -0.029329777, y: 1.6033549, z: -0.022758633}
+--- !u!114 &7946073416704273486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840473525080572425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61092d46680dba4d9b6661eccc30386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  onTakeDamagedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 28007370267455465}
+        m_TargetAssemblyTypeName: Torch, Assembly-CSharp
+        m_MethodName: CloseTorchLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &28007370267455465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840473525080572425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b312fa834f20a4b8e1f3499cb24442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openFire: {fileID: 2297592568663795410}
+--- !u!1 &5480307480979458066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8496698761929806948}
+  - component: {fileID: 1101550631994152277}
+  - component: {fileID: 1001840675205236197}
+  - component: {fileID: 8924787255352455274}
+  - component: {fileID: 2153631989905383247}
+  m_Layer: 7
+  m_Name: AreaCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8496698761929806948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480307480979458066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 60.202236, y: 60.202236, z: 60.202236}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2866150230088396088}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1101550631994152277
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480307480979458066}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1001840675205236197
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480307480979458066}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 090c3e97eadf6494f9906ffa6ea0e05c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &8924787255352455274
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480307480979458066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2153631989905383247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480307480979458066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82856a9e5cb71e443882d2578b00e64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inAreaDashableObject: []
 --- !u!1 &7068789899908236723
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,7 +5270,7 @@ GameObject:
   - component: {fileID: 7332061385321976509}
   - component: {fileID: 1035364429402234323}
   - component: {fileID: 7174045320316771971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sub Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5195,7 +5385,7 @@ GameObject:
   - component: {fileID: 3204805811529055789}
   - component: {fileID: 6614383922806278001}
   - component: {fileID: 8969142624371865734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sub Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

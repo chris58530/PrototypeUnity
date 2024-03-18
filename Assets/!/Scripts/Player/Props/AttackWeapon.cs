@@ -23,13 +23,20 @@ namespace @_.Scripts.Player.Props
 
         private void OnTriggerEnter(Collider other)
         {
-            attackAction?.Invoke(other);
+           
 
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             //Enemy layer
             if ((mask & (1 << other.gameObject.layer)) == 0) return;
 
+            
+            //Damage frist then use attackActions effect attack
             damageObj.OnTakeDamage(attackValue);
+            //Damage frist then use attackActions effect attack
+            attackAction?.Invoke(other);
+            
+            
+            
             Debug.Log("攻擊了 : " + attackValue);
             PlayerActions.onHitEnemy?.Invoke();
             //dubug

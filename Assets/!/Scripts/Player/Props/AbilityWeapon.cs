@@ -58,13 +58,12 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
             if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
+            if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
         }
 
         public void ExecuteAblilty()
         {
             _currentAbilityBase.AbilityAlgorithm();
-          
-
         }
 
         public void ChangeAbility(AbilityType getAbility)
