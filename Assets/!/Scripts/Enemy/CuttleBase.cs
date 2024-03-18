@@ -3,11 +3,13 @@ using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class CuttleBase : Enemy, IDamageable
 {
-
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed;
 
     private void Start()
     {
@@ -26,9 +28,11 @@ public class CuttleBase : Enemy, IDamageable
 
         if (_currentHp.Value <= 0) OnDied();
     }
+
     public void OnDied()
     {
         bt.SendEvent("OnDied");
     }
-   
+
+ 
 }
