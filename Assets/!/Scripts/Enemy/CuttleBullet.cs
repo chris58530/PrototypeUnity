@@ -22,5 +22,6 @@ public class CuttleBullet : MonoBehaviour
     {
         if ((mask & (1 << other.gameObject.layer)) == 0) return;
         Destroy(gameObject);
+        Debug.Log("touch");
     }
 }
