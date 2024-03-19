@@ -34,7 +34,6 @@ public class CuttleBase : Enemy, IDamageable
             return;
         }
 
-        bt.SendEvent("GetHurt");
         _currentHp.Value -= value;
         if (_currentHp.Value <= 0)
         {
