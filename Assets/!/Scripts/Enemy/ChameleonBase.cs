@@ -2,10 +2,7 @@ using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-
-using System.Collections;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 
 public class ChameleonBase : Enemy, IDamageable
@@ -19,7 +16,6 @@ public class ChameleonBase : Enemy, IDamageable
     private void Start()
     {
         Initialize();
-        _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
     }
 
     void Initialize()

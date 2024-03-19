@@ -34,9 +34,9 @@ namespace _.Scripts.Enemy
             canGetAbilty = canGet;
         }
 
-        public void DestroyGameObject()
+        public void DestroyGameObject(GameObject obj)
         {
-            Destroy(gameObject);
+            Destroy(obj);
         }
     }
 }

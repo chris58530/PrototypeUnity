@@ -34,7 +34,7 @@ namespace @_.Scripts.Player.State.AbilityState
         public override void OnEnter()
         {
             _timer = new Timer();
-      
+
             _animator.Play("UseAbility");
             _controller.FaceToMousePos();
             // _animator.Play("Eat");
@@ -42,17 +42,17 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > .5f)
-            {
-                fsm.StateCanExit();
-            }
+            _controller.FaceToMousePos();
 
+            if (_input.IsReleasedAttack &&_timer.Elapsed > 0.5f)
+            {
+                    fsm.StateCanExit();
+            }
         }
 
         public override void OnExit()
         {
             _abilityWeapon.ExecuteAblilty();
-
         }
     }
 }
