@@ -12,7 +12,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
     private bool isShield = true;
 
-    public Image hpImage;
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
@@ -30,7 +29,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     private void Start()
     {
         Initialize();
-        // _currentHp.Subscribe(_ => { hpImage.fillAmount = _currentHp.Value / maxHp; }).AddTo(this);
         BossABomb.bossABigBombEvent += BossABigBombDie;
     }
 
