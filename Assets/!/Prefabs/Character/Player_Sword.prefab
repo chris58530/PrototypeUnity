@@ -1337,13 +1337,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordTransform: {fileID: 5879314652902246116}
-  abilityBase:
+  abilityBaseList:
   - {fileID: 11400000, guid: eb6cd873b49cc3947807d1c5160a87b2, type: 2}
   - {fileID: 11400000, guid: b3edcc8f245082d4baf0c5b1e86d9e71, type: 2}
   - {fileID: 11400000, guid: 2b12eb1240c84b4449c1f396ceca2799, type: 2}
   currentAbility: 0
-  inMouthObjectTransform: {fileID: 0}
-  quitAbilityObjectTransform: {fileID: 0}
+  inMouthObjectObjectList: []
 --- !u!1 &2434023633437217312
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,6 +2037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordTransform: {fileID: 5879314652902246116}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &6559911302172263288
 GameObject:
   m_ObjectHideFlags: 0
