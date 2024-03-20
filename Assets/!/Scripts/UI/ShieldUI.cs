@@ -21,7 +21,7 @@ public class ShieldUI : MonoBehaviour
         // _thisAni.Play("ShieldShaking");
 
 
-        StartCoroutine(ShakeAnimatorObjec());
+        // StartCoroutine(ShakeAnimatorObjec());
     }
 
     IEnumerator ShakeAnimatorObjec()

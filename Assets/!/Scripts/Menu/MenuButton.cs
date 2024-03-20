@@ -7,6 +7,11 @@ public class MenuButton : MonoBehaviour
 {
     public void OnClickStart()
     {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene("Level 1");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

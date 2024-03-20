@@ -40,7 +40,6 @@ namespace _.Scripts.Enemy.BossA
         {
             base.Awake();
             _shieldUI = GetComponentInChildren<ShieldUI>();
-
         }
 
         private void Start()
@@ -94,7 +93,7 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnTakeShield(int removeValue)
         {
-            _shieldUI.BreakShield(shieldValue-1);
+            _shieldUI.BreakShield(shieldValue - 1);
             shieldValue -= removeValue;
         }
 
@@ -107,6 +106,8 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnDied()
         {
+            GameManager.Instance.SwitchScene(0, 2);
+
             ani.Play("Die");
             GetComponent<AbilityContainer>().SetCanGetAbility(true);
             bt.enabled = false;
@@ -145,8 +146,8 @@ namespace _.Scripts.Enemy.BossA
 
         public void EndPerformance()
         {
-            TimeLineController.Instance.PlayTimeLine(2);
-
+            //0320發布之後要重啟
+            // TimeLineController.Instance.PlayTimeLine(2);
         }
 
         public void BigBombTransition(bool isAppeared)
