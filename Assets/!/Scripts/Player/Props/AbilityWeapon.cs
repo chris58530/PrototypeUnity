@@ -50,15 +50,15 @@ namespace @_.Scripts.Player.Props
         private void Update()
         {
             //for test
-            // if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
-            //
-            // if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
-            // if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
-            //
-            // if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
-            // if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
-            // if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
-            // if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
+            if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
+            
+            if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
+            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
+            
+            if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
+            if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
+            if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
+            if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
         }
 
         public void ExecuteAblilty()
