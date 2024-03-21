@@ -106,8 +106,6 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnDied()
         {
-            GameManager.Instance.SwitchScene(0, 2);
-
             ani.Play("Die");
             GetComponent<AbilityContainer>().SetCanGetAbility(true);
             bt.enabled = false;

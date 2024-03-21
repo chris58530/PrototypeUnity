@@ -18,7 +18,7 @@ namespace _.Scripts.Enemy.TypeA
         public override void OnStart()
         {
             _success = false;
-            controller.PreviewThrow(player);
+            // controller.PreviewThrow(player);
             Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(trackTime)).First().Subscribe(_ => { _success = true; })
                 .AddTo(this.gameObject);
         }

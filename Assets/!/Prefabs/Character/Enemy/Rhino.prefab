@@ -565,7 +565,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DestoryThis","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"FristSeePlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isShield","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Collider","IsShared":true,"CollidermValue":3}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DestoryThis","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"FristSeePlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isShield","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Collider","IsShared":true,"CollidermValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RihnoAttackVFX","IsShared":true,"GameObjectmValue":4}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -576,6 +576,7 @@ MonoBehaviour:
         - {fileID: 5902329517855384453}
         - {fileID: 5902329517855384453}
         - {fileID: 819885912782606956}
+        - {fileID: 5668528827197311829}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -5242,6 +5243,107 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &1743319713176318372 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1743319713325364704, guid: 3a1dc8f6cdcb3a941a01dee6e82587c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 461292612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &926576095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1743319713176318372}
+    m_Modifications:
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16666663
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.16666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6927685
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.72116
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000006589856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000006432696
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865673, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865674, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_Name
+      value: RihnoAttackVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668528827044865674, guid: 1bc363f0aa8e97d4ea990e643333d552,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bc363f0aa8e97d4ea990e643333d552, type: 3}
+--- !u!1 &5668528827197311829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5668528827044865674, guid: 1bc363f0aa8e97d4ea990e643333d552,
+    type: 3}
+  m_PrefabInstance: {fileID: 926576095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4768358833166867604
 PrefabInstance:
   m_ObjectHideFlags: 0
