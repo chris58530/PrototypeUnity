@@ -18,30 +18,32 @@ public class Crystal : MonoBehaviour
 
     public void OnDied()
     {
+        BossABomb.bossABigBombEvent -= OnDied;
+
+        modelObject.SetActive(false);
+
         GameObject obj = Instantiate(detroyCrystalObject, transform.position + detroyCrystalObjectOffset,
             transform.rotation);
         Destroy(obj, 3);
         GetComponent<Collider>().enabled = false;
-        ReLife();
+        if (canRelife) ReLife();
     }
 
     public void OnAbosrt()
     {
-        absortObject.Play();
-        GetComponent<Collider>().enabled = false;
+        modelObject.SetActive(false);
 
-        ReLife();
+        absortObject.Play();
+
+        GetComponent<Collider>().enabled = false;
+        
+        Destroy(gameObject, 3);
+
+        if (canRelife) ReLife();
     }
 
     public void ReLife()
     {
-        modelObject.SetActive(false);
-        if (!canRelife)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(relifeTime)).Subscribe(_ =>
             {
                 modelObject.SetActive(true);
@@ -54,5 +56,14 @@ public class Crystal : MonoBehaviour
                 GetComponent<Collider>().enabled = true;
             })
             .AddTo(this);
+    }
+    private void OnEnable()
+    {
+        BossABomb.bossABigBombEvent += OnDied;
+    }
+
+    private void OnDisable()
+    {
+        BossABomb.bossABigBombEvent -= OnDied;
     }
 }

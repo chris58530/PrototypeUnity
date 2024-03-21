@@ -23,13 +23,5 @@ public class DamageableObject : MonoBehaviour, IDamageable
 
     }
 
-    private void OnEnable()
-    {
-        BossABomb.bossABigBombEvent += OnDied;
-    }
-
-    private void OnDisable()
-    {
-        BossABomb.bossABigBombEvent -= OnDied;
-    }
+ 
 }
