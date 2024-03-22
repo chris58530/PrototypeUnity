@@ -36,10 +36,9 @@ public class Crystal : MonoBehaviour
         absortObject.Play();
 
         GetComponent<Collider>().enabled = false;
-        
-        Destroy(gameObject, 3);
-
         if (canRelife) ReLife();
+        return;
+        Destroy(gameObject, 3);
     }
 
     public void ReLife()
@@ -57,6 +56,7 @@ public class Crystal : MonoBehaviour
             })
             .AddTo(this);
     }
+
     private void OnEnable()
     {
         BossABomb.bossABigBombEvent += OnDied;

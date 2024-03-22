@@ -13,6 +13,8 @@ public class CuttleBase : Enemy, IDamageable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
+
+    [SerializeField] private GameObject cuttleModel;
   
     private void Start()
     {
@@ -47,6 +49,7 @@ public class CuttleBase : Enemy, IDamageable
         onDiedEvent?.Invoke();
 
         bt.SendEvent("OnDied");
+        cuttleModel.SetActive(false);
     }
 
  
