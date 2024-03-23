@@ -24,7 +24,7 @@ public class Torch : MonoBehaviour
     public void CloseTorchLight()
     {
         _isOpenFire = false;
-        _spawnGoblinDisposable.Dispose();
+        _spawnGoblinDisposable?.Dispose();
         openFire.SetActive(false);
     }
 
