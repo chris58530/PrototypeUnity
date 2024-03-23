@@ -329,7 +329,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
             _hammerState.AddState(
                 PlayerState.DashAbility, new DashAbility(
-                    _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, false));
+                    _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
             _hammerState.AddState(
                 PlayerState.GunAbility, new GunAbility(
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
@@ -378,6 +378,9 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.GunAbility,
                 transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Gun);
+            _hammerState.AddTransition(PlayerState.Idle, PlayerState.DashAbility,
+                transition => _input.IsPressedAttack &&
+                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
 
             _hammerState.AddTransition(PlayerState.InsertSword, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.KeyAbility, PlayerState.Idle);
@@ -391,7 +394,7 @@ namespace _.Scripts.Player.State
             
             //Walk
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.DashAbility,
-                transition => _input.IsPressedRoll &&
+                transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
             
             

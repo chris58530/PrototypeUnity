@@ -33,14 +33,23 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnEnter()
         {
-            if (_input.Move)
-                _controller.FaceInputDireaction(_input);
+            _timer = new Timer();
+            _attackSystem.FaceMousePosition();
+            // if (_input.Move)
+            //     _controller.FaceInputDireaction(_input);
             _controller.Dash(15);
+            _animator.Play("Q1");
+            _attackSystem.Attack();
+
         }
 
         public override void OnLogic()
         {
 
+            if (_timer.Elapsed > 0.5f)
+            {
+                fsm.StateCanExit();
+            }
         }
 
         public override void OnExit()
