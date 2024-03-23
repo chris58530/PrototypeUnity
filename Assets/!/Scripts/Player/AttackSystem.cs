@@ -82,6 +82,12 @@ namespace _.Scripts.Player
             weaponCollider.GetComponent<Collider>().enabled = true;
         }
 
+        public void FaceMouseInputPosition()
+        {
+            transform.LookAt(GetDirection());
+
+        }
+
         public float AttackTime(int count)
         {
             float time = 0;
