@@ -12,8 +12,7 @@ namespace _.Scripts.Player
 {
     public class PlayerBase : MonoBehaviour, IDamageable, IKnockable
     {
-        [Header("CAN BE HURT for test")] [SerializeField]
-        private bool canHurt;
+        public bool canHurt;
 
         public int maxHpValue;
         [HideInInspector] public ReactiveProperty<int> currentHpValue = new ReactiveProperty<int>();

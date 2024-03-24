@@ -1,5 +1,6 @@
 using System;
 using _.Scripts.Event;
+using _.Scripts.Player;
 using UnityEngine;
 using _.Scripts.Tools;
 using UniRx;
@@ -9,9 +10,30 @@ namespace _.Scripts
 {
     public class GameManager : Singleton<GameManager>
     {
+        private PlayerInput _playerInput;
+        private PlayerBase _playerBase;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameObject player = GameObject.FindWithTag("Player");
+            _playerInput = player.GetComponent<PlayerInput>();
+            _playerBase = player.GetComponent<PlayerBase>();
+        }
+
         private void Start()
         {
             SystemActions.onSceneStart?.Invoke();
+        }
+
+        public void LockPlayerInput(bool islock)
+        {
+            _playerInput.enabled = islock;
+        }
+
+        public void LockPlayerHp(bool islock)
+        {
+            _playerBase.canHurt = islock;
         }
 
         public void SwitchScene(int num, float time)
