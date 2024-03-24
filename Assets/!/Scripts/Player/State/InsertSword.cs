@@ -40,7 +40,8 @@ namespace @_.Scripts.Player.State
             AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Azbsword);
 
             _insertTime = 0;
-            _abilitySystem.Attack();
+            _abilitySystem.Attack(); if (_input.Move)
+                _controller.FaceInputDireaction(_input);
         }
 
         public override void OnLogic()

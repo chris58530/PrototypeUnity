@@ -10,8 +10,9 @@ namespace @_.Scripts.Player.State
         private Timer _timer;
         private AttackSystem _attackSystem;
         private Animator _animator;
+        private readonly PlayerInput _input;
 
-        public ExtractSword(PlayerController controller,
+        public ExtractSword(PlayerInput playerInput,PlayerController controller,
             Animator animator, AttackSystem attackSystem,
             bool needsExitTime, bool isGhostState = false) : base(
             needsExitTime, isGhostState)
@@ -26,7 +27,8 @@ namespace @_.Scripts.Player.State
             Debug.Log("ExtractSword");
             DebugTools.StateText("ExtractSword");
             _timer = new Timer();
-
+            if (_input.Move)
+                _controller.FaceInputDireaction(_input);
          
         }
 

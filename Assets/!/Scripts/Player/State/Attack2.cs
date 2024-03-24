@@ -32,7 +32,8 @@ namespace _.Scripts.Player.State
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q2"), 0.1f);
             _animator.Play("Q2");
-            _attackSystem.Attack();
+            _attackSystem.Attack();      if (_input.Move)
+                _controller.FaceInputDireaction(_input);
 
         }
 

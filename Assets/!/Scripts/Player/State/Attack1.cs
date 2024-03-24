@@ -33,7 +33,8 @@ namespace _.Scripts.Player.State
             // _animator.CrossFade(Animator.StringToHash("Q1"), 0.1f);
             _animator.Play("Q1");
 
-            _attackSystem.Attack();
+            _attackSystem.Attack();      if (_input.Move)
+                _controller.FaceInputDireaction(_input);
         }
 
         public override void OnLogic()

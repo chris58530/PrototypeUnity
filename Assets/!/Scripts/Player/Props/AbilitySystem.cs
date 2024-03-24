@@ -29,7 +29,7 @@ namespace @_.Scripts.Player.Props
         {
             Observable.EveryFixedUpdate().First().Delay(TimeSpan.FromSeconds(0.04f)).Subscribe(_ =>
             {
-                transform.LookAt(GetDirection());
+                // transform.LookAt(GetDirection());
                 _abilityWeaponCollider.enabled = true;
             }).AddTo(this);
         }

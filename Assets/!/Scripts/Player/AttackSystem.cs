@@ -74,7 +74,6 @@ namespace _.Scripts.Player
                 attackCount++;
             else attackCount = 0;
 
-            transform.LookAt(GetDirection());
 
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ => { finishAttack = true; });
