@@ -144,8 +144,7 @@ namespace _.Scripts.Enemy.BossA
 
         public void EndPerformance()
         {
-            //0320發布之後要重啟
-            // TimeLineController.Instance.PlayTimeLine(2);
+            TimeLineManager.Instance.PlayTimeLine(1);
         }
 
         public void BigBombTransition(bool isAppeared)

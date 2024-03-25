@@ -3,6 +3,7 @@ using _.Scripts.Interface;
 using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(DamageableObject))]
 public class Crystal : MonoBehaviour
@@ -26,7 +27,13 @@ public class Crystal : MonoBehaviour
             transform.rotation);
         Destroy(obj, 3);
         GetComponent<Collider>().enabled = false;
-        if (canRelife) ReLife();
+        if (canRelife)
+        {
+            ReLife();
+            return;
+        }
+
+        Destroy(gameObject, Random.Range(0, 4));
     }
 
     public void OnAbosrt()
@@ -36,9 +43,13 @@ public class Crystal : MonoBehaviour
         absortObject.Play();
 
         GetComponent<Collider>().enabled = false;
-        if (canRelife) ReLife();
-        return;
-        Destroy(gameObject, 3);
+        if (canRelife)
+        {
+            ReLife();
+            return;
+        }
+
+        Destroy(gameObject, Random.Range(0, 4));
     }
 
     public void ReLife()

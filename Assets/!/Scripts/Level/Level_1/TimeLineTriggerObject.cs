@@ -10,15 +10,15 @@ public class TimeLineTriggerObject : MonoBehaviour
     private int timeLineNumber;
 
     [SerializeField] private bool repeat;
-    private bool _isExecuted;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!repeat && _isExecuted) return;
         if (!other.gameObject.TryGetComponent<PlayerInput>(out var player)) return;
-        
-        _isExecuted = true;
+
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
         Debug.Log($"Play number {timeLineNumber} TimeLine");
+        
+        if (repeat) return;
+        Destroy(gameObject);
     }
 }

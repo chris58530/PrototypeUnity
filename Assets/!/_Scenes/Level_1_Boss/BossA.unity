@@ -573,6 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 62074317}
   - component: {fileID: 62074318}
+  - component: {fileID: 62074319}
   m_Layer: 0
   m_Name: TimeLineManager
   m_TagString: Untagged
@@ -604,7 +605,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62074316}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7df230e8e4f06d48a1457b2dda77043, type: 3}
   m_Name: 
@@ -612,6 +613,21 @@ MonoBehaviour:
   introDirector: {fileID: 1256309166}
   endDirector: {fileID: 1129917262}
   quackTree: {fileID: 385412465}
+--- !u!114 &62074319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62074316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c022c36d74474eba08d74b0504e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playableDirectors:
+  - {fileID: 1256309166}
+  - {fileID: 1129917262}
 --- !u!1 &62710452
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +640,7 @@ GameObject:
   - component: {fileID: 62710456}
   - component: {fileID: 62710455}
   - component: {fileID: 62710454}
-  - component: {fileID: 62710457}
+  - component: {fileID: 62710458}
   m_Layer: 0
   m_Name: TimeLineActiveCollider
   m_TagString: Untagged
@@ -710,7 +726,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62710452}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &62710457
+--- !u!114 &62710458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -719,9 +735,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 62710452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c4e04eb3f27cb849b2ef45bd525ecb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8963c4feaabfdad47875fc923554a464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLineNumber: 0
+  repeat: 0
 --- !u!1 &72288868
 GameObject:
   m_ObjectHideFlags: 0
