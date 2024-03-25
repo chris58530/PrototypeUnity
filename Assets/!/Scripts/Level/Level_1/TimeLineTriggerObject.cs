@@ -10,20 +10,35 @@ public class TimeLineTriggerObject : MonoBehaviour
     private int timeLineNumber;
 
     [SerializeField] private bool repeat;
+    [SerializeField] private bool needConfrim;
 
     public bool CanConfirmTimeline;
+
+    private PlayerUseTimeLineUI _playerUseTimeLineUI;
 
     private void Update()
     {
         if (!CanConfirmTimeline) return;
-        
+
         ConfirmTimeline();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>()) return;
-        other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>().ShowCanConfirmImage(true);
+        if (!needConfrim)
+        {
+            TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
+            Debug.Log($"Play number {timeLineNumber} TimeLine");
+            if (repeat) return;
+
+            Destroy(gameObject);
+            return;
+        }
+
+        _playerUseTimeLineUI = other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>();
+        _playerUseTimeLineUI.ShowCanConfirmImage(true);
+        
         CanConfirmTimeline = true;
     }
 
@@ -31,7 +46,9 @@ public class TimeLineTriggerObject : MonoBehaviour
     {
         if (!other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>()) return;
 
-        other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>().ShowCanConfirmImage(false);
+
+        _playerUseTimeLineUI = other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>();
+        _playerUseTimeLineUI.ShowCanConfirmImage(false);
 
         CanConfirmTimeline = false;
     }
@@ -42,6 +59,9 @@ public class TimeLineTriggerObject : MonoBehaviour
 
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
         Debug.Log($"Play number {timeLineNumber} TimeLine");
+        
+        _playerUseTimeLineUI.ShowCanConfirmImage(false);
+
 
         if (repeat) return;
         Destroy(gameObject);
