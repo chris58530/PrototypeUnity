@@ -2,27 +2,47 @@ using System;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
-using _.Scripts.Tools;
+using Unity.VisualScripting;
 
-public class TimeLineManager : Singleton<TimeLineManager>
+public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 {
     [SerializeField] private PlayableDirector[] playableDirectors;
-    private PlayableDirector _currentDirector;
+    [HideInInspector] public PlayableDirector currentDirector;
+
+
+    public static Action onPlayTimelLine;
+    public static Action onQuitTimelLine;
 
     private void Update()
     {
-        if (_currentDirector == null) return;
-        if (_currentDirector.duration - 2 <= _currentDirector.time) return;
-        
-        if (Input.GetKey(KeyCode.Q))
-        {
-            _currentDirector.time += 0.05f;
-        }
+        if (currentDirector == null) return;
+
+        SpeedUpDirectors();
+        QuitTimeLineDetect();
     }
 
     public void PlayTimeLine(int num)
     {
-        _currentDirector = playableDirectors[num];
-        _currentDirector.Play();
+        onPlayTimelLine?.Invoke();
+        currentDirector = playableDirectors[num];
+        currentDirector.Play();
+    }
+
+    private void QuitTimeLineDetect()
+    {
+        if (currentDirector.time == 0)
+        {
+            onQuitTimelLine?.Invoke();
+        }
+    }
+
+    private void SpeedUpDirectors()
+    {
+        if (currentDirector.duration - 2 <= currentDirector.time) return;
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            currentDirector.time += 0.05f;
+        }
     }
 }
