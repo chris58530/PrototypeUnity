@@ -14,6 +14,8 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     public static Action onQuitTimelLine;
 
     private bool _isExecuteQuitAction;
+    [SerializeField] private int currentActiveDirectorNumber = 0;
+
 
     private void Update()
     {
@@ -25,6 +27,9 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     public void PlayTimeLine(int num)
     {
+        //Insure current time line is follow the flow
+        // if (num != currentActiveDirectorNumber) return;
+        currentActiveDirectorNumber++;
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
         currentDirector.Play();
@@ -53,6 +58,5 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private void OnEnable()
     {
-       
     }
 }

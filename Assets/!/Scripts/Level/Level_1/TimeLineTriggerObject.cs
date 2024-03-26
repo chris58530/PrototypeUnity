@@ -17,6 +17,7 @@ public class TimeLineTriggerObject : MonoBehaviour
 
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
     private bool _isPlaying;
+    private bool _isPlayed;
 
     private void Update()
     {
@@ -28,16 +29,17 @@ public class TimeLineTriggerObject : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (_isPlaying) return;
+        if (!repeat && _isPlayed) return;
+
         if (!other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>()) return;
         if (!needConfrim)
         {
             TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
             Debug.Log($"Play number {timeLineNumber} TimeLine");
-            if (repeat) return;
+            _isPlayed = true;
 
-            Destroy(gameObject);
-            return;
         }
+
 
         _playerUseTimeLineUI = other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>();
         _playerUseTimeLineUI.ShowCanConfirmImage(true);
@@ -60,15 +62,13 @@ public class TimeLineTriggerObject : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Q)) return;
         if (_isPlaying) return;
+        _isPlayed = true;
 
         _isPlaying = true;
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
         Debug.Log($"Play number {timeLineNumber} TimeLine");
 
         _playerUseTimeLineUI.ShowCanConfirmImage(false);
-
-        if (repeat) return;
-        Destroy(gameObject);
     }
 
 

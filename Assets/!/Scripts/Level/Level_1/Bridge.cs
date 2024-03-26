@@ -16,7 +16,6 @@ public class Bridge : MonoBehaviour, ITaskResult
 
     public void DoResult()
     {
-        Debug.Log("dsdsada");
         if (!isPull)
         {
             Observable.EveryUpdate().First().Subscribe(_ =>
@@ -26,13 +25,14 @@ public class Bridge : MonoBehaviour, ITaskResult
                     puller.GetComponent<Animator>().Play("PullDown");
                     AudioManager.Instance.PlaySFX("PullingController");
                     isPull = true; // 設置標誌，表示已經播放過 PullingController 音效
+                    
+                    
                 }
 
-                Observable.Timer(TimeSpan.FromSeconds(2)).Subscribe(__ =>
+                Observable.Timer(TimeSpan.FromSeconds(2)).First().Subscribe(__ =>
                 {
                     brige.GetComponent<Animator>().Play("PutDownBridge");
                     AudioManager.Instance.PlaySFX("OpenBridge");
-                    Debug.Log("ppppppppppppppppppppppp");
                     Destroy(gameObject);
                 }).AddTo(this);
             }).AddTo(this);
