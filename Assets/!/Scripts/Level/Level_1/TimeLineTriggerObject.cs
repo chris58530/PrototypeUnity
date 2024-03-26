@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Player;
+using UniRx;
 using UnityEngine;
 
 public class TimeLineTriggerObject : MonoBehaviour
@@ -15,6 +16,7 @@ public class TimeLineTriggerObject : MonoBehaviour
     public bool CanConfirmTimeline;
 
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
+    private bool _isPlaying;
 
     private void Update()
     {
@@ -23,8 +25,9 @@ public class TimeLineTriggerObject : MonoBehaviour
         ConfirmTimeline();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        if (_isPlaying) return;
         if (!other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>()) return;
         if (!needConfrim)
         {
@@ -38,7 +41,7 @@ public class TimeLineTriggerObject : MonoBehaviour
 
         _playerUseTimeLineUI = other.gameObject.GetComponentInChildren<PlayerUseTimeLineUI>();
         _playerUseTimeLineUI.ShowCanConfirmImage(true);
-        
+
         CanConfirmTimeline = true;
     }
 
@@ -56,14 +59,32 @@ public class TimeLineTriggerObject : MonoBehaviour
     public void ConfirmTimeline()
     {
         if (!Input.GetKeyDown(KeyCode.Q)) return;
+        if (_isPlaying) return;
 
+        _isPlaying = true;
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
         Debug.Log($"Play number {timeLineNumber} TimeLine");
-        
-        _playerUseTimeLineUI.ShowCanConfirmImage(false);
 
+        _playerUseTimeLineUI.ShowCanConfirmImage(false);
 
         if (repeat) return;
         Destroy(gameObject);
+    }
+
+
+    private void NotPlaying()
+    {
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ => { _isPlaying = false; })
+            .AddTo(this);
+    }
+
+    private void OnEnable()
+    {
+        TimeLineManager.onQuitTimelLine += NotPlaying;
+    }
+
+    private void OnDisable()
+    {
+        TimeLineManager.onQuitTimelLine -= NotPlaying;
     }
 }

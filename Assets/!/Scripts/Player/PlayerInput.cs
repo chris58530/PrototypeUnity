@@ -21,15 +21,30 @@ namespace _.Scripts.Player
         private void Awake()
         {
             _input = new PlayerCustomInput();
+            OpenInput();
         }
 
         private void OnEnable()
         {
-            _input.Enable();
+            TimeLineManager.onPlayTimelLine += CloseInput;
+            TimeLineManager.onQuitTimelLine += OpenInput;
         }
 
 
         private void OnDisable()
+        {
+            TimeLineManager.onPlayTimelLine -= CloseInput;
+            TimeLineManager.onQuitTimelLine -= OpenInput;
+
+            CloseInput();
+        }
+
+        private void OpenInput()
+        {
+            _input.Enable();
+        }
+
+        private void CloseInput()
         {
             _input.Disable();
         }

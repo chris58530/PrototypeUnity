@@ -13,12 +13,14 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     public static Action onPlayTimelLine;
     public static Action onQuitTimelLine;
 
+    private bool _isExecuteQuitAction;
+
     private void Update()
     {
         if (currentDirector == null) return;
+        if (_isExecuteQuitAction) return;
 
         SpeedUpDirectors();
-        QuitTimeLineDetect();
     }
 
     public void PlayTimeLine(int num)
@@ -26,14 +28,17 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
         currentDirector.Play();
+        _isExecuteQuitAction = false;
+        currentDirector.stopped += QuitTimeLineDetect;
     }
 
-    private void QuitTimeLineDetect()
+    private void QuitTimeLineDetect(PlayableDirector playableDirector)
     {
-        if (currentDirector.time == 0)
-        {
-            onQuitTimelLine?.Invoke();
-        }
+        if (currentDirector.duration <= currentDirector.time && _isExecuteQuitAction) return;
+        Debug.Log("QuitTimeLineDetect");
+        onQuitTimelLine?.Invoke();
+        _isExecuteQuitAction = true;
+        currentDirector = null;
     }
 
     private void SpeedUpDirectors()
@@ -42,7 +47,12 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
         if (Input.GetKey(KeyCode.Q))
         {
-            currentDirector.time += 0.05f;
+            currentDirector.time += 0.1f;
         }
+    }
+
+    private void OnEnable()
+    {
+       
     }
 }
