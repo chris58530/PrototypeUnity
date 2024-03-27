@@ -20,8 +20,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     private void Update()
     {
         if (currentDirector == null) return;
-        if (_isExecuteQuitAction) return;
-
+        ContinueTimeline();
         SpeedUpDirectors();
     }
 
@@ -48,12 +47,29 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private void SpeedUpDirectors()
     {
-        if (currentDirector.duration - 2 <= currentDirector.time) return;
+        if (_isExecuteQuitAction) return;
+
+        if (currentDirector.duration - .5f <= currentDirector.time) return;
 
         if (Input.GetKey(KeyCode.Q))
         {
             currentDirector.time += 0.1f;
         }
+    }
+
+    void ContinueTimeline()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentDirector.Resume();
+            Debug.Log("time line continue");
+        }
+    }
+
+    public void StopTimeLine()
+    {
+        if (currentDirector == null) return;
+        currentDirector.Pause();
     }
 
     private void OnEnable()

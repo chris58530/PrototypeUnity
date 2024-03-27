@@ -26,7 +26,7 @@ public class TimeLineTriggerObject : MonoBehaviour
         ConfirmTimeline();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (_isPlaying) return;
         if (!repeat && _isPlayed) return;
@@ -37,7 +37,7 @@ public class TimeLineTriggerObject : MonoBehaviour
             TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
             Debug.Log($"Play number {timeLineNumber} TimeLine");
             _isPlayed = true;
-
+            return;
         }
 
 

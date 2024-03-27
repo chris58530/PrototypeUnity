@@ -19,9 +19,8 @@ public class LemonBase : MonoBehaviour
 
   
 
-    public void SetMission(string[] text, GameObject targetTransObj, bool isMission)
+    public void SetDestination(string[] text, GameObject targetTransObj, bool isMission)
     {
-        //set canvas text
         onMissionSpeak?.Invoke(text);
 
         //set behaviour disgner the target position
@@ -33,18 +32,12 @@ public class LemonBase : MonoBehaviour
         bt.SetVariable("InMission", islastSpeakShared);
 
     }
-    public void SetSpeak(string[] text, GameObject targetTransObj, bool isMission)
+    public void SetSpeak(string[] text)
     {
         //set canvas text
-        onSpeak?.Invoke(text,3);
+        onSpeak?.Invoke(text,1.5f);
 
-        //set behaviour disgner the target position
-        SharedGameObject targetShared = targetTransObj;
-        bt.SetVariable("MissionPosObject", targetShared);
-
-        //Set behaviour disgner InMission
-        SharedBool islastSpeakShared = isMission;
-        bt.SetVariable("InMission", islastSpeakShared);
+       
 
     }
 
