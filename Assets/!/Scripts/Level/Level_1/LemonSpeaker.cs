@@ -18,7 +18,7 @@ public class LemonSpeaker : MonoBehaviour, ITaskResult
         if (AddDestination)
             _lemonBase.SetDestination(lemonDialogText, this.gameObject, AddDestination);
         else
-            _lemonBase.SetSpeak(lemonDialogText);
+            _lemonBase.SetSpeak(lemonDialogText,AddDestination);
     }
 
   

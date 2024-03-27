@@ -32,13 +32,14 @@ public class LemonBase : MonoBehaviour
         bt.SetVariable("InMission", islastSpeakShared);
 
     }
-    public void SetSpeak(string[] text)
+    public void SetSpeak(string[] text, bool isMission)
     {
         //set canvas text
         onSpeak?.Invoke(text,1.5f);
 
        
-
+        SharedBool islastSpeakShared = isMission;
+        bt.SetVariable("InMission", islastSpeakShared);
     }
 
    

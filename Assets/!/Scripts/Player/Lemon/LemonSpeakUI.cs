@@ -21,13 +21,13 @@ public class LemonSpeakUI : MonoBehaviour
     private void OnEnable()
     {
         LemonBase.onMissionSpeak += MissionSpeak;
-        // LemonBase.onSpeak += Speak;
+        LemonBase.onSpeak += Speak;
     }
 
     private void OnDisable()
     {
         LemonBase.onMissionSpeak -= MissionSpeak;
-        // LemonBase.onSpeak -= Speak;
+        LemonBase.onSpeak -= Speak;
     }
 
     private void MissionSpeak(string[] text)
@@ -39,7 +39,7 @@ public class LemonSpeakUI : MonoBehaviour
 
 
         _randomSpeakDisposable = Observable.Interval(TimeSpan.FromSeconds(intervalSpeakTime))
-            .First().Delay(TimeSpan.FromSeconds(.3f))
+            .First().Delay(TimeSpan.FromSeconds(.2f))
             .Subscribe(_ =>
             {
                 speakCanvas.SetActive(true);
