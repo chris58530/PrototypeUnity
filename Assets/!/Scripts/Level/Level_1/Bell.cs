@@ -3,9 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Bell : MonoBehaviour
 {
-    [SerializeField] private Animator ani;
+    [Tooltip("TimeLineManagers PlayableDirector Number")] [SerializeField]
+    private int timeLineNumber;
+
+    private Animator ani;
+
+    private bool _isPlayed;
 
     private void Start()
     {
@@ -14,6 +20,13 @@ public class Bell : MonoBehaviour
 
     public void PlayAnimation()
     {
+        if (!_isPlayed)
+        {
+            _isPlayed = true;
+            TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
+
+        }
+
         if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             ani.Play("Ring");
