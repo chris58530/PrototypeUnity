@@ -7,6 +7,7 @@ public class DialogTextClip : PlayableAsset, ITimelineClipAsset
     private readonly DialogTextBehaviour _dialogTextBehaviour = new DialogTextBehaviour();
     public string dialogText;
     public bool needConfrimToContinue;
+    public bool frameShowing;
 
     public ClipCaps clipCaps => ClipCaps.None;
 
@@ -16,6 +17,7 @@ public class DialogTextClip : PlayableAsset, ITimelineClipAsset
         DialogTextBehaviour clone = playable.GetBehaviour();
         clone.dialogText = this.dialogText;
         clone.needConfrimToContinue = this.needConfrimToContinue;
+        clone.frameShowing = this.frameShowing;
         return playable;
     }
 }
