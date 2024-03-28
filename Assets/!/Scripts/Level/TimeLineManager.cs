@@ -53,8 +53,9 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
         if (Input.GetKey(KeyCode.Q))
         {
-            currentDirector.time += 0.1f;
-        }
+            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(5f);
+        }else             currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
+
     }
 
     void ContinueTimeline()

@@ -7,15 +7,22 @@ using _.Scripts.Task;
 public class TaskObject : MonoBehaviour, ITaskObject
 {
     public bool isDone { get; set; }
-    [SerializeField]private int taskNumber;
+    [SerializeField] private int taskNumber;
+    [SerializeField] private bool autoSucces;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!autoSucces) return;
         if (!other.gameObject.CompareTag("Player")) return;
 
-        isDone = true;
-        TaskManager.checkTaskAction?.Invoke(taskNumber);
+        SetIsDone();
 
         Destroy(gameObject);
+    }
+
+    public void SetIsDone()
+    {
+        isDone = true;
+        TaskManager.checkTaskAction?.Invoke(taskNumber);
     }
 }

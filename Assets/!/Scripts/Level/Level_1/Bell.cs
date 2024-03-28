@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Bell : MonoBehaviour
+public class Bell : MonoBehaviour, ITaskResult
 {
     [Tooltip("TimeLineManagers PlayableDirector Number")] [SerializeField]
     private int timeLineNumber;
 
     private Animator ani;
 
-    private bool _isPlayed;
+
+    [SerializeField]private bool canPlay;
 
     private void Start()
     {
@@ -20,11 +21,12 @@ public class Bell : MonoBehaviour
 
     public void PlayAnimation()
     {
-        if (!_isPlayed)
+        if (canPlay)
         {
-            _isPlayed = true;
             TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
+            Debug.Log("PlayTimeLine");
 
+            canPlay = false;
         }
 
         if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
@@ -33,4 +35,10 @@ public class Bell : MonoBehaviour
             ani.CrossFade("Ring", 0.1f);
         }
     }
+
+    public void DoResult()
+    {
+        canPlay = true;
+    }
+
 }
