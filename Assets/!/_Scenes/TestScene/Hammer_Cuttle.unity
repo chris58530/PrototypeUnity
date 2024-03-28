@@ -513,12 +513,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 973689819}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &292792174 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 722985660756753692, guid: 587a60ba5d2725a4b9687f07e144b7ee,
-    type: 3}
-  m_PrefabInstance: {fileID: 1004467240}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &307091468
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,18 +782,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474074259}
   m_CullTransparentMesh: 1
---- !u!114 &702348253 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8933884228928244378, guid: 31cb5c4b5a1f9074998c91605c3dcfe0,
-    type: 3}
-  m_PrefabInstance: {fileID: 973689819}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &738094671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,21 +1458,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5309940633342143418, guid: 587a60ba5d2725a4b9687f07e144b7ee,
-        type: 3}
-      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Bullet","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ShootPoint","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Cannon_Animator","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"ThisCollider","IsShared":true,"CollidermValue":5},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isUnderGround","IsShared":true,"BooleanmValue":false}]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 5309940633342143418, guid: 587a60ba5d2725a4b9687f07e144b7ee,
-        type: 3}
-      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5309940633342143418, guid: 587a60ba5d2725a4b9687f07e144b7ee,
-        type: 3}
-      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[5]
-      value: 
-      objectReference: {fileID: 292792174}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587a60ba5d2725a4b9687f07e144b7ee, type: 3}
 --- !u!4 &1004467241 stripped
@@ -1641,7 +1608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d850d411f210eb64bab9163bca53bf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _virtualCamera: {fileID: 702348253}
+  mainVirtualCamera: {fileID: 0}
+  virtualCameras: []
 --- !u!1001 &1218622035
 PrefabInstance:
   m_ObjectHideFlags: 0
