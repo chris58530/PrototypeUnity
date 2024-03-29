@@ -67,6 +67,8 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnTakeDamage(int value)
         {
+            if (_currentHp.Value <= 0)
+                return;
             if (isShielded)
             {
                 _shieldUI.HitShield();
@@ -106,6 +108,7 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnDied()
         {
+            TimeLineManager.Instance.PlayTimeLine(1);
             ani.Play("Die");
             GetComponent<AbilityContainer>().SetCanGetAbility(true);
             bt.enabled = false;
@@ -144,7 +147,7 @@ namespace _.Scripts.Enemy.BossA
 
         public void EndPerformance()
         {
-            TimeLineManager.Instance.PlayTimeLine(1);
+            TimeLineManager.Instance.PlayTimeLine(2);
         }
 
         public void BigBombTransition(bool isAppeared)

@@ -47,16 +47,16 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private void SpeedUpDirectors()
     {
-        if(_isPauseTimeLine)return;
+        if (_isPauseTimeLine) return;
         if (_isExecuteQuitAction) return;
 
         if (currentDirector.duration - 1.5f <= currentDirector.time) return;
 
         if (Input.GetKey(KeyCode.Q))
         {
-            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(5f);
-        }else             currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
-
+            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
+        }
+        else currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
     }
 
     void ContinueTimeline()
@@ -76,9 +76,9 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         _isPauseTimeLine = true;
         // currentDirector.Pause();
         currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
-
     }
 
+   
     private void OnEnable()
     {
     }
