@@ -15,7 +15,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private bool _isExecuteQuitAction;
     [SerializeField] private int currentActiveDirectorNumber = 0;
-
+    private bool _isPauseTimeLine;
 
     private void Update()
     {
@@ -47,9 +47,10 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private void SpeedUpDirectors()
     {
+        if(_isPauseTimeLine)return;
         if (_isExecuteQuitAction) return;
 
-        if (currentDirector.duration - .5f <= currentDirector.time) return;
+        if (currentDirector.duration - 1.5f <= currentDirector.time) return;
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -62,7 +63,9 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            currentDirector.Resume();
+            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
+            // currentDirector.Resume();
+            _isPauseTimeLine = false;
             Debug.Log("time line continue");
         }
     }
@@ -70,7 +73,10 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     public void StopTimeLine()
     {
         if (currentDirector == null) return;
-        currentDirector.Pause();
+        _isPauseTimeLine = true;
+        // currentDirector.Pause();
+        currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
+
     }
 
     private void OnEnable()

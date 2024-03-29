@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Enemy.BossA;
+using UniRx;
 using UnityEngine;
 
 public class BossA_UI : MonoBehaviour
@@ -12,6 +13,7 @@ public class BossA_UI : MonoBehaviour
     {
         _ani = GetComponent<Animator>();
     }
+    
 
     void RaiseTowerAnimation()
     {
@@ -25,6 +27,12 @@ public class BossA_UI : MonoBehaviour
 
     private void OnEnable()
     {
+
+        Observable.EveryFixedUpdate().Delay(TimeSpan.FromSeconds(1)).First().Subscribe(_ =>
+        {
+            _ani.Play("FadeIn First Time");
+
+        });
         BossAController.onRaiseTower += RaiseTowerAnimation;
         BossAController.onDownTower += DownTowerAnimation;
     }
