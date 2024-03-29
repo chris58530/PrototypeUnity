@@ -1,24 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class WithVecterDistance : Conditional
+public class ObjectWithVecterDistance : Conditional
 {
-    public SharedGameObject targetObject;
+    public SharedGameObject targetObjectA;
+    public SharedGameObject targetObjectB;
     public SharedFloat magnitude = 5;
 
 
-    public override void OnStart()
-    {
-        if (targetObject.Value == null)
-        {
-            targetObject.Value= GameObject.FindWithTag("Player");
-        }
-    }
 
     public override TaskStatus OnUpdate()
     {
-        if (Vector3.Magnitude(transform.position - targetObject.Value.transform.position) < magnitude.Value)
+        if (Vector3.Magnitude(targetObjectA.Value.transform.position - targetObjectB.Value.transform.position) < magnitude.Value)
             return TaskStatus.Success;
         return TaskStatus.Failure;
     }
@@ -32,7 +29,7 @@ public class WithVecterDistance : Conditional
         }
 
         var oldColor = UnityEditor.Handles.color;
-        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.color = Color.blue;
         var transform1 = Owner.transform;
         UnityEditor.Handles.DrawWireDisc(transform1.position, transform1.up, magnitude.Value);
         UnityEditor.Handles.color = oldColor;

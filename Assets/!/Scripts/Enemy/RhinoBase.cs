@@ -12,6 +12,8 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
     private bool isShield = true;
 
+    [SerializeField] private GameObject[] armors;
+    [SerializeField] private LayerMask mask;
 
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
@@ -39,12 +41,12 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeDamage(int value)
     {
+        Debug.Log("take damage");
         onTakeDamagedEvent?.Invoke();
         bt.SendEvent("OnTakeDamage");
 
         if (isShield)
         {
-           
             _shieldUI.HitShield();
             return;
         }
@@ -79,10 +81,20 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeShield(int removeValue)
     {
+        if (!isShield)
+        {
+            SharedBool _isShield = false;
+            bt.SetVariable("isShield", _isShield);
+        }
+
+        bt.SendEvent("OnTakeDamage");
+        foreach (var obj in armors)
+        {
+            obj.SetActive(false);
+        }
+
         _shieldUI.BreakShield(0);
-        SharedBool _isShield = false;
-        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0)).Subscribe(_ => { bt.SetVariable("isShield", _isShield); })
-            .AddTo(this);
+
         isShield = false;
     }
 
@@ -91,6 +103,13 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         // bt.SendEvent("OnDied");
 
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((mask & (1 << other.gameObject.layer)) == 0) return;
+        bt.SendEvent("OnHitWall");
+
     }
 
     private void OnDisable()
