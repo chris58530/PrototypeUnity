@@ -14,7 +14,6 @@ public class DialogTextBehaviour : PlayableBehaviour
     {
         DialogTextController controller = playerData as DialogTextController;
         float progress = (float)(playable.GetTime() / playable.GetDuration());
-        Debug.Log("time line time is : " + progress);
 
         if (!frameShowing) progress = 0.9f;
         controller.TextLineOnUpdate(dialogText, progress);
@@ -29,7 +28,6 @@ public class DialogTextBehaviour : PlayableBehaviour
             playable.GetGraph().GetRootPlayable(0).IsDone())
         {
             // Execute your finishing logic here:
-            Debug.Log("Clip done!");
             if (needConfrimToContinue)
                 TimeLineManager.Instance.StopTimeLine();
         }
