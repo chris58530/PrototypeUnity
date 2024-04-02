@@ -4,27 +4,31 @@ using UnityEngine;
 using System;
 using _.Scripts.Tools;
 
-public class AudioManager:Singleton<AudioManager>
+public class AudioManager : Singleton<AudioManager>
 {
-    public Sound[] BGMSounds, sfxSounds,sfxLoop,enemyLoop;
-    public AudioSource BGMSource, sfxSource, sfxSource2,enemySfxLoop;
+    public Sound[] BGMSounds, sfxSounds, sfxLoop, enemyLoop;
+    public AudioSource BGMSource, sfxSource, sfxSource2, enemySfxLoop;
 
     private void Start()
     {
+        PlayBGM(0);
     }
-    public void PlayBGM(string name)
-    {
-        Sound s = Array.Find(BGMSounds, x => x.name == name);
 
-        if (s == null)
-        {
-            Debug.Log("sound not found");
-        }
-        else
-        {
-            BGMSource.clip = s.clip;
-            BGMSource.Play();
-        }
+    public void PlayBGM(int num)
+    {
+        // Sound s = Array.Find(BGMSounds, x => x.name == name);
+        //
+        // if (s == null)
+        // {
+        //     Debug.Log("sound not found");
+        // }
+        // else
+        // {
+        //     BGMSource.clip = s.clip;
+        //     BGMSource.Play();
+        // }
+        BGMSource.clip = BGMSounds[num].clip;
+        BGMSource.Play();
     }
     //public void PlayUI(string name)
     //{
@@ -51,6 +55,7 @@ public class AudioManager:Singleton<AudioManager>
             sfxSource.PlayOneShot(s.clip);
         }
     }
+
     public void PlaySFX2(string name)
     {
         Sound s = Array.Find(sfxLoop, x => x.name == name);
@@ -64,10 +69,12 @@ public class AudioManager:Singleton<AudioManager>
             sfxSource2.Play();
         }
     }
+
     public void StopPlaySFX2()
     {
-            sfxSource2.Stop();
+        sfxSource2.Stop();
     }
+
     public void PlayEnemyLoop(string name)
     {
         Sound s = Array.Find(enemyLoop, x => x.name == name);
@@ -81,6 +88,7 @@ public class AudioManager:Singleton<AudioManager>
             enemySfxLoop.Play();
         }
     }
+
     public void StopEnemyLoop()
     {
         enemySfxLoop.Stop();
@@ -98,6 +106,7 @@ public class AudioManager:Singleton<AudioManager>
     {
         BGMSource.volume = volume;
     }
+
     public void SFXVolume(float volume)
     {
         sfxSource.volume = volume;

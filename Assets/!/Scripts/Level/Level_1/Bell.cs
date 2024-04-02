@@ -42,3 +42,8 @@ public class Bell : MonoBehaviour, ITaskResult
     }
 
 }
+
+public class ObjectSoundEffect : MonoBehaviour
+{
+    
+}
