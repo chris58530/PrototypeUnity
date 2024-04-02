@@ -339,6 +339,15 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenClose"",
+                    ""type"": ""Button"",
+                    ""id"": ""6dd02d24-7d4e-4192-aefc-2f225d86e3f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -550,6 +559,28 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                     ""action"": ""Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c6d6283-3c6d-4e3b-881a-4f38efdcd243"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36969876-5db7-459c-a5cf-fea1d525394f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -567,6 +598,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         m_UI_Control = m_UI.FindAction("Control", throwIfNotFound: true);
         m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
         m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
+        m_UI_OpenClose = m_UI.FindAction("OpenClose", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -701,6 +733,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Control;
     private readonly InputAction m_UI_Confirm;
     private readonly InputAction m_UI_Ability;
+    private readonly InputAction m_UI_OpenClose;
     public struct UIActions
     {
         private @PlayerCustomInput m_Wrapper;
@@ -708,6 +741,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         public InputAction @Control => m_Wrapper.m_UI_Control;
         public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
         public InputAction @Ability => m_Wrapper.m_UI_Ability;
+        public InputAction @OpenClose => m_Wrapper.m_UI_OpenClose;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -726,6 +760,9 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Ability.started += instance.OnAbility;
             @Ability.performed += instance.OnAbility;
             @Ability.canceled += instance.OnAbility;
+            @OpenClose.started += instance.OnOpenClose;
+            @OpenClose.performed += instance.OnOpenClose;
+            @OpenClose.canceled += instance.OnOpenClose;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -739,6 +776,9 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             @Ability.started -= instance.OnAbility;
             @Ability.performed -= instance.OnAbility;
             @Ability.canceled -= instance.OnAbility;
+            @OpenClose.started -= instance.OnOpenClose;
+            @OpenClose.performed -= instance.OnOpenClose;
+            @OpenClose.canceled -= instance.OnOpenClose;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -768,5 +808,6 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
         void OnControl(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
+        void OnOpenClose(InputAction.CallbackContext context);
     }
 }

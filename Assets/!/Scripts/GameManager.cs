@@ -26,6 +26,11 @@ namespace _.Scripts
             SystemActions.onSceneStart?.Invoke();
         }
 
+        public void TimeScale(int scale)
+        {
+            Time.timeScale = scale;
+        }
+
         public void LockPlayerInput(bool islock)
         {
             _playerInput.enabled = islock;

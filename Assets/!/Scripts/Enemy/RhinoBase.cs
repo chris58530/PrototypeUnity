@@ -81,17 +81,19 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeShield(int removeValue)
     {
-        if (!isShield)
-        {
-            SharedBool _isShield = false;
-            bt.SetVariable("isShield", _isShield);
-        }
+        if (!isShield) return;
 
-        bt.SendEvent("OnTakeDamage");
-        foreach (var obj in armors)
+        SharedBool _isShield = false;
+        bt.SetVariable("isShield", _isShield);
+
+        // bt.SendEvent("OnTakeDamage");
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.7f)).Subscribe(_ =>
         {
-            obj.SetActive(false);
-        }
+            foreach (var obj in armors)
+            {
+                obj.SetActive(false);
+            }
+        }).AddTo(this);
 
         _shieldUI.BreakShield(0);
 
@@ -109,7 +111,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     {
         if ((mask & (1 << other.gameObject.layer)) == 0) return;
         bt.SendEvent("OnHitWall");
-
     }
 
     private void OnDisable()
