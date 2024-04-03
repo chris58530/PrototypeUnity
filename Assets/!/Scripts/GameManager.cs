@@ -31,14 +31,14 @@ namespace _.Scripts
             Time.timeScale = scale;
         }
 
-        public void LockPlayerInput(bool islock)
+        public void LockPlayerInput(bool isEnabled)
         {
-            _playerInput.enabled = islock;
+            _playerInput.enabled = isEnabled;
         }
 
-        public void LockPlayerHp(bool islock)
+        public void LockPlayerHp(bool isEnabled)
         {
-            _playerBase.canHurt = islock;
+            _playerBase.canHurt = isEnabled;
         }
 
         public void SwitchScene(int num, float time)

@@ -8635,7 +8635,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827528696}
+        m_TargetAssemblyTypeName: VolumeSetting, Assembly-CSharp
+        m_MethodName: SetBGMVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &623713443
 GameObject:
   m_ObjectHideFlags: 0
@@ -9718,7 +9730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &827528677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9758,7 +9770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixer: {fileID: 24100000, guid: 587abb98bc5c74346bdf7e50df83c28d, type: 2}
   bgmSlider: {fileID: 623713441}
-  effSlider: {fileID: 0}
+  effSlider: {fileID: 1320500957}
 --- !u!114 &827528698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16490,7 +16502,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 827528696}
+        m_TargetAssemblyTypeName: VolumeSetting, Assembly-CSharp
+        m_MethodName: SetEFFVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1321625524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5715834888313830771, guid: efd14440ccebf1b40a35b4bcab778964,
@@ -28591,8 +28615,6 @@ MonoBehaviour:
   BGMSounds:
   - name: BGM
     clip: {fileID: 8300000, guid: 330f0616a1777c94dbec5ff3344097e6, type: 3}
-  - name: PartyRoomBGM
-    clip: {fileID: 8300000, guid: 5d6d63e1500b2194e8658d04c9294e59, type: 3}
   sfxSounds:
   - name: Dash
     clip: {fileID: 8300000, guid: 5e801070e93426a4e9b64cfab5fa2793, type: 3}

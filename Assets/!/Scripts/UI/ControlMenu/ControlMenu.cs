@@ -26,6 +26,7 @@ public class ControlMenu : MonoBehaviour
 
     public ControlMenuState controlMenuState { get; private set; }
     private UIInput _uiInput;
+
     private void Start()
     {
         _uiInput = FindObjectOfType<UIInput>();
@@ -61,34 +62,35 @@ public class ControlMenu : MonoBehaviour
 
         Observable.EveryUpdate().Where(_ => controlMenuState == ControlMenuState.State1).Subscribe(_ =>
         {
-           
             Debug.Log("State1");
         }).AddTo(this);
     }
 
     public void ShowContext(bool show)
     {
-        context.SetActive(show);
         if (show)
         {
             GameManager.Instance.TimeScale(0);
-            GameManager.Instance.LockPlayerInput(false);
-            GameManager.Instance.LockPlayerHp(false);
+
             ChangeState(ControlMenuState.Visible);
         }
         else
         {
             GameManager.Instance.TimeScale(1);
-            GameManager.Instance.LockPlayerInput(true);
-            GameManager.Instance.LockPlayerHp(true);
+          
             ChangeState(ControlMenuState.Invisible);
-
         }
+
+        context.SetActive(show);
     }
 
     private void Update()
     {
         // Debug.Log(controlMenuState);
+    }
+
+    private void OnDisable()
+    {
     }
 
     public void ChangeState(ControlMenuState state)
