@@ -25,7 +25,11 @@ public class KeyDoor : MonoBehaviour, ITaskResult
         Debug.Log("Key Door Open");
         Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1.8f)).First().Subscribe(_ =>
         {
-            door.gameObject.SetActive(false);
+            door.GetComponent<Animator>().Play("KeyDoorOpen");
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(2)).First().Subscribe(_ =>
+            {
+                door.gameObject.SetActive(false);
+            }).AddTo(this);
         }).AddTo(this);
     }
 }

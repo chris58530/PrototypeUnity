@@ -36,8 +36,8 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
         var timelineAsset = currentDirector.playableAsset as TimelineAsset;
-        _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
-
+        if (timelineAsset.markerTrack != null) _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
+        
         currentDirector.Play();
         _isExecuteQuitAction = false;
 
@@ -57,19 +57,17 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     {
         if (_isPauseTimeLine) return;
         if (_isExecuteQuitAction) return;
-
-        if (currentDirector.duration - 1.5f <= currentDirector.time) return;
+        if (_stopMarkers == null) return;
+        // if (currentDirector.duration - 1.5f <= currentDirector.time) return;
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
 
-            if (_stopMarkers == null) return;
-       
 
             for (int s = 0; s < _stopMarkers.Length; s++)
             {
-                if ( currentDirector.time<_stopMarkers[s].time )
+                if (currentDirector.time < _stopMarkers[s].time)
                 {
                     currentDirector.time = _stopMarkers[s].time;
                     return;

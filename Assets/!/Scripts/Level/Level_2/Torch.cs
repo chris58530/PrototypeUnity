@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Torch : MonoBehaviour
 {
-    [SerializeField] private GameObject openFire;
+    [SerializeField] private GameObject[] openFire;
     [SerializeField] private GameObject golbinPrefab;
 
     private bool _isOpenFire;
@@ -14,7 +14,11 @@ public class Torch : MonoBehaviour
 
     public void OpenTorchLight()
     {
-        openFire.SetActive(true);
+        foreach (var fire in openFire)
+        {
+            fire.SetActive(true);
+
+        }
         _spawnGoblinDisposable = Observable.Interval(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
         {
             Instantiate(golbinPrefab, transform.position + Vector3.up, transform.rotation);
@@ -25,7 +29,11 @@ public class Torch : MonoBehaviour
     {
         _isOpenFire = false;
         _spawnGoblinDisposable?.Dispose();
-        openFire.SetActive(false);
+        foreach (var fire in openFire)
+        {
+            fire.SetActive(false);
+
+        }
     }
 
   
