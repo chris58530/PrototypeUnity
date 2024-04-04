@@ -19,6 +19,8 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     [SerializeField] private int currentActiveDirectorNumber = 0;
     private bool _isPauseTimeLine;
 
+    private IMarker[] _stopMarkers;
+
     private void Update()
     {
         if (currentDirector == null) return;
@@ -33,8 +35,12 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         currentActiveDirectorNumber++;
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
+        var timelineAsset = currentDirector.playableAsset as TimelineAsset;
+        _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
+
         currentDirector.Play();
         _isExecuteQuitAction = false;
+
         currentDirector.stopped += QuitTimeLineDetect;
     }
 
@@ -54,10 +60,23 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
         if (currentDirector.duration - 1.5f <= currentDirector.time) return;
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
+            // currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
+
+            if (_stopMarkers == null) return;
+       
+
+            for (int s = 0; s < _stopMarkers.Length; s++)
+            {
+                if ( currentDirector.time<_stopMarkers[s].time )
+                {
+                    currentDirector.time = _stopMarkers[s].time;
+                    return;
+                }
+            }
         }
+
         else currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
     }
 
@@ -80,11 +99,6 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         Debug.Log("Pause");
 
         currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
-
-        var timelineAsset = currentDirector.playableAsset as TimelineAsset;
-
-
-        Debug.Log(timelineAsset.markerTrack.GetMarkers());
     }
 
 
