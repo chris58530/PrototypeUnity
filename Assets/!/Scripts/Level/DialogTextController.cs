@@ -15,7 +15,8 @@ public class DialogTextController : Singleton<DialogTextController>
 
     public void TextLineOnUpdate(string line, float progress)
     {
-        textBackGround.SetActive(true);
+        if (textBackGround != null)
+            textBackGround.SetActive(true);
         dialogText.text = line;
         float x = dialogText.preferredWidth * progress;
         dialogText.rectTransform.sizeDelta = new Vector2(x, dialogText.rectTransform.sizeDelta.y);
@@ -23,16 +24,16 @@ public class DialogTextController : Singleton<DialogTextController>
 
     private void OnQuitTimelLine()
     {
-        textBackGround.SetActive(false);
+        if (textBackGround != null)
+            textBackGround.SetActive(false);
         dialogText.text = "";
-
     }
+
     private void OnEnable()
     {
         TimeLineManager.onQuitTimelLine += OnQuitTimelLine;
-
     }
-    
+
     private void OnDisable()
     {
         TimeLineManager.onQuitTimelLine -= OnQuitTimelLine;

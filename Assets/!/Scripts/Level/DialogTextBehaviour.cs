@@ -27,9 +27,11 @@ public class DialogTextBehaviour : PlayableBehaviour
         if ((info.effectivePlayState == PlayState.Paused && count > duration) ||
             playable.GetGraph().GetRootPlayable(0).IsDone())
         {
-            // Execute your finishing logic here:
+
             if (needConfrimToContinue)
+            {
                 TimeLineManager.Instance.StopTimeLine();
+            }
         }
     }
 }

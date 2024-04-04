@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using Unity.VisualScripting;
+using UnityEngine.Timeline;
 
 public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 {
@@ -75,10 +77,17 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         if (currentDirector == null) return;
         _isPauseTimeLine = true;
         // currentDirector.Pause();
+        Debug.Log("Pause");
+
         currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
+
+        var timelineAsset = currentDirector.playableAsset as TimelineAsset;
+
+
+        Debug.Log(timelineAsset.markerTrack.GetMarkers());
     }
 
-   
+
     private void OnEnable()
     {
     }
