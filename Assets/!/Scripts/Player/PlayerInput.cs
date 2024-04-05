@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
+using UnityEngine.InputSystem.XInput;
 
 namespace _.Scripts.Player
 {
@@ -21,6 +23,7 @@ namespace _.Scripts.Player
         private void Awake()
         {
             _input = new PlayerCustomInput();
+            
             OpenInput();
         }
 
@@ -37,6 +40,14 @@ namespace _.Scripts.Player
             TimeLineManager.onQuitTimelLine -= OpenInput;
 
             CloseInput();
+        }
+
+
+        private void Update()
+        {
+            Debug.Log(Gamepad.current);
+            Debug.Log(Keyboard.current);
+            Debug.Log(Mouse.current);
         }
 
         private void OpenInput()

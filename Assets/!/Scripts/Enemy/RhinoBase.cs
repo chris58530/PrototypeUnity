@@ -102,9 +102,14 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void BossABigBombDie()
     {
-        // bt.SendEvent("OnDied");
+        bt.SendEvent("OnStun");
+        onDiedEvent?.Invoke();
+        
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(2)).First().Subscribe(_ =>
+        {
+            Destroy(gameObject);
 
-        Destroy(gameObject);
+        }).AddTo(this);
     }
 
     private void OnTriggerEnter(Collider other)

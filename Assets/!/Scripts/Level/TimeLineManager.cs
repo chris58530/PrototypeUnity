@@ -36,7 +36,14 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
         var timelineAsset = currentDirector.playableAsset as TimelineAsset;
-        if (timelineAsset.markerTrack != null) _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
+        if (timelineAsset.markerTrack != null)
+        {
+            _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
+            for (int i = 0; i < _stopMarkers.Length; i++)
+            {
+                Debug.Log( _stopMarkers[i].time);
+            }
+        }
         
         currentDirector.Play();
         _isExecuteQuitAction = false;
@@ -63,7 +70,8 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
-
+        //markers 創建順序會影響array的順序
+        //需要從第一個點位開始創建
 
             for (int s = 0; s < _stopMarkers.Length; s++)
             {
