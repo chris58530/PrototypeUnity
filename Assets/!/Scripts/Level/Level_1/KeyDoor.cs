@@ -22,6 +22,7 @@ public class KeyDoor : MonoBehaviour, ITaskResult
         if (keyMonster != null)
             keyMonster.SetActive(true);
         locker.GetComponent<Animator>().Play("Spin");
+        AudioManager.Instance.PlaySFX("DoorLock");
         Debug.Log("Key Door Open");
         Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1.8f)).First().Subscribe(_ =>
         {

@@ -39,10 +39,10 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         if (timelineAsset.markerTrack != null)
         {
             _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
-            for (int i = 0; i < _stopMarkers.Length; i++)
-            {
-                Debug.Log( _stopMarkers[i].time);
-            }
+            // for (int i = 0; i < _stopMarkers.Length; i++)
+            // {
+            //     Debug.Log( _stopMarkers[i].time);
+            // }
         }
         
         currentDirector.Play();
