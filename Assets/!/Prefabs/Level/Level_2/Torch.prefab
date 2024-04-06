@@ -5181,9 +5181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b312fa834f20a4b8e1f3499cb24442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openFire: {fileID: 2297592568663795410}
-  golbinPrefab: {fileID: 840979769018266425, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
-    type: 3}
+  openFire:
+  - {fileID: 2297592568663795410}
+  - {fileID: 2744314870952147010}
+  golbinPrefab: {fileID: 0}
+  _isOpenFire: 1
 --- !u!1 &5480307480979458066
 GameObject:
   m_ObjectHideFlags: 0
@@ -5737,6 +5739,12 @@ PrefabInstance:
 --- !u!4 &2744314870952068970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 445868, guid: 592b16584edabff4ebaab93d658a9409,
+    type: 3}
+  m_PrefabInstance: {fileID: 2744314870952184518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2744314870952147010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127620, guid: 592b16584edabff4ebaab93d658a9409,
     type: 3}
   m_PrefabInstance: {fileID: 2744314870952184518}
   m_PrefabAsset: {fileID: 0}
