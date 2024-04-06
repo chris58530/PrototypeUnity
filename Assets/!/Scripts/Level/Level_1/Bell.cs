@@ -33,6 +33,7 @@ public class Bell : MonoBehaviour, ITaskResult
         {
             ani.Play("Ring");
             ani.CrossFade("Ring", 0.1f);
+            AudioManager.Instance.PlaySFX("BellCalling");
         }
     }
 

@@ -9,7 +9,7 @@ public class Torch : MonoBehaviour
     [SerializeField] private GameObject[] openFire;
     [SerializeField] private GameObject golbinPrefab;
 
-    private bool _isOpenFire;
+    [SerializeField]private bool _isOpenFire;
     private IDisposable _spawnGoblinDisposable;
 
     public void OpenTorchLight()

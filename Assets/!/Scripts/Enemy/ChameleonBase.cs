@@ -26,7 +26,7 @@ public class ChameleonBase : Enemy, IDamageable
     public void OnTakeDamage(int value)
     {
         onTakeDamagedEvent?.Invoke();
-
+AudioManager.Instance.PlaySFX("MobInjured");
         if (_currentHp.Value <= 0)
         {
             OnDied();
