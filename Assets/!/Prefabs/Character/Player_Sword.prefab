@@ -1687,6 +1687,7 @@ GameObject:
   - component: {fileID: 5715834888313830752}
   - component: {fileID: 1156654683}
   - component: {fileID: 1156654684}
+  - component: {fileID: 2259666724119089383}
   m_Layer: 6
   m_Name: Player_Sword
   m_TagString: Player
@@ -1869,6 +1870,14 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!81 &2259666724119089383
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715834888313830771}
+  m_Enabled: 1
 --- !u!1 &5715834889141235566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13835,7 +13844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c93f25ec4d79c746801281124202ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowSpeed: 0.1
+  slowSpeed: 0.2
   keepTime: 0.01
 --- !u!4 &8691330759189285584 stripped
 Transform:

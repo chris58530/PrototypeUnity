@@ -29,6 +29,7 @@ public class CuttleBase : Enemy, IDamageable
     public void OnTakeDamage(int value)
     {
         onTakeDamagedEvent?.Invoke();
+        AudioManager.Instance.PlaySFX("MobInjured");
 
         if (_currentHp.Value <= 0)
         {
@@ -49,7 +50,6 @@ public class CuttleBase : Enemy, IDamageable
         onDiedEvent?.Invoke();
 
         bt.SendEvent("OnDied");
-        cuttleModel.SetActive(false);
     }
 
  

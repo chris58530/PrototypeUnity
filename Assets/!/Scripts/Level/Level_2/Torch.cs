@@ -19,10 +19,7 @@ public class Torch : MonoBehaviour
             fire.SetActive(true);
 
         }
-        _spawnGoblinDisposable = Observable.Interval(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
-        {
-            Instantiate(golbinPrefab, transform.position + Vector3.up, transform.rotation);
-        }).AddTo(this);
+      
     }
 
     public void CloseTorchLight()
@@ -34,6 +31,10 @@ public class Torch : MonoBehaviour
             fire.SetActive(false);
 
         }
+        _spawnGoblinDisposable = Observable.Interval(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
+        {
+            Instantiate(golbinPrefab, transform.position + Vector3.up, transform.rotation);
+        }).AddTo(this);
     }
 
   
