@@ -21,6 +21,13 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     private IMarker[] _stopMarkers;
 
+    private UIInput _uiInput;
+
+    private void Start()
+    {
+        _uiInput = FindObjectOfType<UIInput>();
+    }
+
     private void Update()
     {
         if (currentDirector == null) return;
@@ -67,7 +74,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         if (_stopMarkers == null) return;
         // if (currentDirector.duration - 1.5f <= currentDirector.time) return;
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (_uiInput.Confirm)
         {
             // currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(10f);
         //markers 創建順序會影響array的順序
@@ -88,7 +95,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
 
     void ContinueTimeline()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (_uiInput.Confirm)
         {
             currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
             // currentDirector.Resume();
