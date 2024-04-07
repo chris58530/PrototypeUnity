@@ -18,6 +18,11 @@ public class TimeLineTriggerObject : MonoBehaviour
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
     private bool _isPlaying;
     private bool _isPlayed;
+    private UIInput _uiInput;
+    private void Start()
+    {
+        _uiInput = FindObjectOfType<UIInput>();
+    }
 
     private void Update()
     {
@@ -26,7 +31,7 @@ public class TimeLineTriggerObject : MonoBehaviour
         ConfirmTimeline();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (_isPlaying) return;
         if (!repeat && _isPlayed) return;
@@ -60,7 +65,7 @@ public class TimeLineTriggerObject : MonoBehaviour
 
     public void ConfirmTimeline()
     {
-        if (!Input.GetKeyDown(KeyCode.Q)) return;
+        if (!_uiInput.Confirm) return;
         if (_isPlaying) return;
         _isPlayed = true;
 

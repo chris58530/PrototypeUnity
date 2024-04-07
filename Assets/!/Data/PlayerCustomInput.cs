@@ -353,17 +353,6 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""e303a837-7529-4a53-ae82-429d13df9698"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b171a76a-c099-41ed-a027-8a283c53eb17"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
