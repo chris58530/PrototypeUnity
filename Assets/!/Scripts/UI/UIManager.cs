@@ -20,30 +20,9 @@ public class UIManager : Singleton<UIManager>
     {
         if (_uiInput.OpenUI)
         {
-            OpenControlMenu(controlMenu.controlMenuState);
+            controlMenu.OpenControlMenu(controlMenu.controlMenuState);
         }
     }
 
-    void OpenControlMenu(ControlMenuState state)
-    {
-        switch (state)
-        {
-            case ControlMenuState.Invisible:
-
-                controlMenu.ShowContext(true);
-                controlMenu.ChangeState(ControlMenuState.Visible);
-
-
-                break;
-            case ControlMenuState.Visible:
-                controlMenu.ChangeState(ControlMenuState.Invisible);
-
-                controlMenu.ShowContext(false);
-                break;
-
-            case ControlMenuState.State1:
-                controlMenu.ChangeState(ControlMenuState.Visible);
-                break;
-        }
-    }
+    
 }

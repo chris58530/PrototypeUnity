@@ -563,7 +563,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6c6d6283-3c6d-4e3b-881a-4f38efdcd243"",
-                    ""path"": ""<XInputController>/start"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
