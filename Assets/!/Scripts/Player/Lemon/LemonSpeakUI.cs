@@ -47,7 +47,6 @@ public class LemonSpeakUI : MonoBehaviour
                 int randomText = Random.Range(0, _randomSpeak.Length);
 
                 dialogText.text = _randomSpeak[randomText];
-                Debug.Log(randomText);
             }).AddTo(this);
     }
 
