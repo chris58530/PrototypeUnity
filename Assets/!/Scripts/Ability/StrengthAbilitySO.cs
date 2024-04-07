@@ -9,7 +9,7 @@ namespace @_.Scripts.Ability
     [CreateAssetMenu(fileName = "StrengthAbilityData", menuName = "Ability/StrengthAbility", order = 2)]
     public class StrengthAbilitySO : AbilityBase
     {
-        [SerializeField] private Material effect;
+         private GameObject powerfulSword;
         private IDisposable lifeTimer;
 
         public override void AbilityAlgorithm()
@@ -22,14 +22,16 @@ namespace @_.Scripts.Ability
 
         public override void StartAbility()
         {
-            if (effect != null)
-                effect.EnableKeyword("_EMISSION");
+            powerfulSword = GameObject.Find("NoChargeSword");
+            if (powerfulSword != null)
+                powerfulSword.SetActive(false);
         }
 
         public override void QuitAbilityAlgorithm()
         {
-            if (effect != null)
-                effect.DisableKeyword("_EMISSION");
+            if (powerfulSword != null)
+                powerfulSword.SetActive(true);
+
             //產生對應物件 噴出原始怪物
             Debug.Log("QuitAbilityAlgorithm");
         }
