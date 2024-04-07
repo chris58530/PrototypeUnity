@@ -365,7 +365,18 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b171a76a-c099-41ed-a027-8a283c53eb17"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff8f3bdc-4422-46dd-8e50-220962e930e4"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -563,7 +574,7 @@ public partial class @PlayerCustomInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6c6d6283-3c6d-4e3b-881a-4f38efdcd243"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

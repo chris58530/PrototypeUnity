@@ -20,15 +20,12 @@ namespace _.Scripts.Player
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 
 
-        private void Awake()
-        {
-            _input = new PlayerCustomInput();
-            
-            OpenInput();
-        }
-
         private void OnEnable()
         {
+            _input = new PlayerCustomInput();
+
+            OpenInput();
+
             TimeLineManager.onPlayTimelLine += CloseInput;
             TimeLineManager.onQuitTimelLine += OpenInput;
         }
