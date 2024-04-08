@@ -57,34 +57,7 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: bbdbaa82634eecd48acec4693ba1ca90, type: 2}
---- !u!114 &-6123679159358726801
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ae20c2d3bc46efa250a495bb060c3a, type: 3}
-  m_Name: DialogTextClip(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  dialogText: '!! !'
-  needConfrimToContinue: 0
-  frameShowing: 1
---- !u!114 &-4158365836727601783
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
---- !u!114 &-4140273267447299799
+--- !u!114 &-6126373578520494761
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +67,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
-  m_Name: Activation Track (1)
+  m_Name: Activation Track (7)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -108,10 +81,10 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 2.4166666666666665
     m_ClipIn: 0
-    m_Asset: {fileID: 1515832767692573486}
+    m_Asset: {fileID: 9169168561008263709}
     m_Duration: 2.0833333333333335
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -4140273267447299799}
+    m_ParentTrack: {fileID: -6126373578520494761}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -174,6 +147,57 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
+  m_Markers:
+    m_Objects: []
+  m_PostPlaybackState: 3
+--- !u!114 &-6123679159358726801
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ae20c2d3bc46efa250a495bb060c3a, type: 3}
+  m_Name: DialogTextClip(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  dialogText: '! !'
+  needConfrimToContinue: 0
+  frameShowing: 1
+--- !u!114 &-4158365836727601783
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
+  m_Name: ActivationPlayableAsset
+  m_EditorClassIdentifier: 
+--- !u!114 &-4140273267447299799
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
+  m_Name: Activation Track (1)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
   - m_Version: 1
     m_Start: 7.410019599087535
     m_ClipIn: 0
@@ -351,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ae20c2d3bc46efa250a495bb060c3a, type: 3}
   m_Name: DialogTextClip(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  dialogText: "\u8ACB\u4F60\u5E6B\u5E6B\u6211."
+  dialogText: "\u8ACB\u4F60\u5E6B\u5E6B\u6211"
   needConfrimToContinue: 0
   frameShowing: 1
 --- !u!114 &-3191423077506231793
@@ -555,75 +579,6 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 2.466666666666667
-    m_ClipIn: 0
-    m_Asset: {fileID: 8936823043281246990}
-    m_Duration: 0.8500000000000001
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -1088945402875698073}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: DialogTextClip
-  - m_Version: 1
     m_Start: 7.676686265754205
     m_ClipIn: 0
     m_Asset: {fileID: -6123679159358726801}
@@ -693,7 +648,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogTextClip
   - m_Version: 1
-    m_Start: 10.383333333333333
+    m_Start: 9.983333333333333
     m_ClipIn: 0
     m_Asset: {fileID: -3284618818089948630}
     m_Duration: 0.4666666666666668
@@ -762,7 +717,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogTextClip
   - m_Version: 1
-    m_Start: 12.55
+    m_Start: 11.916666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 5837568361381083029}
     m_Duration: 0.4666666666666668
@@ -1034,6 +989,7 @@ MonoBehaviour:
   - {fileID: 3958399538964344947}
   - {fileID: -9045986584041475630}
   - {fileID: -680458902996403184}
+  - {fileID: -6126373578520494761}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -1194,18 +1150,6 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 0}
---- !u!114 &1515832767692573486
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
 --- !u!114 &1683101272993334515
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1655,7 +1599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ae20c2d3bc46efa250a495bb060c3a, type: 3}
   m_Name: DialogTextClip(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  dialogText: "\u8DDF\u6211\u4F86!!."
+  dialogText: "\u8DDF\u6211\u4F86 !"
   needConfrimToContinue: 0
   frameShowing: 1
 --- !u!114 &6069854137823548644
@@ -1727,7 +1671,7 @@ MonoBehaviour:
   dialogText: 
   needConfrimToContinue: 0
   frameShowing: 0
---- !u!114 &8936823043281246990
+--- !u!114 &9169168561008263709
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1736,9 +1680,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ae20c2d3bc46efa250a495bb060c3a, type: 3}
-  m_Name: DialogTextClip
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
+  m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
-  dialogText: "\u57AE\u514B\u7684\u7926\u5834 \u9592\u96DC\u4EBA\u7B49\u8ACB\u6EFE\uFF01!"
-  needConfrimToContinue: 0
-  frameShowing: 1

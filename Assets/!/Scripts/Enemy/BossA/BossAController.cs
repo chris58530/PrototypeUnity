@@ -125,7 +125,7 @@ namespace @_.Scripts.Enemy.BossA
         {
             var obj = Instantiate(bomb, target + new Vector3(0, 100, 0),
                 Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
-            Destroy(obj, 3);
+            Destroy(obj, 5);
             Observable.EveryUpdate().Subscribe(_ =>
             {
                 obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 50 * Time.deltaTime);
