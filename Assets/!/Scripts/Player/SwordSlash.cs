@@ -10,6 +10,7 @@ using UniRx;
 public class SwordSlash : MonoBehaviour
 {
     [SerializeField] private GameObject[] effectObjects;
+    [SerializeField] private GameObject[] normal_effectObjects;
     private VisualEffect[] _effect;
     [SerializeField] private float[] delayTime;
 
@@ -17,8 +18,15 @@ public class SwordSlash : MonoBehaviour
 
     public void UseSlash(int count, float scale)
     {
-        if (!canUse) return;
-        effectObjects[count].transform.localScale = new Vector3(scale, scale, scale);
+        if (!canUse)
+        {
+
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(delayTime[count])).First().Subscribe(_ =>
+            {
+                normal_effectObjects[count].GetComponent<VisualEffect>().Play();
+            }).AddTo(this);
+            return;
+        }
 
         Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(delayTime[count])).First().Subscribe(_ =>
         {
