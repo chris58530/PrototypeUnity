@@ -47,7 +47,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
         if (isShield)
         {
-            _shieldUI.HitShield();
+            _shieldUI.HitShield(1);
             return;
         }
         AudioManager.Instance.PlaySFX("MobInjured");

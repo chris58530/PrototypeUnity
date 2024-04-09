@@ -56,7 +56,7 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private GameObject bomb;
 
-
+       
         [SerializeField] private Collider[] tailDamageCollider;
         [SerializeField] private Collider[] headDamageCollider;
 

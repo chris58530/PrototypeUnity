@@ -11,7 +11,13 @@ public class BossAEndEvelator : MonoBehaviour
     private bool _isEntered;
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
     private PlayerInput _input;
+    private UIInput _uiInput;
     private bool _canConfirm;
+
+    private void Start()
+    {
+        _uiInput = FindObjectOfType<UIInput>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -52,7 +58,7 @@ public class BossAEndEvelator : MonoBehaviour
 
     public void ConfirmTimeline()
     {
-        if (!Input.GetKeyDown(KeyCode.Q)) return;
+        if (!_uiInput.Confirm) return;
         if (_isEntered) return;
         _input.enabled = false;
 
