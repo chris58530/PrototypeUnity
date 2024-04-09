@@ -20,7 +20,7 @@ public class Crystal : MonoBehaviour
     public void OnDied()
     {
         BossABomb.bossABigBombEvent -= OnDied;
-
+        AudioManager.Instance.PlaySFX("CrystalHit");
         modelObject.SetActive(false);
 
         GameObject obj = Instantiate(detroyCrystalObject, transform.position + detroyCrystalObjectOffset,
@@ -39,6 +39,7 @@ public class Crystal : MonoBehaviour
     public void OnAbosrt()
     {
         modelObject.SetActive(false);
+        AudioManager.Instance.PlaySFX("CrystalHit");
 
         absortObject.Play();
 
