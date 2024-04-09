@@ -1,11 +1,8 @@
-using System;
 using _.Scripts.Tools;
-using TMPro;
 using UnityEngine;
 using UnityHFSM;
-using UniRx;
 
-namespace _.Scripts.Player.State
+namespace @_.Scripts.Player.State
 {
     public class Idle : StateBase<PlayerState>
     {

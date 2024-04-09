@@ -33,13 +33,14 @@ namespace _.Scripts.Player.State
         FireAbility,
         DashAbility,
         GunAbility,
+        
+        Dead
     }
 
     public enum SuperState
     {
         Normal,
         Hammer,
-        Dead
     }
 
     public class PlayerStateMachine : MonoBehaviour
@@ -80,10 +81,10 @@ namespace _.Scripts.Player.State
             _fsm.AddState(SuperState.Normal, _normalState);
             _fsm.AddState(SuperState.Hammer, _hammerState);
 
-            _fsm.AddState(SuperState.Dead, new Dead(animator, false));
             _fsm.AddTwoWayTransition(SuperState.Normal, SuperState.Hammer,
                 transition => isHammer);
-
+    
+  
 
             //_fsm.AddTwoWayTransition(SuperState.Normal, SuperState.NoSword,
             //transitionon => !_attackSystem.hasSword);
@@ -106,6 +107,9 @@ namespace _.Scripts.Player.State
             _normalState = new StateMachine<SuperState, PlayerState, string>();
             _normalState.AddState(
                 PlayerState.Idle, new Idle(
+                    _input, _controller, animator, _attackSystem, false));
+            _normalState.AddState(
+                PlayerState.Dead, new Dead(
                     _input, _controller, animator, _attackSystem, false));
 
             _normalState.AddState(
@@ -152,6 +156,7 @@ namespace _.Scripts.Player.State
             _normalState.AddState(
                 PlayerState.InsertSword, new InsertSword(
                     _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+     
 
 
             //Idle
@@ -170,19 +175,25 @@ namespace _.Scripts.Player.State
 
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
-
+            _normalState.AddTransition(PlayerState.Idle, PlayerState.Dead,
+                transition =>_playerBase.isDead);
+            
 
             //Walk
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
             _normalState.AddTransition(PlayerState.Walk, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
-
+            _normalState.AddTransition(PlayerState.Walk, PlayerState.Dead,
+                transition =>_playerBase.isDead);
 
             _normalState.AddTransition(PlayerState.Roll, PlayerState.Fail,
                 transition => _controller.finsihRoll);
+            _normalState.AddTransition(PlayerState.Roll, PlayerState.Dead,
+                transition =>_playerBase.isDead);
             //RollAttack
             _normalState.AddTransition(PlayerState.RollAttack, PlayerState.Idle);
+            
 
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
@@ -202,6 +213,8 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Attack3, PlayerState.Chance3);
             _normalState.AddTransition(PlayerState.Attack3, PlayerState.Hurt,
                 transition => _playerBase.getHurt);
+            _normalState.AddTransition(PlayerState.Attack3, PlayerState.Dead,
+                transition =>_playerBase.isDead);
             //extra
             // _normalState.AddTransition(PlayerState.Chance1ToIdle, PlayerState.Fail);
 
@@ -218,7 +231,8 @@ namespace _.Scripts.Player.State
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
-
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Dead,
+                transition =>_playerBase.isDead);
             //
             //
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
@@ -235,6 +249,8 @@ namespace _.Scripts.Player.State
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Dead,
+                transition =>_playerBase.isDead);
 
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
@@ -249,10 +265,14 @@ namespace _.Scripts.Player.State
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Dead,
+                transition =>_playerBase.isDead);
 
             //Faill
             _normalState.AddTransition(PlayerState.Fail, PlayerState.Idle,
                 transition => _attackSystem.finsihFail);
+            _normalState.AddTransition(PlayerState.Fail, PlayerState.Dead,
+                transition =>_playerBase.isDead);
             // _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,
             //     transition => _attackSystem.finsihFail && _attackSystem.attackCount == 1);
         }
@@ -333,10 +353,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddState(
                 PlayerState.GunAbility, new GunAbility(
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
-            
-            
-            
-            
+
 
             //Idle
             _hammerState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Walk,
@@ -345,7 +362,7 @@ namespace _.Scripts.Player.State
                 transition => _playerBase.getHurt);
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
-            
+
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.Attack1,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 0 &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.None);
@@ -355,9 +372,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2 &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.None);
-            
-            
-            
+
 
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.KeyAbility,
                 transition => _input.IsPressedAttack &&
@@ -371,7 +386,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.QuityAbility,
                 transition => _input.IsPressedAbility &&
                               _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None);
-            
+
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.DashAbility,
                 transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
@@ -384,20 +399,14 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.QuityAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.DashAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.GunAbility, PlayerState.Idle);
-            
-            
-            
-            
-            
+
+
             //Walk
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.DashAbility,
                 transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
-            
-            
-            
-            
-            
+
+
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
 
