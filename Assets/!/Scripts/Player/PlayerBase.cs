@@ -25,6 +25,7 @@ namespace _.Scripts.Player
         private CharacterController _controller;
 
         private HeartTest _view;
+        public bool isDead;
 
         private void Awake()
         {
@@ -105,7 +106,7 @@ namespace _.Scripts.Player
 
         public void OnDied()
         {
-            // GetComponentInChildren<Animator>().Play("Died");
+            isDead = true;
             GetComponent<Collider>().enabled = false;
             GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex,0);
         }
