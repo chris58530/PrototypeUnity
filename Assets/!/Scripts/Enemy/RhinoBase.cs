@@ -32,6 +32,8 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     {
         Initialize();
         BossABomb.bossABigBombEvent += BossABigBombDie;
+        _shieldUI.ResetShield();
+
     }
 
     void Initialize()

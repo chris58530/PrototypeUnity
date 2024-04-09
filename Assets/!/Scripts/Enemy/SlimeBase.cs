@@ -30,6 +30,7 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
     void Start()
     {
         _currentHp.Value = maxHp;
+        _shieldUI.ResetShield();
     }
 
     public void OnTakeDamage(int value)
