@@ -23,7 +23,7 @@ namespace _.Scripts.Enemy.BossA
         [Header("Shield Setting")] //.
         [SerializeField]
         private int shieldValue;
-
+    
         [SerializeField] private Material bodydMaterial;
         [SerializeField] private Material elseMaterial;
         [SerializeField] private Material bombMaterial;
@@ -46,12 +46,14 @@ namespace _.Scripts.Enemy.BossA
         {
             Initialize();
 
-
             _currentHp.Subscribe(_ =>
             {
                 hpImage.fillAmount = _currentHp.Value / maxHp;
                 hardHpImage.fillAmount = _currentHp.Value / maxHp;
             }).AddTo(this);
+            
+            ResetShield();
+
         }
 
         private void Update()
@@ -71,7 +73,7 @@ namespace _.Scripts.Enemy.BossA
                 return;
             if (isShielded)
             {
-                _shieldUI.HitShield();
+                _shieldUI.HitShield(shieldValue);
                 _currentHp.Value -= value / 5;
 
                 //Play effect
@@ -110,6 +112,7 @@ namespace _.Scripts.Enemy.BossA
         {
             TimeLineManager.Instance.PlayTimeLine(1);
             ani.Play("Die");
+            _shieldUI.DisableImage();
             GetComponent<AbilityContainer>().SetCanGetAbility(true);
             bt.enabled = false;
         }

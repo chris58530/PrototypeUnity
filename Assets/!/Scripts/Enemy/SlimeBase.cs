@@ -30,6 +30,7 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
     void Start()
     {
         _currentHp.Value = maxHp;
+        _shieldUI.ResetShield();
     }
 
     public void OnTakeDamage(int value)
@@ -40,7 +41,7 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
         onTakeDamagedEvent?.Invoke();
         if (isShield)
         {
-            _shieldUI.HitShield();
+            _shieldUI.HitShield(1);
             return;
         }
         // AudioManager.Instance.PlaySFX("MobInjured");
