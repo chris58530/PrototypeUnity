@@ -5,6 +5,7 @@ using _.Scripts;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ public class ControlMenu : MonoBehaviour
 {
     public ControlMenuState controlMenuState { get; private set; }
 
-    
+
     [SerializeField] private GameObject context;
 
     [SerializeField] private Button continueButton;
@@ -60,10 +61,9 @@ public class ControlMenu : MonoBehaviour
             audioPanel.SetActive(true);
             basicContorlPanel.SetActive(false);
             buttonGroup.SetActive(false);
-            
+
             EventSystem.current.SetSelectedGameObject(audioPanelFirstSelect);
             _lastSelectButtonObject = openAudioControlButton.gameObject;
-
         }).AddTo(this);
 
 
@@ -122,7 +122,7 @@ public class ControlMenu : MonoBehaviour
                 audioPanel.SetActive(false);
                 basicContorlPanel.SetActive(false);
                 buttonGroup.SetActive(true);
-                
+
                 EventSystem.current.SetSelectedGameObject(_lastSelectButtonObject.gameObject);
 
                 break;
@@ -133,5 +133,10 @@ public class ControlMenu : MonoBehaviour
     public void ChangeState(ControlMenuState state)
     {
         controlMenuState = state;
+    }
+
+    public void GoMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
