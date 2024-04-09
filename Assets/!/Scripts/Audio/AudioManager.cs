@@ -27,7 +27,8 @@ public class AudioManager : Singleton<AudioManager>
         //     BGMSource.clip = s.clip;
         //     BGMSource.Play();
         // }
-        BGMSource.clip = BGMSounds[num].clip;
+        if (BGMSounds != null)
+            BGMSource.clip = BGMSounds[num].clip;
         BGMSource.Play();
     }
     //public void PlayUI(string name)
