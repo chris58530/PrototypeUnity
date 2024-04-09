@@ -158,7 +158,7 @@ namespace _.Scripts.Enemy.BossA
             StopCoroutine(BigBomb_TransitionFloatValue(0, 0, 0));
             if (isAppeared)
             {
-                StartCoroutine(BigBomb_TransitionFloatValue(0.3f, minValue, 10));
+                StartCoroutine(BigBomb_TransitionFloatValue(0.3f, minValue, 15));
             }
             else
                 StartCoroutine(BigBomb_TransitionFloatValue(current, maxValue, 0.5f));

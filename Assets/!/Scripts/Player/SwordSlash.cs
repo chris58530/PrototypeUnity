@@ -12,14 +12,17 @@ public class SwordSlash : MonoBehaviour
     [SerializeField] private GameObject[] effectObjects;
     private VisualEffect[] _effect;
     [SerializeField] private float[] delayTime;
+
+    public bool canUse;
+
     public void UseSlash(int count, float scale)
     {
+        if (!canUse) return;
         effectObjects[count].transform.localScale = new Vector3(scale, scale, scale);
 
         Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(delayTime[count])).First().Subscribe(_ =>
         {
             effectObjects[count].GetComponent<VisualEffect>().Play();
-
         }).AddTo(this);
     }
 

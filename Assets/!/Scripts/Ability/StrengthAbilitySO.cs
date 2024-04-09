@@ -9,8 +9,9 @@ namespace @_.Scripts.Ability
     [CreateAssetMenu(fileName = "StrengthAbilityData", menuName = "Ability/StrengthAbility", order = 2)]
     public class StrengthAbilitySO : AbilityBase
     {
-         private GameObject powerfulSword;
+        private GameObject powerfulSword;
         private IDisposable lifeTimer;
+        private SwordSlash sword;
 
         public override void AbilityAlgorithm()
         {
@@ -23,6 +24,8 @@ namespace @_.Scripts.Ability
         public override void StartAbility()
         {
             powerfulSword = GameObject.Find("NoChargeSword");
+            sword = FindObjectOfType<SwordSlash>();
+            sword.canUse = true;
             if (powerfulSword != null)
                 powerfulSword.SetActive(false);
         }
@@ -31,6 +34,7 @@ namespace @_.Scripts.Ability
         {
             if (powerfulSword != null)
                 powerfulSword.SetActive(true);
+            sword.canUse = false;
 
             //產生對應物件 噴出原始怪物
             Debug.Log("QuitAbilityAlgorithm");
