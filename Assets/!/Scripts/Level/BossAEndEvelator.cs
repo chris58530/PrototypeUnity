@@ -65,7 +65,7 @@ public class BossAEndEvelator : MonoBehaviour
         _isEntered = true;
         _playerUseTimeLineUI.ShowCanConfirmImage(false);
 
-        GameManager.Instance.SwitchScene(5, 2);
+        GameManager.Instance.SwitchScene(4, 2);
         StartCoroutine(MoveDownCoroutine(5));
     }
 

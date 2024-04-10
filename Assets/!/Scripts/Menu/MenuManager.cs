@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     public void OnClickStart()
     {
         TimeLineManager.Instance.PlayTimeLine(0);
-        GameManager.Instance.SwitchScene(1,1);
+        GameManager.Instance.SwitchScene(1,2);
     }
 
     public void QuitGame()

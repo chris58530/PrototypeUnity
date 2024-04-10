@@ -66,5 +66,13 @@ namespace _.Scripts
                 }).AddTo(this);
             }
         }
+        private void OnEnable()
+        {
+            TimeScale(1);
+        }
+        private void OnDisable()
+        {
+         TimeScale(1);
+        }
     }
 }
