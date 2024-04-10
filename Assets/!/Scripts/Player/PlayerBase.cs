@@ -46,7 +46,6 @@ namespace _.Scripts.Player
         private void Start()
         {
             Initialize();
-           
         }
 
         void Initialize()
@@ -107,6 +106,7 @@ namespace _.Scripts.Player
         }
 
         private IDisposable respawnDispose;
+
         public void OnDied()
         {
             isDead = true;
@@ -121,10 +121,11 @@ namespace _.Scripts.Player
                     LevelSceneManager.Instance.ReSpawn(this.gameObject);
                     Initialize();
                     isDead = false;
+                    getHurt = false;
+
                     GetComponent<Collider>().enabled = true;
-            
                 }).AddTo(this);
-               
+
                 return;
             }
 
