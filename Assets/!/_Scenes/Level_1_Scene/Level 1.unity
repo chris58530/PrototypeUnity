@@ -1949,6 +1949,8 @@ PlayableDirector:
     value: {fileID: 1109876848}
   - key: {fileID: -6394759545029898655, guid: d67b3e435bb65294da720cc8989d2387, type: 2}
     value: {fileID: 8407909036264296958}
+  - key: {fileID: -8049033914301567429, guid: d67b3e435bb65294da720cc8989d2387, type: 2}
+    value: {fileID: 8407909036264296958}
   m_ExposedReferences:
     m_References:
     - bf8d4aa0703aa4a47a4210c71e775ed7: {fileID: 8933884229095446849}
@@ -2299,7 +2301,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15496
+  m_Name: pb_Mesh-45668
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4244,6 +4246,8 @@ PlayableDirector:
     value: {fileID: 7145478580817600646}
   - key: {fileID: 7831833330158209610, guid: bc89ffb6b06b7b844ba66972cb5209d5, type: 2}
     value: {fileID: 543608412}
+  - key: {fileID: 6676906312016380211, guid: bc89ffb6b06b7b844ba66972cb5209d5, type: 2}
+    value: {fileID: 8407909036264296958}
   m_ExposedReferences:
     m_References:
     - bf8d4aa0703aa4a47a4210c71e775ed7: {fileID: 8933884229095446849}
@@ -7534,7 +7538,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 20
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 31.1
   orthographic: 0
@@ -7561,8 +7565,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882612097}
-  m_LocalRotation: {x: 0.121214285, y: 0.33572915, z: -0.043612625, w: 0.93310827}
-  m_LocalPosition: {x: -18.240326, y: 20.56999, z: -47.45732}
+  m_LocalRotation: {x: 0.3420201, y: -0, z: -0, w: 0.9396927}
+  m_LocalPosition: {x: 77.33, y: 72.78, z: 3.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15697,7 +15701,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15518
+  m_Name: pb_Mesh-45690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17633,6 +17637,8 @@ PlayableDirector:
     value: {fileID: 1109876848}
   - key: {fileID: 2623989422117397790, guid: 1b0f192929d38b24aa26ea2de39098dc, type: 2}
     value: {fileID: 536666102}
+  - key: {fileID: -3662770431261388387, guid: 1b0f192929d38b24aa26ea2de39098dc, type: 2}
+    value: {fileID: 8407909036264296958}
   m_ExposedReferences:
     m_References:
     - bf8d4aa0703aa4a47a4210c71e775ed7: {fileID: 8933884229095446849}
@@ -18335,7 +18341,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13696
+  m_Name: pb_Mesh-43868
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37335,6 +37341,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkipImage
       objectReference: {fileID: 0}
+    - target: {fileID: 6618666184131944118, guid: a5d0daa060536a444a06a7d236a2116a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8407909036047455740, guid: a5d0daa060536a444a06a7d236a2116a,
         type: 3}
       propertyPath: m_Pivot.x
@@ -37444,6 +37455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DialogCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407909037160052499, guid: a5d0daa060536a444a06a7d236a2116a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 405.009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d0daa060536a444a06a7d236a2116a, type: 3}
