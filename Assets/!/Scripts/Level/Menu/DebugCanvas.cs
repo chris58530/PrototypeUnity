@@ -20,6 +20,7 @@ public class DebugCanvas : MonoBehaviour
 
     public void SelectScene(int num)
     {
+        Debug.Log("swtich to scene");
         SceneManager.LoadScene(num);
     }
 }
