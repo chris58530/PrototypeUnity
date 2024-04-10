@@ -16,9 +16,6 @@ namespace _.Scripts
         protected override void Awake()
         {
             base.Awake();
-            GameObject player = GameObject.FindWithTag("Player");
-            _playerInput = player.GetComponent<PlayerInput>();
-            _playerBase = player.GetComponent<PlayerBase>();
         }
 
         private void Start()
@@ -33,11 +30,15 @@ namespace _.Scripts
 
         public void LockPlayerInput(bool isEnabled)
         {
+            GameObject player = GameObject.FindWithTag("Player");
+            _playerInput = player.GetComponent<PlayerInput>();
             _playerInput.enabled = isEnabled;
         }
 
         public void LockPlayerHp(bool isEnabled)
         {
+            GameObject player = GameObject.FindWithTag("Player");
+            _playerBase = player.GetComponent<PlayerBase>();
             _playerBase.canHurt = isEnabled;
         }
 
@@ -52,8 +53,11 @@ namespace _.Scripts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.P))
             {
+                GameObject player = GameObject.FindWithTag("Player");
+                _playerBase = player.GetComponent<PlayerBase>();
+                _playerBase.isDead = true;
                 SystemActions.onSwitchScene?.Invoke(1);
                 Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ =>
                 {
