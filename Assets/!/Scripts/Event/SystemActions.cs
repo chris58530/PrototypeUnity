@@ -7,6 +7,7 @@ namespace @_.Scripts.Event
     {
         public static Action<float> onSwitchScene;
         public static Action onSceneStart;
+        public static Action onPlayerRespawn;
       
     }
 }

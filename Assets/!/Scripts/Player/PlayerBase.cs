@@ -26,6 +26,7 @@ namespace _.Scripts.Player
 
         private HeartTest _view;
         public bool isDead;
+        [SerializeField] private bool canReSpawn;
 
         private void Awake()
         {
@@ -45,17 +46,18 @@ namespace _.Scripts.Player
         private void Start()
         {
             Initialize();
+           
+        }
+
+        void Initialize()
+        {
+            currentHpValue.Value = maxHpValue;
             currentHpValue.Skip(1).Subscribe(_ => { getHurt = true; }).AddTo(this);
             currentHpValue.Subscribe(_ =>
             {
                 DebugTools.HpText(currentHpValue.Value);
                 _view.UpdateHearts(currentHpValue.Value);
             }).AddTo(this);
-        }
-
-        void Initialize()
-        {
-            currentHpValue.Value = maxHpValue;
         }
 
 
@@ -100,6 +102,7 @@ namespace _.Scripts.Player
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
             getHurt = false;
         }
 
@@ -108,7 +111,18 @@ namespace _.Scripts.Player
         {
             isDead = true;
             GetComponent<Collider>().enabled = false;
-            GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex,0);
+
+            if (canReSpawn)
+            {
+                SystemActions.onPlayerRespawn?.Invoke();
+                LevelSceneManager.Instance.ReSpawn(this.gameObject);
+                Initialize();
+                GetComponent<Collider>().enabled = true;
+                isDead = false;
+                return;
+            }
+
+            GameManager.Instance.SwitchScene(SceneManager.GetActiveScene().buildIndex, 0);
         }
     }
 }

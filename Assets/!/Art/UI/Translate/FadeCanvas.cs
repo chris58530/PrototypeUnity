@@ -22,6 +22,11 @@ public class FadeCanvas : MonoBehaviour
             .Subscribe(_ => { ani.SetTrigger("FadeOut"); }).AddTo(this);
     }
 
+    void ReSpawnFadeOut()
+    {
+        ani.SetTrigger("ReSpawn");
+    }
+
     void Awake()
     {
         ani = GetComponent<Animator>();
@@ -31,22 +36,21 @@ public class FadeCanvas : MonoBehaviour
     private void OnEnable()
     {
         SystemActions.onSwitchScene += FadeOutAnimation;
+        
         SystemActions.onSceneStart += FadeInAnimation;
+
+        SystemActions.onPlayerRespawn += ReSpawnFadeOut;
     }
 
-    public void GroupOn()
-    {
-        canvasGroup.alpha = 1;
-    }
-
-    public void GroupOff()
-    {
-        canvasGroup.alpha = 0;
-    }
+  
 
     private void OnDisable()
     {
         SystemActions.onSwitchScene -= FadeOutAnimation;
+        
         SystemActions.onSceneStart -= FadeInAnimation;
+        
+        SystemActions.onPlayerRespawn -= ReSpawnFadeOut;
+
     }
 }
