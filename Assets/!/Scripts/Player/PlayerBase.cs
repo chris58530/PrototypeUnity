@@ -106,19 +106,25 @@ namespace _.Scripts.Player
             getHurt = false;
         }
 
-
+        private IDisposable respawnDispose;
         public void OnDied()
         {
             isDead = true;
             GetComponent<Collider>().enabled = false;
+            respawnDispose?.Dispose();
 
             if (canReSpawn)
             {
                 SystemActions.onPlayerRespawn?.Invoke();
-                LevelSceneManager.Instance.ReSpawn(this.gameObject);
-                Initialize();
-                GetComponent<Collider>().enabled = true;
-                isDead = false;
+                respawnDispose = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(1)).Subscribe(_ =>
+                {
+                    LevelSceneManager.Instance.ReSpawn(this.gameObject);
+                    Initialize();
+                    isDead = false;
+                    GetComponent<Collider>().enabled = true;
+            
+                }).AddTo(this);
+               
                 return;
             }
 

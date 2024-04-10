@@ -175,7 +175,7 @@ namespace _.Scripts.Player.State
 
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
-            _normalState.AddTransition(PlayerState.Idle, PlayerState.Dead,
+            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Dead,
                 transition =>_playerBase.isDead);
             
 
