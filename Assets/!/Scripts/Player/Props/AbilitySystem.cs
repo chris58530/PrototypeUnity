@@ -12,6 +12,7 @@ namespace @_.Scripts.Player.Props
         private AbilityWeapon _abilityWeapon;
         private BoxCollider _abilityWeaponCollider;
         public AbilityWeapon.AbilityType GetCurrentAbility => _abilityWeapon.currentAbility;
+        public bool isBlockInsert;
 
         private void Awake()
         {
@@ -27,6 +28,7 @@ namespace @_.Scripts.Player.Props
 
         public void Attack()
         {
+            
             Observable.EveryFixedUpdate().First().Delay(TimeSpan.FromSeconds(0.04f)).Subscribe(_ =>
             {
                 // transform.LookAt(GetDirection());

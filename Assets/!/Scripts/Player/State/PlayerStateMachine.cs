@@ -174,7 +174,7 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2);
 
             _normalState.AddTransition(PlayerState.Idle, PlayerState.InsertSword,
-                transition => _input.IsPressedAbility);
+                transition => _input.IsPressedAbility && !_abilitySystem.isBlockInsert);
        
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Dead,
                 transition =>_playerBase.isDead);
@@ -184,7 +184,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
             _normalState.AddTransition(PlayerState.Walk, PlayerState.InsertSword,
-                transition => _input.IsPressedAbility);
+                transition => _input.IsPressedAbility&& !_abilitySystem.isBlockInsert);
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Dead,
                 transition =>_playerBase.isDead);
 
@@ -231,7 +231,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.InsertSword,
-                transition => _input.IsPressedAbility);
+                transition => _input.IsPressedAbility&& !_abilitySystem.isBlockInsert);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Dead,
                 transition =>_playerBase.isDead);
             //
@@ -249,7 +249,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.InsertSword,
-                transition => _input.IsPressedAbility);
+                transition => _input.IsPressedAbility&& !_abilitySystem.isBlockInsert);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Dead,
                 transition =>_playerBase.isDead);
 
@@ -265,7 +265,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Walk,
                 transition => _input.Move);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
-                transition => _input.IsPressedAbility);
+                transition => _input.IsPressedAbility&& !_abilitySystem.isBlockInsert);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Dead,
                 transition =>_playerBase.isDead);
 
