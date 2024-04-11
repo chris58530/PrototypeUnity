@@ -33,19 +33,19 @@ namespace _.Scripts.Player.State
             // _animator.CrossFade(Animator.StringToHash("Q1"), 0.1f);
             _animator.Play("Q1");
 
-            _attackSystem.Attack();      if (_input.Move)
+            _attackSystem.Attack();
+            if (_input.Move)
                 _controller.FaceInputDireaction(_input);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed >  _attackSystem.AttackTime(0))
+            if (_timer.Elapsed > _attackSystem.AttackTime(0))
                 fsm.StateCanExit();
         }
 
         public override void OnExit()
         {
-
             _attackSystem.CancelAttack();
         }
     }

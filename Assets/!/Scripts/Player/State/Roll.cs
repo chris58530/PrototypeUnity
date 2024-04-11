@@ -37,9 +37,12 @@ namespace _.Scripts.Player.State
             _animator.Play(Animator.StringToHash("Roll"));
 
             _controller.Roll();
-
+            // _attackSystem.finishAttack = false;
+            // _attackSystem. finsihFail = true;
+            // _attackSystem._failTimer?.Dispose();
+            // // _attackSystem.Fail();
             _attackSystem.Fail();
-            
+
             if (_input.Move)
                 _controller.FaceInputDireaction(_input);
         }
@@ -60,8 +63,9 @@ namespace _.Scripts.Player.State
 
         public override void OnExit()
         {
-            _attackSystem.attackCount = 0;
+            // _attackSystem.attackCount = 0;
             _animator.Play("Q1ToIdle");
+            _attackSystem.attackCount = 0;
 
             // //這方法是attacksystem的父類，不確定這樣呼叫好不好
             // _attackSystem.ResetChance();

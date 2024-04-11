@@ -173,8 +173,9 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Idle, PlayerState.Attack3,
                 transition => _input.IsPressedAttack && _attackSystem.attackCount == 2);
 
-            _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.InsertSword,
+            _normalState.AddTransition(PlayerState.Idle, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
+       
             _normalState.AddTwoWayTransition(PlayerState.Idle, PlayerState.Dead,
                 transition =>_playerBase.isDead);
             
@@ -275,6 +276,15 @@ namespace _.Scripts.Player.State
                 transition =>_playerBase.isDead);
             // _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,
             //     transition => _attackSystem.finsihFail && _attackSystem.attackCount == 1);
+            
+            
+            //insert 
+            _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Walk,
+                transition => _input.Move);
+            _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Attack1,
+                transition => _input.IsPressedAttack);
+            _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Idle,
+                transition => _input.IsReleasedAbility);
         }
 
         private void HammerState()

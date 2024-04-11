@@ -34,13 +34,16 @@ namespace @_.Scripts.Player.Props
         [SerializeField]
         private List<AbilityBase> abilityBaseList = new List<AbilityBase>();
 
-        private AbilityBase _currentAbilityBase;
+         public AbilityBase currentAbilityBase;
 
         public AbilityType currentAbility = AbilityType.None;
 
         [SerializeField] private GameObject[] inMouthObjectObjectList;
 
-        private IDisposable _abilityTimer;
+        public IDisposable _abilityTimer;
+        
+        public float currentAbilityTime;
+
 
         private void Start()
         {
@@ -52,27 +55,33 @@ namespace @_.Scripts.Player.Props
         {
             //for test
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
-            
+
             if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
+            
             if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
             
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
+            
             if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
+            
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
+            
             if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
+
+
         }
 
         public void ExecuteAblilty()
         {
-            _currentAbilityBase.AbilityAlgorithm();
+            currentAbilityBase.AbilityAlgorithm();
         }
 
         public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
 
-            if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm();
+            if (currentAbilityBase != null)
+                currentAbilityBase.QuitAbilityAlgorithm();
 
 //make current ability containers gameObject visible 
 
@@ -89,21 +98,20 @@ namespace @_.Scripts.Player.Props
             {
                 if (ability.abilityType == getAbility)
                 {
-                    _currentAbilityBase = ability;
-                    attackValue = _currentAbilityBase.damage;
-                    attackAction = _currentAbilityBase.TriggerEffect;
+                    currentAbilityBase = ability;
+                    attackValue = currentAbilityBase.damage;
+                    attackAction = currentAbilityBase.TriggerEffect;
                     currentAbility = getAbility;
-                    _currentAbilityBase.StartAbility();
-                    AbilityWeaponAnimator.Instance?.PlayAnimation(_currentAbilityBase.animationName);
+                    currentAbilityBase.StartAbility();
+                    AbilityWeaponAnimator.Instance?.PlayAnimation(currentAbilityBase.animationName);
 
 
                     //caculate when the aiblity is over
-                    PlayerActions.onStartAbility?.Invoke(_currentAbilityBase.lifeTime);
                     _abilityTimer = Observable.EveryUpdate().First()
-                        .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
+                        .Delay(TimeSpan.FromSeconds(currentAbilityBase.lifeTime))
                         .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);
 
-                    Debug.Log(_currentAbilityBase.name);
+                    Debug.Log(currentAbilityBase.name);
                     return;
                 }
             }
@@ -113,6 +121,7 @@ namespace @_.Scripts.Player.Props
             ChangeAbility(AbilityType.None);
         }
 
+       
 
         private void OnTriggerEnter(Collider other)
         {
@@ -125,8 +134,8 @@ namespace @_.Scripts.Player.Props
 
         private void OnDisable()
         {
-            if (_currentAbilityBase != null)
-                _currentAbilityBase.QuitAbilityAlgorithm();
+            if (currentAbilityBase != null)
+                currentAbilityBase.QuitAbilityAlgorithm();
         }
     }
 }

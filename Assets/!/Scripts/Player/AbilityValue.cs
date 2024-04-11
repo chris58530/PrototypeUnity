@@ -8,28 +8,17 @@ public class AbilityValue : MonoBehaviour
 {
     [SerializeField] private Image valueImage;
     [SerializeField] private GameObject valueBG;
-    private float _value;
 
-    private void Update()
+
+    public void UpdateTimeImage(float value, float max)
     {
-        if (_value < 0) return;
-        UpdateTime();
+        valueBG.SetActive(true);
+
+        valueImage.fillAmount = value / max;
     }
 
-    public void UpdateTime()
-    {
-        if(!valueBG.activeSelf)
-            valueBG.SetActive(true);
-        
-        _value -= Time.deltaTime;
-        Debug.Log($"current ability {_value} time");
-        valueImage.fillAmount = _value / 1;
-    }
-
-    void StopUpdateTime()
+    public void StopUpdateTime()
     {
         valueBG.SetActive(false);
-
     }
-  
 }

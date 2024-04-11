@@ -29,7 +29,6 @@ namespace _.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("ChanceFirst");
-            _attackSystem.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()

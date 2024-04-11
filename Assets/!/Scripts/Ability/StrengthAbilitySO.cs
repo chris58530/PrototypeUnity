@@ -46,6 +46,7 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Strength TriggerEffect ");
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
+          
         }
 
         // private void OnDisable()

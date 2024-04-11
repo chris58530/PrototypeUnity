@@ -25,12 +25,13 @@ namespace _.Scripts.Player
         public float failTime;
 
         public bool finsihFail;
-        private IDisposable _failTimer;
+        public IDisposable _failTimer;
 
 
         public void Fail()
         {
             finsihFail = false;
+            _failTimer?.Dispose();
             _failTimer = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(failTime)).Subscribe(_ =>
             {
                 finsihFail = true;
