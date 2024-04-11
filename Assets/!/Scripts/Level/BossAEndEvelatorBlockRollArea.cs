@@ -21,6 +21,7 @@ public class BossAEndEvelatorBlockRollArea : MonoBehaviour
         if (other.TryGetComponent<PlayerController>(out var controller))
         {
             evelator.gameObject.GetComponent<MeshRenderer>().material = brightMaterial;
+            evelator.GetComponent<BossAEndEvelator>().enabled = true;
             controller.blockRoll = true;
         }
 
