@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _.Scripts.Ability;
 using _.Scripts.Enemy;
+using _.Scripts.Event;
 using _.Scripts.Interface;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -97,6 +98,7 @@ namespace @_.Scripts.Player.Props
 
 
                     //caculate when the aiblity is over
+                    PlayerActions.onStartAbility?.Invoke(_currentAbilityBase.lifeTime);
                     _abilityTimer = Observable.EveryUpdate().First()
                         .Delay(TimeSpan.FromSeconds(_currentAbilityBase.lifeTime))
                         .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);

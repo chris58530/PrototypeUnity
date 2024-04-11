@@ -6,13 +6,21 @@ using UnityEngine.Serialization;
 
 public class BossAEndEvelatorBlockRollArea : MonoBehaviour
 {
+    [Header("active change bright material")]
+    [SerializeField] private GameObject evelator;
+
+    [SerializeField] private Material brightMaterial;
+    [SerializeField] private Material _originMaterial;
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
-  
+
+
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerController>(out var controller))
         {
+            evelator.gameObject.GetComponent<MeshRenderer>().material = brightMaterial;
             controller.blockRoll = true;
         }
 
@@ -23,6 +31,8 @@ public class BossAEndEvelatorBlockRollArea : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerController>(out var controller))
         {
+            evelator.gameObject.GetComponent<MeshRenderer>().material = _originMaterial;
+
             controller.blockRoll = false;
         }
 

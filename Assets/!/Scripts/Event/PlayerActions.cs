@@ -19,5 +19,6 @@ namespace _.Scripts.Event
         public static Action onHitEnemy;
         
         public static Action<int> onUseAbility; 
+        public static Action<float> onStartAbility; 
     }
 }
