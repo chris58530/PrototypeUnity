@@ -998,7 +998,7 @@ PrefabInstance:
     - target: {fileID: 2068971478276831748, guid: 1ec1c7b37457f9547a98e4e1c3272405,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2068971478276831748, guid: 1ec1c7b37457f9547a98e4e1c3272405,
         type: 3}
@@ -1104,6 +1104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925230371}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[3]
@@ -1625,68 +1629,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352549393}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &355123520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 355123521}
-  - component: {fileID: 355123522}
-  m_Layer: 0
-  m_Name: BehaviourDesign_GlobleValues
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &355123521
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355123520}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.3908, y: 0.6944494, z: 44.78799}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 645124227}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &355123522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355123520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6597a3c29eedbb443be50bee187bf865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player:
-    mIsShared: 0
-    mIsGlobal: 0
-    mIsDynamic: 0
-    mName: 
-    mToolTip: 
-    mPropertyMapping: 
-    mPropertyMappingOwner: {fileID: 0}
-    mValue: {fileID: 1973834519}
-  canfight:
-    mIsShared: 0
-    mIsGlobal: 0
-    mIsDynamic: 0
-    mName: 
-    mToolTip: 
-    mPropertyMapping: 
-    mPropertyMappingOwner: {fileID: 0}
-    mValue: 1
 --- !u!1001 &361443889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1977,6 +1919,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -3001,6 +2947,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -3130,7 +3080,6 @@ Transform:
   - {fileID: 89232921}
   - {fileID: 1646510923}
   - {fileID: 815170123}
-  - {fileID: 355123521}
   - {fileID: 1344906722}
   - {fileID: 1079571655}
   - {fileID: 990720047}
@@ -3360,6 +3309,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -3761,6 +3714,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925230371}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -3890,7 +3847,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh974290
+  m_Name: pb_Mesh1943996
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4492,6 +4449,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -5294,6 +5255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -5511,7 +5476,7 @@ Transform:
   m_Children:
   - {fileID: 613310423}
   m_Father: {fileID: 645124227}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &990720048
 MonoBehaviour:
@@ -5876,6 +5841,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -6316,7 +6285,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 645124227}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1079571656
 MonoBehaviour:
@@ -6826,6 +6795,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925230371}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -22912,6 +22885,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925230371}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
@@ -23332,7 +23309,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh974448
+  m_Name: pb_Mesh1944154
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24919,6 +24896,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901391926}
     m_Modifications:
+    - target: {fileID: 1258395185, guid: 59889cdfff5424b4e90c88f552186148, type: 3}
+      propertyPath: canGetAbilty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2034712047617236536, guid: 59889cdfff5424b4e90c88f552186148,
         type: 3}
       propertyPath: m_Enabled
