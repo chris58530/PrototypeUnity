@@ -32,8 +32,8 @@ public class GoblinBase : Enemy, IDamageable, IDashable
     {
         if (canDash)
         {
-            bt.SendEvent("DoDash");
-
+            // bt.SendEvent("DoDash");
+            DoDash();
             return;
         }
 
@@ -52,6 +52,13 @@ public class GoblinBase : Enemy, IDamageable, IDashable
             bt.SendEvent("OnStun");
             onStunEvent?.Invoke();
         }
+    }
+
+    void DoDash()
+    {
+        Transform destination = GameObject.Find("GloblinPosition").transform;
+        transform.position = destination.position;
+
     }
 
     public void OnDied()
