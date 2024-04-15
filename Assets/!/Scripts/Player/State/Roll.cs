@@ -1,5 +1,6 @@
 using System;
 using _.Scripts.Event;
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using TMPro;
 using UniRx;

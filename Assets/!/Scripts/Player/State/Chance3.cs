@@ -1,3 +1,4 @@
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using _.Scripts.UI;
 using UnityEngine;
@@ -34,7 +35,6 @@ namespace @_.Scripts.Player.State
             //debug
             _timer = new Timer();
             DebugTools.StateText("ChanceThird");
-            _attackSystem.AttackChancePreview(Color.yellow);
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
         }
 
@@ -53,7 +53,6 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }

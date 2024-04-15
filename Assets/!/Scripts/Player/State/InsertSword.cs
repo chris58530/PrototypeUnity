@@ -2,6 +2,7 @@ using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
+using _.Scripts.Event;
 
 namespace @_.Scripts.Player.State
 {
@@ -41,7 +42,7 @@ namespace @_.Scripts.Player.State
 
             _insertTime = 0;
             _abilitySystem.Attack();
-            
+
             //避免接下來連續兩次q1
             // _attackSystem.finishAttack = true;
             // _attackSystem.finishAttack = false;
@@ -49,7 +50,7 @@ namespace @_.Scripts.Player.State
             // _attackSystem._failTimer?.Dispose();
             _attackSystem.Fail();
 
-            
+
             if (_input.Move)
                 _controller.FaceInputDireaction(_input);
         }
@@ -67,6 +68,7 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
+            PlayerActions.endPlayerEatEffect?.Invoke();
             _abilitySystem.CancelAttack();
         }
     }

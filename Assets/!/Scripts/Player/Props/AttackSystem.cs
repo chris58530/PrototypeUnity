@@ -2,9 +2,8 @@ using System;
 using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace _.Scripts.Player
+namespace @_.Scripts.Player.Props
 {
     public class AttackSystem : PlayerAttackSystem
     {
@@ -16,8 +15,7 @@ namespace _.Scripts.Player
         [SerializeField] private float chanceTime;
         [SerializeField] public bool finishAttack;
         [SerializeField] private GameObject weaponCollider;
-        [SerializeField] private GameObject attackChancePreview;
-
+        [SerializeField] private GameObject weaponColliderQ3;
 
 
         [Header("Fail Setting")] //
@@ -27,6 +25,11 @@ namespace _.Scripts.Player
         public bool finsihFail;
         public IDisposable _failTimer;
 
+        [Header("Gamepad vibrate setting")] [SerializeField]
+        private float low;
+
+        [SerializeField] private float high;
+        [SerializeField] private float time;
 
         public void Fail()
         {
@@ -44,9 +47,10 @@ namespace _.Scripts.Player
             UseNormalAttack();
         }
 
-        private void UseNormalAttack()
+        public void UseQ3Attack()
         {
             chanceTimer?.Dispose();
+            SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
@@ -54,20 +58,50 @@ namespace _.Scripts.Player
             if (attackCount == 0)
             {
                 AudioManager.Instance.PlaySFX("Attack1");
-                // if (isHeammer)
-                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q1);
             }
             else if (attackCount == 1)
             {
                 AudioManager.Instance.PlaySFX("Attack2");
-                // if (isHeammer)
-                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q2);
             }
             else if (attackCount == 2)
             {
                 AudioManager.Instance.PlaySFX("Attack3");
-                // if (isHeammer)
-                //     AbilityWeaponAnimator.Instance.PlayerAnimation(AbilityWeaponAnimator.AnimationName.Q3);
+            }
+
+            //接技 保持攻擊不中斷 Q1可以接走路再接Q2
+            if (attackCount < 2)
+                attackCount++;
+            else attackCount = 0;
+
+
+            chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
+                .First().Subscribe(_ => { finishAttack = true; });
+
+            weaponColliderQ3.GetComponent<Collider>().enabled = true;
+
+            if (autoTurnAroundDetect.NearEnemy(this.transform) == null) return;
+            transform.LookAt(autoTurnAroundDetect.NearEnemy(this.transform));
+        }
+
+        private void UseNormalAttack()
+        {
+            chanceTimer?.Dispose();
+            SystemActions.onGamePadVibrate?.Invoke(low, high, time);
+
+            //sword effect
+            PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
+            //audio
+            if (attackCount == 0)
+            {
+                AudioManager.Instance.PlaySFX("Attack1");
+            }
+            else if (attackCount == 1)
+            {
+                AudioManager.Instance.PlaySFX("Attack2");
+            }
+            else if (attackCount == 2)
+            {
+                AudioManager.Instance.PlaySFX("Attack3");
             }
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
@@ -85,7 +119,6 @@ namespace _.Scripts.Player
         public void FaceMouseInputPosition()
         {
             transform.LookAt(GetDirection());
-
         }
 
         public float AttackTime(int count)
@@ -98,13 +131,10 @@ namespace _.Scripts.Player
         public void CancelAttack()
         {
             weaponCollider.GetComponent<Collider>().enabled = false;
+            weaponColliderQ3.GetComponent<Collider>().enabled = false;
         }
 
 
-        public void AttackChancePreview(Color color)
-        {
-            attackChancePreview.GetComponent<MeshRenderer>().material.color = color;
-        }
-        
+     
     }
 }

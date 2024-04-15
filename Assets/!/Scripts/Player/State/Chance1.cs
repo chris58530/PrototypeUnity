@@ -1,3 +1,4 @@
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using TMPro;
 using UnityEngine;
@@ -44,7 +45,6 @@ namespace _.Scripts.Player.State
         {
             // _animator.CrossFade(Animator.StringToHash("Q1ToIdle"),0f);
             _animator.Play("Q1ToIdle");
-            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }

@@ -1,4 +1,5 @@
 using _.Scripts.Event;
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using _.Scripts.UI;
 using UnityEngine;
@@ -35,9 +36,9 @@ namespace @_.Scripts.Player.State
             // _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
             _animator.Play("Q3");
 
-            _attackSystem.Attack();      if (_input.Move)
+            _attackSystem.UseQ3Attack();
+            if (_input.Move)
                 _controller.FaceInputDireaction(_input);
-            
         }
 
         public override void OnLogic()

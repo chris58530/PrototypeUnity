@@ -1,3 +1,4 @@
+using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
@@ -27,7 +28,6 @@ namespace @_.Scripts.Player.State
         {
             //debug
             DebugTools.StateText("ChanceScecond");
-            _attackSystem.AttackChancePreview(Color.yellow);
         }
 
         public override void OnLogic()
@@ -40,7 +40,6 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
-            _attackSystem.AttackChancePreview(Color.white);
         }
     }
 }

@@ -44,7 +44,6 @@ public class SwordInsert : MonoBehaviour
         }
 
 
-        Debug.Log("strength time : " + abilityWeapon.currentAbilityTime);
     }
 
     private void OnTriggerStay(Collider other)
@@ -52,7 +51,6 @@ public class SwordInsert : MonoBehaviour
         if (other.TryGetComponent<Crystal>(out var crystal))
         {
             AddSwordAbilityTime();
-            Debug.Log("add time");
         }
     }
 }

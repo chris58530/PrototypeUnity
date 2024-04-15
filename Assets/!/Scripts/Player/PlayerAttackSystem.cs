@@ -7,6 +7,7 @@ namespace _.Scripts.Player
     public  class PlayerAttackSystem: MonoBehaviour
     {
         protected IDisposable chanceTimer;
+        protected AutoTurnAroundDetect autoTurnAroundDetect => GetComponentInChildren<AutoTurnAroundDetect>();
 
         protected PlayerBase playerBase;
         protected AttackWeapon attackWeapon;

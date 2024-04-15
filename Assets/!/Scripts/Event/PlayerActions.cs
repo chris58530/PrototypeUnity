@@ -15,6 +15,10 @@ namespace _.Scripts.Event
         public static Action<float> onPlayerAttack;
         //第幾個、縮放大小
         public static Action<int,float> onPlayerAttackEffect;
+        public static Action onPlayerEatEffect;
+        
+        public static Action endPlayerEatEffect;
+        //state machine insert state call
         
         public static Action onHitEnemy;
         

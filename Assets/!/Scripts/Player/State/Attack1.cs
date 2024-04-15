@@ -2,6 +2,7 @@ using _.Scripts.Tools;
 using UnityEngine;
 using UnityHFSM;
 using _.Scripts.Event;
+using _.Scripts.Player.Props;
 
 namespace _.Scripts.Player.State
 {
@@ -36,6 +37,7 @@ namespace _.Scripts.Player.State
             _attackSystem.Attack();
             if (_input.Move)
                 _controller.FaceInputDireaction(_input);
+            
         }
 
         public override void OnLogic()
