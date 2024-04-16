@@ -43,8 +43,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeDamage(int value)
     {
-        Debug.Log("take damage");
-        onTakeDamagedEvent?.Invoke();
         bt.SendEvent("OnTakeDamage");
 
         if (isShield)
@@ -52,6 +50,11 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
             _shieldUI.HitShield(1);
             return;
         }
+        
+        
+        onTakeDamagedEvent?.Invoke();
+
+       
         AudioManager.Instance.PlaySFX("MobInjured");
 
 
@@ -90,7 +93,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         bt.SetVariable("isShield", _isShield);
 
         // bt.SendEvent("OnTakeDamage");
-        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.7f)).Subscribe(_ =>
+        Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.1f)).Subscribe(_ =>
         {
             foreach (var obj in armors)
             {

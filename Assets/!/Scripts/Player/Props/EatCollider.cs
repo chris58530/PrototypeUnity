@@ -11,6 +11,7 @@ public class EatCollider : MonoBehaviour
     private void OnEnable()
     {
         PlayerActions.endPlayerEatEffect += StopCrystalParticle;
+        crystalParticleSystem.gameObject.SetActive(false);
     }
     private void OnDisable()
     {
@@ -27,11 +28,14 @@ public class EatCollider : MonoBehaviour
     void StopCrystalParticle()
     {
         crystalParticleSystem.Stop();
+        crystalParticleSystem.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.GetComponent<Crystal>()) return;
+        crystalParticleSystem.gameObject.SetActive(true);
+
         crystalParticleSystem.Play();
     }
 }
