@@ -13,6 +13,8 @@ public class TorchArea : MonoBehaviour
         if (other.gameObject.TryGetComponent<IDashable>(out var target))
         {
             target.canDash = false;
+            target.InLight(true);
+
             inAreaDashableObject.Add(other.gameObject);
         }
     }
@@ -22,6 +24,7 @@ public class TorchArea : MonoBehaviour
         if (other.gameObject.TryGetComponent<IDashable>(out var target))
         {
             target.canDash = true;
+            target.InLight(false);
             inAreaDashableObject.Remove(other.gameObject);
         }
     }
@@ -31,6 +34,8 @@ public class TorchArea : MonoBehaviour
         foreach (var obj in inAreaDashableObject)
         {
             obj.GetComponent<IDashable>().canDash = true;
+            obj.GetComponent<IDashable>().InLight(false);
+
         }
     }
 }

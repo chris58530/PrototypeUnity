@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 639ea49eb2cbc9043a45e2f988c5ca42, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8dd2e1f50c0cc5946a5641ab9dd11b85, type: 2}
 --- !u!1 &57054471
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +604,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &382493586 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7548447265081511460, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7887936364074138294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &389235712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2049,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1390242524}
     m_Modifications:
+    - target: {fileID: 2070054599083397302, guid: 0a0064897d62f934cb4d36f4a4c9e08d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5715834888313830770, guid: 0a0064897d62f934cb4d36f4a4c9e08d,
         type: 3}
       propertyPath: m_RootOrder
@@ -2426,6 +2437,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1390242524}
     m_Modifications:
+    - target: {fileID: 1770439319, guid: ff4805dec0ccc984d8eb4ef3dedaa83d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.806
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770439321, guid: ff4805dec0ccc984d8eb4ef3dedaa83d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770439321, guid: ff4805dec0ccc984d8eb4ef3dedaa83d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 090c3e97eadf6494f9906ffa6ea0e05c, type: 2}
     - target: {fileID: 2351550720334255428, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
         type: 3}
       propertyPath: m_Name
@@ -2486,6 +2509,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: EmssionMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 03f48b4847ec07d4b9ab4e7206b0945b, type: 2}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: OringinMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 4511126de92e49441949d9fffb877340, type: 2}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 382493586}
+    - target: {fileID: 2351550720443715618, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: InLightMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 03f48b4847ec07d4b9ab4e7206b0945b, type: 2}
+    - target: {fileID: 2351550720443715618, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: OringinMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4511126de92e49441949d9fffb877340, type: 2}
+    - target: {fileID: 2351550720443715618, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351550720443715618, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 382493586}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4805dec0ccc984d8eb4ef3dedaa83d, type: 3}
 --- !u!4 &8933884229095446848
