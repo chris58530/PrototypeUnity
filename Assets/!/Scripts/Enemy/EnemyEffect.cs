@@ -23,9 +23,9 @@ public class EnemyEffect : MonoBehaviour
 
     public void SetEmission()
     {
-        for (int i = 0; i < _renderers.Length; i++)
+        foreach (var i in _renderers)
         {
-            _renderers[i].material = EmssionMat;
+            i.material = EmssionMat;
         }
 
         Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.2f)).First().Subscribe(_ =>
