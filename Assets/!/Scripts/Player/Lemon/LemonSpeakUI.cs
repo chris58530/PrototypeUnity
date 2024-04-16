@@ -6,6 +6,7 @@ using UnityEngine;
 using UniRx;
 using Random = UnityEngine.Random;
 
+
 public class LemonSpeakUI : MonoBehaviour
 {
     [SerializeField] private GameObject speakCanvas;

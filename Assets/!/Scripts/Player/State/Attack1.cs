@@ -37,7 +37,7 @@ namespace _.Scripts.Player.State
             _attackSystem.Attack();
             if (_input.Move)
                 _controller.FaceInputDireaction(_input);
-            
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.Normal);
         }
 
         public override void OnLogic()

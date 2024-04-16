@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: LemonSpeak
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-177.535568,211.5415)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(19.0475845,141.428741)"},"ID":1,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-397.8263,585.2174)","Comment":"Event
+        speak ","ColorIndex":3},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-376.85437,168.046265)","Comment":"QuackBigBomb","Collapsed":true},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"QuackBigBomb"},"ID":4,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"QuackBigBomb"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-41.0254059,183.243439)","Comment":"Keymonster","Collapsed":true},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"Keymonster"},"ID":6,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Keymonster"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(198.1679,202.307648)","Comment":"Shield"},"ID":7,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-321.538727,265.384735)","Comment":"Shield"},"ID":8,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Shield"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.SetBool","NodeData":{"Offset":"(-195.726074,276.77417)"},"ID":9,"Name":"Set
+        Bool","Instant":true,"SharedBoolboolValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolstoreResult":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(-65.8974,281.538422)"},"ID":10,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["maybre
+        should use crystal","what ?","cant hurtA"]},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.SetBool","NodeData":{"Offset":"(92.05147,290)"},"ID":11,"Name":"Set
+        Bool","Instant":true,"SharedBoolboolValue":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolstoreResult":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(586.838135,604.083)"},"ID":12,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.Math.BoolComparison","NodeData":{"Offset":"(-127.942139,207.2124)"},"ID":13,"Name":"Bool
+        Comparison","Instant":true,"SharedBoolbool1":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false},"SharedBoolbool2":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(200,229.629669)","Comment":"Normal
+        speak","ColorIndex":3},"ID":14,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-602.9543,208.928513)","Comment":"Level
+        1"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"Level
+        1"},"ID":16,"Name":"Has Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Level
+        1"}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(38,145)"},"ID":17,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["Level
+        1"]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-250.447418,198.4831)","Comment":"BossA"},"ID":18,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"BossA"},"ID":19,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"BossA"}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(48,175)"},"ID":20,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["BossA","BossA"]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-23.2384033,225.414185)","Comment":"Party_Scene"},"ID":21,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"Party_Scene"},"ID":22,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Party_Scene"}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(38,165)"},"ID":23,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["Party_Scene","Party_Scene"]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(247.798981,216.627838)","Comment":"Level
+        2"},"ID":24,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-110,150)","Comment":"Level
+        2"},"ID":25,"Name":"Has Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Level
+        2"}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(10,180)"},"ID":26,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["Level
+        2","Level 2"]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(587.6415,199.409058)","Comment":"Level_2_Boss"},"ID":27,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.HasReceivedEvent","NodeData":{"Offset":"(-141.914917,213.829834)","Comment":"Level_1_Boss"},"ID":28,"Name":"Has
+        Received Event","Instant":true,"SharedStringeventName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Level_1_Boss"}},{"Type":"LemonSpeakAction","NodeData":{"Offset":"(62.25818,202.2583)"},"ID":29,"Name":"Lemon
+        Speak Action","Instant":true,"SharedGameObjectdialogText":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},"SharedGameObjectdialogCanvas":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},"SinglekeepTime":5,"String[]dialog":["Level_2_Boss","Level_2_Boss"]}]}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.7

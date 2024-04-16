@@ -244,6 +244,37 @@ MonoBehaviour:
   speakCanvas: {fileID: 503461523}
   dialogText: {fileID: 4759191775044005529}
   intervalSpeakTime: 0
+--- !u!1 &1377549989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377549990}
+  m_Layer: 0
+  m_Name: Speaking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1377549990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377549989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2216531663737464911}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1883278809037035777
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,9 +316,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2216531663737464911}
-  - component: {fileID: 2216531663737464906}
-  - component: {fileID: 2216531663737464905}
   - component: {fileID: 2216531663737464907}
+  - component: {fileID: 8463882320375617695}
   - component: {fileID: 1600284951}
   - component: {fileID: 1600284952}
   m_Layer: 0
@@ -311,59 +341,10 @@ Transform:
   m_Children:
   - {fileID: 1228171961906118534}
   - {fileID: 1270406864}
+  - {fileID: 1377549990}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2216531663737464906
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216531663737464910}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2216531663737464905
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216531663737464910}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 443f82df649c26c44b5e24ac10a91247, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2216531663737464907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,14 +373,61 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DestoryThis","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Collider","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"AttackCollider","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"FristFindPlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true,"GameObjectmValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
-        - {fileID: 0}
+        - {fileID: 1298120932552270968}
+        - {fileID: 2216531663737464910}
+        - {fileID: 6092109548785372936}
+        - {fileID: 503461523}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.7
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
+--- !u!114 &8463882320375617695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216531663737464910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 1
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 11400000, guid: a906a5f9a0e881d48b8d865ae87587d6, type: 2}
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 1298120932552270968}
+        - {fileID: 2216531663737464910}
+        - {fileID: 6092109548785372936}
+        - {fileID: 503461523}
         byteData: 
         byteDataArray: 
       Version: 1.7.7

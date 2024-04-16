@@ -47,6 +47,8 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
         if (isShield)
         {
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.Shield);
+
             _shieldUI.HitShield(1);
             return;
         }
