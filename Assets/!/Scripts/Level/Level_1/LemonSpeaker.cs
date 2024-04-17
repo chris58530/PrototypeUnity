@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class LemonSpeaker : MonoBehaviour, ITaskResult
 {
-    [SerializeField] private string[] lemonDialogText;
+    [SerializeField] private string lemonDialogEventText;
     [SerializeField] private bool AddDestination;
     private LemonBase _lemonBase;
     
@@ -16,9 +16,8 @@ public class LemonSpeaker : MonoBehaviour, ITaskResult
             _lemonBase = FindObjectOfType<LemonBase>();
 
         if (AddDestination)
-            _lemonBase.SetDestination(lemonDialogText, this.gameObject, AddDestination);
-        else
-            _lemonBase.SetSpeak(lemonDialogText,AddDestination);
+            _lemonBase.SetDestination(lemonDialogEventText, this.gameObject);
+  
     }
 
   

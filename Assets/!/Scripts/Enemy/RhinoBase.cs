@@ -33,7 +33,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         Initialize();
         BossABomb.bossABigBombEvent += BossABigBombDie;
         _shieldUI.ResetShield();
-
     }
 
     void Initialize()
@@ -52,11 +51,11 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
             _shieldUI.HitShield(1);
             return;
         }
-        
-        
+
+
         onTakeDamagedEvent?.Invoke();
 
-       
+
         AudioManager.Instance.PlaySFX("MobInjured");
 
 
@@ -76,8 +75,9 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnDied()
     {
-        onDiedEvent?.Invoke();
+        AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
 
+        onDiedEvent?.Invoke();
         bt.SendEvent("OnDied");
     }
 
@@ -112,12 +112,9 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     {
         bt.SendEvent("OnStun");
         onDiedEvent?.Invoke();
-        
-        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(2)).First().Subscribe(_ =>
-        {
-            Destroy(gameObject);
 
-        }).AddTo(this);
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(2)).First().Subscribe(_ => { Destroy(gameObject); })
+            .AddTo(this);
     }
 
     private void OnTriggerEnter(Collider other)

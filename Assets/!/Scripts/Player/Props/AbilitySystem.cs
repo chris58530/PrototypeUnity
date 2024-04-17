@@ -32,8 +32,8 @@ namespace @_.Scripts.Player.Props
             {
                 // transform.LookAt(GetDirection());
                 _abilityWeaponCollider.enabled = true;
-          
             }).AddTo(this);
+
             if (autoTurnAroundDetect.NearContainers(this.transform) == null) return;
             transform.LookAt(autoTurnAroundDetect.NearContainers(this.transform));
         }

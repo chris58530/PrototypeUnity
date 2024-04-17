@@ -14,17 +14,16 @@ public enum LemonSpeakEnum
     Keymonster,
     QuackNormal,
     QuackBigBomb,
-    QuackDieNormal
+    InsertCrystal
 }
 
 public class LemonBase : MonoBehaviour
 {
-    [SerializeField]private BehaviorTree bt;
+    [SerializeField]private BehaviorTree speakBT;
+    [SerializeField]private BehaviorTree moveBT;
 
 
-    public static Action<string[]> onMissionSpeak;
 
-    public static Action<string[], float> onSpeak;
     
     public static Action<LemonSpeakEnum> onUseBTSpeak;
     private bool _isSpeaking;
@@ -55,34 +54,19 @@ public class LemonBase : MonoBehaviour
         }
 
 
-        bt.SendEvent(name);
+        speakBT.SendEvent(name);
     }
 
-    public void SetDestination(string[] text, GameObject targetTransObj, bool isMission)
+    public void SetDestination(string eventText, GameObject targetTransObj)
     {
-        if (bt == null)
-        {
-            bt = GetComponent<BehaviorTree>();
-        }
-
-        onMissionSpeak?.Invoke(text);
+    
         Debug.Log("lemon in mission");
         //set behaviour disgner the target position
         SharedGameObject targetShared = targetTransObj;
-        bt.SetVariable("MissionPosObject", targetShared);
-
-        //Set behaviour disgner InMission
-        SharedBool islastSpeakShared = isMission;
-        bt.SetVariable("InMission", islastSpeakShared);
+        moveBT.SetVariable("MissionPosObject", targetShared);
+        SharedBool islastSpeakShared = true;
+        moveBT.SetVariable("InMission", islastSpeakShared);
+        speakBT.SendEvent(eventText);
     }
 
-    public void SetSpeak(string[] text, bool isMission)
-    {
-        //set canvas text
-        onSpeak?.Invoke(text, 1.5f);
-
-
-        SharedBool islastSpeakShared = isMission;
-        bt.SetVariable("InMission", islastSpeakShared);
-    }
 }

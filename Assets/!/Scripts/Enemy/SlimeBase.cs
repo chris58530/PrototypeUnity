@@ -6,7 +6,8 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
+
+public class SlimeBase : Enemy, IDamageable, IShieldable
 {
     [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
     private bool isShield = true;
@@ -18,11 +19,10 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
     [SerializeField] private UnityEvent onStunEvent;
     [SerializeField] private UnityEvent onDiedEvent;
     private ShieldUI _shieldUI;
-    [SerializeField]private Animator _animator;
+    [SerializeField] private Animator _animator;
 
-   void Awake()
+    void Awake()
     {
-     
         _shieldUI = GetComponentInChildren<ShieldUI>();
     }
 
@@ -41,6 +41,8 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
         onTakeDamagedEvent?.Invoke();
         if (isShield)
         {
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.Shield);
+
             _shieldUI.HitShield(1);
             return;
         }
@@ -65,22 +67,17 @@ public class SlimeBase :  MonoBehaviour, IDamageable, IShieldable
         GetComponent<Collider>().enabled = false;
         onDiedEvent?.Invoke();
         _animator.Play("Die");
-        Destroy(gameObject,3);
+        Destroy(gameObject, 3);
     }
-
-  
 
 
     public void OnTakeShield(int removeValue)
     {
         if (!isShield) return;
 
-   
 
         _shieldUI.BreakShield(0);
 
         isShield = false;
     }
-
- 
 }

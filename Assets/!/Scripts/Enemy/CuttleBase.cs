@@ -47,6 +47,9 @@ public class CuttleBase : Enemy, IDamageable
 
     public void OnDied()
     {
+        AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+
+        
         onDiedEvent?.Invoke();
 
         bt.SendEvent("OnDied");

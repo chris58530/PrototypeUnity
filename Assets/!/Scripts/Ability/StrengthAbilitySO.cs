@@ -23,7 +23,8 @@ namespace @_.Scripts.Ability
 
         public override void StartAbility()
         {
-            powerfulSword = GameObject.Find("NoChargeSword");
+            powerfulSword = GameObject.Find("NoChargeSword");            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.InsertCrystal);
+
             sword = FindObjectOfType<SwordSlash>();
             sword.canUse = true;
             if (powerfulSword != null)

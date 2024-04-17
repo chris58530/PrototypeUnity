@@ -9,6 +9,39 @@ public class AutoTurnAroundDetect : MonoBehaviour
     [SerializeField] private List<Enemy> enemyList = new List<Enemy>();
     [SerializeField] private List<AbilityContainer> containers = new List<AbilityContainer>();
 
+    public static Action<GameObject> onDieRemoveDetectList;
+
+    private void OnEnable()
+    {
+        onDieRemoveDetectList += RemoveDetectList;
+    }
+
+    private void OnDisable()
+    {
+        onDieRemoveDetectList -= RemoveDetectList;
+    }
+
+    void RemoveDetectList(GameObject obj)
+    {
+        foreach (Enemy enemy in enemyList)
+        {
+            if (enemy.gameObject == obj)
+            {
+                enemyList.Remove(enemy);
+                break;
+            }
+        }
+
+        foreach (AbilityContainer container in containers)
+        {
+            if (container.gameObject == obj)
+            {
+                containers.Remove(container);
+                break;
+            }
+        }
+    }
+
     //回傳在 list 距離 playerTrans 最近的Enemy
     public Transform NearEnemy(Transform playerTrans)
     {
@@ -19,12 +52,6 @@ public class AutoTurnAroundDetect : MonoBehaviour
 
         foreach (Enemy enemy in enemyList)
         {
-            if (enemy.gameObject == null)
-            {
-                Debug.Log("remove enemy");
-                enemyList.Remove(enemy);
-            }
-            
             float distance = Vector3.Distance(enemy.transform.position, playerTrans.position);
             if (distance < shortestDistance)
             {

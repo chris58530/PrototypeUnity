@@ -279,8 +279,7 @@ namespace _.Scripts.Player.State
             
             
             //insert 
-            _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Walk,
-                transition => _input.Move);
+    
             _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
             _normalState.AddTransition(PlayerState.InsertSword, PlayerState.Idle,
