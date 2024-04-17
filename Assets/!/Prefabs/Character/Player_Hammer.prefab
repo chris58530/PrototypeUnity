@@ -475,7 +475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1429672024359545925
 Transform:
   m_ObjectHideFlags: 0
@@ -1617,6 +1617,7 @@ MonoBehaviour:
   - {fileID: 884564808}
   - {fileID: 1030761778}
   currentAbilityTime: 0
+  _abilityValueUI: {fileID: 6654021214854090447}
 --- !u!1 &2029443772365429856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &293138585441187142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2830,7 +2831,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3948989100175777547}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2890,6 +2891,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e88f406a0f518944ba191ec746c2ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyList: []
+  containers: []
 --- !u!1 &4004925896617695957
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,6 +3492,7 @@ GameObject:
   - component: {fileID: 5715834888313830752}
   - component: {fileID: 1156654683}
   - component: {fileID: 509779780}
+  - component: {fileID: 1973834529}
   m_Layer: 6
   m_Name: Player_Hammer
   m_TagString: Player
@@ -3676,6 +3680,14 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!81 &1973834529
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715834888313830771}
+  m_Enabled: 1
 --- !u!1 &5715834889141235566
 GameObject:
   m_ObjectHideFlags: 0

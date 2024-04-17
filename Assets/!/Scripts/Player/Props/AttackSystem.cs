@@ -74,8 +74,8 @@ namespace @_.Scripts.Player.Props
 
             weaponColliderQ3.GetComponent<Collider>().enabled = true;
 
-            if (autoTurnAroundDetect.NearEnemy(this.transform) == null) return;
-            transform.LookAt(autoTurnAroundDetect.NearEnemy(this.transform));
+            // if (autoTurnAroundDetect.NearEnemy(this.transform) == null) return;
+            // transform.LookAt(autoTurnAroundDetect.NearEnemy(this.transform));
         }
 
         private void UseNormalAttack()
