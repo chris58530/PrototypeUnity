@@ -13,7 +13,11 @@ namespace @_.Scripts.Player.Props
 
         // [Header("On Hit Effect")] [SerializeField]
         // private ParticleSystem onHitEffect;
+        [Header("Gamepad vibrate setting")] [SerializeField]
+        private float low;
 
+        [SerializeField] private float high;
+        [SerializeField] private float time;
         private void Start()
         {
             transform.parent = swordTransform.transform;
@@ -42,6 +46,8 @@ namespace @_.Scripts.Player.Props
             //dubug
             TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
             t.text = (attackValue).ToString();
+            
+            SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
             // var closestPoint = other.bounds.ClosestPoint(transform.position);
             // Instantiate(onHitEffect, closestPoint, Quaternion.identity);

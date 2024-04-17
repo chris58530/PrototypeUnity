@@ -25,11 +25,7 @@ namespace @_.Scripts.Player.Props
         public bool finsihFail;
         public IDisposable _failTimer;
 
-        [Header("Gamepad vibrate setting")] [SerializeField]
-        private float low;
-
-        [SerializeField] private float high;
-        [SerializeField] private float time;
+      
 
         public void Fail()
         {
@@ -50,7 +46,6 @@ namespace @_.Scripts.Player.Props
         public void UseQ3Attack()
         {
             chanceTimer?.Dispose();
-            SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
@@ -86,7 +81,6 @@ namespace @_.Scripts.Player.Props
         private void UseNormalAttack()
         {
             chanceTimer?.Dispose();
-            SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
