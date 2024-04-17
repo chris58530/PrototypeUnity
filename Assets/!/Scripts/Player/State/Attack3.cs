@@ -50,8 +50,8 @@ namespace @_.Scripts.Player.State
         public override void OnExit()
         {
             // _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
-            _controller.transform.localEulerAngles = new Vector3(0
-                , _controller.transform.rotation.y, _controller.transform.rotation.z);
+            // _controller.transform.localEulerAngles = new Vector3(0
+            //     , _controller.transform.rotation.y, _controller.transform.rotation.z);
      
             _attackSystem.CancelAttack();
         }

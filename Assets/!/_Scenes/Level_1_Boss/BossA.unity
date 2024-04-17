@@ -6848,8 +6848,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882612097}
-  m_LocalRotation: {x: 0.0017594761, y: 0.9659035, z: -0.25881314, w: 0.0065664533}
-  m_LocalPosition: {x: 1.2, y: 48.1, z: -144.5}
+  m_LocalRotation: {x: 0.3420201, y: -0, z: -0, w: 0.9396927}
+  m_LocalPosition: {x: 1.2, y: 70.97145, z: -271.0282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7843,7 +7843,7 @@ PrefabInstance:
     - target: {fileID: 2216531663737464907, guid: 62b93015a4c52db439de824a45a10b0c,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"AttackCollider","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true}]}'
+      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowDistance","IsShared":true,"SinglemValue":15},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"InMission","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"MissionPosObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogText","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DialogCanvas","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isSpeaking","IsShared":true,"BooleanmValue":false}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 2216531663737464907, guid: 62b93015a4c52db439de824a45a10b0c,
         type: 3}
@@ -7854,6 +7854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lemon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2216531663737464910, guid: 62b93015a4c52db439de824a45a10b0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2216531663737464911, guid: 62b93015a4c52db439de824a45a10b0c,
         type: 3}
@@ -8380,6 +8385,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1032510198}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1034746596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1401924367, guid: efd14440ccebf1b40a35b4bcab778964,
+    type: 3}
+  m_PrefabInstance: {fileID: 1156654674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb80b60cb9af8488a8b1ef4caab841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &1038177697 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6198761464721261359, guid: 4385a2964edd2324a8b7658620acee45,
@@ -9159,6 +9176,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1925464678, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
+      propertyPath: _abilityValueUI
+      value: 
+      objectReference: {fileID: 1034746596}
+    - target: {fileID: 1925464678, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
       propertyPath: inMouthObjectTransform
       value: 
       objectReference: {fileID: 606384461}
@@ -9166,6 +9187,10 @@ PrefabInstance:
       propertyPath: quitAbilityObjectTransform
       value: 
       objectReference: {fileID: 606384461}
+    - target: {fileID: 2056041629, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 244124232036944041, guid: efd14440ccebf1b40a35b4bcab778964,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -9471,7 +9496,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 654237894, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: efd14440ccebf1b40a35b4bcab778964, type: 3}
 --- !u!4 &1156654675 stripped
 Transform:
@@ -14520,6 +14546,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
+  low: 0
+  high: 0
+  time: 0
 --- !u!65 &1746642302
 BoxCollider:
   m_ObjectHideFlags: 0
