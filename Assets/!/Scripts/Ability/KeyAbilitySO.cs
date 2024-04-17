@@ -30,9 +30,9 @@ namespace @_.Scripts.Ability
         public override void TriggerEffect(Collider other)
         {
             //OnTrigger enemy will do 
-            if (other.gameObject.CompareTag("KeyDoor"))
+            if (other.gameObject.GetComponent<KeyDoor>())
             {
-                // Debug.Log("Use Key TriggerEffect ");
+                Debug.Log("Use Key TriggerEffect ");
                 //
                 // TaskManager.checkTaskAction?.Invoke(taskNumber);
                 // AbilityWeapon weapon = FindObjectOfType<AbilityWeapon>();

@@ -34,16 +34,17 @@ namespace @_.Scripts.Player.Props
         [SerializeField]
         private List<AbilityBase> abilityBaseList = new List<AbilityBase>();
 
-         public AbilityBase currentAbilityBase;
+        public AbilityBase currentAbilityBase;
 
         public AbilityType currentAbility = AbilityType.None;
 
         [SerializeField] private GameObject[] inMouthObjectObjectList;
 
         public IDisposable _abilityTimer;
-        
+
         public float currentAbilityTime;
 
+        [SerializeField] private AbilityValueUI _abilityValueUI;
 
         private void Start()
         {
@@ -57,18 +58,16 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.Z)) ChangeAbility(AbilityType.None);
 
             if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
-            
+
             if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
-            
+
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
-            
+
             if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
-            
+
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
-            
+
             if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
-
-
         }
 
         public void ExecuteAblilty()
@@ -79,7 +78,10 @@ namespace @_.Scripts.Player.Props
         public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
-
+            
+            //means stop showing value UI
+            _abilityValueUI.DisplayTime(0, 0);
+            
             if (currentAbilityBase != null)
                 currentAbilityBase.QuitAbilityAlgorithm();
 
@@ -107,9 +109,28 @@ namespace @_.Scripts.Player.Props
 
 
                     //caculate when the aiblity is over
-                    _abilityTimer = Observable.EveryUpdate().First()
-                        .Delay(TimeSpan.FromSeconds(currentAbilityBase.lifeTime))
-                        .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);
+                    // _abilityTimer = Observable.EveryUpdate().First()
+                    //     .Delay(TimeSpan.FromSeconds(currentAbilityBase.lifeTime))
+                    //     .Subscribe(_ => { ChangeAbility(AbilityType.None); }).AddTo(this);
+
+                    if (currentAbilityBase.abilityType == AbilityType.None) return;
+
+                    float keepTime = currentAbilityBase.lifeTime * 10;
+                    float addTionTime = 1;
+                    _abilityTimer = Observable.Interval(TimeSpan.FromSeconds(0.1f))
+                        .TakeWhile(time => time <= keepTime)
+                        .Subscribe(time =>
+                        {
+                            float remainingTime = keepTime - (time * addTionTime);
+                            _abilityValueUI.DisplayTime(remainingTime, keepTime);
+
+                            if (remainingTime <= 0)
+                            {
+                                ChangeAbility(AbilityType.None);
+                                _abilityTimer.Dispose(); // 结束计时器
+                            }
+                        });
+
 
                     Debug.Log(currentAbilityBase.name);
                     return;
@@ -121,7 +142,6 @@ namespace @_.Scripts.Player.Props
             ChangeAbility(AbilityType.None);
         }
 
-       
 
         private void OnTriggerEnter(Collider other)
         {
@@ -129,6 +149,7 @@ namespace @_.Scripts.Player.Props
             if (other.gameObject.TryGetComponent(out IAbilityContainer getAbility))
             {
                 ChangeAbility(getAbility.GetAbility());
+                GetComponent<Collider>().enabled = false;
             }
         }
 

@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Player;
 using _.Scripts.Player.Props;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SwordInsert : MonoBehaviour
 {
-    [SerializeField] private AbilityValue abilityValue;
+    [FormerlySerializedAs("abilityValue")] [SerializeField] private AbilityValueUI abilityValueUI;
     [SerializeField] private AbilityWeapon abilityWeapon;
 
     private void Update()
@@ -34,13 +36,13 @@ public class SwordInsert : MonoBehaviour
         if (abilityWeapon.currentAbilityTime >= 0)
         {
             abilityWeapon.currentAbilityTime -= Time.deltaTime;
-            abilityValue.UpdateTimeImage(abilityWeapon.currentAbilityTime, 10);
+            abilityValueUI.DisplayTime(abilityWeapon.currentAbilityTime, 10);
 
         }
         else
         {
             abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
-            abilityValue.StopUpdateTime();
+            abilityValueUI.StopUpdateTime();
         }
 
 
