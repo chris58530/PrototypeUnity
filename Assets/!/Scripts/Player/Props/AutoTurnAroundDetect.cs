@@ -66,6 +66,8 @@ public class AutoTurnAroundDetect : MonoBehaviour
     public Transform NearContainers(Transform playerTrans)
     {
         if (containers == null) return null;
+        
+        Debug.Log("use ability face");
 
         Transform nearContainers = null;
         float shortestDistance = Mathf.Infinity;
