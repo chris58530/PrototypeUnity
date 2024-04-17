@@ -4,30 +4,31 @@ using BehaviorDesigner.Runtime;
 using TMPro;
 using UnityEngine.AI;
 using UnityEngine;
+
 [TaskCategory("Lemon")]
-
-
 public class LemonSpeakAction : Action
 {
     public SharedGameObject dialogText;
     public SharedGameObject dialogCanvas;
     public float keepTime;
-    private float _currentTome;
+    private float _currentTime;
     public string[] dialog;
+    public SharedBool isImportantSpeaking;
 
     public override void OnStart()
     {
-        _currentTome = 0;
-        dialogCanvas.Value.SetActive(true);
+        _currentTime = 0;
         dialogText.Value.GetComponent<TMP_Text>().text = dialog[Random.Range(0, dialog.Length)];
+
+        dialogCanvas.Value.SetActive(true);
     }
 
     public override TaskStatus OnUpdate()
     {
-        _currentTome += Time.deltaTime;
+        _currentTime += Time.deltaTime;
 
 
-        if (_currentTome > keepTime)
+        if (_currentTime > keepTime || isImportantSpeaking.Value)
             return TaskStatus.Success;
 
         return TaskStatus.Running;
@@ -36,6 +37,7 @@ public class LemonSpeakAction : Action
     public override void OnEnd()
     {
         dialogCanvas.Value.SetActive(false);
-        dialogText.Value.GetComponent<TMP_Text>().text = "";
+        // dialogText.Value.GetComponent<TMP_Text>().text = "";
+        _currentTime = 0;
     }
 }
