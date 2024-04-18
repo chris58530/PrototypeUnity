@@ -25,7 +25,6 @@ namespace @_.Scripts.Player.Props
         public bool finsihFail;
         public IDisposable _failTimer;
 
-      
 
         public void Fail()
         {
@@ -73,9 +72,8 @@ namespace @_.Scripts.Player.Props
                 .First().Subscribe(_ => { finishAttack = true; });
 
             weaponColliderQ3.GetComponent<Collider>().enabled = true;
-
-            // if (autoTurnAroundDetect.NearEnemy(this.transform) == null) return;
-            // transform.LookAt(autoTurnAroundDetect.NearEnemy(this.transform));
+            //自動校正
+            transform.LookAt(autoTurnAroundDetect.NearEnemy(transform));
         }
 
         private void UseNormalAttack()
@@ -127,8 +125,5 @@ namespace @_.Scripts.Player.Props
             weaponCollider.GetComponent<Collider>().enabled = false;
             weaponColliderQ3.GetComponent<Collider>().enabled = false;
         }
-
-
-     
     }
 }

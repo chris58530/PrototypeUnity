@@ -34,14 +34,16 @@ namespace @_.Scripts.Player.Props
                 _abilityWeaponCollider.enabled = true;
             }).AddTo(this);
 
-            // if (autoTurnAroundDetect.NearContainers(this.transform) == null) return;
-            // transform.LookAt(autoTurnAroundDetect.NearContainers(this.transform));
             
-            
+            //自動校正
+            transform.LookAt(autoTurnAroundDetect.NearContainers(transform));
+
+
             // Vector3 dir = autoTurnAroundDetect.NearContainers(this.transform).transform.position;
             // Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
             // transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 1000 * Time.deltaTime);
 
+            //
             // Vector3 dir = new Vector3(autoTurnAroundDetect.NearContainers(this.transform).position.x, 
             //     0, autoTurnAroundDetect.NearContainers(this.transform).position.y);
             // Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);

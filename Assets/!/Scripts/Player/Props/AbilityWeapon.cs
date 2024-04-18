@@ -78,10 +78,10 @@ namespace @_.Scripts.Player.Props
         public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
-            
+
             //means stop showing value UI
             _abilityValueUI.DisplayTime(0, 0);
-            
+
             if (currentAbilityBase != null)
                 currentAbilityBase.QuitAbilityAlgorithm();
 
@@ -129,7 +129,7 @@ namespace @_.Scripts.Player.Props
                                 ChangeAbility(AbilityType.None);
                                 _abilityTimer.Dispose(); // 结束计时器
                             }
-                        });
+                        }).AddTo(this);
 
 
                     Debug.Log(currentAbilityBase.name);

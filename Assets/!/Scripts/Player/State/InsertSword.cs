@@ -68,8 +68,7 @@ namespace @_.Scripts.Player.State
 
         public override void OnExit()
         {
-            _controller.transform.localEulerAngles = new Vector3(0
-                , _controller.transform.rotation.y, _controller.transform.rotation.z);
+        
 
             PlayerActions.endPlayerEatEffect?.Invoke();
             _abilitySystem.CancelAttack();

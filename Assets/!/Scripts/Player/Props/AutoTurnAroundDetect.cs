@@ -43,9 +43,9 @@ public class AutoTurnAroundDetect : MonoBehaviour
     }
 
     //回傳在 list 距離 playerTrans 最近的Enemy
-    public Transform NearEnemy(Transform playerTrans)
+    public Vector3 NearEnemy(Transform playerTrans)
     {
-        if (enemyList == null) return null;
+        if (enemyList == null) return playerTrans.position;
 
         Transform nearestEnemy = null;
         float shortestDistance = Mathf.Infinity;
@@ -60,14 +60,17 @@ public class AutoTurnAroundDetect : MonoBehaviour
             }
         }
 
-        return nearestEnemy;
+        if (nearestEnemy == null) return playerTrans.position;
+        
+        var enemyPosition = nearestEnemy.position;
+        Vector3 dir = new Vector3(enemyPosition.x, playerTrans.position.y, enemyPosition.z);
+        return dir;
     }
 
-    public Transform NearContainers(Transform playerTrans)
+    public Vector3 NearContainers(Transform playerTrans)
     {
-        if (containers == null) return null;
+        if (containers == null) return playerTrans.position;
         
-        Debug.Log("use ability face");
 
         Transform nearContainers = null;
         float shortestDistance = Mathf.Infinity;
@@ -82,7 +85,11 @@ public class AutoTurnAroundDetect : MonoBehaviour
             }
         }
 
-        return nearContainers;
+        if (nearContainers == null) return playerTrans.position;
+        
+        var containersPosition = nearContainers.position;
+        Vector3 dir = new Vector3(containersPosition.x, playerTrans.position.y, containersPosition.z);
+        return dir;
     }
 
     //如果 other layer 是 Enemy 加入
