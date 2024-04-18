@@ -1123,7 +1123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2056041630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2401,7 +2401,6 @@ GameObject:
   - component: {fileID: 7795234186049212961}
   - component: {fileID: 1837726799173510393}
   - component: {fileID: 1925464678}
-  - component: {fileID: 654237894}
   m_Layer: 0
   m_Name: EatCollider
   m_TagString: Sword
@@ -2537,20 +2536,7 @@ MonoBehaviour:
   currentAbility: 0
   inMouthObjectObjectList: []
   currentAbilityTime: 0
---- !u!114 &654237894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931403840824622115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c55bae351f3e01c4a8647f1e125d321e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityValue: {fileID: 1401924367}
-  abilityWeapon: {fileID: 1925464678}
+  _abilityValueUI: {fileID: 1401924367}
 --- !u!1 &2434023633437217312
 GameObject:
   m_ObjectHideFlags: 0
@@ -2737,6 +2723,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e88f406a0f518944ba191ec746c2ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyList: []
+  containers: []
 --- !u!1 &2940573336115822101
 GameObject:
   m_ObjectHideFlags: 0
