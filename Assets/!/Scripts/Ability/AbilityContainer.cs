@@ -36,6 +36,8 @@ namespace _.Scripts.Enemy
 
         public void DestroyGameObject(GameObject obj)
         {
+            AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+
             Destroy(obj);
         }
     }
