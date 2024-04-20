@@ -9,5 +9,6 @@ namespace @_.Scripts.Event
         public static Action onSceneStart;
         public static Action onPlayerRespawn;
         public static Action<float, float, float> onGamePadVibrate;
+        public static Action onCameraShake;
     }
 }

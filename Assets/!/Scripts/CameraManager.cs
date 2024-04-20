@@ -19,12 +19,12 @@ public class CameraManager : MonoBehaviour
         SwitchToMainVirtualCamera();
     }
 
-    void ShakeCamera_Hurt()
+    void ShakeCamera_Big()
     {
         StartCoroutine(TogglePerlinNoiseAmplitude(5, 0.2f));
     }
 
-    void ShakeCamera_HitEnemy()
+    void ShakeCamera_Small()
     {
         StartCoroutine(TogglePerlinNoiseAmplitude(1.5f, 0.1f));
     }
@@ -49,16 +49,20 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerActions.onPlayerHurt += ShakeCamera_Hurt;
-        PlayerActions.onHitEnemy += ShakeCamera_HitEnemy;
+        PlayerActions.onPlayerHurt += ShakeCamera_Big;
+        PlayerActions.onHitEnemy += ShakeCamera_Small;
+        SystemActions.onCameraShake += ShakeCamera_Big;
+        
         TimeLineManager.onQuitTimelLine += SwitchToMainVirtualCamera;
     }
 
     private void OnDisable()
     {
         _perlinNoise.m_AmplitudeGain = 0;
-        PlayerActions.onPlayerHurt -= ShakeCamera_Hurt;
-        PlayerActions.onHitEnemy -= ShakeCamera_HitEnemy;
+        PlayerActions.onPlayerHurt -= ShakeCamera_Big;
+        PlayerActions.onHitEnemy -= ShakeCamera_Small;
+        SystemActions.onCameraShake -= ShakeCamera_Big;
+
         TimeLineManager.onQuitTimelLine -= SwitchToMainVirtualCamera;
     }
 }

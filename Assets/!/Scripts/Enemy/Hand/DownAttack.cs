@@ -1,3 +1,4 @@
+using _.Scripts.Event;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class DownAttack : EnemyAction
     {
         // Return a task status of success once we've reached the target
         if (Vector3.Magnitude(transform.position - targetPosition) < arriveDistance.Value) {
+            SystemActions.onCameraShake?.Invoke();
             return TaskStatus.Success;
         }
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed.Value * Time.deltaTime);
