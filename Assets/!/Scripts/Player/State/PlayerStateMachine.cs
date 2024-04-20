@@ -15,7 +15,6 @@ namespace _.Scripts.Player.State
         Attack1,
         Attack2,
         Attack3,
-        Fail,
 
         InsertSword,
         Chance1,
@@ -112,9 +111,7 @@ namespace _.Scripts.Player.State
                 PlayerState.Dead, new Dead(
                     _input, _controller, animator, _attackSystem, false));
 
-            _normalState.AddState(
-                PlayerState.Fail, new Fail(
-                    _input, _controller, animator, _attackSystem, false));
+            
 
             _normalState.AddState(
                 PlayerState.Walk, new Walk(
@@ -143,9 +140,7 @@ namespace _.Scripts.Player.State
             _normalState.AddState(
                 PlayerState.Chance1, new Chance1(
                     _input, _controller, animator, _attackSystem, false));
-            _normalState.AddState(
-                PlayerState.Chance1ToIdle, new Chance1ToIdle(
-                    _input, _controller, animator, _attackSystem, true));
+          
 
             _normalState.AddState(
                 PlayerState.Chance2, new Chance2(
@@ -188,7 +183,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Walk, PlayerState.Dead,
                 transition =>_playerBase.isDead);
 
-            _normalState.AddTransition(PlayerState.Roll, PlayerState.Fail,
+            _normalState.AddTransition(PlayerState.Roll, PlayerState.Idle,
                 transition => _controller.finsihRoll);
             _normalState.AddTransition(PlayerState.Roll, PlayerState.Dead,
                 transition =>_playerBase.isDead);
@@ -220,7 +215,7 @@ namespace _.Scripts.Player.State
             // _normalState.AddTransition(PlayerState.Chance1ToIdle, PlayerState.Fail);
 
             //AttackChance
-            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Fail,
+            _normalState.AddTransition(PlayerState.Chance1, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance1, PlayerState.Attack2,
                 transition => _input.IsPressedAttack);
@@ -239,7 +234,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
 
-            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Fail,
+            _normalState.AddTransition(PlayerState.Chance2, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance2, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
@@ -255,7 +250,7 @@ namespace _.Scripts.Player.State
 
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
-            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Fail,
+            _normalState.AddTransition(PlayerState.Chance3, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
@@ -269,11 +264,7 @@ namespace _.Scripts.Player.State
             _normalState.AddTransition(PlayerState.Chance3, PlayerState.Dead,
                 transition =>_playerBase.isDead);
 
-            //Faill
-            _normalState.AddTransition(PlayerState.Fail, PlayerState.Idle,
-                transition => _attackSystem.finsihFail);
-            _normalState.AddTransition(PlayerState.Fail, PlayerState.Dead,
-                transition =>_playerBase.isDead);
+
             // _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,
             //     transition => _attackSystem.finsihFail && _attackSystem.attackCount == 1);
             
@@ -295,9 +286,7 @@ namespace _.Scripts.Player.State
                 PlayerState.Idle, new Idle(
                     _input, _controller, animator, _attackSystem, false));
 
-            _hammerState.AddState(
-                PlayerState.Fail, new Fail(
-                    _input, _controller, animator, _attackSystem, false));
+       
 
             _hammerState.AddState(
                 PlayerState.Walk, new Walk(
@@ -326,9 +315,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddState(
                 PlayerState.Chance1, new Chance1(
                     _input, _controller, animator, _attackSystem, false));
-            _hammerState.AddState(
-                PlayerState.Chance1ToIdle, new Chance1ToIdle(
-                    _input, _controller, animator, _attackSystem, true));
+           
 
             _hammerState.AddState(
                 PlayerState.Chance2, new Chance2(
@@ -420,7 +407,7 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
 
 
-            _hammerState.AddTransition(PlayerState.Roll, PlayerState.Fail,
+            _hammerState.AddTransition(PlayerState.Roll, PlayerState.Idle,
                 transition => _controller.finsihRoll);
             //RollAttack
             _hammerState.AddTransition(PlayerState.RollAttack, PlayerState.Idle);
@@ -446,7 +433,7 @@ namespace _.Scripts.Player.State
 
 
             //AttackChance
-            _hammerState.AddTransition(PlayerState.Chance1, PlayerState.Fail,
+            _hammerState.AddTransition(PlayerState.Chance1, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _hammerState.AddTransition(PlayerState.Chance1, PlayerState.Attack2,
                 transition => _input.IsPressedAttack);
@@ -463,7 +450,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Chance2, PlayerState.Attack3,
                 transition => _input.IsPressedAttack);
 
-            _hammerState.AddTransition(PlayerState.Chance2, PlayerState.Fail,
+            _hammerState.AddTransition(PlayerState.Chance2, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _hammerState.AddTransition(PlayerState.Chance2, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
@@ -477,7 +464,7 @@ namespace _.Scripts.Player.State
 
             _hammerState.AddTransition(PlayerState.Chance3, PlayerState.Attack1,
                 transition => _input.IsPressedAttack);
-            _hammerState.AddTransition(PlayerState.Chance3, PlayerState.Fail,
+            _hammerState.AddTransition(PlayerState.Chance3, PlayerState.Idle,
                 transition => _attackSystem.finishAttack);
             _hammerState.AddTransition(PlayerState.Chance3, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
@@ -489,9 +476,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Chance3, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility);
 
-            //Faill
-            _hammerState.AddTransition(PlayerState.Fail, PlayerState.Idle,
-                transition => _attackSystem.finsihFail);
+
             // _normalState.AddTransition(PlayerState.Fail, PlayerState.Chance1ToIdle,
             //     transition => _attackSystem.finsihFail && _attackSystem.attackCount == 1);
         }
