@@ -28,10 +28,12 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
-            _attackSystem.finishAttack = false;
-         
+            _attackSystem.Reset();
+
 
             DebugTools.StateText("Idle");
+            // _animator.Play("Q1ToIdle");
+
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.2f);
         }
 

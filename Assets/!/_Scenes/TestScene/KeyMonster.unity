@@ -223,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d35fc7ecd43d1b0114980b324f667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDone: 0
   reviewPanel: {fileID: 123601116}
   Puller: {fileID: 944107887}
 --- !u!135 &57054477
@@ -783,18 +782,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474074259}
   m_CullTransparentMesh: 1
---- !u!114 &702348253 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8933884228928244378, guid: 31cb5c4b5a1f9074998c91605c3dcfe0,
-    type: 3}
-  m_PrefabInstance: {fileID: 973689819}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &747585073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5902329517855384453, guid: 59889cdfff5424b4e90c88f552186148,
@@ -1441,8 +1428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d850d411f210eb64bab9163bca53bf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _virtualCamera: {fileID: 702348253}
-  _perlinNoise: {fileID: 0}
+  mainVirtualCamera: {fileID: 0}
+  virtualCameras: []
 --- !u!1001 &1187226096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1671,6 +1658,15 @@ MonoBehaviour:
     mPropertyMapping: 
     mPropertyMappingOwner: {fileID: 0}
     mValue: {fileID: 1321625524}
+  canfight:
+    mIsShared: 0
+    mIsGlobal: 0
+    mIsDynamic: 0
+    mName: 
+    mToolTip: 
+    mPropertyMapping: 
+    mPropertyMappingOwner: {fileID: 0}
+    mValue: 1
 --- !u!4 &1261271752
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,6 +2338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerWithSword
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715834888313830782, guid: efd14440ccebf1b40a35b4bcab778964,
+        type: 3}
+      propertyPath: rollTime
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5767223698232274353, guid: efd14440ccebf1b40a35b4bcab778964,
         type: 3}

@@ -32,22 +32,23 @@ namespace _.Scripts.Player.State
 
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q2"), 0.1f);
-            _animator.Play("Q2");
-            _attackSystem.Attack();      if (_input.Move)
-                _controller.FaceInputDireaction(_input);
 
+            _attackSystem.Attack();
+            _animator.Play("Q2");
+
+            if (_input.Move)
+                _controller.FaceInputDireaction(_input);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed >  _attackSystem.AttackTime(1))
+            if (_timer.Elapsed > _attackSystem.AttackTime(1))
                 fsm.StateCanExit();
         }
 
         public override void OnExit()
         {
             _attackSystem.CancelAttack();
-
         }
     }
 }

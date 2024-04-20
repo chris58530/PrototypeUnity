@@ -35,16 +35,16 @@ namespace @_.Scripts.Player.State
             //debug
             _timer = new Timer();
             DebugTools.StateText("ChanceThird");
-            _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
+            // _animator.CrossFade(Animator.StringToHash("Idle"), 0.8f);
         }
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > 0.5f) fsm.StateCanExit();
+            // if (_timer.Elapsed > 0.5f) fsm.StateCanExit();
 
             if (_input.Move)
             {
-                _animator.CrossFade(Animator.StringToHash("Walk"), 0.2f);
+                // _animator.CrossFade(Animator.StringToHash("Walk"), 0.2f);
                 _controller.Move(_input);
             }else
 

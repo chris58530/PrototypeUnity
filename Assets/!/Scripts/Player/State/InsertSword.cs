@@ -48,7 +48,7 @@ namespace @_.Scripts.Player.State
             // _attackSystem.finishAttack = false;
             // _attackSystem. finsihFail = true;
             // _attackSystem._failTimer?.Dispose();
-            _attackSystem.Fail();
+            _attackSystem.Reset();
 
 
             // if (_input.Move)

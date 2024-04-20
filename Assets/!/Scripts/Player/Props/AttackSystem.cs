@@ -18,22 +18,11 @@ namespace @_.Scripts.Player.Props
         [SerializeField] private GameObject weaponColliderQ3;
 
 
-        [Header("Fail Setting")] //
-        [SerializeField]
-        public float failTime;
-
-        public bool finsihFail;
-        public IDisposable _failTimer;
-
-
-        public void Fail()
+        public void Reset()
         {
-            finsihFail = false;
-            _failTimer?.Dispose();
-            _failTimer = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(failTime)).Subscribe(_ =>
-            {
-                finsihFail = true;
-            }).AddTo(this);
+            chanceTimer?.Dispose();
+            finishAttack = false;
+            attackCount = 0;
         }
 
 
@@ -68,7 +57,7 @@ namespace @_.Scripts.Player.Props
             else attackCount = 0;
 
 
-            chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
+            chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime + 0.2f))
                 .First().Subscribe(_ => { finishAttack = true; });
 
             weaponColliderQ3.GetComponent<Collider>().enabled = true;

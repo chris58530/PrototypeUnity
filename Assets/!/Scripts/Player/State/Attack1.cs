@@ -32,9 +32,10 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("AttackFirst");
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q1"), 0.1f);
-            _animator.Play("Q1");
 
             _attackSystem.Attack();
+            _animator.Play("Q1");
+
             if (_input.Move)
                 _controller.FaceInputDireaction(_input);
             LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.Normal);

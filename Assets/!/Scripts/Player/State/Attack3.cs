@@ -34,9 +34,10 @@ namespace @_.Scripts.Player.State
 
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
+            _attackSystem.UseQ3Attack();
+
             _animator.Play("Q3");
 
-            _attackSystem.UseQ3Attack();
             // if (_input.Move)
             //     _controller.FaceInputDireaction(_input);
         }
