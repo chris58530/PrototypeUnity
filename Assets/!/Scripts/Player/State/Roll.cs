@@ -35,8 +35,8 @@ namespace _.Scripts.Player.State
             DebugTools.StateText("Roll");
             _timer = new Timer();
 
-            // _animator.Play(Animator.StringToHash("Roll"));
-            _animator.Play(Animator.StringToHash("Dash_1"));
+            _animator.Play(Animator.StringToHash("Roll"));
+            // _animator.Play(Animator.StringToHash("Dash_1"));
 
             _controller.Roll();
             // _attackSystem.finishAttack = false;

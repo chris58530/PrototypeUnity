@@ -17,7 +17,9 @@ public class EnemyEffect : MonoBehaviour
 
     private void Start()
     {
+        if(stunParticle!=null)
         stunParticle.Stop();
+        if(absortableEffcet!=null)
         absortableEffcet.Stop();
     }
 
