@@ -27,14 +27,13 @@ public class MovieBackGround : MonoBehaviour
         up.transform.gameObject.SetActive(true);
         down.transform.gameObject.SetActive(true);
 
-        up.transform.DOLocalMove(new Vector3(0, 525, 0), 1f);
-        down.transform.DOLocalMove(new Vector3(0, -525, 0), 1f);
+        up.transform.DOLocalMove(new Vector3(0, 1500, 0), 1f);
+        down.transform.DOLocalMove(new Vector3(0, -1500, 0), 1f);
     }
     private void OutPlayMode()
     {
-        up.transform.DOLocalMove(new Vector3(0, 650, 0), 1f);
-        down.transform.DOLocalMove(new Vector3(0, -650, 0), 1f);
-        Debug.Log("active black");
+        up.transform.DOLocalMove(new Vector3(0, 1650, 0), 1f);
+        down.transform.DOLocalMove(new Vector3(0, -1650, 0), 1f);
 
         outPlayModeInsuranceDisposable = Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(2)).Subscribe(_ =>
         {

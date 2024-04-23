@@ -122,9 +122,7 @@ namespace _.Scripts.Player.State
             _normalState.AddState(
                 PlayerState.Hurt, new Hurt(
                     _input, _controller, animator, _attackSystem, _playerBase, false));
-            _normalState.AddState(
-                PlayerState.RollAttack, new RollAttack(
-                    _controller, animator, _attackSystem, true));
+         
             _normalState.AddState(
                 PlayerState.Attack1, new Attack1(
                     _input, _controller, animator, _attackSystem, true));
@@ -285,6 +283,9 @@ namespace _.Scripts.Player.State
             _hammerState.AddState(
                 PlayerState.Idle, new Idle(
                     _input, _controller, animator, _attackSystem, false));
+            _hammerState.AddState(
+                PlayerState.Dead, new Dead(
+                    _input, _controller, animator, _attackSystem, false));
 
        
 
@@ -297,9 +298,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddState(
                 PlayerState.Hurt, new Hurt(
                     _input, _controller, animator, _attackSystem, _playerBase, false));
-            _hammerState.AddState(
-                PlayerState.RollAttack, new RollAttack(
-                    _controller, animator, _attackSystem, true));
+          
             _hammerState.AddState(
                 PlayerState.Attack1, new Attack1(
                     _input, _controller, animator, _attackSystem, true));
@@ -383,9 +382,7 @@ namespace _.Scripts.Player.State
                 transition => _input.IsPressedAbility &&
                               _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None);
 
-            _hammerState.AddTransition(PlayerState.Idle, PlayerState.DashAbility,
-                transition => _input.IsPressedAttack &&
-                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
+       
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.GunAbility,
                 transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Gun);
@@ -398,10 +395,12 @@ namespace _.Scripts.Player.State
 
 
             //Walk
-            _hammerState.AddTransition(PlayerState.Walk, PlayerState.DashAbility,
-                transition => _input.IsPressedAttack &&
-                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Dash);
-
+             _hammerState.AddTransition(PlayerState.Walk, PlayerState.InsertSword,
+                transition => _input.IsPressedAbility &&
+                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.None);
+             _hammerState.AddTransition(PlayerState.Walk, PlayerState.KeyAbility,
+                 transition => _input.IsPressedAttack &&
+                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Key);
 
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);

@@ -4,6 +4,7 @@ using _.Scripts.Ability;
 using _.Scripts.Enemy;
 using _.Scripts.Event;
 using _.Scripts.Interface;
+using _.Scripts.Player.Ability;
 using JetBrains.Annotations;
 using UnityEngine;
 using UniRx;

@@ -38,18 +38,8 @@ namespace @_.Scripts.Player.Props
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
             //audio
-            if (attackCount == 0)
-            {
-                AudioManager.Instance.PlaySFX("Attack1");
-            }
-            else if (attackCount == 1)
-            {
-                AudioManager.Instance.PlaySFX("Attack2");
-            }
-            else if (attackCount == 2)
-            {
-                AudioManager.Instance.PlaySFX("Attack3");
-            }
+            PlayAudio(attackCount);
+
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
@@ -71,19 +61,9 @@ namespace @_.Scripts.Player.Props
 
             //sword effect
             PlayerActions.onPlayerAttackEffect.Invoke(attackCount, 1);
+            PlayAudio(attackCount);
             //audio
-            if (attackCount == 0)
-            {
-                AudioManager.Instance.PlaySFX("Attack1");
-            }
-            else if (attackCount == 1)
-            {
-                AudioManager.Instance.PlaySFX("Attack2");
-            }
-            else if (attackCount == 2)
-            {
-                AudioManager.Instance.PlaySFX("Attack3");
-            }
+
 
             //接技 保持攻擊不中斷 Q1可以接走路再接Q2
             if (attackCount < 2)
@@ -113,6 +93,22 @@ namespace @_.Scripts.Player.Props
         {
             weaponCollider.GetComponent<Collider>().enabled = false;
             weaponColliderQ3.GetComponent<Collider>().enabled = false;
+        }
+
+        public void PlayAudio(int count)
+        {
+            if (count == 0)
+            {
+                AudioManager.Instance.PlaySFX("Attack1");
+            }
+            else if (count == 1)
+            {
+                AudioManager.Instance.PlaySFX("Attack2");
+            }
+            else if (count == 2)
+            {
+                AudioManager.Instance.PlaySFX("Attack3");
+            }
         }
     }
 }

@@ -42,9 +42,9 @@ namespace _.Scripts.Player
 
         private void Update()
         {
-            Debug.Log(Gamepad.current);
-            Debug.Log(Keyboard.current);
-            Debug.Log(Mouse.current);
+            // Debug.Log(Gamepad.current);
+            // Debug.Log(Keyboard.current);
+            // Debug.Log(Mouse.current);
         }
 
         private void OpenInput()

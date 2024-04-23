@@ -61,7 +61,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     private void QuitTimeLineDetect(PlayableDirector playableDirector)
     {
         if (currentDirector.duration <= currentDirector.time && _isExecuteQuitAction) return;
-        Debug.Log("QuitTimeLineDetect");
+        // Debug.Log("QuitTimeLineDetect");
         onQuitTimelLine?.Invoke();
         _isExecuteQuitAction = true;
         currentDirector = null;
@@ -100,7 +100,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
             currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1f);
             // currentDirector.Resume();
             _isPauseTimeLine = false;
-            Debug.Log("time line continue");
+            // Debug.Log("time line continue");
         }
     }
 
@@ -109,7 +109,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
         if (currentDirector == null) return;
         _isPauseTimeLine = true;
         // currentDirector.Pause();
-        Debug.Log("Pause");
+        // Debug.Log("Pause");
 
         currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0f);
     }

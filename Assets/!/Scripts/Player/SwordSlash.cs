@@ -44,3 +44,4 @@ public class SwordSlash : MonoBehaviour
         PlayerActions.onPlayerAttackEffect -= UseSlash;
     }
 }
+
