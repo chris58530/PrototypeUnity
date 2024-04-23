@@ -14,7 +14,7 @@ namespace _.Scripts.Ability
             Debug.Log("Use None Ability");
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
 
         }

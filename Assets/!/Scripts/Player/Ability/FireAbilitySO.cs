@@ -1,4 +1,5 @@
 using _.Scripts.Player.Ability;
+using _.Scripts.Player.Props;
 using UnityEngine;
 
 namespace @_.Scripts.Ability
@@ -14,7 +15,7 @@ namespace @_.Scripts.Ability
 
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
             
         }

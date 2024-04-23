@@ -1,4 +1,5 @@
 using _.Scripts.Player.Ability;
+using _.Scripts.Player.Props;
 using UniRx;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Gun Ability");
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
         }
 

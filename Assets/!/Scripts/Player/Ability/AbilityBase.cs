@@ -12,8 +12,10 @@ namespace @_.Scripts.Player.Ability
         public int damage;
         public int lifeTime;
 
+
         public abstract void AbilityAlgorithm();
-        public abstract void StartAbility();
+        //初始化 將當前的AbilityWeapon附加至類別
+        public abstract void StartAbility(AbilityWeapon weapon);
         public abstract void QuitAbilityAlgorithm();
         public abstract void TriggerEffect(Collider other);
     }

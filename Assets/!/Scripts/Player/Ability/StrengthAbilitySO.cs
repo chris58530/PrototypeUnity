@@ -22,7 +22,7 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Strength Ability");
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
             powerfulSword = GameObject.Find("NoChargeSword");            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.InsertCrystal);
 

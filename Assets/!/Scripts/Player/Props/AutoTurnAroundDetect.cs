@@ -10,16 +10,16 @@ public class AutoTurnAroundDetect : MonoBehaviour
     [SerializeField] private List<Enemy> enemyList = new List<Enemy>();
     [SerializeField] private List<AbilityContainer> containers = new List<AbilityContainer>();
 
-    public static Action<GameObject> onDieRemoveDetectList;
+    public static Action<GameObject> onRemoveDetectList;
 
     private void OnEnable()
     {
-        onDieRemoveDetectList += RemoveDetectList;
+        onRemoveDetectList += RemoveDetectList;
     }
 
     private void OnDisable()
     {
-        onDieRemoveDetectList -= RemoveDetectList;
+        onRemoveDetectList -= RemoveDetectList;
     }
 
     void RemoveDetectList(GameObject obj)

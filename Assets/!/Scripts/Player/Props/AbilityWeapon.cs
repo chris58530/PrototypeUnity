@@ -64,7 +64,6 @@ namespace @_.Scripts.Player.Props
 
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
 
-            if (Input.GetKeyDown(KeyCode.B)) ChangeAbility(AbilityType.Dash);
 
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
 
@@ -82,6 +81,9 @@ namespace @_.Scripts.Player.Props
 
             //means stop showing value UI
             _abilityValueUI.DisplayTime(0, 0);
+            
+            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
+
 
             if (currentAbilityBase != null)
                 currentAbilityBase.QuitAbilityAlgorithm();
@@ -105,7 +107,7 @@ namespace @_.Scripts.Player.Props
                     attackValue = currentAbilityBase.damage;
                     attackAction = currentAbilityBase.TriggerEffect;
                     currentAbility = getAbility;
-                    currentAbilityBase.StartAbility();
+                    currentAbilityBase.StartAbility(this);
                     AbilityWeaponAnimator.Instance?.PlayAnimation(currentAbilityBase.animationName);
 
 
@@ -128,6 +130,7 @@ namespace @_.Scripts.Player.Props
                             if (remainingTime <= 0)
                             {
                                 ChangeAbility(AbilityType.None);
+
                                 _abilityTimer.Dispose(); // 结束计时器
                             }
                         }).AddTo(this);
@@ -151,6 +154,7 @@ namespace @_.Scripts.Player.Props
             {
                 ChangeAbility(getAbility.GetAbility());
                 GetComponent<Collider>().enabled = false;
+                AutoTurnAroundDetect.onRemoveDetectList?.Invoke(other.gameObject);
             }
         }
 

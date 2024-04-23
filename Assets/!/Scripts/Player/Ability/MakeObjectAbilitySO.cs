@@ -1,6 +1,7 @@
 using System;
 using _.Scripts.Interface;
 using _.Scripts.Player.Ability;
+using _.Scripts.Player.Props;
 using UnityEngine;
 using UniRx;
 
@@ -23,7 +24,7 @@ namespace @_.Scripts.Ability
          
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
         
         }

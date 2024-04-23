@@ -44,7 +44,7 @@ AudioManager.Instance.PlaySFX("MobInjured");
 
     public void OnDied()
     {
-        AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
 
         onDiedEvent?.Invoke();
         bt.SendEvent("OnDied");

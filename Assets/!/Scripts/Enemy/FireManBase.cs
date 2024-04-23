@@ -45,7 +45,7 @@ public class FireManBase : Enemy, IDamageable
 
     public void OnDied()
     {
-        AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
 
         onDiedEvent?.Invoke();
 

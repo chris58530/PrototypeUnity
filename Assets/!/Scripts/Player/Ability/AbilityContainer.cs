@@ -35,7 +35,7 @@ namespace @_.Scripts.Player.Ability
 
         public void DestroyGameObject(GameObject obj)
         {
-            AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+            AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
 
             Destroy(obj);
         }

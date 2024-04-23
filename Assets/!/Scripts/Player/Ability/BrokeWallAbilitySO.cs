@@ -14,7 +14,7 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Broke Wall Ability");
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
             GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(true,"Breakable");
         }

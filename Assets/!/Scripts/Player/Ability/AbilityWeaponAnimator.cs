@@ -15,7 +15,9 @@ public class AbilityWeaponAnimator : Singleton<AbilityWeaponAnimator>
         Azbsword,
         Hold_Big,
         Hold_Medium,
-        Hold_Small
+        Hold_Small,
+        
+        Swallow
     }
 
     private Animator animator;

@@ -47,6 +47,7 @@ namespace @_.Scripts.Player.Props
             TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
             t.text = (attackValue).ToString();
             
+            //手把震動
             SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
             // var closestPoint = other.bounds.ClosestPoint(transform.position);

@@ -8,8 +8,7 @@ namespace @_.Scripts.Ability
     [CreateAssetMenu(fileName = "KeyAbilityData", menuName = "Ability/KeyAbility", order = 5)]
     public class KeyAbilitySO : AbilityBase
     {
-        public GameObject keyMonster;
-        public int taskNumber;
+        private AbilityWeapon _abilityWeapon;
 
         public override void AbilityAlgorithm()
         {
@@ -18,8 +17,9 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Key Ability");
         }
 
-        public override void StartAbility()
+        public override void StartAbility(AbilityWeapon weapon)
         {
+            _abilityWeapon = weapon;
         }
 
         public override void QuitAbilityAlgorithm()
@@ -31,9 +31,11 @@ namespace @_.Scripts.Ability
         public override void TriggerEffect(Collider other)
         {
             //OnTrigger enemy will do 
-            if (other.gameObject.GetComponent<KeyDoor>())
+            if (other.gameObject.TryGetComponent<KeyDoor>(out var door))
             {
                 Debug.Log("Use Key TriggerEffect ");
+                door.DoResult();
+                _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
                 //
                 // TaskManager.checkTaskAction?.Invoke(taskNumber);
                 // AbilityWeapon weapon = FindObjectOfType<AbilityWeapon>();

@@ -81,7 +81,7 @@ public class GoblinBase : Enemy, IDamageable, IDashable
 
     public void OnDied()
     {
-        AutoTurnAroundDetect.onDieRemoveDetectList?.Invoke(gameObject);
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
 
         onDiedEvent?.Invoke();
     }
