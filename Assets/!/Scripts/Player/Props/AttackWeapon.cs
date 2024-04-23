@@ -36,7 +36,7 @@ namespace @_.Scripts.Player.Props
             
             //Damage frist then use attackActions effect attack
             damageObj.OnTakeDamage(attackValue);
-            //Damage frist then use attackActions effect attack
+            //Damage frist then use attackActions effect attack (ability)
             attackAction?.Invoke(other);
             
             

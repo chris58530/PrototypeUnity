@@ -3,8 +3,7 @@ using _.Scripts.Player.Props;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-namespace _.Scripts.Enemy
+namespace @_.Scripts.Player.Ability
 {
     public class AbilityContainer : MonoBehaviour, IAbilityContainer
     {

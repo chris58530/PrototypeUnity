@@ -43,16 +43,9 @@ namespace @_.Scripts.Player.State
             _insertTime = 0;
             _abilitySystem.Attack();
 
-            //避免接下來連續兩次q1
-            // _attackSystem.finishAttack = true;
-            // _attackSystem.finishAttack = false;
-            // _attackSystem. finsihFail = true;
-            // _attackSystem._failTimer?.Dispose();
+       
             _attackSystem.Reset();
-
-
-            // if (_input.Move)
-            //     _controller.FaceInputDireaction(_input);
+      
         }
 
         public override void OnLogic()

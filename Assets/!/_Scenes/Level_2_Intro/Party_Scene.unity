@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: d4b05eb74d986ad4a835581b3c7f8a60, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 94fc057fb93f8b04f8377b9d0b29a76a, type: 2}
 --- !u!1 &32892710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6570869664316509642, guid: 59889cdfff5424b4e90c88f552186148,
@@ -270,7 +270,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &65439431
 GameObject:
@@ -287,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &65439432
 Transform:
   m_ObjectHideFlags: 0
@@ -295,15 +295,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65439431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1757174688}
   - {fileID: 1388426418}
-  m_Father: {fileID: 1390242524}
-  m_RootOrder: 9
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &84004536
 GameObject:
@@ -2779,6 +2779,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8407909036906125676, guid: a5d0daa060536a444a06a7d236a2116a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1587
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407909037177830848, guid: a5d0daa060536a444a06a7d236a2116a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1537
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d0daa060536a444a06a7d236a2116a, type: 3}
 --- !u!224 &585897530 stripped
@@ -3305,7 +3315,7 @@ Transform:
   - {fileID: 1079571655}
   - {fileID: 990720047}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &645124228
 MonoBehaviour:
@@ -4094,7 +4104,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh745290
+  m_Name: pb_Mesh124306
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5071,7 +5081,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1390242524}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904981328
 GameObject:
@@ -7635,6 +7645,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorLock
       objectReference: {fileID: 0}
+    - target: {fileID: 2724195855600577478, guid: 6401bf1090cc8b4498a725887e60df72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2724195855600577479, guid: 6401bf1090cc8b4498a725887e60df72,
         type: 3}
       propertyPath: m_RootOrder
@@ -7730,7 +7745,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -7772,7 +7787,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7825,7 +7840,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1233884495
 GameObject:
@@ -12788,7 +12803,7 @@ Transform:
   - {fileID: 1970428303}
   - {fileID: 1950032829}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &1264104944
 LightingSettings:
@@ -13490,10 +13505,9 @@ Transform:
   - {fileID: 766744286241437727}
   - {fileID: 811365260}
   - {fileID: 925230371}
-  - {fileID: 65439432}
   - {fileID: 901590242}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1399687038
 PrefabInstance:
@@ -24006,7 +24020,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh745480
+  m_Name: pb_Mesh124496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24984,7 +24998,7 @@ Transform:
   - {fileID: 1528131290}
   - {fileID: 2067576735}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1656596982
 PrefabInstance:
@@ -27621,7 +27635,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!154 &2067576733
 TerrainCollider:
@@ -33152,7 +33166,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 62.66, z: 0}
 --- !u!1 &3307853361195499330
 GameObject:

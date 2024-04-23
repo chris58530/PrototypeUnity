@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Enemy;
+using _.Scripts.Player.Ability;
 using UnityEngine;
 
 public class AutoTurnAroundDetect : MonoBehaviour
