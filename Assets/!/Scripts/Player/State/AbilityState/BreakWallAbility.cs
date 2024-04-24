@@ -41,7 +41,8 @@ namespace @_.Scripts.Player.State.AbilityState
             
 
             _insertTime = 0;
-            _abilitySystem.Attack();
+            _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.BreakWall);
+
         }
 
         public override void OnLogic()

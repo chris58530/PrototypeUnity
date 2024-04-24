@@ -77,6 +77,33 @@ namespace @_.Scripts.Player.Props
             weaponCollider.GetComponent<Collider>().enabled = true;
         }
 
+        public void UseAbilityAttack(AbilityWeapon.AbilityType abilityType)
+        {
+            chanceTimer?.Dispose();
+            weaponCollider.GetComponent<Collider>().enabled = true;
+
+            switch (abilityType)
+            {
+                case AbilityWeapon.AbilityType.Key:
+                    //Q3的音樂和特效
+                    PlayAudio(2);
+                    PlayerActions.onPlayerAttackEffect.Invoke(2, 1);
+
+                    break;
+                case AbilityWeapon.AbilityType.BreakWall:
+                    PlayAudio(2);
+
+                    break;
+                case AbilityWeapon.AbilityType.Gun:
+                    break;
+                case AbilityWeapon.AbilityType.None:
+                    break;
+                default:
+                    Debug.LogWarning("Unknown ability type!");
+                    break;
+            }
+        }
+
         public void FaceMouseInputPosition()
         {
             transform.LookAt(GetDirection());

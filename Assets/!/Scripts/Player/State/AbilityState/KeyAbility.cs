@@ -34,14 +34,13 @@ namespace @_.Scripts.Player.State.AbilityState
         {
             //debug
             DebugTools.StateText("KeyAbility");
-            _animator.CrossFade(Animator.StringToHash("UseAbility"), 0.1f);
             
             
             _animator.Play("KeyAbility");
             
 
             _insertTime = 0;
-            _attackSystem.Attack();
+            _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.Key);
         }
 
         public override void OnLogic()
