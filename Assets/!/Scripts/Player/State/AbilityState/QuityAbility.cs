@@ -36,6 +36,7 @@ namespace @_.Scripts.Player.State.AbilityState
         {
             _timer = new Timer();
             _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
+            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
 
             // _animator.Play("Eat");
         }

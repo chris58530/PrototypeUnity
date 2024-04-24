@@ -35,6 +35,7 @@ namespace @_.Scripts.Player.State
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q3"), 0.1f);
             _attackSystem.UseQ3Attack();
+            _attackSystem.AutoDetect();
 
             _animator.Play("Q3");
 

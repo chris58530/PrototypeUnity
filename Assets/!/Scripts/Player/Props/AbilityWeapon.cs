@@ -19,11 +19,8 @@ namespace @_.Scripts.Player.Props
             None,
             Strength,
             Fire,
-            Ice,
-            MakeObject,
             Key,
-            Dash,
-            BrokeWall,
+            BreakWall,
             Gun,
         }
 
@@ -60,7 +57,7 @@ namespace @_.Scripts.Player.Props
 
             if (Input.GetKeyDown(KeyCode.X)) ChangeAbility(AbilityType.Strength);
 
-            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BrokeWall);
+            if (Input.GetKeyDown(KeyCode.C)) ChangeAbility(AbilityType.BreakWall);
 
             if (Input.GetKeyDown(KeyCode.V)) ChangeAbility(AbilityType.Key);
 
@@ -82,7 +79,6 @@ namespace @_.Scripts.Player.Props
             //means stop showing value UI
             _abilityValueUI.DisplayTime(0, 0);
             
-            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
 
 
             if (currentAbilityBase != null)

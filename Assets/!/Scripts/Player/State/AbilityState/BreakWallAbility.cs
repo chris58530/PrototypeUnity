@@ -33,15 +33,16 @@ namespace @_.Scripts.Player.State.AbilityState
         public override void OnEnter()
         {
             //debug
-            DebugTools.StateText("KeyAbility");
-            _animator.CrossFade(Animator.StringToHash("UseAbility"), 0.1f);
+            DebugTools.StateText("BreakWallAbility");
             
             
-            _animator.Play("KeyAbility");
+            _animator.Play("UseAbility");
             
 
             _insertTime = 0;
-            _abilitySystem.Attack();
+            _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.BreakWall);
+            _attackSystem.AutoDetect();
+
         }
 
         public override void OnLogic()

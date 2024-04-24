@@ -24,7 +24,8 @@ namespace @_.Scripts.Ability
 
         public override void StartAbility(AbilityWeapon weapon)
         {
-            powerfulSword = GameObject.Find("NoChargeSword");            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.InsertCrystal);
+            powerfulSword = GameObject.Find("NoChargeSword");
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.InsertCrystal);
 
             sword = FindObjectOfType<SwordSlash>();
             sword.canUse = true;
@@ -48,7 +49,6 @@ namespace @_.Scripts.Ability
             Debug.Log("Use Strength TriggerEffect ");
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
-          
         }
 
         // private void OnDisable()
