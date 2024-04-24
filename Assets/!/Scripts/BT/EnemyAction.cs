@@ -13,6 +13,5 @@ public class EnemyAction : Action
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        EnemyAnimator enemyAnimator = GetComponent<EnemyAnimator>();
     }
 }
