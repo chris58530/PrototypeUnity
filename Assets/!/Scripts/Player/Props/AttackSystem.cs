@@ -33,6 +33,7 @@ namespace @_.Scripts.Player.Props
 
         public void UseQ3Attack()
         {
+            //與UseNormalAttack()的差異在開啟的攻擊Collider不一樣
             chanceTimer?.Dispose();
 
             //sword effect
@@ -51,8 +52,7 @@ namespace @_.Scripts.Player.Props
                 .First().Subscribe(_ => { finishAttack = true; });
 
             weaponColliderQ3.GetComponent<Collider>().enabled = true;
-            //自動校正
-            transform.LookAt(autoTurnAroundDetect.NearEnemy(transform));
+         
         }
 
         private void UseNormalAttack()
@@ -104,6 +104,11 @@ namespace @_.Scripts.Player.Props
             }
         }
 
+        public void AutoDetect()
+        {
+            //自動校正
+            transform.LookAt(autoTurnAroundDetect.NearEnemy(transform));
+        }
         public void FaceMouseInputPosition()
         {
             transform.LookAt(GetDirection());

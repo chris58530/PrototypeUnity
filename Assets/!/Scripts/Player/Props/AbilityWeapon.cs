@@ -79,7 +79,6 @@ namespace @_.Scripts.Player.Props
             //means stop showing value UI
             _abilityValueUI.DisplayTime(0, 0);
             
-            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
 
 
             if (currentAbilityBase != null)

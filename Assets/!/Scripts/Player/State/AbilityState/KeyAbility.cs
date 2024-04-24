@@ -41,6 +41,8 @@ namespace @_.Scripts.Player.State.AbilityState
 
             _insertTime = 0;
             _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.Key);
+            _attackSystem.AutoDetect();
+
         }
 
         public override void OnLogic()

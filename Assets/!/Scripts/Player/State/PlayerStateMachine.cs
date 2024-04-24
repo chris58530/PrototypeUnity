@@ -372,7 +372,9 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.KeyAbility,
                 transition => _input.IsPressedAttack &&
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Key);
-
+            _hammerState.AddTransition(PlayerState.Idle, PlayerState.BreakWallAbility,
+                transition => _input.IsPressedAttack &&
+                              _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.BreakWall);
 
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.InsertSword,
                 transition => _input.IsPressedAbility &&
@@ -390,7 +392,7 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.InsertSword, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.KeyAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.QuityAbility, PlayerState.Idle);
-            _hammerState.AddTransition(PlayerState.DashAbility, PlayerState.Idle);
+            _hammerState.AddTransition(PlayerState.BreakWallAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.GunAbility, PlayerState.Idle);
 
 
@@ -401,7 +403,9 @@ namespace _.Scripts.Player.State
              _hammerState.AddTransition(PlayerState.Walk, PlayerState.KeyAbility,
                  transition => _input.IsPressedAttack &&
                                _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.Key);
-
+             _hammerState.AddTransition(PlayerState.Walk, PlayerState.BreakWallAbility,
+                 transition => _input.IsPressedAttack &&
+                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.BreakWall);
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
 
