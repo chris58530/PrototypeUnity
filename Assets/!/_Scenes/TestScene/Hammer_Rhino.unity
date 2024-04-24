@@ -1663,18 +1663,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainVirtualCamera: {fileID: 8933884229095446849}
   virtualCameras: []
---- !u!114 &1113689812 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354,
-    type: 3}
-  m_PrefabInstance: {fileID: 1774321783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1184258687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2455,34 +2443,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1390242524}
     m_Modifications:
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: canGetAbilty
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1113689812}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DestroyGameObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: _.Scripts.Enemy.AbilityContainer, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1781673585}
-    - target: {fileID: 834615429, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
-      propertyPath: onGetAbiltyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5902329517746710244, guid: 2ce3962c561762b40809781bb5cbb354,
         type: 3}
       propertyPath: m_Name
@@ -2545,12 +2505,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce3962c561762b40809781bb5cbb354, type: 3}
---- !u!1 &1781673585 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5902329517746710244, guid: 2ce3962c561762b40809781bb5cbb354,
-    type: 3}
-  m_PrefabInstance: {fileID: 1774321783}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1781673586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5902329517746710245, guid: 2ce3962c561762b40809781bb5cbb354,
@@ -2635,7 +2589,7 @@ PrefabInstance:
     - target: {fileID: 345332434743177130, guid: 2edee2166561efe4ca87290f69b892af,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 345332434743177130, guid: 2edee2166561efe4ca87290f69b892af,
         type: 3}

@@ -47,7 +47,8 @@ namespace @_.Scripts.Player.State.AbilityState
             {
                 fsm.StateCanExit();
             }
-
+            if (_input.Move)
+                _controller.Move(_input);
         }
 
         public override void OnExit()
