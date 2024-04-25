@@ -21,6 +21,7 @@ public class ObjectMoveTowards :Action
     public SharedGameObject moveObject;
     [UnityEngine.Tooltip("If target is null then use the target position")]
     public SharedVector3 targetPosition;
+    public SharedVector3 addPosition;
 
     public override TaskStatus OnUpdate()
     {
@@ -45,7 +46,7 @@ public class ObjectMoveTowards :Action
         if (target == null || target.Value == null) {
             return targetPosition.Value;
         }
-        return target.Value.transform.position;
+        return target.Value.transform.position +addPosition.Value;
     }
 
     // Reset the public variables
