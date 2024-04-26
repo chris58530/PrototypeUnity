@@ -8,7 +8,7 @@ public class EnemyWeapon : MonoBehaviour
 {
     private int attackValue = 1;
     [SerializeField] private LayerMask mask;
-
+    
 
     private void OnTriggerEnter(Collider other)
     {

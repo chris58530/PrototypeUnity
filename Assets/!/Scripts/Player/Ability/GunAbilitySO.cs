@@ -25,6 +25,8 @@ namespace @_.Scripts.Ability
                 Debug.Log("flying");
             }).AddTo(obj);
 
+            
+            GameObject.Find("Cuttle_InMouth").GetComponent<Animator>().Play("BitedAtk");
             Debug.Log("Use Gun Ability");
         }
 

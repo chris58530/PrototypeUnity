@@ -42,6 +42,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeDamage(int value)
     {
+        Debug.Log("rhino take damage");
         bt.SendEvent("OnTakeDamage");
 
         if (isShield)

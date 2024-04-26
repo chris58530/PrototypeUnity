@@ -19,7 +19,6 @@ public class ShieldUI : MonoBehaviour
     {
         //shake all shield ui
 
-        Debug.Log("hit shield animatiob");
         for (int i = 0; i < shieldAni.Length; i++)
         {
             if (shieldNumber > i)
