@@ -9,6 +9,7 @@ using UnityEngine.Events;
 
 public class RhinoBase : Enemy, IDamageable, IShieldable
 {
+
     [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
     private bool isShield = true;
 
