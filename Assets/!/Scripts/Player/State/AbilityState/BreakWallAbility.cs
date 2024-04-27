@@ -58,7 +58,7 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnExit()
         {
-            _abilitySystem.CancelAttack();
+            _attackSystem.CancelAttack();
 
         }
     }
