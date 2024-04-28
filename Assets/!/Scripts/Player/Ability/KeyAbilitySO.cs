@@ -25,7 +25,6 @@ namespace @_.Scripts.Ability
         public override void QuitAbilityAlgorithm()
         {
             // Instantiate(keyMonster, transform.position, transform.rotation);
-            Debug.Log("------玩家血量加一!!------");
         }
 
         public override void TriggerEffect(Collider other)
@@ -33,7 +32,6 @@ namespace @_.Scripts.Ability
             //OnTrigger enemy will do 
             if (other.gameObject.TryGetComponent<KeyDoor>(out var door))
             {
-                Debug.Log("Use Key TriggerEffect ");
                 door.DoResult();
                 _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
                 //
