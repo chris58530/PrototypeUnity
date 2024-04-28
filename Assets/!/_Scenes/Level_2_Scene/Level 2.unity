@@ -17778,8 +17778,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552805812}
-  m_LocalRotation: {x: -0.008501521, y: 0.7045348, z: 0.0084412135, w: 0.7095683}
-  m_LocalPosition: {x: -8.672502, y: 5.9354134, z: 0.50968707}
+  m_LocalRotation: {x: -0.20616344, y: 0.40407863, z: 0.05999705, w: 0.8891667}
+  m_LocalPosition: {x: 41.98337, y: 18.70424, z: 20.624352}
   m_LocalScale: {x: 5.5432, y: 5.5432, z: 5.5432}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27552,12 +27552,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 819300696}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &819911667 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9042936341524017298, guid: f4a6efbc39000b84f97fbfd529e88c69,
-    type: 3}
-  m_PrefabInstance: {fileID: 1031225735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &819911668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9042936341524018029, guid: f4a6efbc39000b84f97fbfd529e88c69,
@@ -30596,8 +30590,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Swing_Rhino
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3213247812538985362, guid: f4a6efbc39000b84f97fbfd529e88c69, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a6efbc39000b84f97fbfd529e88c69, type: 3}
 --- !u!4 &1031225736 stripped
 Transform:
@@ -50124,7 +50117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1664283557}
   - component: {fileID: 1664283559}
-  - component: {fileID: 1664283558}
   m_Layer: 7
   m_Name: AbsortCollider
   m_TagString: Untagged
@@ -50147,35 +50139,6 @@ Transform:
   m_Father: {fileID: 819911668}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1664283558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664283556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityType: 4
-  canGetAbilty: 1
-  onGetAbiltyEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: _.Scripts.Player.Ability.AbilityContainer, Assembly-CSharp
-        m_MethodName: DestroyGameObject
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 819911667}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1664283559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50185,7 +50148,7 @@ BoxCollider:
   m_GameObject: {fileID: 1664283556}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.820566, y: 5.383563, z: 11.41393}
   m_Center: {x: -0.000018039038, y: 2.1917815, z: 4.1573806}
