@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1664283556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664283557}
+  - component: {fileID: 1664283559}
+  m_Layer: 7
+  m_Name: AbsortCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1664283557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664283556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9042936341524018029}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1664283559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664283556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.820566, y: 5.383563, z: 11.41393}
+  m_Center: {x: -0.000018039038, y: 2.1917815, z: 4.1573806}
 --- !u!1 &4882283879595100
 GameObject:
   m_ObjectHideFlags: 0
@@ -40283,7 +40328,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9042936341524017298}
-  m_LocalRotation: {x: -0, y: -0.7042595, z: -0, w: 0.70994264}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40292,9 +40337,10 @@ Transform:
   - {fileID: 9042936341566644316}
   - {fileID: 3213247812590701222}
   - {fileID: 6000681344604685565}
+  - {fileID: 1664283557}
   m_Father: {fileID: 9042936341683811826}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -89.54, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &3506896803196701999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40323,8 +40369,8 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DestoryThis","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"FristSeePlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isShield","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Collider","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RihnoAttackVFX","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Armors","IsShared":true,"List`1mValue":[4,5,6]},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isAttacking","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Sword
-        Slash Impact_Audio","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"AttackWeapon","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChaseDistance","IsShared":true,"SinglemValue":50},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isUnlimitedChasing","IsShared":true,"BooleanmValue":false}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"DestoryThis","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"FristSeePlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isShield","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"Collider","IsShared":true,"CollidermValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RihnoAttackVFX","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Armors","IsShared":true,"List`1mValue":[5,6,7]},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isAttacking","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Sword
+        Slash Impact_Audio","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"AttackWeapon","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChaseDistance","IsShared":true,"SinglemValue":50},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isUnlimitedChasing","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -40334,6 +40380,7 @@ MonoBehaviour:
         - {fileID: 1689293597802974255}
         - {fileID: 9042936341524017298}
         - {fileID: 9042936341524017298}
+        - {fileID: 819911677}
         - {fileID: 7078839698409607886}
         - {fileID: 294951646284485050}
         - {fileID: 7602895814706903478}
@@ -40406,7 +40453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5222f75991c6ff14482db4ee05e5dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -28
+  AbsortCollider: {fileID: 1664283556}
+  gravity: -35
 --- !u!143 &819911677
 CharacterController:
   m_ObjectHideFlags: 0
@@ -40453,7 +40501,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &9042936341566644317
 GameObject:
