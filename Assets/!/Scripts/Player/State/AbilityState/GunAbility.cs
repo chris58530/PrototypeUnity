@@ -47,10 +47,10 @@ namespace @_.Scripts.Player.State.AbilityState
         {
             _controller.FaceToMousePos();
 
-            if (!_input.IsPressingAttack && _timer.Elapsed > 0.1f)
+            if (!_input.IsPressingAttack && _timer.Elapsed > 0.3f)
             {
                 _animator.Play("Shoot_2");
-                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.1f)).First().Subscribe(_ =>
+                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.5f)).First().Subscribe(_ =>
                 {
                     fsm.StateCanExit();
 
