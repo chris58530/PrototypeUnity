@@ -704,6 +704,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!137 &453910972 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8742861007711442402, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7887936364074138294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474074259
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +845,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474074259}
   m_CullTransparentMesh: 1
+--- !u!23 &542428930 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2958909409155655428, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7887936364074138294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &666517143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2477,6 +2489,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 453910972}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 542428930}
+    - target: {fileID: 2351550720443715617, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: _renderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 542428930}
     - target: {fileID: 2351550720443715618, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
         type: 3}
       propertyPath: onStunEvent.m_PersistentCalls.m_Calls.Array.size
@@ -2526,6 +2558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onStunEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270491779598808751, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
+        type: 3}
+      propertyPath: m_Name
+      value: Knife
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4805dec0ccc984d8eb4ef3dedaa83d, type: 3}

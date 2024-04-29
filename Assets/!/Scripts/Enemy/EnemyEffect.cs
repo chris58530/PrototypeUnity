@@ -11,16 +11,16 @@ public class EnemyEffect : MonoBehaviour
 
     [SerializeField] private Material OringinMat;
     [SerializeField] private Renderer[] _renderers;
-  
+
     [SerializeField] private ParticleSystem stunParticle;
     [SerializeField] private ParticleSystem absortableEffcet;
 
     private void Start()
     {
-        if(stunParticle!=null)
-        stunParticle.Stop();
-        if(absortableEffcet!=null)
-        absortableEffcet.Stop();
+        if (stunParticle != null)
+            stunParticle.Stop();
+        if (absortableEffcet != null)
+            absortableEffcet.Stop();
     }
 
     public void SetEmission()
