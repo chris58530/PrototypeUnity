@@ -14,6 +14,7 @@ namespace _.Scripts.Player
         public bool IsPressedRoll => _input.Player.Roll.WasPressedThisFrame();
 
         public bool IsPressedAttack => _input.Player.Attack.WasPressedThisFrame();
+        public bool IsPressingAttack => _input.Player.Attack.IsPressed();
         public bool IsReleasedAttack => _input.Player.Attack.WasReleasedThisFrame();
         public bool IsPressedAbility => _input.Player.Ability.WasPressedThisFrame();
         public bool IsReleasedAbility => _input.Player.Ability.WasReleasedThisFrame();

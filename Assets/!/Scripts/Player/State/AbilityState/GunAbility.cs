@@ -1,4 +1,6 @@
+using System;
 using _.Scripts.Player.Props;
+using UniRx;
 using UnityEngine;
 using UnityHFSM;
 
@@ -35,7 +37,7 @@ namespace @_.Scripts.Player.State.AbilityState
         {
             _timer = new Timer();
 
-            _animator.Play("UseAbility");
+            _animator.Play("Shoot_1");
             _controller.FaceToMousePos();
             // _animator.Play("Eat");
         }
@@ -44,9 +46,14 @@ namespace @_.Scripts.Player.State.AbilityState
         {
             _controller.FaceToMousePos();
 
-            if (_input.IsReleasedAttack &&_timer.Elapsed > 0.5f)
+            if (!_input.IsPressingAttack && _timer.Elapsed > 0.1f)
             {
+                _animator.Play("Shoot_2");
+                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.1f)).First().Subscribe(_ =>
+                {
                     fsm.StateCanExit();
+
+                }).AddTo(this._controller);
             }
         }
 

@@ -35,6 +35,8 @@ namespace @_.Scripts.Player.State
             // _animator.Play("Q1ToIdle");
 
             _animator.CrossFade(Animator.StringToHash("Idle"), 0.2f);
+            AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Head_Shake);
+
         }
 
         public override void OnLogic()
