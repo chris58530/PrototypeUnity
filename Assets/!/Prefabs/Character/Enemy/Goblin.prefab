@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770439318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.18, z: 0.36}
+  m_LocalPosition: {x: 0, y: 1.18, z: 0.806}
   m_LocalScale: {x: 1.4875, y: 2.8875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 090c3e97eadf6494f9906ffa6ea0e05c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 3373100648105966398}
   - component: {fileID: 7887936364386250136}
   - component: {fileID: 2351550720443715618}
-  - component: {fileID: 2351550720443715616}
   - component: {fileID: 2351550720443715617}
   m_Layer: 7
   m_Name: Base
@@ -329,6 +328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 10
+  InLightMaterial: {fileID: 2100000, guid: 4511126de92e49441949d9fffb877340, type: 2}
+  OringinMaterial: {fileID: 2100000, guid: d1503818f20c46a4bba0ce0641d633da, type: 2}
+  _renderers:
+  - {fileID: 7548447265081511460}
   onTakeDamagedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -347,10 +350,10 @@ MonoBehaviour:
   onStunEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2351550720443715616}
-        m_TargetAssemblyTypeName: _.Scripts.Enemy.AbilityContainer, Assembly-CSharp
-        m_MethodName: SetCanGetAbility
-        m_Mode: 6
+      - m_Target: {fileID: 2351550720443715617}
+        m_TargetAssemblyTypeName: EnemyEffect, Assembly-CSharp
+        m_MethodName: OnStun
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -361,7 +364,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2351550720443715617}
         m_TargetAssemblyTypeName: EnemyEffect, Assembly-CSharp
-        m_MethodName: OnStun
+        m_MethodName: OnDead
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -386,23 +389,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2351550720443715616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2351550720443715621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9de99c68f640b299a3bfb6bcc8d964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityType: 6
-  canGetAbilty: 0
-  onGetAbiltyEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2351550720443715617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,9 +401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a073ae9f52284ed4ea2287248d22be75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmssionMat: {fileID: 0}
-  OringinMat: {fileID: 0}
-  _renderers: []
+  EmssionMat: {fileID: 2100000, guid: 03f48b4847ec07d4b9ab4e7206b0945b, type: 2}
+  OringinMat: {fileID: 2100000, guid: 4511126de92e49441949d9fffb877340, type: 2}
+  _renderers:
+  - {fileID: 7548447265081511460}
   stunParticle: {fileID: 8014344557171707409}
   absortableEffcet: {fileID: 5376272911675252791}
 --- !u!1 &2351550720484966634
@@ -30243,3 +30230,9 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!137 &7548447265081511460 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5694255694306452204, guid: de2f173ffb331dc47abc28041771188a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2866391256644349128}
+  m_PrefabAsset: {fileID: 0}
