@@ -39,7 +39,8 @@ namespace @_.Scripts.Player.State.AbilityState
             _animator.Play("UseAbility");
             
 
-            _insertTime = 0;
+            _insertTime = 0;            
+
             _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.BreakWall);
             _attackSystem.AutoDetect();
 

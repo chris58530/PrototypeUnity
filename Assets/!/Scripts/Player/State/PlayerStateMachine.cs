@@ -105,7 +105,7 @@ namespace _.Scripts.Player.State
             _normalState = new StateMachine<SuperState, PlayerState, string>();
             _normalState.AddState(
                 PlayerState.Idle, new Idle(
-                    _input, _controller, animator, _attackSystem, false));
+                    _input, _controller, animator, _attackSystem,_abilityWeapon, false));
             _normalState.AddState(
                 PlayerState.Dead, new Dead(
                     _input, _controller, animator, _attackSystem, false));
@@ -279,7 +279,7 @@ namespace _.Scripts.Player.State
             _hammerState = new StateMachine<SuperState, PlayerState, string>();
             _hammerState.AddState(
                 PlayerState.Idle, new Idle(
-                    _input, _controller, animator, _attackSystem, false));
+                    _input, _controller, animator, _attackSystem,_abilityWeapon, false));
             _hammerState.AddState(
                 PlayerState.Dead, new Dead(
                     _input, _controller, animator, _attackSystem, false));

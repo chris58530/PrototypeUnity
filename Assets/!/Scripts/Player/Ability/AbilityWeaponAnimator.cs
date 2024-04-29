@@ -17,6 +17,7 @@ public class AbilityWeaponAnimator : Singleton<AbilityWeaponAnimator>
         Hold_Medium,
         Hold_Small,
         Head_Shake,
+        Idle,
         Swallow
     }
 

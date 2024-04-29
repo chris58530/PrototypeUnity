@@ -39,6 +39,7 @@ namespace @_.Scripts.Player.State.AbilityState
 
             _animator.Play("Shoot_1");
             _controller.FaceToMousePos();
+
             // _animator.Play("Eat");
         }
 

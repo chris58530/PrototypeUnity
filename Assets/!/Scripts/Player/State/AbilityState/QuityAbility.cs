@@ -43,7 +43,7 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnLogic()
         {
-            if (_timer.Elapsed > .5f)
+            if (_timer.Elapsed > .8f)
             {
                 fsm.StateCanExit();
             }
