@@ -254,7 +254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1190284853}
-  - {fileID: 1983149404}
+  - {fileID: 4871399362862644110}
   m_Father: {fileID: 7337187574264071245}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -283,14 +283,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936943948}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.068367, y: -0.42479, z: -0.025506}
-  m_LocalScale: {x: 0.2228585, y: 0.15162545, z: 0.031583898}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.2, y: 21.8, z: -163.6}
+  m_LocalScale: {x: 3, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1983149404}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 4871399362862644110}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!2083052967 &936943951
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936943948}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 1983149405}
   - component: {fileID: 1983149408}
   m_Layer: 7
-  m_Name: HyperBeam
+  m_Name: HyperBeamZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -953,14 +953,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983149403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 37.4, z: -73}
   m_LocalScale: {x: 29.156618, y: 42.85428, z: 205.73141}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 936943949}
-  m_Father: {fileID: 928904477}
-  m_RootOrder: 1
+  m_Children: []
+  m_Father: {fileID: 4871399362862644110}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1983149407
 MeshFilter:
@@ -1264,6 +1263,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bt: {fileID: 7337187574264071242}
   eventName: Right_Punch_Ground
+--- !u!1 &5747868130522129262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4871399362862644110}
+  m_Layer: 7
+  m_Name: HyperBeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4871399362862644110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747868130522129262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1983149404}
+  - {fileID: 936943949}
+  m_Father: {fileID: 928904477}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7337187574191970816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1342,7 @@ GameObject:
   - component: {fileID: 1642186614}
   - component: {fileID: 1786901386}
   - component: {fileID: 1786901387}
+  - component: {fileID: 1786901388}
   m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
@@ -1459,6 +1492,22 @@ MonoBehaviour:
   onDiedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!54 &1786901388
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337187574264071244}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &7337187574349489501
 GameObject:
   m_ObjectHideFlags: 0
