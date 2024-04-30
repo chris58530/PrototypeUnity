@@ -1,3 +1,4 @@
+using _.Scripts.Interface;
 using _.Scripts.Player.Ability;
 using _.Scripts.Player.Props;
 using UnityEngine;
@@ -30,7 +31,9 @@ namespace @_.Scripts.Ability
 
         public override void TriggerEffect(Collider other)
         {
-          
+            if (other.TryGetComponent<IBreakable>(out IBreakable target))
+                target.OnTakeAttack();
+            
         }
     }
 }

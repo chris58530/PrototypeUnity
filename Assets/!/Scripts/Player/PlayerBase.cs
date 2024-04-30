@@ -105,6 +105,27 @@ namespace _.Scripts.Player
             getHurt = false;
         }
 
+        //boss 2 的 hyper beam 準備的時候 大手需要阻擋並推動玩家 但似乎Charator ctr 無法被 box collider推動 故Ontouch模擬
+        public void OnTouch(Transform trans)
+        {
+            Vector3 dir = (transform.position - trans.position).normalized;
+            StartCoroutine(Touch(dir));
+        }
+
+        IEnumerator Touch(Vector3 trans)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < knockTime / 5)
+            {
+                _controller.Move(trans);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            getHurt = false;
+        }
+
         private IDisposable respawnDispose;
 
         public void OnDied()

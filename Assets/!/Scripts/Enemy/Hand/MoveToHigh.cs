@@ -11,10 +11,11 @@ public class MoveToHigh : EnemyAction
     public SharedGameObject target;
     public SharedGameObject moveObject;
     private Vector3 targetPosition;
+    public SharedVector3 addPosition;
 
     public override void OnStart()
     {
-        targetPosition = target.Value.transform.position;
+        targetPosition = target.Value.transform.position +addPosition.Value;;
         targetPosition.y += high.Value;
     }
 
