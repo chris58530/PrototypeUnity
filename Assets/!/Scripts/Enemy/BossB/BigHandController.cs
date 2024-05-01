@@ -20,39 +20,35 @@ public class BigHandController : MonoBehaviour, IBreakable, IDamageable
     [SerializeField] private HandType handType;
     [SerializeField] private float normalAttackMoveDistance;
     [SerializeField] private float rhinoMoveDistance;
-    private float moveDuration = 0.05f; 
-    public bool canBeBreak;
+    private float moveDuration = 0.15f; 
 
-    private void OnEnable()
-    {
-        canBeBreak = true;
-    }
-
+    
     void IBreakable.OnTakeAttack()
     {
-        if (!canBeBreak) return;
-        
-        canBeBreak = false;
-        SystemActions.onCameraShake?.Invoke();
+        Debug.Log(" IBreakable.OnTakeAttack()");
+        SystemActions.onCameraShake?.Invoke();  // 调用摄像机震动事件
+        StartCoroutine(MoveCoroutine());
 
-        float dir = (float)handType;
-        float moveSpeed = rhinoMoveDistance / moveDuration;
-        Observable.EveryUpdate()
-            // 使用 TakeUntil 方法来设置结束条件
-            .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(moveDuration)))
-            .Subscribe(_ =>
-            {
-                // 在每帧更新位置
-                float step = moveSpeed * Time.deltaTime * dir; // 根据 handType 控制移动方向
-                moveTarget.transform.position += new Vector3(step, 0, 0);
-            })
-            .AddTo(this); // 确保适当的清理
+        // SystemActions.onFrameSlow?.Invoke(0.2f);  // 调用帧率减慢事件
+
+   
     }
 
-
+    IEnumerator MoveCoroutine()
+    {
+        float dir = (float)handType;  // 获取手的类型
+        float moveSpeed = rhinoMoveDistance / moveDuration;  // 计算移动速度
+        float timeElapsed = 0f;
+        while (timeElapsed < moveDuration)
+        {
+            float step = moveSpeed * Time.deltaTime * dir;  // 计算移动步长
+            moveTarget.transform.position += new Vector3(step, 0, 0);  // 根据计算出的步长更新位置
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
     void IDamageable.OnTakeDamage(int value)
     {
-        if (!canBeBreak) return;
 
         Debug.Log("Got Normal Attack");
 

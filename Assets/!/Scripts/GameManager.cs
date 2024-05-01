@@ -13,6 +13,10 @@ namespace _.Scripts
         private PlayerInput _playerInput;
         private PlayerBase _playerBase;
 
+
+        [SerializeField] private float slowSpeed;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -66,13 +70,25 @@ namespace _.Scripts
                 }).AddTo(this);
             }
         }
+
+
+        void SlowAnimaiotnSpeed(float time)
+        {
+            Time.timeScale = slowSpeed;
+            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(time)).Subscribe(_ => { Time.timeScale = 1; })
+                .AddTo(this);
+        }
+
         private void OnEnable()
         {
             TimeScale(1);
+            SystemActions.onFrameSlow += SlowAnimaiotnSpeed;
         }
+
         private void OnDisable()
         {
-         TimeScale(1);
+            TimeScale(1);
+            SystemActions.onFrameSlow -= SlowAnimaiotnSpeed;
         }
     }
 }

@@ -43,6 +43,8 @@ namespace @_.Scripts.Player.Props
             
             Debug.Log("攻擊了 : " + attackValue);
             PlayerActions.onHitEnemy?.Invoke();
+            SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
+
             //dubug
             TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
             t.text = (attackValue).ToString();
