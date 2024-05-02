@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Enemy;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class BossBBase : Enemy, IDamageable
 {
     [Header("Base setting")] [SerializeField]
@@ -12,19 +12,18 @@ public class BossBBase : Enemy, IDamageable
 
     [Header("Event")] [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onDiedEvent;
-    protected override void Awake()
-    {
-        base.Awake();
-    }
 
-    private void Start()
+ 
+[ContextMenu("Send Event")]
+    private void Sentevent()
     {
-        Debug.Log("send event");
+        bt.SendEvent("Ground_Spike");
+
     }
 
     public void OnTakeDamage(int value)
     {
-        bt.SendEvent("Ground_Thorn");
+        bt.SendEvent("Ground_Spike");
 
         onTakeDamagedEvent?.Invoke();
         hp -= value;
