@@ -2,18 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Event;
+using _.Scripts.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
+public enum HandState
+{
+    Normal,
+    Break_1,
+    Break_2,
+}
 
 public class BossBBody : MonoBehaviour
 {
     [SerializeField] private GameObject shakeModel;
     [SerializeField] private float shakeDuration;
 
-    private void Start()
-    {
-    }
 
+
+  
     public void ShakeBody()
     {
         StartCoroutine(ShakeCoroutine());

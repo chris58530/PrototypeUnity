@@ -6,15 +6,11 @@ using UnityEngine.Serialization;
 
 namespace @_.Scripts.Enemy.Hand
 {
-    public enum SmallHandState
-    {
-        Normal,
-        Breakable
-    }
+ 
 
     public class SmallHandBase : Enemy, IDamageable, IBreakable
     {
-        [SerializeField] private SmallHandState smallHandState;
+     [SerializeField] private HandState handState;
         [SerializeField] private Renderer[] renderers;
         [SerializeField] private Material brokenMaterial;
         [SerializeField] private int hp;
@@ -41,7 +37,7 @@ namespace @_.Scripts.Enemy.Hand
 
         void Start()
         {
-            if (smallHandState == SmallHandState.Breakable)
+            if (handState == HandState.Break_1)
                 SwitchState();
         }
 
