@@ -14,7 +14,7 @@ public enum HandType
     Left = 1
 }
 
-public class BigHandController : MonoBehaviour, IBreakable, IDamageable
+public class BigHandController : MonoBehaviour, IBreakable
 {
     [SerializeField] private GameObject moveTarget;
     [SerializeField] private HandType handType;
@@ -47,18 +47,9 @@ public class BigHandController : MonoBehaviour, IBreakable, IDamageable
             yield return null;
         }
     }
-    void IDamageable.OnTakeDamage(int value)
-    {
+ 
 
-        Debug.Log("Got Normal Attack");
-
-        float dir = (float)handType;
-        moveTarget.transform.position += new Vector3(normalAttackMoveDistance * dir, 0, 0);
-    }
-
-    public void OnDied()
-    {
-    }
+  
 
     private void OnTriggerEnter(Collider other)
     {

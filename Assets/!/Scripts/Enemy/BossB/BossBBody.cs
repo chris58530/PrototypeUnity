@@ -13,7 +13,7 @@ public enum HandState
     Break_2,
 }
 
-public class BossBBody : MonoBehaviour
+public class BossBBody : MonoBehaviour,IDamageable
 {
     [SerializeField] private GameObject shakeModel;
     [SerializeField] private float shakeDuration;
@@ -24,6 +24,7 @@ public class BossBBody : MonoBehaviour
     public void ShakeBody()
     {
         StartCoroutine(ShakeCoroutine());
+        Debug.Log("Shake Body");
     }
 
     IEnumerator ShakeCoroutine()
@@ -44,5 +45,16 @@ public class BossBBody : MonoBehaviour
         shakeModel.transform.localPosition = originalPos; // 重置位置到初始值
         yield return null; 
 
+    }
+
+    public void OnTakeDamage(int value)
+    {
+        Debug.Log("BossBBody Take Damage");
+        BossBBase.onBodyTakeDamage?.Invoke(value);
+    }
+
+    public void OnDied()
+    {
+        
     }
 }
