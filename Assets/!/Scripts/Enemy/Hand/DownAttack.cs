@@ -10,12 +10,13 @@ public class DownAttack : EnemyAction
     public SharedFloat arriveDistance = 0.1f;
     public SharedGameObject target;
     private Vector3 targetPosition;
+    public Vector3 offset;
     public bool shake = true;
 
     public override void OnStart()
     {
         targetPosition = new Vector3(transform.position.x, target.Value.transform.position.y,
-            transform.position.z);
+            transform.position.z)+ offset;
     }
 
 

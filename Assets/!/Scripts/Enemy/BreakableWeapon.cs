@@ -16,6 +16,8 @@ public class BreakableWeapon : MonoBehaviour
         if (other.TryGetComponent<IBreakable>(out IBreakable target))
         {
             target.OnTakeAttack();
+            bt.SendEvent("HitBody");
+
         }
         if (other.gameObject.TryGetComponent<BossBBody>(out var bossBBody))
         {
