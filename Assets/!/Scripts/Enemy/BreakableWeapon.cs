@@ -25,6 +25,7 @@ public class BreakableWeapon : MonoBehaviour
         {
             bossBBody.ShakeBody();
             bt.SendEvent("HitBody");
+            bossBBody.OnPush();
         }
     }
 }

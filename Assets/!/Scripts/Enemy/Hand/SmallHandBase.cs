@@ -6,24 +6,23 @@ using UnityEngine.Serialization;
 
 namespace @_.Scripts.Enemy.Hand
 {
- 
-
     public class SmallHandBase : Enemy, IDamageable, IBreakable
     {
-     [SerializeField] private HandState handState;
+        [FormerlySerializedAs("handState")] [SerializeField]
+        private BreakState breakState;
+
         [SerializeField] private Renderer[] renderers;
-        [SerializeField] private Material brokenMaterial;
+        [SerializeField] private Material brokenMaterial1;
+        [SerializeField] private Material brokenMaterial2;
         [SerializeField] private int hp;
-        private bool canbreak;
         [SerializeField] private UnityEvent onTakeDamagedEvent;
         [SerializeField] private UnityEvent onDiedEvent;
 
         public void OnTakeDamage(int value)
         {
-            if (!canbreak)return;
-            
+
             if (hp <= 0) OnDied();
-         
+
             onTakeDamagedEvent?.Invoke();
             hp -= value;
         }
@@ -37,8 +36,8 @@ namespace @_.Scripts.Enemy.Hand
 
         void Start()
         {
-            if (handState == HandState.Break_1)
-                SwitchState();
+            if (breakState == BreakState.Break1)
+                SwitchBreakMaterial();
         }
 
 
@@ -49,22 +48,26 @@ namespace @_.Scripts.Enemy.Hand
                 cartRhino.CatchRhino();
                 bt.SendEvent("CatchRhino");
             }
-         
         }
 
 
-        public void SwitchState()
+        public void SwitchBreakMaterial()
         {
-            foreach (var m in renderers)
-            {
-                m.material = brokenMaterial;
-            }
+            if (breakState == BreakState.Break1)
+                foreach (var m in renderers)
+                {
+                    m.material = brokenMaterial1;
+                }
+            if(breakState == BreakState.Break2)
+                foreach (var m in renderers)
+                {
+                    m.material = brokenMaterial2;
+                }
         }
 
         public void OnTakeAttack()
         {
-            canbreak = true;
-            SwitchState();
+            SwitchBreakMaterial();
         }
     }
 }

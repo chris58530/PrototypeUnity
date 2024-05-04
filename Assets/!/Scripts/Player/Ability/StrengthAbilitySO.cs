@@ -19,7 +19,6 @@ namespace @_.Scripts.Ability
             //Hold this ability will do 
 
 
-            Debug.Log("Use Strength Ability");
         }
 
         public override void StartAbility(AbilityWeapon weapon)
@@ -40,13 +39,11 @@ namespace @_.Scripts.Ability
             sword.canUse = false;
 
             //產生對應物件 噴出原始怪物
-            Debug.Log("QuitAbilityAlgorithm");
         }
 
         public override void TriggerEffect(Collider other)
         {
             //OnTrigger enemy will do 
-            Debug.Log("Use Strength TriggerEffect ");
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
         }

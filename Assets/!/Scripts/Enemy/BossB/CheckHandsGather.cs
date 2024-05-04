@@ -17,14 +17,10 @@ public class CheckHandsGather : Conditional
     public override TaskStatus OnUpdate()
     {
 
-        bool right = _bossBController.ReturnRightGather().Value;
-        Debug.Log("Right: " + right);
-        bool left = _bossBController.ReturnLeftGather().Value;
-        Debug.Log("Left: " + left);
         if (_bossBController.ReturnRightGather().Value && _bossBController.ReturnLeftGather().Value)
         {
             return TaskStatus.Success;
         }
-         return TaskStatus.Failure;
+        return TaskStatus.Failure;
     }
 }

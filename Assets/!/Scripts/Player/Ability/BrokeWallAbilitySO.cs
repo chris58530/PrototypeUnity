@@ -25,7 +25,6 @@ namespace @_.Scripts.Ability
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
             GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false,"Breakable");
 
-            Debug.Log($"------{this.name} QuitAbilityAlgorithm------");
 
         }
 
