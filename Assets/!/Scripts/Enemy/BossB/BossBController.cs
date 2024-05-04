@@ -1,36 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class BossBController : MonoBehaviour
 {
-   
-    [Header("Objects")]
-
-    [SerializeField] private GameObject[] right_AttaKWeapons;
-    [SerializeField] private GameObject[] left_AttaKWeapons;
-    
-    
+    [Header("Objects")] 
+    [SerializeField] private BehaviorTree rightSmallHandBt;
+    [SerializeField] private BehaviorTree leftSmallHandBt;
 
 
-    public void AttaKWeapon_Right(bool open )
+    public SharedBool ReturnRightGather()
     {
-   
-        foreach (GameObject weapon in right_AttaKWeapons)
-        {
-            weapon.SetActive(open);
-        }
-    } public void AttaKWeapon_Left(bool open)
-    {
-   
-        foreach (GameObject weapon in left_AttaKWeapons)
-        {
-            weapon.SetActive(open);
-        }
+        return (SharedBool)rightSmallHandBt.GetVariable("OnDestination");
     }
-
-  
-    
+    public SharedBool ReturnLeftGather()
+    {
+        return (SharedBool)leftSmallHandBt.GetVariable("OnDestination");
+    }
 }

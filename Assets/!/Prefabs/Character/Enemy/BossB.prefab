@@ -1189,9 +1189,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2132727986509311403}
-  - {fileID: 4805228839315642892}
+  m_Children: []
   m_Father: {fileID: 7337187576254879687}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1965,12 +1963,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3572939079540343628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 77.3, y: 56.7, z: -80}
+  m_LocalPosition: {x: -22.699997, y: 16.7, z: -80}
   m_LocalScale: {x: 95.2729, y: 95.2729, z: 322.73697}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1496813779}
-  m_RootOrder: 0
+  m_Father: {fileID: 7337187574349489498}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5398552230001704916
 MeshFilter:
@@ -2077,12 +2075,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5721678468935120397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75.7, y: 54.8, z: -80}
+  m_LocalPosition: {x: 24.300003, y: 14.799999, z: -80}
   m_LocalScale: {x: 95.2729, y: 95.2729, z: 322.73697}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1496813779}
-  m_RootOrder: 1
+  m_Father: {fileID: 7337187576265668425}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8876298870624756541
 MeshFilter:
@@ -2285,7 +2283,7 @@ GameObject:
   - component: {fileID: 1786901386}
   - component: {fileID: 1786901387}
   m_Layer: 7
-  m_Name: Base
+  m_Name: BossB_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2340,7 +2338,7 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Body_Animator","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_Animator","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_Animator","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_Object","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LefttHand_Object","IsShared":true,"GameObjectmValue":5},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_PunchPreparePos","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_PunchPreparePos","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_Punch_DetectCollider","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_Punch_DetectCollider","IsShared":true,"GameObjectmValue":9},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_OriginalPos
         ","IsShared":true,"GameObjectmValue":10},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_OriginalPos
-        ","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam_Pre","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":15},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_PunchCollider","IsShared":true,"GameObjectmValue":16},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_PunchCollider","IsShared":true,"GameObjectmValue":17},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightSmallHand_GameObject","IsShared":true,"GameObjectmValue":18},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftSmallHand_GameObject","IsShared":true,"GameObjectmValue":19},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":20},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":21},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"RightWeaponList","IsShared":true,"List`1mValue":[22,23]},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"LefttWeaponList","IsShared":true,"List`1mValue":[24,25]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_Pos","IsShared":true,"GameObjectmValue":26}]}'
+        ","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam_Pre","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":15},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_PunchCollider","IsShared":true,"GameObjectmValue":16},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_PunchCollider","IsShared":true,"GameObjectmValue":17},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightSmallHand_GameObject","IsShared":true,"GameObjectmValue":18},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftSmallHand_GameObject","IsShared":true,"GameObjectmValue":19},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":20},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":21},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"RightWeaponList","IsShared":true,"List`1mValue":[22,23]},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"LefttWeaponList","IsShared":true,"List`1mValue":[24,25]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_Pos","IsShared":true,"GameObjectmValue":26},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Head_Object","IsShared":true,"GameObjectmValue":27}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -2374,6 +2372,7 @@ MonoBehaviour:
         - {fileID: 2044514702}
         - {fileID: 282526055}
         - {fileID: 2128923192}
+        - {fileID: 7337187574191970816}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -2391,8 +2390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b226365da6b34b84c85042b38a6709dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  right_AttaKWeapons: []
-  left_AttaKWeapons: []
+  rightSmallHandBt: {fileID: 0}
+  leftSmallHandBt: {fileID: 0}
 --- !u!114 &1786901387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,6 +2444,7 @@ Transform:
   - {fileID: 7086506667590191393}
   - {fileID: 1163931394}
   - {fileID: 840912325}
+  - {fileID: 2132727986509311403}
   m_Father: {fileID: 7337187575524465603}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2546,6 +2546,7 @@ Transform:
   - {fileID: 7086506666948775413}
   - {fileID: 1945456346}
   - {fileID: 1814503312}
+  - {fileID: 4805228839315642892}
   m_Father: {fileID: 7337187575524465603}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
