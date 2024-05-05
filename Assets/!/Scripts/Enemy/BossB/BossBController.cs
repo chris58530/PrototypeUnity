@@ -8,17 +8,21 @@ using UnityEngine.Serialization;
 
 public class BossBController : MonoBehaviour
 {
-    [Header("Objects")] 
-    [SerializeField] private BehaviorTree rightSmallHandBt;
+    [Header("Objects")] [SerializeField] private BehaviorTree rightSmallHandBt;
     [SerializeField] private BehaviorTree leftSmallHandBt;
 
 
     public SharedBool ReturnRightGather()
     {
-        return (SharedBool)rightSmallHandBt.GetVariable("OnDestination");
+        if (rightSmallHandBt.gameObject.activeSelf)
+            return (SharedBool)rightSmallHandBt.GetVariable("OnDestination");
+        return true;
     }
+
     public SharedBool ReturnLeftGather()
     {
-        return (SharedBool)leftSmallHandBt.GetVariable("OnDestination");
+        if (leftSmallHandBt.gameObject.activeSelf)
+            return (SharedBool)leftSmallHandBt.GetVariable("OnDestination");
+        return true;
     }
 }

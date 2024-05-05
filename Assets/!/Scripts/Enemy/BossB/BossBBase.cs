@@ -143,6 +143,7 @@ public class BossBBase : Enemy
                     foreach (var hand in leftHand)
                     {
                         hand.isBroken = true;
+                    
                     }
                 }
 
