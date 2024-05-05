@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Event;
 using _.Scripts.Interface;
 using _.Scripts.Player.Ability;
 using UnityEngine;
@@ -70,6 +71,8 @@ namespace _.Scripts.Enemy.BossA
 
         public void OnTakeDamage(int value)
         {
+            SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
+
             if (_currentHp.Value <= 0)
                 return;
             if (isShielded)

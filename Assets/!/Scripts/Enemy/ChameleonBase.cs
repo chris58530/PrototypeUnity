@@ -1,4 +1,5 @@
 using _.Scripts.Enemy;
+using _.Scripts.Event;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class ChameleonBase : Enemy, IDamageable
 
     public void OnTakeDamage(int value)
     {
+        SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
+
         onTakeDamagedEvent?.Invoke();
 AudioManager.Instance.PlaySFX("MobInjured");
         if (_currentHp.Value <= 0)

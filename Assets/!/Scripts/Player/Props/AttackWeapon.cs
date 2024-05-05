@@ -39,21 +39,16 @@ namespace @_.Scripts.Player.Props
             //Damage frist then use attackActions effect attack (ability)
             attackAction?.Invoke(other);
             
+                
+            Debug.Log("主角攻擊了" + other.name + " 造成了" + attackValue + "傷害");
             
-            
-            Debug.Log("攻擊了 : " + attackValue);
             PlayerActions.onHitEnemy?.Invoke();
-            SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
 
-            //dubug
-            TMP_Text t = GameObject.Find("AttackValueText").GetComponent<TMP_Text>();
-            t.text = (attackValue).ToString();
+           
             
             //手把震動
             SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 
-            // var closestPoint = other.bounds.ClosestPoint(transform.position);
-            // Instantiate(onHitEffect, closestPoint, Quaternion.identity);
         }
 
         public void AddLayerFromMask(bool isAdd, string layerName)

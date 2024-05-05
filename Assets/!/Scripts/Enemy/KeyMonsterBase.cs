@@ -1,5 +1,6 @@
 using System;
 using _.Scripts.Enemy;
+using _.Scripts.Event;
 using BehaviorDesigner.Runtime;
 using UniRx;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class KeyMonsterBase : Enemy, ITaskResult
 
     public void OnTakeDamage()
     {
+        SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
+
         bt.SendEvent("GetHurt");
     }
     public void OnGetAbiltyEvent()

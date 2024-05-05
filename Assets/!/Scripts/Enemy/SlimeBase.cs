@@ -1,5 +1,6 @@
 using System;
 using _.Scripts.Enemy;
+using _.Scripts.Event;
 using _.Scripts.Interface;
 using BehaviorDesigner.Runtime;
 using UniRx;
@@ -36,6 +37,7 @@ public class SlimeBase : Enemy, IDamageable, IShieldable
     public void OnTakeDamage(int value)
     {
         _animator.Play("Hurt");
+        SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
 
         Debug.Log("take damage");
         onTakeDamagedEvent?.Invoke();
