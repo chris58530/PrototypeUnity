@@ -1,4 +1,5 @@
 using System;
+using _.Scripts.Event;
 using _.Scripts.Interface;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,6 +21,7 @@ namespace @_.Scripts.Enemy.Hand
 
         public void OnTakeDamage(int value)
         {
+            SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
 
             if (hp <= 0) OnDied();
 
@@ -58,7 +60,8 @@ namespace @_.Scripts.Enemy.Hand
                 {
                     m.material = brokenMaterial1;
                 }
-            if(breakState == BreakState.Break2)
+
+            if (breakState == BreakState.Break2)
                 foreach (var m in renderers)
                 {
                     m.material = brokenMaterial2;

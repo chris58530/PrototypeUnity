@@ -80,12 +80,16 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void OnTakeDamage(int value)
     {
+        SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
+
         BossBBase.onBodyTakeDamage?.Invoke(value);
     }
 
     void IBreakable.OnTakeAttack()
     {
         Debug.Log(" IBreakable.OnTakeAttack()");
+        SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
+
         SystemActions.onCameraShake?.Invoke(); // 调用摄像机震动事件
 
         if (canBreak) BossBBase.onBodyBreakDamage?.Invoke(bodyType, this); // 调用Body被打断事件
