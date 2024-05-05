@@ -12,18 +12,17 @@ namespace @_.Scripts.Ability
         {
             //Hold this ability will do 
 
-            Debug.Log("Use Broke Wall Ability");
         }
 
         public override void StartAbility(AbilityWeapon weapon)
         {
-            GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(true,"Breakable");
+            GameObject.Find("PlayerAttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(true,"Breakable");
         }
 
         public override void QuitAbilityAlgorithm()
         {
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
-            GameObject.Find("AttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false,"Breakable");
+            GameObject.Find("PlayerAttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false,"Breakable");
 
 
         }

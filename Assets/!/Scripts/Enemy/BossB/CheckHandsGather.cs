@@ -10,8 +10,6 @@ public class CheckHandsGather : Conditional
     public override void OnStart()
     {
         _bossBController = UnityEngine.GameObject.Find("BossB_Base").GetComponent<BossBController>();
-        
-
     }
 
     public override TaskStatus OnUpdate()
