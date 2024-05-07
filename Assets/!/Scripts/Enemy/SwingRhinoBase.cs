@@ -18,7 +18,7 @@ namespace @_.Scripts.Enemy
 
         private void Update()
         {
-             Fall();
+            Fall();
         }
 
         private void Fall()
@@ -26,14 +26,20 @@ namespace @_.Scripts.Enemy
             _controller.Move(transform.up * (gravity * Time.deltaTime));
         }
 
+        public void RestRhinoTimeLine()
+        {
+            SwingTrigger.OnSwingTrigger?.Invoke();
+
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
+            if (other.gameObject.layer != LayerMask.NameToLayer("Ground") ||
+                other.gameObject.GetComponent<SwingRhinoBase>()) return;
             _controller.enabled = false;
             AbsortCollider.SetActive(true);
             bt.SendEvent("OnGround");
             enabled = false;
         }
-      
     }
 }

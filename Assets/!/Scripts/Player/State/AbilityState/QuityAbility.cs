@@ -35,7 +35,8 @@ namespace @_.Scripts.Player.State.AbilityState
         public override void OnEnter()
         {
             _timer = new Timer();
-            _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
+            _abilityWeapon.QuitInMouthObjectObject();
+
             AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
 
             // _animator.Play("Eat");
@@ -43,10 +44,14 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnLogic()
         {
+         
+
             if (_timer.Elapsed > 1.4f)
             {
+                _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
                 fsm.StateCanExit();
             }
+
             if (_input.Move)
                 _controller.Move(_input);
         }

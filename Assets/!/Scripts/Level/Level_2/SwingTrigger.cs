@@ -13,19 +13,28 @@ public class SwingTrigger : MonoBehaviour
     [SerializeField] private float resetTime;
     [SerializeField] private PlayableDirector down;
     [SerializeField] private PlayableDirector up;
+    
+    public static Action OnSwingTrigger;
+
+    private void OnEnable()
+    {
+        OnSwingTrigger += DownTimeline;
+    }
+
+    private void OnDisable()
+    {
+        OnSwingTrigger -= DownTimeline;
+
+    }
+
     public void DownTimeline()
     {
         down.Play();
+        Instantiate(swingRhino, rhinoSpawnPoint.position, rhinoSpawnPoint.rotation);
     }
     public void UpTimeline()
     {
         up.Play();
-        GetComponent<Collider>().enabled = false;
-        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(resetTime)).First().Subscribe(_ =>
-        {
-            GetComponent<Collider>().enabled = true;
-            DownTimeline();
-            Instantiate(swingRhino, rhinoSpawnPoint.position, rhinoSpawnPoint.rotation);
-        }).AddTo(this);
+ 
     }
 }

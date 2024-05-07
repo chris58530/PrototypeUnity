@@ -15,7 +15,7 @@ public class Key : MonoBehaviour, ITaskObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("KeyDoor"))
+        if (other.GetComponent<KeyDoor>())
         {
             Debug.Log("touch door");
             isDone = true;

@@ -5,6 +5,7 @@ using _.Scripts.Enemy;
 using _.Scripts.Event;
 using _.Scripts.Interface;
 using _.Scripts.Player.Ability;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using UniRx;
@@ -39,6 +40,7 @@ namespace @_.Scripts.Player.Props
         [SerializeField] private GameObject[] inMouthObjectObjectList;
 
         public IDisposable _abilityTimer;
+        public IDisposable _QuitInMouthObjectObjectTimer;
 
         public float currentAbilityTime;
 
@@ -75,16 +77,21 @@ namespace @_.Scripts.Player.Props
         public void ChangeAbility(AbilityType getAbility)
         {
             _abilityTimer?.Dispose();
-
+            _QuitInMouthObjectObjectTimer?.Dispose();
             //means stop showing value UI
             _abilityValueUI.DisplayTime(0, 0);
-            
 
 
             if (currentAbilityBase != null)
                 currentAbilityBase.QuitAbilityAlgorithm();
 
+
 //make current ability containers gameObject visible 
+
+            foreach (var abilityObject in inMouthObjectObjectList)
+            {
+                abilityObject.transform.DOScale(Vector3.one, 0);
+            }
 
             foreach (var abilityObject in inMouthObjectObjectList)
             {
@@ -142,6 +149,27 @@ namespace @_.Scripts.Player.Props
             ChangeAbility(AbilityType.None);
         }
 
+        public void QuitInMouthObjectObject()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(0.5f)).First()
+                .Subscribe(_ =>
+                {
+                    foreach (var abilityObject in inMouthObjectObjectList)
+                    {
+                        abilityObject.transform.DOScale(Vector3.one * 0.6f, 0.15f);
+                    }
+                }).AddTo(this);
+
+            _QuitInMouthObjectObjectTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.7f)).First()
+                .Subscribe(
+                    _ =>
+                    {
+                        foreach (var abilityObject in inMouthObjectObjectList)
+                        {
+                            abilityObject.gameObject.SetActive(false);
+                        }
+                    }).AddTo(this);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
