@@ -20,6 +20,10 @@ public class CuttleBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameObject.FindObjectOfType<CuttleEffectPanel>().OnCuttleBulletHiiPlayer();
+        }
         if ((mask & (1 << other.gameObject.layer)) == 0) return;
         Destroy(gameObject);
         Debug.Log("touch");
