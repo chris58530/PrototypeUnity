@@ -19,6 +19,7 @@ public class Crystal : MonoBehaviour
 
     public void OnDied()
     {
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
         BossABomb.bossABigBombEvent -= OnDied;
         AudioManager.Instance.PlaySFX("CrystalHit");
         modelObject.SetActive(false);
@@ -32,7 +33,6 @@ public class Crystal : MonoBehaviour
             ReLife();
             return;
         }
-
         Destroy(gameObject, Random.Range(0, 4));
     }
 

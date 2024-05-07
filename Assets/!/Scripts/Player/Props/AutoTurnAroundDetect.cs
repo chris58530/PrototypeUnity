@@ -12,15 +12,52 @@ public class AutoTurnAroundDetect : MonoBehaviour
 
     public static Action<GameObject> onRemoveDetectList;
 
+    private float _detecedDistance = 13f;
+
     private void OnEnable()
     {
         onRemoveDetectList += RemoveDetectList;
+        StartCoroutine(CheckDistanceCoroutine());
     }
 
     private void OnDisable()
     {
         onRemoveDetectList -= RemoveDetectList;
+        StopCoroutine(CheckDistanceCoroutine());
     }
+
+    private IEnumerator CheckDistanceCoroutine()
+    {
+        while (true)
+        {
+            for (int i = enemyList.Count - 1; i >= 0; i--)
+            {
+                float distance = Vector3.Distance(transform.position, enemyList[i].transform.position);
+
+                if (distance > _detecedDistance)
+                {
+                    enemyList.RemoveAt(i);
+
+                    Debug.Log(
+                        $"清除 enemyList 距離:" + distance);
+                }
+            }
+
+            for (int i = containers.Count - 1; i >= 0; i--)
+            {
+                float distance = Vector3.Distance(transform.position, containers[i].transform.position);
+                if (distance > _detecedDistance)
+                {
+                    containers.RemoveAt(i);
+                    Debug.Log(
+                        $"清除 containers 距離:" + distance);
+                }
+            }
+
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+        }
+    }
+
 
     void RemoveDetectList(GameObject obj)
     {
@@ -62,7 +99,7 @@ public class AutoTurnAroundDetect : MonoBehaviour
         }
 
         if (nearestEnemy == null) return playerTrans.position;
-        
+
         var enemyPosition = nearestEnemy.position;
         Vector3 dir = new Vector3(enemyPosition.x, playerTrans.position.y, enemyPosition.z);
         return dir;
@@ -71,7 +108,7 @@ public class AutoTurnAroundDetect : MonoBehaviour
     public Vector3 NearContainers(Transform playerTrans)
     {
         if (containers == null) return playerTrans.position;
-        
+
 
         Transform nearContainers = null;
         float shortestDistance = Mathf.Infinity;
@@ -87,7 +124,7 @@ public class AutoTurnAroundDetect : MonoBehaviour
         }
 
         if (nearContainers == null) return playerTrans.position;
-        
+
         var containersPosition = nearContainers.position;
         Vector3 dir = new Vector3(containersPosition.x, playerTrans.position.y, containersPosition.z);
         return dir;
@@ -115,14 +152,18 @@ public class AutoTurnAroundDetect : MonoBehaviour
     {
         if (other.TryGetComponent<Enemy>(out var enemy))
         {
-            if (!enemyList.Contains(enemy)) return;
-            enemyList.Remove(enemy);
+            if (enemyList.Contains(enemy))
+            {
+                enemyList.Remove(enemy);
+            }
         }
 
         if (other.TryGetComponent<AbilityContainer>(out var container))
         {
-            if (!containers.Contains(container)) return;
-            containers.Remove(container);
+            if (containers.Contains(container))
+            {
+                containers.Remove(container);
+            }
         }
     }
 }

@@ -150,7 +150,7 @@ namespace @_.Scripts.Player.Props
             {
                 ChangeAbility(getAbility.GetAbility());
                 GetComponent<Collider>().enabled = false;
-                AutoTurnAroundDetect.onRemoveDetectList?.Invoke(other.gameObject);
+                // AutoTurnAroundDetect.onRemoveDetectList?.Invoke(other.gameObject);
             }
         }
 
