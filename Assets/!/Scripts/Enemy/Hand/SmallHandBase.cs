@@ -9,8 +9,7 @@ namespace @_.Scripts.Enemy.Hand
 {
     public class SmallHandBase : Enemy, IDamageable, IBreakable
     {
-        [FormerlySerializedAs("handState")] [SerializeField]
-        private BreakState breakState;
+        [SerializeField] private BreakState breakState;
 
         [SerializeField] private Renderer[] renderers;
         [SerializeField] private Material brokenMaterial1;
@@ -18,6 +17,7 @@ namespace @_.Scripts.Enemy.Hand
         [SerializeField] private int hp;
         [SerializeField] private UnityEvent onTakeDamagedEvent;
         [SerializeField] private UnityEvent onDiedEvent;
+        private HandEffect _hadnEffect;
 
         public void OnTakeDamage(int value)
         {
@@ -38,8 +38,8 @@ namespace @_.Scripts.Enemy.Hand
 
         void Start()
         {
-            if (breakState == BreakState.Break1)
-                SwitchBreakMaterial();
+            _hadnEffect = GetComponent<HandEffect>();
+            SwitchBreakMaterial();
         }
 
 
@@ -56,20 +56,15 @@ namespace @_.Scripts.Enemy.Hand
         public void SwitchBreakMaterial()
         {
             if (breakState == BreakState.Break1)
-                foreach (var m in renderers)
-                {
-                    m.material = brokenMaterial1;
-                }
+                _hadnEffect.SwitchBreakMaterial(BreakState.Break1);
 
             if (breakState == BreakState.Break2)
-                foreach (var m in renderers)
-                {
-                    m.material = brokenMaterial2;
-                }
+                _hadnEffect.SwitchBreakMaterial(BreakState.Break2);
         }
 
         public void OnTakeAttack()
         {
+            breakState += 1;
             SwitchBreakMaterial();
         }
     }

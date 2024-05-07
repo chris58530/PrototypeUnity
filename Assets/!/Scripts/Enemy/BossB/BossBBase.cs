@@ -182,7 +182,7 @@ public class BossBBase : Enemy
 
     public void OnDied()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
         onDiedEvent?.Invoke();
     }
 

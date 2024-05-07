@@ -1,25 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HandEffect : MonoBehaviour
 {
-    [SerializeField] private Renderer[] renderers;
-    [SerializeField] private Material brokenMaterial1;
-    [SerializeField] private Material brokenMaterial2;
+    //模型總共有三個 依序開啟
+    [SerializeField] private GameObject[] originObjects;
+    [SerializeField] private GameObject[] break1Objects;
+    [SerializeField] private GameObject[] break2Objects;
+
 
     public void SwitchBreakMaterial(BreakState breakState)
     {
         if (breakState == BreakState.Break1)
-            foreach (var m in renderers)
+        {
+            //除了break1Objects都關掉 break1Objects打開
+            for (int i = 0; i < originObjects.Length; i++)
             {
-                m.material = brokenMaterial1;
+                originObjects[i].SetActive(false);
             }
 
-        if (breakState == BreakState.Break2)
-            foreach (var m in renderers)
+            for (int i = 0; i < break1Objects.Length; i++)
             {
-                m.material = brokenMaterial2;
+                break1Objects[i].SetActive(true);
             }
+
+            for (int i = 0; i < break2Objects.Length; i++)
+            {
+                break2Objects[i].SetActive(false);
+            }
+        }
+
+        if (breakState == BreakState.Break2)
+        {
+            for (int i = 0; i < originObjects.Length; i++)
+            {
+                originObjects[i].SetActive(false);
+            }
+
+            for (int i = 0; i < break1Objects.Length; i++)
+            {
+                break1Objects[i].SetActive(false);
+            }
+
+            for (int i = 0; i < break2Objects.Length; i++)
+            {
+                break2Objects[i].SetActive(true);
+            }
+        }
     }
 }
