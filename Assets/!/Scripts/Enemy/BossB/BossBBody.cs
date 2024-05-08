@@ -5,6 +5,7 @@ using _.Scripts.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using _.Scripts.Player;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum BreakState
@@ -27,13 +28,10 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     [SerializeField] private BreakState breakState;
 
 
-
     [SerializeField] private GameObject shakeModel; //被打到震動的模型
 
     private readonly float _shakeDuration = 0.2f;
 
-    // [SerializeField] private float breakValue; //護頓值
-    [SerializeField] private Image breaktHpImage; //護頓血條
 
     public bool canBreak;
     public bool isBroken;
@@ -44,13 +42,14 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     private readonly float _normalAttackMoveDistance = 0.1f; //移動距離
     private readonly float _rhinoMoveDistance = 10; //移動距離
     private readonly float _moveDuration = 0.15f; //移動時間
-    private HandEffect _handEffect;
+    [SerializeField] private HandEffect handEffect;
+    private BossBCanvas _bossBCanvas;
 
     private void Start()
     {
+        _bossBCanvas = FindObjectOfType<BossBCanvas>();
         // breaktHpImage.gameObject.SetActive(false);
-        _handEffect = GetComponent<HandEffect>();
-        _handEffect.SwitchBreakMaterial(breakState);
+        handEffect.SwitchBreakMaterial(breakState);
     }
 
     public void ShakeBody()
@@ -80,7 +79,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void OnTakeDamage(int value)
     {
-        SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
+        SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
 
         BossBBase.onBodyTakeDamage?.Invoke(value);
     }
@@ -88,7 +87,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     void IBreakable.OnTakeAttack()
     {
         Debug.Log(" IBreakable.OnTakeAttack()");
-        SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
+        SystemActions.onFrameSlow?.Invoke(0.05f); // 调用帧率减慢事件
 
         SystemActions.onCameraShake?.Invoke(); // 调用摄像机震动事件
 
@@ -126,9 +125,8 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     {
         if (value <= 0)
         {
-            breaktHpImage.gameObject.SetActive(false);
             breakState = BreakState.Break1;
-            _handEffect.SwitchBreakMaterial(breakState);
+            handEffect.SwitchBreakMaterial(breakState);
             Debug.Log($" {this.name} 已經被打爆了 ");
 
             return;
@@ -136,15 +134,14 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
         //當 isBroken = false 被玩家攻擊中
         Debug.Log($" {this.name}HitBreak {value}");
-        breaktHpImage.gameObject.GetComponent<Animator>().Play("HitBreak");
-        breaktHpImage.fillAmount = (float)value / 3;
-   
+        // breaktHpImage.gameObject.GetComponent<Animator>().Play("HitBreak");
+
+        _bossBCanvas.SetBreakImage(bodyType, value);
     }
 
     public void OpenBreak() //護頓首次登場
     {
-        breaktHpImage.color = Color.red;
-        breaktHpImage.gameObject.GetComponent<Animator>().Play("OpenBreak");
+        // breaktHpImage.gameObject.GetComponent<Animator>().Play("OpenBreak");
     }
 
 
