@@ -123,6 +123,8 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void HitBreak(int value)
     {
+        _bossBCanvas.SetBreakImage(bodyType, value);
+
         if (value <= 0)
         {
             breakState = BreakState.Break1;
@@ -133,10 +135,8 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
         }
 
         //當 isBroken = false 被玩家攻擊中
-        Debug.Log($" {this.name}HitBreak {value}");
+        Debug.Log($" ---{this.name}   HitBreak  {value} ---");
         // breaktHpImage.gameObject.GetComponent<Animator>().Play("HitBreak");
-
-        _bossBCanvas.SetBreakImage(bodyType, value);
     }
 
     public void OpenBreak() //護頓首次登場

@@ -22,6 +22,7 @@ public class HandEffect : MonoBehaviour
     [SerializeField] private ParticleSystem breakEffect; //護頓特效
     bool isBreak1; //是否正在護頓中
     bool isBreak2; //是否正在護頓中
+    
 
     public void SwitchBreakMaterial(BreakState breakState)
     {
