@@ -933,8 +933,8 @@ MonoBehaviour:
   gemMaterials:
   - {fileID: 2100000, guid: a967b42ca0d493443b15683236bd9efc, type: 2}
   - {fileID: 2100000, guid: edca2c6618816384aad9bbe74aa981a7, type: 2}
-  duration: 1
-  intensity: 10
+  duration: 4
+  intensity: 30
   originObjects:
   - {fileID: 4472955735724336110}
   - {fileID: 552294749421593442}
@@ -1934,7 +1934,6 @@ MonoBehaviour:
   bodyType: 1
   breakState: 0
   shakeModel: {fileID: 7571541531423069083}
-  breaktHpImage: {fileID: 0}
   canBreak: 0
   isBroken: 0
   moveTarget: {fileID: 7337187574349489501}
@@ -3025,7 +3024,6 @@ MonoBehaviour:
   bodyType: 1
   breakState: 0
   shakeModel: {fileID: 7571541531423069083}
-  breaktHpImage: {fileID: 0}
   canBreak: 0
   isBroken: 0
   moveTarget: {fileID: 7337187574349489501}
@@ -3757,6 +3755,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3153547418929264599}
+  - {fileID: 8757972607188744727}
   m_Father: {fileID: 7337187576265668425}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3772,9 +3771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14e0d2624ad2ca488feb4094def9d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemMaterials: []
-  duration: 0
-  intensity: 0
+  gemMaterials:
+  - {fileID: 2100000, guid: 20f7ee0a3cd7eb5499b36cf75cae9dc9, type: 2}
+  - {fileID: 2100000, guid: 19d9c8106bf344e4e953a54de6201833, type: 2}
+  duration: 4
+  intensity: 30
   originObjects:
   - {fileID: 6846237146863332263}
   break1Objects:
@@ -4422,7 +4423,6 @@ MonoBehaviour:
   bodyType: -1
   breakState: 0
   shakeModel: {fileID: 7571541531033278287}
-  breaktHpImage: {fileID: 0}
   canBreak: 0
   isBroken: 0
   moveTarget: {fileID: 7337187576265668424}
@@ -4671,6 +4671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3153547418513149463}
+  - {fileID: 4055190807465357545}
   m_Father: {fileID: 7337187574349489498}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4686,9 +4687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14e0d2624ad2ca488feb4094def9d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemMaterials: []
-  duration: 0
-  intensity: 0
+  gemMaterials:
+  - {fileID: 2100000, guid: 2e9d44443e3d9194d8dea348f30cdba3, type: 2}
+  - {fileID: 2100000, guid: fb4ba22fb52dc124b8b83ad473bfa07d, type: 2}
+  duration: 4
+  intensity: 30
   originObjects:
   - {fileID: 5912536007737697352}
   break1Objects:
@@ -4936,7 +4939,6 @@ MonoBehaviour:
   bodyType: -1
   breakState: 0
   shakeModel: {fileID: 7571541531033278287}
-  breaktHpImage: {fileID: 0}
   canBreak: 0
   isBroken: 0
   moveTarget: {fileID: 7337187576265668424}
@@ -5959,7 +5961,6 @@ MonoBehaviour:
   bodyType: 0
   breakState: 0
   shakeModel: {fileID: 7571541532125921425}
-  breaktHpImage: {fileID: 0}
   canBreak: 0
   isBroken: 0
   moveTarget: {fileID: 7337187574264071244}
@@ -6061,7 +6062,7 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Body_Animator","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_Animator","IsShared":true,"GameObjectmValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_Animator","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_Object","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LefttHand_Object","IsShared":true,"GameObjectmValue":5},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_PunchPreparePos","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_PunchPreparePos","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_Punch_DetectCollider","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_Punch_DetectCollider","IsShared":true,"GameObjectmValue":9},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_OriginalPos
         ","IsShared":true,"GameObjectmValue":10},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_OriginalPos
-        ","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam_Pre","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":15},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_PunchCollider","IsShared":true,"GameObjectmValue":16},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_PunchCollider","IsShared":true,"GameObjectmValue":17},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightSmallHand_GameObject","IsShared":true,"GameObjectmValue":18},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftSmallHand_GameObject","IsShared":true,"GameObjectmValue":19},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":20},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":21},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":22},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"RightWeaponList","IsShared":true,"List`1mValue":[23,24]},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"LefttWeaponList","IsShared":true,"List`1mValue":[25,26]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_Pos","IsShared":true,"GameObjectmValue":27},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Head_Object","IsShared":true,"GameObjectmValue":28},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"GroundSpike_Hitting_Effect","IsShared":true,"GameObjectmValue":29}]}'
+        ","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam_Pre","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"HyperBeam","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_HyperBeamCollider","IsShared":true,"GameObjectmValue":15},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightHand_PunchCollider","IsShared":true,"GameObjectmValue":16},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftHand_PunchCollider","IsShared":true,"GameObjectmValue":17},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RightSmallHand_GameObject","IsShared":true,"GameObjectmValue":18},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LeftSmallHand_GameObject","IsShared":true,"GameObjectmValue":19},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":20},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":21},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_GroundSpike_Timeline","IsShared":true,"GameObjectmValue":22},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"RightWeaponList","IsShared":true,"List`1mValue":[23,24]},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"LefttWeaponList","IsShared":true,"List`1mValue":[25,26]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Middle_Pos","IsShared":true,"GameObjectmValue":27},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Head_Object","IsShared":true,"GameObjectmValue":28},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"GroundSpike_Hitting_Effect","IsShared":true,"GameObjectmValue":29},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Head_HandEffect","IsShared":true,"GameObjectmValue":30},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Right_HandEffect","IsShared":true,"GameObjectmValue":31},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Left_HandEffect","IsShared":true,"GameObjectmValue":32}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -6098,6 +6099,9 @@ MonoBehaviour:
         - {fileID: 2128923192}
         - {fileID: 7337187574191970816}
         - {fileID: 0}
+        - {fileID: 547759667}
+        - {fileID: 1578717142}
+        - {fileID: 1897284301}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -6284,6 +6288,81 @@ Transform:
   m_Father: {fileID: 7337187575524465603}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4319578188150348537
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1578717143}
+    m_Modifications:
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317659302384546620, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_Name
+      value: Punch_Ground_Effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93b8f2d393847824e8a766289b913b94, type: 3}
+--- !u!4 &8757972607188744727 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+    type: 3}
+  m_PrefabInstance: {fileID: 4319578188150348537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7337187574178375671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8032,4 +8111,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1392231477583332511, guid: 99f17da456a7b7247babcf1459d45dd9,
     type: 3}
   m_PrefabInstance: {fileID: 7337187576225606174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8808555278766886919
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1897284302}
+    m_Modifications:
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.0999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317659302384546620, guid: 93b8f2d393847824e8a766289b913b94,
+        type: 3}
+      propertyPath: m_Name
+      value: Punch_Ground_Effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93b8f2d393847824e8a766289b913b94, type: 3}
+--- !u!4 &4055190807465357545 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4789763844545978606, guid: 93b8f2d393847824e8a766289b913b94,
+    type: 3}
+  m_PrefabInstance: {fileID: 8808555278766886919}
   m_PrefabAsset: {fileID: 0}
