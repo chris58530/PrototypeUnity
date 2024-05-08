@@ -32,12 +32,17 @@ public class BossBCanvas : MonoBehaviour
                     leftHand.gameObject.SetActive(false);
                 }
 
-                for (int i = 0; i <= headImages.Length; i++)
+                for (int i = 0; i < headImages.Length; i++)
                 {
                     if (i == damageCount)
                     {
                         headImages[i].gameObject.SetActive(true);
                     }
+                }
+                if (damageCount < 0)
+                {
+                    headImages[0].gameObject.SetActive(true);
+                
                 }
 
                 break;
@@ -56,12 +61,7 @@ public class BossBCanvas : MonoBehaviour
                     }
                 }
 
-                if (damageCount < 0)
-                {
-                    leftHandImages[leftHandImages.Length].gameObject.SetActive(true);
-                
-                }
-
+              
                 break;
             case BodyType.RightHand:
 
@@ -77,11 +77,7 @@ public class BossBCanvas : MonoBehaviour
                         rightHandImages[i].gameObject.SetActive(true);
                     }
                 }
-                if (damageCount < 0)
-                {
-                    rightHandImages[leftHandImages.Length].gameObject.SetActive(true);
-                  
-                }
+              
 
 
                 break;
