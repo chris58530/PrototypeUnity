@@ -14,7 +14,7 @@ namespace _.Scripts
         private PlayerBase _playerBase;
 
 
-        [SerializeField] private float slowSpeed;
+        [SerializeField] private float slowSpeed =0.04f;
 
 
         protected override void Awake()

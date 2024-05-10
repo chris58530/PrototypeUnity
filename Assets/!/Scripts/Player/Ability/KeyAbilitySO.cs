@@ -18,7 +18,8 @@ namespace @_.Scripts.Ability
         }
 
         public override void StartAbility(AbilityWeapon weapon)
-        {
+        {            AbilityWeapon.onPlayerGetAbility?.Invoke();
+
             _abilityWeapon = weapon;
         }
 

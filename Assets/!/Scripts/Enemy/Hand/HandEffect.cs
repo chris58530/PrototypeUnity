@@ -20,17 +20,17 @@ public class HandEffect : MonoBehaviour
     [SerializeField] private GameObject[] break1Objects;
     [SerializeField] private GameObject[] break2Objects;
     [SerializeField] private ParticleSystem breakEffect; //護頓特效
-    bool isBreak1; //是否正在護頓中
-    bool isBreak2; //是否正在護頓中
+    bool _isBreak1; //是否正在護頓中
+    bool _isBreak2; //是否正在護頓中
     
 
     public void SwitchBreakMaterial(BreakState breakState)
     {
         if (breakState == BreakState.Break1)
         {
-            if (!isBreak1)
+            if (!_isBreak1)
             {
-                isBreak1 = true;
+                _isBreak1 = true;
                 breakEffect.Play();
             }
 
@@ -53,9 +53,9 @@ public class HandEffect : MonoBehaviour
 
         if (breakState == BreakState.Break2)
         {
-            if (!isBreak2)
+            if (!_isBreak2)
             {
-                isBreak2 = true;
+                _isBreak2 = true;
                 breakEffect.Play();
             }
 
