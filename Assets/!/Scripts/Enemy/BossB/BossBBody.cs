@@ -5,6 +5,7 @@ using _.Scripts.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using _.Scripts.Player;
+using UniRx;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -35,6 +36,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public bool canBreak;
     public bool isBroken;
+    public bool canDamage;
 
     [SerializeField] private GameObject moveTarget; //要位移的物件
 
@@ -77,24 +79,31 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
         yield return null;
     }
 
+    IDisposable _damageDisposable;
+
     public void OnTakeDamage(int value)
     {
-        SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
-
+        if (!canDamage) return;
+        canDamage = false;
+        _damageDisposable?.Dispose();
+        _damageDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.7f)).First().Subscribe(_ =>
+        {
+            canDamage = true;
+        }).AddTo(this);
+        
+        SystemActions.onFrameSlow?.Invoke(0.06f);
         BossBBase.onBodyTakeDamage?.Invoke(value);
     }
 
-    void IBreakable.OnTakeAttack()
+    public void OnTakeAttack()
     {
         Debug.Log(" IBreakable.OnTakeAttack()");
         SystemActions.onFrameSlow?.Invoke(0.05f); // 调用帧率减慢事件
 
         SystemActions.onCameraShake?.Invoke(); // 调用摄像机震动事件
+        SystemActions.onFrameSlow?.Invoke(0.2f); // 调用帧率减慢事件 這個會導致MoveCoroutine()無法正常運行
 
         if (canBreak) BossBBase.onBodyBreakDamage?.Invoke(bodyType, this); // 调用Body被打断事件
-
-
-        // SystemActions.onFrameSlow?.Invoke(0.2f);  // 调用帧率减慢事件 這個會導致MoveCoroutine()無法正常運行
     }
 
     public void OnPush()

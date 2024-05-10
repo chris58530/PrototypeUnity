@@ -44,8 +44,8 @@ namespace @_.Scripts.Player.Props
             
             PlayerActions.onHitEnemy?.Invoke();
 
-           
-            
+           //計算接觸點 觸發特效
+           var collisionPoint = other.ClosestPoint(transform.position);
             //手把震動
             SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 

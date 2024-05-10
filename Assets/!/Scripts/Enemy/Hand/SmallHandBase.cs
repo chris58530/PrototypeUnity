@@ -11,9 +11,7 @@ namespace @_.Scripts.Enemy.Hand
     {
         [SerializeField] private BreakState breakState;
 
-        [SerializeField] private Renderer[] renderers;
-        [SerializeField] private Material brokenMaterial1;
-        [SerializeField] private Material brokenMaterial2;
+      
         [SerializeField] private int hp;
         [SerializeField] private UnityEvent onTakeDamagedEvent;
         [SerializeField] private UnityEvent onDiedEvent;
@@ -21,7 +19,7 @@ namespace @_.Scripts.Enemy.Hand
 
         public void OnTakeDamage(int value)
         {
-            SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
+            // SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
 
             if (hp <= 0) OnDied();
 

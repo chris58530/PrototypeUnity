@@ -38,6 +38,7 @@ namespace @_.Scripts.Player.State.AbilityState
             _abilityWeapon.QuitInMouthObjectObject();
 
             AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
             // _animator.Play("Eat");
         }

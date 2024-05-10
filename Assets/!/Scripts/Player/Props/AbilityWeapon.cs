@@ -45,6 +45,10 @@ namespace @_.Scripts.Player.Props
         public float currentAbilityTime;
 
         [SerializeField] private AbilityValueUI _abilityValueUI;
+        
+        public static Action onPlayerGetAbility;
+        public static Action onPlayerQuitAbility;
+
 
         private void Start()
         {
