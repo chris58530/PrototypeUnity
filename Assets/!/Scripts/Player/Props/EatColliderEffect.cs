@@ -13,12 +13,15 @@ public class EatColliderEffect : MonoBehaviour
 
     private void OnEnable()
     {
+        QuitAbility();
         AbilityWeapon.onPlayerGetAbility += GetAbility;
         AbilityWeapon.onPlayerQuitAbility += QuitAbility;
     }
 
     private void OnDisable()
     {
+        QuitAbility();
+
         AbilityWeapon.onPlayerGetAbility -= GetAbility;
         AbilityWeapon.onPlayerQuitAbility -= QuitAbility;
     }

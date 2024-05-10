@@ -22,8 +22,5 @@ namespace _.Scripts.Event
         //state machine insert state call
         
         public static Action onHitEnemy;
-        
-        public static Action<int> onUseAbility; 
-        public static Action<float> onStartAbility; 
     }
 }
