@@ -29,6 +29,8 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
+            EnemyActions.setCanDamagedEnemy?.Invoke(true);
+
             DebugTools.StateText("AttackFirst");
             _timer = new Timer();
             // _animator.CrossFade(Animator.StringToHash("Q1"), 0.1f);

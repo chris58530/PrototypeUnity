@@ -36,7 +36,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public bool canBreak;
     public bool isBroken;
-    public bool canDamage;
+    private static bool _canDamage = true;
 
     [SerializeField] private GameObject moveTarget; //要位移的物件
 
@@ -54,6 +54,24 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
         handEffect.SwitchBreakMaterial(breakState);
     }
 
+    private void OnEnable()
+    {
+        EnemyActions.setCanDamagedEnemy += SetCanDamged;
+    }
+
+    private void OnDisable()
+    {
+        EnemyActions.setCanDamagedEnemy -= SetCanDamged;
+
+    }
+
+    void SetCanDamged(bool canDamage)
+    {
+        if(canDamage)
+            _canDamage = true;
+        else
+            _canDamage = false;;
+    }
     public void ShakeBody()
     {
         StartCoroutine(ShakeCoroutine());
@@ -83,16 +101,15 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void OnTakeDamage(int value)
     {
-        if (!canDamage) return;
-        canDamage = false;
-        _damageDisposable?.Dispose();
-        _damageDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.7f)).First().Subscribe(_ =>
+        if (!_canDamage)
         {
-            canDamage = true;
-        }).AddTo(this);
-        
-        SystemActions.onFrameSlow?.Invoke(0.06f);
+            Debug.Log("cant take damage");
+            return;
+        }
+        SystemActions.onFrameSlow?.Invoke(0.1f);
         BossBBase.onBodyTakeDamage?.Invoke(value);
+        SetCanDamged(false);
+
     }
 
     public void OnTakeAttack()

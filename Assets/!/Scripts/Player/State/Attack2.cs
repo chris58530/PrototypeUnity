@@ -28,6 +28,9 @@ namespace _.Scripts.Player.State
 
         public override void OnEnter()
         {
+            EnemyActions.setCanDamagedEnemy?.Invoke(true);
+
+
             DebugTools.StateText("AttackSecond");
 
             _timer = new Timer();

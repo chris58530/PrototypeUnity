@@ -433,16 +433,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429672024359545924}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.81, y: 0.37, z: -0.19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.000000007450578, y: -0.0000001178159, z: -0.09060727, w: 0.99588674}
+  m_LocalPosition: {x: -0.23, y: -0.1, z: -0}
+  m_LocalScale: {x: 0.77903, y: 0.77903, z: 0.77903}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3302281328290166171}
   - {fileID: 4281922188850615589}
   m_Father: {fileID: 766103544}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.397}
 --- !u!95 &5132151064187265856
 Animator:
   serializedVersion: 5
@@ -1456,8 +1456,9 @@ GameObject:
   - component: {fileID: 2277629992872512833}
   - component: {fileID: 7795234186049212961}
   - component: {fileID: 1925464678}
+  - component: {fileID: 1338094328}
   m_Layer: 6
-  m_Name: EatCollider
+  m_Name: PlayerEatCollider
   m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1588,6 +1589,20 @@ MonoBehaviour:
   - {fileID: 1030761778}
   currentAbilityTime: 0
   _abilityValueUI: {fileID: 6654021214854090447}
+--- !u!114 &1338094328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931403840824622115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0f874dd20bdff439813503796f1462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shinymat: {fileID: 2100000, guid: 076db2d69c41d6744acb9ed90ea8a6ea, type: 2}
+  intensity: 10
 --- !u!1 &2029443772365429856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4119,7 +4134,7 @@ GameObject:
   - component: {fileID: 8234654434539089681}
   - component: {fileID: 4736464107615345549}
   m_Layer: 0
-  m_Name: 'Q3_AttackCollider '
+  m_Name: 'PlayerQ3_AttackCollider '
   m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13378,17 +13393,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 85ea5fba4b5ea414082d0360950c2a4f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ea5fba4b5ea414082d0360950c2a4f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ea5fba4b5ea414082d0360950c2a4f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ea5fba4b5ea414082d0360950c2a4f,
         type: 3}
