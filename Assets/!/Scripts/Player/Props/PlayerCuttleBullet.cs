@@ -13,6 +13,6 @@ public class PlayerCuttleBullet : MonoBehaviour
             target.OnTakeShield(1);
 
         if (!other.TryGetComponent<IDamageable>(out var obj)) return;
-        obj.OnTakeDamage(1000);
+        obj.OnTakeDamage(1000,Vector3.zero,Quaternion.identity);
     }
 }

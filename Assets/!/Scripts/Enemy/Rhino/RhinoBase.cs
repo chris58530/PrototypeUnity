@@ -41,7 +41,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         _currentHp.Value = maxHp;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         Debug.Log("rhino take damage");
         bt.SendEvent("OnTakeDamage");

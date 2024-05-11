@@ -34,7 +34,7 @@ public class SlimeBase : Enemy, IDamageable, IShieldable
         _shieldUI.ResetShield();
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         _animator.Play("Hurt");
         SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件

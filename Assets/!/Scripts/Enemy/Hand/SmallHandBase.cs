@@ -17,7 +17,7 @@ namespace @_.Scripts.Enemy.Hand
         [SerializeField] private UnityEvent onDiedEvent;
         private HandEffect _hadnEffect;
 
-        public void OnTakeDamage(int value)
+        public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
         {
             // SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
 

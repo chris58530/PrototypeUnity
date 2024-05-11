@@ -99,7 +99,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     IDisposable _damageDisposable;
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         if (!_canDamage)
         {

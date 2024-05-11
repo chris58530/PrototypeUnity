@@ -32,7 +32,7 @@ public class GoblinBase : Enemy, IDamageable, IDashable
         canDash = true;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         if (canDash)
         {

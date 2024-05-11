@@ -25,7 +25,7 @@ public class TaskCrystal : MonoBehaviour,ITaskObject, IDamageable
         _currentHp = maxHp;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         Debug.Log($"{this.name + " " + "on take damage"}");
         if (_currentHp > 1)

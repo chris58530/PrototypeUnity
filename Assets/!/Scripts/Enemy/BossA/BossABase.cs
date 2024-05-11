@@ -69,7 +69,7 @@ namespace _.Scripts.Enemy.BossA
         }
 
 
-        public void OnTakeDamage(int value)
+        public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
         {
             SystemActions.onFrameSlow?.Invoke(0.05f);  // 调用帧率减慢事件
 

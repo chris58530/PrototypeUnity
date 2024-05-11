@@ -22,7 +22,7 @@ public class BossATower : MonoBehaviour, IDamageable
         GetComponent<Collider>().enabled = false;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         hp -= value;
         SetEmission();

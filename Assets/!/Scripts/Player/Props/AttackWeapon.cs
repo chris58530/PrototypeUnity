@@ -1,6 +1,8 @@
 using _.Scripts.Event;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace @_.Scripts.Player.Props
 {
@@ -35,7 +37,10 @@ namespace @_.Scripts.Player.Props
 
             
             //Damage frist then use attackActions effect attack
-            damageObj.OnTakeDamage(attackValue);
+            var collisionPoint = other.ClosestPoint(transform.position);
+            Vector3 dir = other.transform.position - transform.position;
+                    
+            damageObj.OnTakeDamage(attackValue,collisionPoint,quaternion.identity);
             //Damage frist then use attackActions effect attack (ability)
             attackAction?.Invoke(other);
             
@@ -45,7 +50,6 @@ namespace @_.Scripts.Player.Props
             PlayerActions.onHitEnemy?.Invoke();
 
            //計算接觸點 觸發特效
-           var collisionPoint = other.ClosestPoint(transform.position);
             //手把震動
             SystemActions.onGamePadVibrate?.Invoke(low, high, time);
 

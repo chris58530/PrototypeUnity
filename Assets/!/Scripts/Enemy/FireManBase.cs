@@ -25,7 +25,7 @@ public class FireManBase : Enemy, IDamageable
         _currentHp.Value = maxHp;
     }
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         onTakeDamagedEvent?.Invoke();
 

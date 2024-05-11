@@ -22,7 +22,7 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (!other.TryGetComponent<IDamageable>(out var obj)) return;
 
-        obj.OnTakeDamage(attackValue);
+        obj.OnTakeDamage(attackValue,Vector3.zero,Quaternion.identity);
 
         Debug.Log($"{other.name} get {attackValue} damage");
     }

@@ -10,7 +10,7 @@ public class DamageableObject : MonoBehaviour, IDamageable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onDiedEvent;
 
-    public void OnTakeDamage(int value)
+    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         onTakeDamagedEvent?.Invoke();
         hp -= 1;

@@ -163,7 +163,7 @@ namespace @_.Scripts.Enemy.BossA
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             if (other.gameObject.layer != 6) return;
 
-            damageObj.OnTakeDamage(10);
+            damageObj.OnTakeDamage(10,Vector3.zero,quaternion.identity);
 
             Debug.Log($"{other.name} get {10} damage");
         }
