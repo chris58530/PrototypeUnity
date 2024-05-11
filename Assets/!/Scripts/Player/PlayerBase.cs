@@ -60,7 +60,7 @@ namespace _.Scripts.Player
         }
 
 
-        public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
+        public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation1)
         {
             if (!canHurt) return;
 

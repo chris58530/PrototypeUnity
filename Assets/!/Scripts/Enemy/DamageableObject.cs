@@ -13,6 +13,8 @@ public class DamageableObject : MonoBehaviour, IDamageable
     public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         onTakeDamagedEvent?.Invoke();
+        SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
+
         hp -= 1;
         if (hp <= 0) OnDied();
     }

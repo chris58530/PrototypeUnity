@@ -1,3 +1,4 @@
+using _.Scripts.Event;
 using _.Scripts.Player.Props;
 using _.Scripts.Tools;
 using UnityEngine;
@@ -14,9 +15,10 @@ namespace @_.Scripts.Player.State.AbilityState
         private PlayerBase _playerBase;
         private float _insertTime;
         private AbilitySystem _abilitySystem;
+
         public BreakWallAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
-            ,AbilitySystem abilitySystem,PlayerBase playerBase,
+            , AbilitySystem abilitySystem, PlayerBase playerBase,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -29,21 +31,21 @@ namespace @_.Scripts.Player.State.AbilityState
             _playerBase = playerBase;
         }
 
-       
+
         public override void OnEnter()
         {
             //debug
             DebugTools.StateText("BreakWallAbility");
-            
-            
-            _animator.Play("UseAbility");
-            
+            EnemyActions.setCanDamagedEnemy?.Invoke(true);
+            EnemyActions.setCanBreakBossB?.Invoke(true);
 
-            _insertTime = 0;            
+            _animator.Play("UseAbility");
+
+
+            _insertTime = 0;
 
             _attackSystem.UseAbilityAttack(AbilityWeapon.AbilityType.BreakWall);
             _attackSystem.AutoDetect();
-
         }
 
         public override void OnLogic()
@@ -53,14 +55,13 @@ namespace @_.Scripts.Player.State.AbilityState
             {
                 fsm.StateCanExit();
             }
-       
+
             _controller.Fall();
         }
 
         public override void OnExit()
         {
             _attackSystem.CancelAttack();
-
         }
     }
 }

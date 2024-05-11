@@ -38,6 +38,7 @@ public class SlimeBase : Enemy, IDamageable, IShieldable
     {
         _animator.Play("Hurt");
         SystemActions.onFrameSlow?.Invoke(0.03f);  // 调用帧率减慢事件
+        SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
 
         Debug.Log("take damage");
         onTakeDamagedEvent?.Invoke();

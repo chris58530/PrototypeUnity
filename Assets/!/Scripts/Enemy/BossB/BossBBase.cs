@@ -16,7 +16,7 @@ public class BossBBase : Enemy
     private int currentHp;
 
     //左手
-    private readonly int _breakLeftHandHp = 75;
+    private readonly int _breakLeftHandHp = 85;
     [SerializeField] private BossBBody[] leftHand;
     private int _currentleftHandBreakHp = 3;
 
@@ -39,10 +39,13 @@ public class BossBBase : Enemy
     public static Action<int> onBodyTakeDamage;
     public static Action<BodyType, BossBBody> onBodyBreakDamage;
     public static Action onBodyDied;
+    private BossBCanvas _bossBCanvas;
 
     private void Start()
     {
         //初始化血量
+        _bossBCanvas = FindObjectOfType<BossBCanvas>();
+
         currentHp = hpMax;
         UpdateHpValue(0);
     }
@@ -59,65 +62,68 @@ public class BossBBase : Enemy
     {
         onTakeDamagedEvent?.Invoke();
 
-        foreach (var hand in leftHand)
+        foreach (var leftBody in leftHand)
         {
-            if (hand.canBreak && !hand.isBroken)
+            if (leftBody.thisBreakTurn && !leftBody.isBroken)
             {
                 Debug.Log("砍在護頓上 目標為 :  leftHand");
-                if (hand.gameObject.activeSelf)
-                    hand.HitBreak(_currentleftHandBreakHp); //維持原來的護頓值
+                _bossBCanvas.ShakingImage(BodyType.LeftHand);
+                if (leftBody.gameObject.activeSelf)
+                    leftBody.HitBreak(_currentleftHandBreakHp);
                 return;
             }
         }
 
-        foreach (var hand in rightHand)
+        foreach (var rightBody in rightHand)
         {
-            if (hand.canBreak && !hand.isBroken)
+            if (rightBody.thisBreakTurn && !rightBody.isBroken)
             {
                 Debug.Log("砍在護頓上  目標為 : rightHand");
-                if (hand.gameObject.activeSelf)
-                    hand.HitBreak(_currentRightHandBreakHp); //維持原來的護頓值
+                _bossBCanvas.ShakingImage(BodyType.RightHand);
+                if (rightBody.gameObject.activeSelf)
+                    rightBody.HitBreak(_currentRightHandBreakHp); //維持原來的護頓值
                 return;
             }
         }
 
-        foreach (var hand in head)
+        foreach (var headBody in head)
         {
-            if (hand.canBreak && !hand.isBroken)
+            if (headBody.thisBreakTurn && !headBody.isBroken)
             {
                 Debug.Log("砍在護頓上 目標為 : head");
-                if (hand.gameObject.activeSelf)
-                    hand.HitBreak(_currentHeadHandBreakHp); //維持原來的護頓值
+                _bossBCanvas.ShakingImage(BodyType.Head);
+                if (headBody.gameObject.activeSelf)
+                    headBody.HitBreak(_currentHeadHandBreakHp); //維持原來的護頓值
                 return;
             }
         }
 
         UpdateHpValue(value);
 
-        foreach (var hand in leftHand)
+        foreach (var leftBody in leftHand)
         {
-            if (currentHp <= _breakLeftHandHp && !hand.isBroken && !hand.canBreak)
+            if (currentHp <= _breakLeftHandHp && !leftBody.isBroken && !leftBody.thisBreakTurn)
             {
-                hand.canBreak = true;
-                hand.OpenBreak(); //護頓首次登場
+                leftBody.thisBreakTurn = true;
+                // hand.OpenBreak(); //護頓首次登場
             }
         }
 
-        foreach (var hand in rightHand)
+        foreach (var rightBody in rightHand)
         {
-            if (currentHp <= _breakRightHandHp && !hand.isBroken && !hand.canBreak)
+            if (currentHp <= _breakRightHandHp && !rightBody.isBroken && !rightBody.thisBreakTurn)
             {
-                hand.canBreak = true;
-                hand.OpenBreak(); //護頓首次登場
+                rightBody.thisBreakTurn = true;
+                // hand.OpenBreak(); //護頓首次登場
             }
         }
 
-        foreach (var hand in head)
+        foreach (var headBody in head)
         {
-            if (currentHp <= _breakHeadHandHp && !hand.isBroken && !hand.canBreak)
+            if (currentHp <= _breakHeadHandHp && !headBody.isBroken && !headBody.thisBreakTurn)
             {
-                hand.canBreak = true;
-                hand.OpenBreak(); //護頓首次登場
+                headBody.thisBreakTurn = true;
+                // hand.OpenBreak(); //護頓首次登場
             }
         }
     }
@@ -137,13 +143,15 @@ public class BossBBase : Enemy
                 _currentleftHandBreakHp--;
 
                 currentBody.HitBreak(_currentleftHandBreakHp);
+                _bossBCanvas.SetBreakImage(BodyType.LeftHand, _currentleftHandBreakHp);
+
+                _bossBCanvas.ShakingImage(BodyType.LeftHand);
 
                 if (_currentleftHandBreakHp <= 0)
                 {
                     foreach (var hand in leftHand)
                     {
                         hand.isBroken = true;
-                    
                     }
                 }
 
@@ -152,6 +160,8 @@ public class BossBBase : Enemy
                 _currentRightHandBreakHp--;
 
                 currentBody.HitBreak(_currentRightHandBreakHp);
+                _bossBCanvas.SetBreakImage(BodyType.RightHand, _currentRightHandBreakHp);
+                _bossBCanvas.ShakingImage(BodyType.RightHand);
 
                 if (_currentRightHandBreakHp <= 0)
                 {
@@ -166,6 +176,9 @@ public class BossBBase : Enemy
                 _currentHeadHandBreakHp--;
 
                 currentBody.HitBreak(_currentHeadHandBreakHp);
+
+                _bossBCanvas.SetBreakImage(BodyType.Head, _currentHeadHandBreakHp);
+                _bossBCanvas.ShakingImage(BodyType.Head);
 
                 if (_currentHeadHandBreakHp <= 0)
                 {

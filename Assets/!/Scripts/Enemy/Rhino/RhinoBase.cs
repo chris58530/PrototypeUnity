@@ -49,6 +49,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         if (isShield)
         {
             LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.Shield);
+            SparkleEffect.onPlaySparkleEffect(SparkleType.Shield, sparkleDirection, rotation);
 
             _shieldUI.HitShield(1);
             return;
@@ -59,7 +60,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
 
         AudioManager.Instance.PlaySFX("MobInjured");
-
+        SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
 
         if (_currentHp.Value <= 0)
         {

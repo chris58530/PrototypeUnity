@@ -19,7 +19,8 @@ namespace @_.Scripts.Enemy.Hand
 
         public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
         {
-            // SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
+            SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
+            SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
 
             if (hp <= 0) OnDied();
 
@@ -60,7 +61,7 @@ namespace @_.Scripts.Enemy.Hand
                 _hadnEffect.SwitchBreakMaterial(BreakState.Break2);
         }
 
-        public void OnTakeAttack()
+        public void OnTakeBreakableAttack()
         {
             breakState += 1;
             SwitchBreakMaterial();

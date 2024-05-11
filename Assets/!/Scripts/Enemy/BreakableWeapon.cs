@@ -17,7 +17,7 @@ public class BreakableWeapon : MonoBehaviour
         if (other.TryGetComponent<IBreakable>(out IBreakable target))
         {
             if(other.GetComponent<SmallHandBase>())return;
-            target.OnTakeAttack();
+            target.OnTakeBreakableAttack();
             bt.SendEvent("HitBody");
 
         }

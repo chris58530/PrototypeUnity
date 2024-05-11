@@ -7,5 +7,6 @@ namespace @_.Scripts.Event
     {
       
         public static Action<bool> setCanDamagedEnemy;
+        public static Action<bool> setCanBreakBossB;
     }
 }

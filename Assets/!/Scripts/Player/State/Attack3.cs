@@ -30,6 +30,7 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {            
             EnemyActions.setCanDamagedEnemy?.Invoke(true);
+            EnemyActions.setCanBreakBossB?.Invoke(true);
 
             DebugTools.StateText("AttackThird");
 

@@ -28,7 +28,7 @@ namespace @_.Scripts.Ability
         public override void TriggerEffect(Collider other)
         {
             if (other.TryGetComponent<IBreakable>(out IBreakable target))
-                target.OnTakeAttack();
+                target.OnTakeBreakableAttack();
         }
     }
 }

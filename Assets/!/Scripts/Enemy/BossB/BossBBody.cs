@@ -34,9 +34,10 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     private readonly float _shakeDuration = 0.2f;
 
 
-    public bool canBreak;
-    public bool isBroken;
+    public bool thisBreakTurn = false;
+    public bool isBroken = false;
     private static bool _canDamage = true;
+    private static bool _canBreak = true;
 
     [SerializeField] private GameObject moveTarget; //要位移的物件
 
@@ -45,33 +46,41 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     private readonly float _rhinoMoveDistance = 10; //移動距離
     private readonly float _moveDuration = 0.15f; //移動時間
     [SerializeField] private HandEffect handEffect;
-    private BossBCanvas _bossBCanvas;
 
     private void Start()
     {
-        _bossBCanvas = FindObjectOfType<BossBCanvas>();
         // breaktHpImage.gameObject.SetActive(false);
         handEffect.SwitchBreakMaterial(breakState);
     }
 
     private void OnEnable()
     {
-        EnemyActions.setCanDamagedEnemy += SetCanDamged;
+        EnemyActions.setCanDamagedEnemy += SetCanDamaged;
+        EnemyActions.setCanBreakBossB += SetCanBreak;
     }
 
     private void OnDisable()
     {
-        EnemyActions.setCanDamagedEnemy -= SetCanDamged;
-
+        EnemyActions.setCanDamagedEnemy -= SetCanDamaged;
+        EnemyActions.setCanBreakBossB -= SetCanBreak;
     }
 
-    void SetCanDamged(bool canDamage)
+    void SetCanDamaged(bool canDamage)
     {
-        if(canDamage)
+        if (canDamage)
             _canDamage = true;
         else
-            _canDamage = false;;
+            _canDamage = false;
     }
+
+    void SetCanBreak(bool canBreak)
+    {
+        if (canBreak)
+            _canBreak = true;
+        else
+            _canBreak = false;
+    }
+
     public void ShakeBody()
     {
         StartCoroutine(ShakeCoroutine());
@@ -99,28 +108,26 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     IDisposable _damageDisposable;
 
-    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
+    public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
-        if (!_canDamage)
-        {
-            Debug.Log("cant take damage");
-            return;
-        }
+        if (!_canDamage) return;
+
         SystemActions.onFrameSlow?.Invoke(0.1f);
         BossBBase.onBodyTakeDamage?.Invoke(value);
-        SetCanDamged(false);
-
+        SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
+        SetCanDamaged(false);
     }
 
-    public void OnTakeAttack()
+    public void OnTakeBreakableAttack()
     {
-        Debug.Log(" IBreakable.OnTakeAttack()");
-        SystemActions.onFrameSlow?.Invoke(0.05f); // 调用帧率减慢事件
+        if (!_canBreak) return;
+        SetCanBreak(false);
 
-        SystemActions.onCameraShake?.Invoke(); // 调用摄像机震动事件
+
+        SystemActions.onCameraShake?.Invoke();
         SystemActions.onFrameSlow?.Invoke(0.2f); // 调用帧率减慢事件 這個會導致MoveCoroutine()無法正常運行
 
-        if (canBreak) BossBBase.onBodyBreakDamage?.Invoke(bodyType, this); // 调用Body被打断事件
+        if (thisBreakTurn) BossBBase.onBodyBreakDamage?.Invoke(bodyType, this); // 调用Body被打断事件
     }
 
     public void OnPush()
@@ -149,7 +156,8 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void HitBreak(int value)
     {
-        _bossBCanvas.SetBreakImage(bodyType, value);
+
+        Debug.Log($" ---{this.name}----   HitBreak  : {value}");
 
         if (value <= 0)
         {
@@ -161,14 +169,10 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
         }
 
         //當 isBroken = false 被玩家攻擊中
-        Debug.Log($" ---{this.name}   HitBreak  {value} ---");
         // breaktHpImage.gameObject.GetComponent<Animator>().Play("HitBreak");
     }
 
-    public void OpenBreak() //護頓首次登場
-    {
-        // breaktHpImage.gameObject.GetComponent<Animator>().Play("OpenBreak");
-    }
+
 
 
     private void OnTriggerEnter(Collider other)

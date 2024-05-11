@@ -28,6 +28,8 @@ public class TaskCrystal : MonoBehaviour,ITaskObject, IDamageable
     public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
     {
         Debug.Log($"{this.name + " " + "on take damage"}");
+        SparkleEffect.onPlaySparkleEffect(SparkleType.Crystal, sparkleDirection, rotation);
+
         if (_currentHp > 1)
         {
             _currentHp--;
