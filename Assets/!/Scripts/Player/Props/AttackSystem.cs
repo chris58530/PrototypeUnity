@@ -17,6 +17,20 @@ namespace @_.Scripts.Player.Props
         [SerializeField] private GameObject weaponCollider;
         [SerializeField] private GameObject weaponColliderQ3;
 
+        public static Action<bool> openWeaponCollider;
+        public static Action<bool> openQ3WeaponCollider;
+
+        private void OnEnable()
+        {
+            openWeaponCollider += OpenWeaponCollider;
+            openQ3WeaponCollider += OpenQ3WeaponCollider;
+        }
+
+        private void OnDisable()
+        {
+            openWeaponCollider -= OpenWeaponCollider;
+            openQ3WeaponCollider -= OpenQ3WeaponCollider;
+        }
 
         public void Reset()
         {
@@ -51,8 +65,6 @@ namespace @_.Scripts.Player.Props
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime + 0.2f))
                 .First().Subscribe(_ => { finishAttack = true; });
 
-            weaponColliderQ3.GetComponent<Collider>().enabled = true;
-         
         }
 
         private void UseNormalAttack()
@@ -74,7 +86,6 @@ namespace @_.Scripts.Player.Props
             chanceTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(chanceTime))
                 .First().Subscribe(_ => { finishAttack = true; });
 
-            weaponCollider.GetComponent<Collider>().enabled = true;
         }
 
         public void UseAbilityAttack(AbilityWeapon.AbilityType abilityType)
@@ -109,6 +120,7 @@ namespace @_.Scripts.Player.Props
             //自動校正
             transform.LookAt(autoTurnAroundDetect.NearEnemy(transform));
         }
+
         public void FaceMouseInputPosition()
         {
             transform.LookAt(GetDirection());
@@ -123,8 +135,18 @@ namespace @_.Scripts.Player.Props
 
         public void CancelAttack()
         {
-            weaponCollider.GetComponent<Collider>().enabled = false;
-            weaponColliderQ3.GetComponent<Collider>().enabled = false;
+            openWeaponCollider?.Invoke(false);
+            openQ3WeaponCollider?.Invoke(false);
+        }
+
+        public void OpenWeaponCollider(bool isOpen)
+        {
+            weaponCollider.GetComponent<Collider>().enabled = isOpen;
+        }
+
+        public void OpenQ3WeaponCollider(bool isOpen)
+        {
+            weaponColliderQ3.GetComponent<Collider>().enabled = isOpen;
         }
 
         public void PlayAudio(int count)
