@@ -39,8 +39,8 @@ namespace @_.Scripts.Player.Props
             Vector3 thisPosition = transform.position;
             Vector3 collisionPoint = other.ClosestPoint(thisPosition);
             
-            Quaternion rotation = Quaternion.LookRotation(collisionPoint - thisPosition);
-            damageObj.OnTakeDamage(attackValue, collisionPoint, -rotation);
+            Quaternion rotation = Quaternion.LookRotation(thisPosition-collisionPoint);
+            damageObj.OnTakeDamage(attackValue, collisionPoint, rotation);
             //Damage frist then use attackActions effect attack (ability)
             attackAction?.Invoke(other);
 
