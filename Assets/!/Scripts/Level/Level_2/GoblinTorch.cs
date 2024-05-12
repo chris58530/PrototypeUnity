@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GoblinTorch : MonoBehaviour
 {
+    [SerializeField] private GameObject shakeModel;
     [SerializeField] private GameObject fire;
     [SerializeField] private GameObject golbinPrefab;
 
@@ -38,11 +40,14 @@ public class GoblinTorch : MonoBehaviour
     {
         fire.SetActive(true);
         isDark = false;
+        StopCoroutine(ShakeCoroutine());
     }
 
     public void CloseTorchLight()
     {
         fire.SetActive(false);
+        StartCoroutine(ShakeCoroutine());
+
     }
 
     void SpawnGolbin()
@@ -56,5 +61,23 @@ public class GoblinTorch : MonoBehaviour
     void SpanwCoolDown()
     {
         _canSpawnGolbin = true;
+    }
+    IEnumerator ShakeCoroutine()
+    {
+        Vector3 originalPos = shakeModel.transform.localPosition;
+        float shakeRange = .5f; // 設定震動速度
+        while (true) // 使用經過的時間作為迴圈條件
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) < triggerRadius)
+            {
+                // 透過添加隨機噪音更新位置
+                shakeModel.transform.localPosition = originalPos + new Vector3(Random.Range(-shakeRange, shakeRange),
+                    Random.Range(-shakeRange, shakeRange), 0);
+            }
+            yield return null; // 讓出控制權並繼續下一幀的執行
+        }
+
+        shakeModel.transform.localPosition = originalPos; // 重置位置到初始值
+        yield return null;
     }
 }

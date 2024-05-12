@@ -98,7 +98,7 @@ public class GoblinBase : Enemy, IDamageable, IDashable
     private void OnDestroy()
     {
         AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
-        GameObject obj= Instantiate(disappearEffect, transform.position, Quaternion.identity);
+        GameObject obj= Instantiate(disappearEffect, transform.position + new Vector3(0, 2f, 0), Quaternion.identity);
         Destroy(obj,1);
     }
 }
