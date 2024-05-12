@@ -17,6 +17,10 @@ namespace @_.Scripts.Ability
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do 
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                AbilityOnFire.onFire?.Invoke(true);
+            }
         }
 
         public override void StartAbility(AbilityWeapon weapon)
@@ -52,7 +56,7 @@ namespace @_.Scripts.Ability
                 AbilityOnFire.onFire?.Invoke(true);
             }
 
-            if (other.gameObject.TryGetComponent<Torch>(out var torch))
+            if (other.gameObject.TryGetComponent<GoblinTorch>(out var torch))
             {
                 if (AbilityOnFire.isOnFire)
                 {

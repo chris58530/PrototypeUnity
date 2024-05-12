@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Torch : MonoBehaviour
+public class GoblinTorch : MonoBehaviour
 {
     [SerializeField] private GameObject fire;
     [SerializeField] private GameObject golbinPrefab;
@@ -14,11 +14,12 @@ public class Torch : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
     [Range(0, 5)] [SerializeField] private float spawnCoolTime;
     [SerializeField] private float triggerRadius;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     private bool _canSpawnGolbin = true;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         if (isDark)
         {
             CloseTorchLight();

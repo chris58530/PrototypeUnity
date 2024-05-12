@@ -28,7 +28,7 @@ namespace @_.Scripts.Ability
         public override void TriggerEffect(Collider other)
         {
             //OnTrigger enemy will do 
-            if (other.gameObject.TryGetComponent<Torch>(out var target))
+            if (other.gameObject.TryGetComponent<GoblinTorch>(out var target))
             {
                 target.OpenTorchLight();
                 Debug.Log("Use fire TriggerEffect ");
