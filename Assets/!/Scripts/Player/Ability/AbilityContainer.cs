@@ -39,5 +39,11 @@ namespace @_.Scripts.Player.Ability
 
             Destroy(obj);
         }
+        public void InactiveGameObject(GameObject obj)
+        {
+            AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+
+            obj.SetActive(false);
+        }
     }
 }
