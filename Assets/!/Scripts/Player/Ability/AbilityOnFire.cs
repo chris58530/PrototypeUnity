@@ -17,6 +17,14 @@ public class AbilityOnFire : MonoBehaviour
         onFire += SetFireEffect;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            AbilityOnFire.onFire?.Invoke(true);
+        }
+    }
+
     private void OnDisable()
     {
         onFire -= SetFireEffect;
