@@ -4946,8 +4946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374489252125436408}
   - component: {fileID: 3520269674862745854}
-  - component: {fileID: 4248280196894131078}
-  - component: {fileID: 6111793122109603873}
+  - component: {fileID: 5572349248335952606}
   m_Layer: 7
   m_Name: ShortFire
   m_TagString: Untagged
@@ -4984,9 +4983,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4497213, y: 4.206712, z: 1.6827605}
-  m_Center: {x: -0.029329777, y: 1.6033549, z: -0.022758633}
---- !u!114 &4248280196894131078
+  m_Size: {x: 7.8357058, y: 8.757202, z: 8.068742}
+  m_Center: {x: -0.16316748, y: 4.9493046, z: -0.15659666}
+--- !u!114 &5572349248335952606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4995,43 +4994,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1701836187351313857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61092d46680dba4d9b6661eccc30386, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e085e9bced276a4ab40ca01b9544f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  onTakeDamagedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6111793122109603873}
-        m_TargetAssemblyTypeName: Torch, Assembly-CSharp
-        m_MethodName: CloseTorchLight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDiedEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6111793122109603873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701836187351313857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b312fa834f20a4b8e1f3499cb24442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openFire: {fileID: 5426912026086525210}
-  golbinPrefab: {fileID: 840979769018266425, guid: ff4805dec0ccc984d8eb4ef3dedaa83d,
-    type: 3}
 --- !u!1 &1783149916266489818
 GameObject:
   m_ObjectHideFlags: 0

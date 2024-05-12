@@ -17,8 +17,6 @@ namespace @_.Scripts.Ability
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do 
-
-
         }
 
         public override void StartAbility(AbilityWeapon weapon)
@@ -38,6 +36,7 @@ namespace @_.Scripts.Ability
             if (powerfulSword != null)
                 powerfulSword.SetActive(true);
             sword.canUse = false;
+            AbilityOnFire.onFire?.Invoke(false);
 
             //產生對應物件 噴出原始怪物
         }
@@ -47,6 +46,19 @@ namespace @_.Scripts.Ability
             //OnTrigger enemy will do 
             if (other.TryGetComponent<IShieldable>(out IShieldable target))
                 target.OnTakeShield(1);
+
+            if (other.gameObject.TryGetComponent<CampFire>(out var campFire))
+            {
+                AbilityOnFire.onFire?.Invoke(true);
+            }
+
+            if (other.gameObject.TryGetComponent<Torch>(out var torch))
+            {
+                if (AbilityOnFire.isOnFire)
+                {
+                    torch.OpenTorchLight();
+                }
+            }
         }
 
         // private void OnDisable()

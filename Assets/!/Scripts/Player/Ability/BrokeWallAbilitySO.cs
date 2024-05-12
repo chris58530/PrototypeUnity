@@ -22,6 +22,8 @@ namespace @_.Scripts.Ability
         public override void QuitAbilityAlgorithm()
         {
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
+            AbilityOnFire.onFire?.Invoke(false);
+
             GameObject.Find("PlayerAttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false, "Breakable");
         }
 
@@ -29,6 +31,19 @@ namespace @_.Scripts.Ability
         {
             if (other.TryGetComponent<IBreakable>(out IBreakable target))
                 target.OnTakeBreakableAttack();
+            
+            if (other.gameObject.TryGetComponent<CampFire>(out var campFire))
+            {
+                AbilityOnFire.onFire?.Invoke(true);
+            }
+
+            if (other.gameObject.TryGetComponent<Torch>(out var torch))
+            {
+                if (AbilityOnFire.isOnFire)
+                {
+                    torch.OpenTorchLight();
+                }
+            }
         }
     }
 }
