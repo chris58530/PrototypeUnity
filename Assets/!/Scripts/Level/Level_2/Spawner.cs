@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [Range(0, 5)] [SerializeField] private float spawnCoolTime;
+    [Range(0, 10)] [SerializeField] private float spawnCoolTime;
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject spawnPrefab;
     private bool _canSpawn = true;
