@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Enemy;
@@ -7,6 +8,8 @@ using UnityEngine.Events;
 
 public class GoblinBase : Enemy, IDamageable, IDashable
 {
+    [SerializeField]private float disappearTime;
+    [SerializeField]private GameObject disappearEffect;
     [SerializeField] private float maxHp;
     private ReactiveProperty<float> _currentHp = new ReactiveProperty<float>();
 
@@ -24,6 +27,7 @@ public class GoblinBase : Enemy, IDamageable, IDashable
     private void Start()
     {
         Initialize();
+        Destroy(gameObject, disappearTime);
     }
 
     void Initialize()
@@ -89,5 +93,12 @@ public class GoblinBase : Enemy, IDamageable, IDashable
     public void OnStun()
     {
         bt.SendEvent("OnStun");
+    }
+
+    private void OnDestroy()
+    {
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+        GameObject obj= Instantiate(disappearEffect, transform.position, Quaternion.identity);
+        Destroy(obj,1);
     }
 }
