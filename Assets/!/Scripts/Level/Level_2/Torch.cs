@@ -7,29 +7,53 @@ using UnityEngine.Serialization;
 
 public class Torch : MonoBehaviour
 {
-    [SerializeField] private GameObject[] openFire;
+    [SerializeField] private GameObject fire;
     [SerializeField] private GameObject golbinPrefab;
 
-    [SerializeField] private bool isSpawnGlobin;
+    [SerializeField] private bool isDark;
+    [SerializeField] private GameObject spawnPoint;
+    [Range(0, 5)] [SerializeField] private float spawnCoolTime;
+    [SerializeField] private float triggerRadius;
+    [SerializeField] private GameObject player;
+    private bool _canSpawnGolbin = true;
+
+    private void Start()
+    {
+        if (isDark)
+        {
+            CloseTorchLight();
+        }
+    }
+
+    private void Update()
+    {
+        if (!isDark) return;
+        if (!_canSpawnGolbin) return;
+        if (Vector3.Distance(transform.position, player.transform.position) > triggerRadius) return;
+        SpawnGolbin();
+    }
 
     public void OpenTorchLight()
     {
-        foreach (var fire in openFire)
-        {
-            fire.SetActive(true);
-        }
+        fire.SetActive(true);
+        isDark = false;
     }
 
     public void CloseTorchLight()
     {
-        foreach (var fire in openFire)
-        {
-            fire.SetActive(false);
-        }
+        fire.SetActive(false);
+    }
 
-        if (!isSpawnGlobin)
-            Instantiate(golbinPrefab, transform.position + Vector3.up * 5, transform.rotation);
+    void SpawnGolbin()
+    {
+        Debug.Log("Spawn Golbin");
+        Instantiate(golbinPrefab, spawnPoint.transform.position, Quaternion.identity);
+        Invoke(nameof(SpanwCoolDown), spawnCoolTime);
+        _canSpawnGolbin = false;
+    }
 
-        isSpawnGlobin = true;
+    void SpanwCoolDown()
+    {
+        _canSpawnGolbin = true;
     }
 }
