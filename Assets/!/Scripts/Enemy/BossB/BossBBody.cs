@@ -164,6 +164,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
             breakState = BreakState.Break1;
             handEffect.SwitchBreakMaterial(breakState);
             Debug.Log($" {this.name} 已經被打爆了 ");
+            
 
             return;
         }
@@ -175,7 +176,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent<PlayerBase>(out var player))
         {
