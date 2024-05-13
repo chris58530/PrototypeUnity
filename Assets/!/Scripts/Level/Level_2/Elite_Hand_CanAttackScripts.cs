@@ -17,7 +17,7 @@ public class Elite_Hand_CanAttackScripts : MonoBehaviour
 
     void EnableBt()
     {
-        eliteHandBt.SendEvent("CanAttack");
+        eliteHandBt.enabled = true;
         Destroy(gameObject);
     }
 }

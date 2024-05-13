@@ -39,6 +39,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     {
         //Insure current time line is follow the flow
         // if (num != currentActiveDirectorNumber) return;
+        Debug.Log($"play {num} timeline");
         currentActiveDirectorNumber++;
         onPlayTimelLine?.Invoke();
         currentDirector = playableDirectors[num];
