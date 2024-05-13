@@ -76,10 +76,11 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
             if (_input.IsPressAbility && abilityRemainingTime > 0)
             {
-                abilityRemainingTime -= Time.deltaTime*10;
+                abilityRemainingTime -= Time.deltaTime * 5;
                 _abilityValueUI.ChangeDisplayColor(true);
                 Debug.Log("減少持續時間");
             }
+
             if (_input.IsReleasedAbility)
                 _abilityValueUI.ChangeDisplayColor(false);
         }
@@ -156,7 +157,7 @@ namespace @_.Scripts.Player.Props
                     //             _abilityTimer.Dispose(); // 结束计时器
                     //         }
                     //     }).AddTo(this);
-                    
+
                     float keepTime = currentAbilityBase.lifeTime;
                     abilityRemainingTime = keepTime;
 
@@ -169,7 +170,6 @@ namespace @_.Scripts.Player.Props
                             isQuitAbility = true;
                             _abilityTimer.Dispose(); // 结束计时器
                         }
-                     
                     }).AddTo(this);
 
                     Debug.Log(currentAbilityBase.name);
