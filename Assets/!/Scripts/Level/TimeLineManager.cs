@@ -16,7 +16,7 @@ public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     public static Action onQuitTimelLine;
 
     private bool _isExecuteQuitAction;
-    [SerializeField] private int currentActiveDirectorNumber = 0;
+    [SerializeField] private int currentActiveDirectorNumber = 0;//忘記這是幹啥的了
     private bool _isPauseTimeLine;
 
     private IMarker[] _stopMarkers;

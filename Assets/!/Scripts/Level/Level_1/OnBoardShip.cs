@@ -12,8 +12,5 @@ public class OnBoardShip : MonoBehaviour
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+  
 }
