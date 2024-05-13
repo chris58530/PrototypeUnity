@@ -16,12 +16,14 @@ namespace _.Scripts.Ability
 
         public override void StartAbility(AbilityWeapon weapon)
         {
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
         }
 
         public override void QuitAbilityAlgorithm()
         {
-            
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
+
         }
 
         public override void TriggerEffect(Collider other)

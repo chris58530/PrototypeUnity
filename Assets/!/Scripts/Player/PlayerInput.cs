@@ -17,6 +17,7 @@ namespace _.Scripts.Player
         public bool IsPressingAttack => _input.Player.Attack.IsPressed();
         public bool IsReleasedAttack => _input.Player.Attack.WasReleasedThisFrame();
         public bool IsPressedAbility => _input.Player.Ability.WasPressedThisFrame();
+        public bool IsPressAbility => _input.Player.Ability.IsPressed();
         public bool IsReleasedAbility => _input.Player.Ability.WasReleasedThisFrame();
         public bool Move => MoveVector.x != 0 || MoveVector.y != 0;
 

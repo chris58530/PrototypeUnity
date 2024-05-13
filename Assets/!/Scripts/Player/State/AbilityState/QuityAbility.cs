@@ -34,11 +34,11 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnEnter()
         {
+            _abilityWeapon.isQuitAbility = false;
             _timer = new Timer();
             _abilityWeapon.QuitInMouthObjectObject();
 
             AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
-            AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
             // _animator.Play("Eat");
         }

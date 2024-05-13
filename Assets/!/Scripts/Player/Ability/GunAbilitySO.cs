@@ -37,6 +37,8 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm()
         {
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
+
             Debug.Log("------玩家血量加一!!------");
         }
 

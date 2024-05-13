@@ -13,26 +13,26 @@ public class EatColliderEffect : MonoBehaviour
 
     private void OnEnable()
     {
-        QuitAbility();
-        AbilityWeapon.onPlayerGetAbility += GetAbility;
-        AbilityWeapon.onPlayerQuitAbility += QuitAbility;
+        QuitAbilityEmission();
+        AbilityWeapon.onPlayerGetAbility += GetAbilityEmission;
+        AbilityWeapon.onPlayerQuitAbility += QuitAbilityEmission;
     }
 
     private void OnDisable()
     {
-        QuitAbility();
+        QuitAbilityEmission();
 
-        AbilityWeapon.onPlayerGetAbility -= GetAbility;
-        AbilityWeapon.onPlayerQuitAbility -= QuitAbility;
+        AbilityWeapon.onPlayerGetAbility -= GetAbilityEmission;
+        AbilityWeapon.onPlayerQuitAbility -= QuitAbilityEmission;
     }
 
-    void GetAbility()
+    void GetAbilityEmission()
     {
         shinymat.DOColor(new Color(1, 1, 1) * intensity, "_EmissionColor",
             duration); // Transition to the new intensity over t
     }
 
-    void QuitAbility()
+    void QuitAbilityEmission()
     {
         shinymat.DOColor(new Color(0, 0, 0), "_EmissionColor", duration); // Transition to the new intensity over t
     }

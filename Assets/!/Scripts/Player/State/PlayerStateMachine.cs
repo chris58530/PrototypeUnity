@@ -323,14 +323,14 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
             _hammerState.AddState(
                 PlayerState.KeyAbility, new KeyAbility(
-                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, _abilityWeapon,true));
             _hammerState.AddState(
                 PlayerState.BreakWallAbility, new BreakWallAbility(
-                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, _abilityWeapon,true));
 
             _hammerState.AddState(
                 PlayerState.StrengthAbility, new StrengthAbility(
-                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, true));
+                    _input, _controller, animator, _attackSystem, _abilitySystem, _playerBase, _abilityWeapon,true));
             _hammerState.AddState(
                 PlayerState.QuityAbility, new QuityAbility(
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
@@ -389,8 +389,9 @@ namespace _.Scripts.Player.State
                               _abilitySystem.GetCurrentAbility == AbilityWeapon.AbilityType.None);
 
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.QuityAbility,
-                transition => _input.IsPressedAbility &&
-                              _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None);
+                transition => 
+                              _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None
+                && _abilityWeapon.isQuitAbility);
 
 
             _hammerState.AddTransition(PlayerState.Idle, PlayerState.GunAbility,
@@ -417,8 +418,9 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.Roll,
                 transition => _input.IsPressedRoll && !_controller.blockRoll);
             _hammerState.AddTransition(PlayerState.Walk, PlayerState.QuityAbility,
-                transition => _input.IsPressedAbility &&
-                              _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None);
+                transition =>
+                              _abilitySystem.GetCurrentAbility != AbilityWeapon.AbilityType.None
+                              && _abilityWeapon.isQuitAbility);
 
             _hammerState.AddTransition(PlayerState.Roll, PlayerState.Idle,
                 transition => _controller.finsihRoll);

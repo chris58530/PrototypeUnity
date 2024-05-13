@@ -41,6 +41,7 @@ namespace @_.Scripts.Ability
                 powerfulSword.SetActive(true);
             sword.canUse = false;
             AbilityOnFire.onFire?.Invoke(false);
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
             //產生對應物件 噴出原始怪物
         }

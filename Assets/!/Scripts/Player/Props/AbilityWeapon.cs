@@ -43,17 +43,20 @@ namespace @_.Scripts.Player.Props
         public IDisposable _QuitInMouthObjectObjectTimer;
 
         public float currentAbilityTime;
+        public bool isQuitAbility;
 
         [SerializeField] private AbilityValueUI _abilityValueUI;
-        
+
         public static Action onPlayerGetAbility;
         public static Action onPlayerQuitAbility;
-
+        public float abilityRemainingTime;
+        private PlayerInput _input;
 
         private void Start()
         {
             transform.parent = swordTransform.transform;
             ChangeAbility(AbilityType.None);
+            _input = FindObjectOfType<PlayerInput>();
         }
 
         private void Update()
@@ -71,6 +74,14 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
 
             if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
+            if (_input.IsPressAbility && abilityRemainingTime > 0)
+            {
+                abilityRemainingTime -= Time.deltaTime*10;
+                _abilityValueUI.ChangeDisplayColor(true);
+                Debug.Log("減少持續時間");
+            }
+            if (_input.IsReleasedAbility)
+                _abilityValueUI.ChangeDisplayColor(false);
         }
 
         public void ExecuteAblilty()
@@ -125,23 +136,41 @@ namespace @_.Scripts.Player.Props
 
                     if (currentAbilityBase.abilityType == AbilityType.None) return;
 
-                    float keepTime = currentAbilityBase.lifeTime * 10;
-                    float addTionTime = 1;
-                    _abilityTimer = Observable.Interval(TimeSpan.FromSeconds(0.1f))
-                        .TakeWhile(time => time <= keepTime)
-                        .Subscribe(time =>
+                    // float addTionTime = 1;
+                    // _abilityTimer = Observable.Interval(TimeSpan.FromSeconds(0.1f))
+                    //     .TakeWhile(time => time <= keepTime)
+                    //     .Subscribe(time =>
+                    //     {
+                    //         abilityRemainingTime = keepTime - (time * addTionTime);
+                    //         _abilityValueUI.DisplayTime(abilityRemainingTime, keepTime);
+                    //         if (_input.IsPressAbility && abilityRemainingTime > 0)
+                    //         {
+                    //             keepTime -= Time.deltaTime * 500;
+                    //             _abilityValueUI.ChangeDisplayColor(true);
+                    //             Debug.Log("減少持續時間");
+                    //         }
+                    //
+                    //         if (abilityRemainingTime <= 0)
+                    //         {
+                    //             isQuitAbility = true;
+                    //             _abilityTimer.Dispose(); // 结束计时器
+                    //         }
+                    //     }).AddTo(this);
+                    
+                    float keepTime = currentAbilityBase.lifeTime;
+                    abilityRemainingTime = keepTime;
+
+                    _abilityTimer = Observable.EveryUpdate().Subscribe(_ =>
+                    {
+                        _abilityValueUI.DisplayTime(abilityRemainingTime, keepTime);
+                        abilityRemainingTime -= Time.deltaTime;
+                        if (abilityRemainingTime <= 0)
                         {
-                            float remainingTime = keepTime - (time * addTionTime);
-                            _abilityValueUI.DisplayTime(remainingTime, keepTime);
-
-                            if (remainingTime <= 0)
-                            {
-                                ChangeAbility(AbilityType.None);
-
-                                _abilityTimer.Dispose(); // 结束计时器
-                            }
-                        }).AddTo(this);
-
+                            isQuitAbility = true;
+                            _abilityTimer.Dispose(); // 结束计时器
+                        }
+                     
+                    }).AddTo(this);
 
                     Debug.Log(currentAbilityBase.name);
                     return;

@@ -13,7 +13,6 @@ namespace @_.Scripts.Player.Props
         private BoxCollider _abilityWeaponCollider;
         public AbilityWeapon.AbilityType GetCurrentAbility => _abilityWeapon.currentAbility;
         public bool isBlockInsert;
-
         private void Awake()
         {
             _abilityWeapon = GetComponentInChildren<AbilityWeapon>();
