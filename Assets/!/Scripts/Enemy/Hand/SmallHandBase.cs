@@ -66,5 +66,15 @@ namespace @_.Scripts.Enemy.Hand
             breakState += 1;
             SwitchBreakMaterial();
         }
+
+        private void OnEnable()
+        {
+            BossBBase.onBodyDied += OnDied;
+        }
+        
+        private void OnDisable()
+        {
+            BossBBase.onBodyDied -= OnDied;
+        }
     }
 }

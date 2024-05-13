@@ -25,6 +25,8 @@ namespace @_.Scripts.Ability
 
         public override void QuitAbilityAlgorithm()
         {
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
+
             // Instantiate(keyMonster, transform.position, transform.rotation);
         }
 

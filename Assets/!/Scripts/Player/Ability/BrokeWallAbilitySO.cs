@@ -26,6 +26,8 @@ namespace @_.Scripts.Ability
         public override void QuitAbilityAlgorithm()
         {
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
+            AbilityWeapon.onPlayerQuitAbility?.Invoke();
+
             AbilityOnFire.onFire?.Invoke(false);
 
             GameObject.Find("PlayerAttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(false, "Breakable");

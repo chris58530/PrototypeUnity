@@ -14,9 +14,11 @@ namespace @_.Scripts.Player.State.AbilityState
         private PlayerBase _playerBase;
         private float _insertTime;
         private AbilitySystem _abilitySystem;
+        private readonly AbilityWeapon _abilityWeapon;
+
         public StrengthAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
-            ,AbilitySystem abilitySystem,PlayerBase playerBase,
+            ,AbilitySystem abilitySystem,PlayerBase playerBase, AbilityWeapon abilityWeapon,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -27,6 +29,8 @@ namespace @_.Scripts.Player.State.AbilityState
             _attackSystem = attackSystem;
             _abilitySystem = abilitySystem;
             _playerBase = playerBase;
+            _abilityWeapon = abilityWeapon;
+
         }
 
        
@@ -51,6 +55,8 @@ namespace @_.Scripts.Player.State.AbilityState
             {
                 fsm.StateCanExit();
             }
+
+          
        
             _controller.Fall();
         }
