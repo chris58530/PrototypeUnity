@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Enemy;
+using BehaviorDesigner.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,7 @@ public class BossBBase : Enemy
     private int hpMax;
 
     private int currentHp;
+    [SerializeField]private Animator headAnimator;
 
     //左手
     private readonly int _breakLeftHandHp = 85;
@@ -126,6 +128,11 @@ public class BossBBase : Enemy
                 // hand.OpenBreak(); //護頓首次登場
             }
         }
+
+        if (currentHp < 0)
+        {
+            
+        }
     }
 
     public void UpdateHpValue(int value)
@@ -183,6 +190,7 @@ public class BossBBase : Enemy
                 if (_currentHeadHandBreakHp <= 0)
                 {
                     OnDied();
+                    onBodyDied?.Invoke();
                     foreach (var hand in head)
                     {
                         hand.isBroken = true;
@@ -195,8 +203,10 @@ public class BossBBase : Enemy
 
     public void OnDied()
     {
-        // Destroy(gameObject);
+        GetComponent<BehaviorTree>().enabled = false;
+        headAnimator.Play("Die");
         onDiedEvent?.Invoke();
+        
     }
 
 
