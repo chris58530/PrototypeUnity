@@ -11,6 +11,7 @@ public class GoblinTorch : MonoBehaviour
     [SerializeField] private GameObject shakeModel;
     [SerializeField] private GameObject fire;
     [SerializeField] private GameObject golbinPrefab;
+    [SerializeField] private GameObject darkBlock;
 
     [SerializeField] private bool isDark;
     [SerializeField] private GameObject spawnPoint;
@@ -39,6 +40,7 @@ public class GoblinTorch : MonoBehaviour
     public void OpenTorchLight()
     {
         fire.SetActive(true);
+        darkBlock.SetActive(false);
         isDark = false;
         StopCoroutine(ShakeCoroutine());
     }
