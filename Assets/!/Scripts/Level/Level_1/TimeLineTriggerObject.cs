@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _.Scripts.Player;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeLineTriggerObject : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class TimeLineTriggerObject : MonoBehaviour
     private bool _isPlaying;
     private bool _isPlayed;
     private UIInput _uiInput;
+    [SerializeField] private UnityEvent onTimelineConfirmed;
+
     private void Start()
     {
         _uiInput = FindObjectOfType<UIInput>();
@@ -71,6 +74,7 @@ public class TimeLineTriggerObject : MonoBehaviour
 
         _isPlaying = true;
         TimeLineManager.Instance.PlayTimeLine(timeLineNumber);
+        onTimelineConfirmed?.Invoke();
         Debug.Log($"Play number {timeLineNumber} TimeLine");
 
         _playerUseTimeLineUI.ShowCanConfirmImage(false);
