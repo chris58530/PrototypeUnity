@@ -66,7 +66,7 @@ public class GoblinTorch : MonoBehaviour
     {
         Vector3 originalPos = shakeModel.transform.localPosition;
         float shakeRange = .5f; // 設定震動速度
-        while (true) // 使用經過的時間作為迴圈條件
+        while (isDark) // 使用經過的時間作為迴圈條件
         {
             if (Vector3.Distance(transform.position, player.transform.position) < triggerRadius)
             {

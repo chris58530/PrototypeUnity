@@ -45,10 +45,9 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnLogic()
         {
-         
-
             if (_timer.Elapsed > 1.4f)
             {
+                AbilityWeapon.onPlayerQuitAbility?.Invoke();
                 _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
                 fsm.StateCanExit();
             }

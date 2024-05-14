@@ -9,6 +9,6 @@ public class CartRhinoBase : Enemy
 
     public void CatchRhino()
     {
-        Destroy(rhinoModle);
+       rhinoModle.SetActive(false);
     }
 }

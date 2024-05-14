@@ -47,18 +47,17 @@ public class CuttleBase : Enemy, IDamageable
 
     public void GetAbosort()
     {
-        bt.SendEvent("OnStun");
-
+        bt.SendEvent("OnAbosort");
     }
 
     public void OnDied()
     {
-        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
-
-        
-        onDiedEvent?.Invoke();
-
-        bt.SendEvent("OnDied");
+        // AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+        //
+        //
+        // onDiedEvent?.Invoke();
+        //
+        // bt.SendEvent("OnDied");
     }
 
  
