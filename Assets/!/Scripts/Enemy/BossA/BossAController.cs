@@ -56,7 +56,7 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private GameObject bomb;
 
-       
+
         [SerializeField] private Collider[] tailDamageCollider;
         [SerializeField] private Collider[] headDamageCollider;
 
@@ -111,20 +111,20 @@ namespace @_.Scripts.Enemy.BossA
 
         public void PreviewThrow(Transform target)
         {
-            var obj = Instantiate(previewObject, transform.position, Quaternion.Euler(90, 0, 0));
+            var obj = Instantiate(previewObject, target.position, Quaternion.Euler(90, 0, 0));
             Destroy(obj, 6);
             var track = Observable.EveryUpdate().Subscribe(_ =>
             {
                 obj.transform.position =
                     Vector3.MoveTowards(obj.transform.position, target.position, 80 * Time.deltaTime);
             }).AddTo(obj);
-            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(4)).Subscribe(_ => { track.Dispose(); }).AddTo(obj);
+            Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(3)).Subscribe(_ => { track.Dispose(); }).AddTo(obj);
         }
 
         public void ThrowBomb(Vector3 target)
         {
             var obj = Instantiate(bomb, target + new Vector3(0, 100, 0),
-                Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360)));
+                Quaternion.identity);
             Destroy(obj, 5);
             Observable.EveryUpdate().Subscribe(_ =>
             {
@@ -163,7 +163,7 @@ namespace @_.Scripts.Enemy.BossA
             if (!other.TryGetComponent<IDamageable>(out var damageObj)) return;
             if (other.gameObject.layer != 6) return;
 
-            damageObj.OnTakeDamage(10,Vector3.zero,quaternion.identity);
+            damageObj.OnTakeDamage(10, Vector3.zero, quaternion.identity);
 
             Debug.Log($"{other.name} get {10} damage");
         }

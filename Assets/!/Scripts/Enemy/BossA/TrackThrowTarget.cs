@@ -7,11 +7,11 @@ namespace _.Scripts.Enemy.TypeA
 {
     public class TrackThrowTarget : BossAAction
     {
-        public SharedTransform player;
+        public SharedGameObject player;
 
         public override void OnStart()
         {
-            controller.PreviewThrow(player.Value);
+            controller.PreviewThrow(player.Value.transform);
         }
 
         public override TaskStatus OnUpdate()

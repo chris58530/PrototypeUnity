@@ -12,6 +12,7 @@ public class AttackForward : EnemyAction
     public override void OnStart()
     {
         targetPosition = transform.forward;
+        AudioManager.Instance.PlaySFX("New_Drill");
 
  
     }

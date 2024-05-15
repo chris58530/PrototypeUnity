@@ -17,12 +17,16 @@ namespace @_.Scripts.Enemy
         {
             base.Awake();
             _controller = GetComponent<CharacterController>();
-            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(0.2f)).Subscribe(_ =>
+            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(0.25f)).Subscribe(_ =>
             {
                 _controller.enabled = false;
                 AbsortCollider.SetActive(true);
                 bt.SendEvent("OnGround");
                 enabled = false;
+            }).AddTo(this);
+            Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(4)).Subscribe(_ =>
+            {
+             Destroy(gameObject);
             }).AddTo(this);
         }
 

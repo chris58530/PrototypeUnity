@@ -21,14 +21,16 @@ public class BossIntroTimelineTriggerObject : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //check Coroutine is not already playing
-            
+
             StartCoroutine(IntroTimeline());
+            GetComponent<Collider>().enabled = false;
         }
     }
+
     IEnumerator IntroTimeline()
     {
         earthquakeTimeline.Play();
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(5);
         TimeLineManager.Instance.PlayTimeLine(timelineNumber);
     }
 }

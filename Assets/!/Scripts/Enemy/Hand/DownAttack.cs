@@ -17,6 +17,8 @@ public class DownAttack : EnemyAction
     {
         targetPosition = new Vector3(transform.position.x, target.Value.transform.position.y,
             transform.position.z)+ offset;
+        AudioManager.Instance.PlaySFX("SmallHandPunch");
+
     }
 
 
@@ -27,6 +29,7 @@ public class DownAttack : EnemyAction
         {
             if (shake)
                 SystemActions.onCameraShake?.Invoke();
+
             return TaskStatus.Success;
         }
 

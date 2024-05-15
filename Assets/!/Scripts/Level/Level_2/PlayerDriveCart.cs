@@ -10,6 +10,7 @@ namespace @_.Scripts.Level.Level_2
         [SerializeField] private GameObject playerObject;
         [Range(0, 1), SerializeField] private float speed;
         [SerializeField] private float delayTime;
+        [SerializeField] private GameObject arriveDust;
         private bool _startMoving;
 
         private void OnEnable()
@@ -26,8 +27,9 @@ namespace @_.Scripts.Level.Level_2
         {
             if (!_startMoving) return;
             playerObject.transform.parent = null;
-            playerObject.transform.position += new Vector3(0,-7,0);
+            playerObject.transform.position += new Vector3(0,-6,0);
             playerObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            // arriveDust.SetActive(true);
             Destroy(gameObject);
         }
 
