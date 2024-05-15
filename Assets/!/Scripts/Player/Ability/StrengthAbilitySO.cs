@@ -43,7 +43,6 @@ namespace @_.Scripts.Ability
             AbilityOnFire.onFire?.Invoke(false);
             AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
-            //產生對應物件 噴出原始怪物
         }
 
         public override void TriggerEffect(Collider other)

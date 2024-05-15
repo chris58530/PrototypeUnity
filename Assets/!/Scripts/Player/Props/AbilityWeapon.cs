@@ -46,7 +46,7 @@ namespace @_.Scripts.Player.Props
         public bool isQuitAbility;
 
         [SerializeField] private AbilityValueUI _abilityValueUI;
-
+        [SerializeField] private bool isHammer;
         public static Action onPlayerGetAbility;
         public static Action onPlayerQuitAbility;
         public float abilityRemainingTime;
@@ -76,6 +76,7 @@ namespace @_.Scripts.Player.Props
             if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
             if (_input.IsPressAbility && abilityRemainingTime > 0)
             {
+                if (!isHammer) return;
                 abilityRemainingTime -= Time.deltaTime * 5;
                 _abilityValueUI.ChangeDisplayColor(true);
                 Debug.Log("減少持續時間");
@@ -168,6 +169,12 @@ namespace @_.Scripts.Player.Props
                         if (abilityRemainingTime <= 0)
                         {
                             isQuitAbility = true;
+                            if (!isHammer)
+                            {
+                                isQuitAbility = false;
+                                ChangeAbility(AbilityType.None);
+                            }
+
                             _abilityTimer.Dispose(); // 结束计时器
                         }
                     }).AddTo(this);
