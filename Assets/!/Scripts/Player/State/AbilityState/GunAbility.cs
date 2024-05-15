@@ -16,7 +16,7 @@ namespace @_.Scripts.Player.State.AbilityState
         private float _insertTime;
         private readonly AbilityWeapon _abilityWeapon;
         private Timer _timer;
-
+        private IDisposable _shootDisposable;
         public GunAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
             , AbilityWeapon abilityWeapon, PlayerBase playerBase,
@@ -36,25 +36,27 @@ namespace @_.Scripts.Player.State.AbilityState
         public override void OnEnter()
         {
             _timer = new Timer();
+            _timer.Reset();
 
+            _shootDisposable?.Dispose();
             _animator.Play("Shoot_1");
-            _controller.FaceToMousePos();
-
             // _animator.Play("Eat");
         }
 
         public override void OnLogic()
         {
-            _controller.FaceToMousePos();
+            if (_input.Move)
+                _controller.FaceInputDireactionSlow(_input);
 
             if (!_input.IsPressingAttack && _timer.Elapsed > 0.3f)
             {
                 _animator.Play("Shoot_2");
-                Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.5f)).First().Subscribe(_ =>
+                _shootDisposable = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.5f)).First().Subscribe(_ =>
                 {
                     fsm.StateCanExit();
+                    _shootDisposable?.Dispose();
 
-                }).AddTo(this._controller);
+                });
             }
         }
 

@@ -20,9 +20,8 @@ namespace @_.Scripts.Ability
 
             Observable.EveryUpdate().Subscribe(_ =>
             {
-                obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 250;
+                obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 150;
                 obj.GetComponent<Rigidbody>().isKinematic = false;
-                Debug.Log("flying");
             }).AddTo(obj);
 
             
@@ -39,7 +38,6 @@ namespace @_.Scripts.Ability
         {
             AbilityWeapon.onPlayerQuitAbility?.Invoke();
 
-            Debug.Log("------玩家血量加一!!------");
         }
 
         public override void TriggerEffect(Collider other)

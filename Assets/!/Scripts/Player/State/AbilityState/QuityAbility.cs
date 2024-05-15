@@ -34,9 +34,10 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnEnter()
         {
-            _abilityWeapon.isQuitAbility = false;
             _timer = new Timer();
+            _timer.Reset();
             _abilityWeapon.QuitInMouthObjectObject();
+            Debug.Log("on enter quit ability");
 
             AbilityWeaponAnimator.Instance?.PlayAnimation(AbilityWeaponAnimator.AnimationName.Swallow);
 
@@ -45,13 +46,21 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnLogic()
         {
+            Debug.Log(_timer.Elapsed + " elapsed time");
             if (_timer.Elapsed > 1.4f)
             {
+                _abilityWeapon.isQuitAbility = false;
+
+                Debug.Log("exit quit ability");
                 AbilityWeapon.onPlayerQuitAbility?.Invoke();
                 _abilityWeapon.ChangeAbility(AbilityWeapon.AbilityType.None);
-                fsm.StateCanExit();
             }
 
+            if (!_abilityWeapon.isQuitAbility)
+            {
+                fsm.StateCanExit();
+            }
+    
             if (_input.Move)
                 _controller.Move(_input);
         }

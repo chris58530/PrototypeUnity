@@ -204,6 +204,7 @@ public class BossBBase : Enemy
     public void OnDied()
     {
         GetComponent<BehaviorTree>().enabled = false;
+        transform.position = new Vector3(0, -4, 0);
         headAnimator.Play("Die");
         onDiedEvent?.Invoke();
         

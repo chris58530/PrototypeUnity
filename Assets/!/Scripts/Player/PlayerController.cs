@@ -59,6 +59,15 @@ namespace _.Scripts.Player
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 1000 * Time.deltaTime);
         }
 
+        public void FaceInputDireactionSlow(PlayerInput input)
+        {
+            Vector2 getInput = input.MoveVector;
+            Vector3 dir = new Vector3(getInput.x, 0, getInput.y);
+            Quaternion toRotation = Quaternion.LookRotation(dir, transform.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, (rotateSpeed / 2)* Time.deltaTime);
+        }
+
+
 
         public void Roll()
         {

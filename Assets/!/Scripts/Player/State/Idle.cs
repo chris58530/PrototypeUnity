@@ -31,6 +31,7 @@ namespace @_.Scripts.Player.State
         public override void OnEnter()
         {
             //debug
+            Debug.Log("Idle");
             _attackSystem.Reset();
 
 

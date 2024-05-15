@@ -73,7 +73,6 @@ namespace @_.Scripts.Player.Props
 
             if (Input.GetKeyDown(KeyCode.N)) ChangeAbility(AbilityType.Gun);
 
-            if (Input.GetKeyDown(KeyCode.M)) ChangeAbility(AbilityType.Fire);
             if (_input.IsPressAbility && abilityRemainingTime > 0)
             {
                 if (!isHammer) return;
