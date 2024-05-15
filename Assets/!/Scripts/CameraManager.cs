@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Event;
+using _.Scripts.Level;
 using Cinemachine;
 using UnityEngine;
 

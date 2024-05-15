@@ -2,6 +2,7 @@ using System;
 using _.Scripts.Enemy;
 using _.Scripts.Event;
 using _.Scripts.Interface;
+using _.Scripts.Level;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,6 +44,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
     {
         if (other.gameObject.TryGetComponent<CartRhinoBase>(out var cartRhino))
         {
+            if (cartRhino.isGetCatch) return;
             cartRhino.CatchRhino();
             bt.SendEvent("CatchRhino");
         }

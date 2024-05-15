@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts;
+using _.Scripts.Level;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;

@@ -11,13 +11,13 @@ namespace @_.Scripts.Enemy.Hand
     {
         [SerializeField] private BreakState breakState;
 
-      
+
         [SerializeField] private int hp;
         [SerializeField] private UnityEvent onTakeDamagedEvent;
         [SerializeField] private UnityEvent onDiedEvent;
         private HandEffect _hadnEffect;
 
-        public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
+        public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
         {
             SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
             SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
@@ -46,6 +46,7 @@ namespace @_.Scripts.Enemy.Hand
         {
             if (other.gameObject.TryGetComponent<CartRhinoBase>(out var cartRhino))
             {
+                if (cartRhino.isGetCatch) return;
                 cartRhino.CatchRhino();
                 bt.SendEvent("CatchRhino");
             }
@@ -71,7 +72,7 @@ namespace @_.Scripts.Enemy.Hand
         {
             BossBBase.onBodyDied += OnDied;
         }
-        
+
         private void OnDisable()
         {
             BossBBase.onBodyDied -= OnDied;
