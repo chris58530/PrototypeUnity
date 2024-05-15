@@ -1,11 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts;
 using UnityEngine;
-using UnityEngine.UIElements;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BossBDieFadeOutCanvas : MonoBehaviour
 {
-    [SerializeField]private Image fadeOutImage;
+    [SerializeField] private GameObject fadeOutImageObject;
+
+
     public void FadeOut()
     {
         StartCoroutine(FadeOutCoroutine());
@@ -13,6 +19,11 @@ public class BossBDieFadeOutCanvas : MonoBehaviour
 
     IEnumerator FadeOutCoroutine()
     {
-        
+        //use dotween let fadeoutimage opacity to 100%
+        yield return new WaitForSeconds(6);
+        fadeOutImageObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("EndingScene");
     }
 }

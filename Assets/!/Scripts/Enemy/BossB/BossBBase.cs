@@ -207,7 +207,7 @@ public class BossBBase : Enemy
         transform.position = new Vector3(0, -4, 0);
         headAnimator.Play("Die");
         onDiedEvent?.Invoke();
-        
+        FindObjectOfType<BossBDieFadeOutCanvas>().FadeOut();
     }
 
 
