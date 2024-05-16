@@ -14,7 +14,7 @@ namespace _.Scripts
         private PlayerBase _playerBase;
 
 
-        private float slowSpeed =0.2f;
+        private float slowSpeed =0.5f;
 
 
         protected override void Awake()
