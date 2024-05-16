@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Event;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,8 +9,17 @@ public class FabricDissolve : MonoBehaviour
 {
     [SerializeField] private Renderer[] renderers;
 
+    private void OnDisable()
+    {
+        for (int i = 0; i < renderers.Length; i++)
+            renderers[i].material.SetFloat("__Surface_Dissolove", -1);
+    }
+
+    
+
     private void OnEnable()
     {
+
         StartCoroutine(TransitionFloatValue(-1, 1, 2));
     }
 

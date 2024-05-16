@@ -8,6 +8,8 @@ using UnityEngine.Events;
 
 public class EliteHandBase : Enemy, IDamageable, IBreakable
 {
+    
+
     [SerializeField] private BreakState breakState;
 
 
@@ -15,6 +17,26 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onDiedEvent;
     private HandEffect _hadnEffect;
+
+    private void OnEnable()
+    {
+        SystemActions.onPlayerRespawn += PlayerRespawnSetting;
+    }
+
+    private void OnDisable()
+    {
+        SystemActions.onPlayerRespawn -= PlayerRespawnSetting;
+    }
+
+    public void PlayerRespawnSetting()
+    {
+        Destroy(gameObject,2);
+    }
+
+    public void OpenBT()
+    {
+        bt.enabled = true;
+    }
 
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {

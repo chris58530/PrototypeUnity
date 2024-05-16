@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Event;
 using _.Scripts.Level;
 using _.Scripts.Player;
 using UniRx;
@@ -16,7 +17,7 @@ public class TimeLineTriggerObject : MonoBehaviour
     [SerializeField] private bool needConfrim;
 
     public bool CanConfirmTimeline;
-
+    [SerializeField] private bool spawnReset;
     private PlayerUseTimeLineUI _playerUseTimeLineUI;
     private bool _isPlaying;
     private bool _isPlayed;
@@ -81,6 +82,11 @@ public class TimeLineTriggerObject : MonoBehaviour
         _playerUseTimeLineUI.ShowCanConfirmImage(false);
     }
 
+    public void ResetPlayed()
+    {
+        _isPlayed = false;
+    }
+
 
     private void NotPlaying()
     {
@@ -91,10 +97,21 @@ public class TimeLineTriggerObject : MonoBehaviour
     private void OnEnable()
     {
         TimeLineManager.onQuitTimelLine += NotPlaying;
+
+        if (spawnReset)
+        {
+            SystemActions.onPlayerRespawn += ResetPlayed;
+        }
     }
 
     private void OnDisable()
     {
         TimeLineManager.onQuitTimelLine -= NotPlaying;
+
+
+        if (spawnReset)
+        {
+            SystemActions.onPlayerRespawn -= ResetPlayed;
+        }
     }
 }

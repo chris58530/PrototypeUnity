@@ -130,6 +130,7 @@ namespace _.Scripts.Player
 
         public void OnDied()
         {
+            if(isDead)return;
             isDead = true;
             GetComponent<Collider>().enabled = false;
             respawnDispose?.Dispose();
