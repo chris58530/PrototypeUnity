@@ -31,7 +31,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
 
     public void PlayerRespawnSetting()
     {
-        if (LevelSceneManager.Instance.currentSpawnNumber >= 3)
+        if (LevelSceneManager.Instance.currentSpawnNumber >= 2)
             Destroy(gameObject, 2);
     }
 

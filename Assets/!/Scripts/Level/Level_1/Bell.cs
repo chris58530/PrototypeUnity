@@ -13,7 +13,7 @@ public class Bell : MonoBehaviour, ITaskResult
     private Animator ani;
 
 
-    [SerializeField]private bool canPlay;
+    public bool canPlay;
 
     private void Start()
     {

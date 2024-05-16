@@ -17,7 +17,8 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         Debug.Log("Spawn" + spawnPrefab.name);
-        Instantiate(spawnPrefab, spawnPoint.transform.position, Quaternion.identity);
+        GameObject obj =  Instantiate(spawnPrefab, spawnPoint.transform.position, Quaternion.identity);
+        Destroy(obj, 15f);
         Invoke(nameof(SpanwCoolDown), spawnCoolTime);
         _canSpawn = false;
     }
