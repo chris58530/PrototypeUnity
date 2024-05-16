@@ -30,7 +30,7 @@ public class EliteHandSpawner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GetComponent<Collider>().enabled = false;
-            Instantiate(eliteHand, spawnPoint.position, Quaternion.Euler(0, 180, 0));
+            Instantiate(eliteHand, spawnPoint.position, Quaternion.Euler(360, 180, 0));
             FindObjectOfType<EliteHandBase>().OpenBT();
         }
     }

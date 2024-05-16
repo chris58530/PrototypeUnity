@@ -3,13 +3,12 @@ using _.Scripts.Enemy;
 using _.Scripts.Event;
 using _.Scripts.Interface;
 using _.Scripts.Level;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EliteHandBase : Enemy, IDamageable, IBreakable
 {
-    
-
     [SerializeField] private BreakState breakState;
 
 
@@ -17,10 +16,12 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
     [SerializeField] private UnityEvent onTakeDamagedEvent;
     [SerializeField] private UnityEvent onDiedEvent;
     private HandEffect _hadnEffect;
+    public bool isFirstHand = false;
 
     private void OnEnable()
     {
         SystemActions.onPlayerRespawn += PlayerRespawnSetting;
+        bt.SetVariable("Elite_Runaway_Object", (SharedGameObject)GameObject.Find("Elite_Runaway_Object"));
     }
 
     private void OnDisable()
@@ -30,7 +31,8 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
 
     public void PlayerRespawnSetting()
     {
-        Destroy(gameObject,2);
+        if (LevelSceneManager.Instance.currentSpawnNumber >= 3)
+            Destroy(gameObject, 2);
     }
 
     public void OpenBT()
