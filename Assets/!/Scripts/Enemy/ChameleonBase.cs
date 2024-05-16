@@ -1,3 +1,4 @@
+using System;
 using _.Scripts.Enemy;
 using _.Scripts.Event;
 using UniRx;
@@ -52,5 +53,11 @@ AudioManager.Instance.PlaySFX("MobInjured");
 
         onDiedEvent?.Invoke();
         bt.SendEvent("OnDied");
+    }
+
+    private void OnDisable()
+    {
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+
     }
 }

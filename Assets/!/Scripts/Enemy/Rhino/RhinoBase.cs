@@ -9,7 +9,6 @@ using UnityEngine.Events;
 
 public class RhinoBase : Enemy, IDamageable, IShieldable
 {
-
     [Tooltip("GROUND OR PLANE MUST BE SET GROUMD LAYER")] [SerializeField]
     private bool isShield = true;
 
@@ -41,7 +40,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
         _currentHp.Value = maxHp;
     }
 
-    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
+    public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
         Debug.Log("rhino take damage");
         bt.SendEvent("OnTakeDamage");
@@ -128,6 +127,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     private void OnDisable()
     {
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
         BossABomb.bossABigBombEvent -= BossABigBombDie;
     }
 }

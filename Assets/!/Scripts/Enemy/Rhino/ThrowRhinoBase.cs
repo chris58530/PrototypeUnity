@@ -52,5 +52,10 @@ namespace @_.Scripts.Enemy
             if (other.gameObject.GetComponent<EliteHandBase>() ||
                 other.gameObject.GetComponent<SmallHandBase>()) return;
         }
+
+        private void OnDisable()
+        {
+            AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+        }
     }
 }

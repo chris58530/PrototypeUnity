@@ -67,6 +67,7 @@ public class SlimeBase : Enemy, IDamageable, IShieldable
 
     public void OnDied()
     {
+        AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
         GetComponent<Collider>().enabled = false;
         onDiedEvent?.Invoke();
         _animator.Play("Die");
