@@ -10,7 +10,7 @@ public class TeleportToBossBDoor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             player.transform.position = teleportLocation.position;
 
