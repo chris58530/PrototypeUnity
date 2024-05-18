@@ -26,7 +26,9 @@ namespace @_.Scripts.Enemy
             }).AddTo(this);
             Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(4)).Subscribe(_ =>
             {
-             Destroy(gameObject);
+                AutoTurnAroundDetect.onRemoveDetectList?.Invoke(gameObject);
+
+                Destroy(gameObject);
             }).AddTo(this);
         }
 
@@ -47,11 +49,6 @@ namespace @_.Scripts.Enemy
             SwingTrigger.OnSwingTrigger?.Invoke();
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.GetComponent<EliteHandBase>() ||
-                other.gameObject.GetComponent<SmallHandBase>()) return;
-        }
 
         private void OnDisable()
         {

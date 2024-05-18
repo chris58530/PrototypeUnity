@@ -30,7 +30,7 @@ public class EnemyEffect : MonoBehaviour
             i.material = EmssionMat;
         }
 
-        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.2f)).First().Subscribe(_ =>
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.15f)).First().Subscribe(_ =>
         {
             for (int i = 0; i < _renderers.Length; i++)
             {

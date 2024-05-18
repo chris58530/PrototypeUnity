@@ -17,6 +17,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
     [SerializeField] private UnityEvent onDiedEvent;
     private HandEffect _hadnEffect;
     public bool isFirstHand = false;
+    private bool _canBreakWall;
 
     private void OnEnable()
     {
@@ -75,6 +76,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
 
         if (other.gameObject.TryGetComponent<EliteStoneWall>(out var wall))
         {
+            if (!_canBreakWall) return;
             wall.BreakWall();
         }
     }
@@ -94,6 +96,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
         breakState += 1;
         SwitchBreakMaterial();
         bt.SendEvent("Runaway");
+        _canBreakWall = true;
         TimeLineManager.Instance.PlayTimeLine(4);
     }
 }

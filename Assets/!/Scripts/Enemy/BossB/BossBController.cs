@@ -14,6 +14,8 @@ public class BossBController : MonoBehaviour
 
     public SharedBool ReturnRightGather()
     {
+        if (rightSmallHandBt == null)
+            return true;
         if (rightSmallHandBt.gameObject.activeSelf)
             return (SharedBool)rightSmallHandBt.GetVariable("OnDestination");
         return true;
@@ -21,6 +23,8 @@ public class BossBController : MonoBehaviour
 
     public SharedBool ReturnLeftGather()
     {
+        if (leftSmallHandBt == null)
+            return true;
         if (leftSmallHandBt.gameObject.activeSelf)
             return (SharedBool)leftSmallHandBt.GetVariable("OnDestination");
         return true;

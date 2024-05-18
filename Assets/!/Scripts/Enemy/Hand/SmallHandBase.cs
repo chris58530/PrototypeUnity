@@ -19,13 +19,13 @@ namespace @_.Scripts.Enemy.Hand
 
         public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
         {
-            SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
-            SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
-
-            if (hp <= 0) OnDied();
-
-            onTakeDamagedEvent?.Invoke();
-            hp -= value;
+            // SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
+            // SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
+            //
+            // if (hp <= 0) OnDied();
+            //
+            // onTakeDamagedEvent?.Invoke();
+            // hp -= value;
         }
 
         public void OnDied()
@@ -64,6 +64,12 @@ namespace @_.Scripts.Enemy.Hand
 
         public void OnTakeBreakableAttack()
         {
+            if (breakState == BreakState.Break2)
+            {
+                _hadnEffect.PlayBreakEffect();
+                return;
+            }
+
             breakState += 1;
             SwitchBreakMaterial();
         }
@@ -75,6 +81,7 @@ namespace @_.Scripts.Enemy.Hand
 
         private void OnDisable()
         {
+            AutoTurnAroundDetect.onRemoveDetectList?.Invoke(this.gameObject);
             BossBBase.onBodyDied -= OnDied;
         }
     }

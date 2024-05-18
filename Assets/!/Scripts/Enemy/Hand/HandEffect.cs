@@ -76,6 +76,11 @@ public class HandEffect : MonoBehaviour
         }
     }
 
+    public void PlayBreakEffect()
+    {
+        breakEffect.Play();
+    }
+
     public void SetMaterialsEmission(bool enable)
     {
         if (!enable)

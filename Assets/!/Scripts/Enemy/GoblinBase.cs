@@ -64,6 +64,7 @@ public class GoblinBase : Enemy, IDamageable, IDashable
 
     public void InLight(bool isLight)
     {
+        Destroy(gameObject);
         if (isLight)
             for (int i = 0; i < _renderers.Length; i++)
             {

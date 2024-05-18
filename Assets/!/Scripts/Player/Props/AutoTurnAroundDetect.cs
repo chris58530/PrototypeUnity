@@ -38,8 +38,8 @@ public class AutoTurnAroundDetect : MonoBehaviour
                 {
                     enemyList.RemoveAt(i);
 
-                    Debug.Log(
-                        $"清除 enemyList 距離:" + distance);
+                    // Debug.Log(
+                    //     $"清除 enemyList 距離:" + distance);
                 }
             }
 
@@ -49,8 +49,8 @@ public class AutoTurnAroundDetect : MonoBehaviour
                 if (distance > _detecedDistance)
                 {
                     containers.RemoveAt(i);
-                    Debug.Log(
-                        $"清除 containers 距離:" + distance);
+                    // Debug.Log(
+                    //     $"清除 containers 距離:" + distance);
                 }
             }
 

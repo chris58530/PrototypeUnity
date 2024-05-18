@@ -157,7 +157,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     public void HitBreak(int value)
     {
 
-        Debug.Log($" ---{this.name}----   HitBreak  : {value}");
+        // Debug.Log($" ---{this.name}----   HitBreak  : {value}");
 
         if (value <= 0)
         {

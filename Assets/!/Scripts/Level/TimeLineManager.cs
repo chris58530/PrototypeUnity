@@ -16,19 +16,18 @@ namespace @_.Scripts.Level
         public static Action onQuitTimelLine;
 
         private bool _isExecuteQuitAction;
-        [SerializeField] private int currentActiveDirectorNumber = 0;//忘記這是幹啥的了
+        [SerializeField] private int currentActiveDirectorNumber = 0; //忘記這是幹啥的了
         private bool _isPauseTimeLine;
 
         private IMarker[] _stopMarkers;
 
         private UIInput _uiInput;
-      
+
 
         protected override void Awake()
         {
             base.Awake();
             _uiInput = FindObjectOfType<UIInput>();
-
         }
 
         private void Update()
@@ -51,7 +50,7 @@ namespace @_.Scripts.Level
             {
                 _stopMarkers = timelineAsset.markerTrack.GetMarkers().ToArray();
             }
-        
+
             currentDirector.Play();
             _isExecuteQuitAction = false;
 
@@ -60,6 +59,7 @@ namespace @_.Scripts.Level
 
         private void QuitTimeLineDetect(PlayableDirector playableDirector)
         {
+            if (currentDirector == null) return;
             if (currentDirector.duration <= currentDirector.time && _isExecuteQuitAction) return;
             // Debug.Log("QuitTimeLineDetect");
             onQuitTimelLine?.Invoke();
