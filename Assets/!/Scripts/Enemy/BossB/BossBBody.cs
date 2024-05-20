@@ -110,7 +110,12 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
-        if (!_canDamage) return;
+        if (!_canDamage)
+        {
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.AttackStone);
+
+            return;
+        }
 
         SystemActions.onFrameSlow?.Invoke(0.1f);
         BossBBase.onBodyTakeDamage?.Invoke(value);
@@ -156,7 +161,6 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void HitBreak(int value)
     {
-
         // Debug.Log($" ---{this.name}----   HitBreak  : {value}");
 
         if (value <= 0)
@@ -164,7 +168,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
             breakState = BreakState.Break1;
             handEffect.SwitchBreakMaterial(breakState);
             Debug.Log($" {this.name} 已經被打爆了 ");
-            
+
 
             return;
         }
@@ -172,8 +176,6 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
         //當 isBroken = false 被玩家攻擊中
         // breaktHpImage.gameObject.GetComponent<Animator>().Play("HitBreak");
     }
-
-
 
 
     private void OnTriggerStay(Collider other)

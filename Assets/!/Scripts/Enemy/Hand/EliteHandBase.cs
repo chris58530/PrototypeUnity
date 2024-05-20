@@ -43,6 +43,8 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
 
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
+        LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.AttackStone);
+
         SystemActions.onFrameSlow?.Invoke(0.03f); // 调用帧率减慢事件
         SparkleEffect.onPlaySparkleEffect(SparkleType.Normal, sparkleDirection, rotation);
 

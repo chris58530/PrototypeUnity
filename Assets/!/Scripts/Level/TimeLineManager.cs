@@ -9,7 +9,7 @@ namespace @_.Scripts.Level
     public class TimeLineManager : _.Scripts.Tools.Singleton<TimeLineManager>
     {
         [SerializeField] private PlayableDirector[] playableDirectors;
-        [HideInInspector] public PlayableDirector currentDirector;
+        [SerializeField] public PlayableDirector currentDirector;
 
 
         public static Action onPlayTimelLine;

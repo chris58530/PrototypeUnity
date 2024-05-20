@@ -12,15 +12,17 @@ public enum LemonSpeakEnum
     Normal,
     Shield,
     Keymonster,
-    QuackNormal,
     QuackBigBomb,
-    InsertCrystal
+    InsertCrystal,
+    GoblibAttack,
+    AttackStone,
+    EarthQuake
 }
 
 public class LemonBase : MonoBehaviour
 {
     [SerializeField]private BehaviorTree speakBT;
-    [SerializeField]private BehaviorTree moveBT;
+    [SerializeField]public BehaviorTree moveBT;
 
 
 

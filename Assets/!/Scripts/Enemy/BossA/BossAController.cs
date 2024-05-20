@@ -141,6 +141,8 @@ namespace @_.Scripts.Enemy.BossA
                 towerAni.Play("RaiseTower");
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
                 raiseTower.Play();
+                LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.QuackBigBomb);
+
             }
             else
             {
