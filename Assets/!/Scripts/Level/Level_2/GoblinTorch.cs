@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _.Scripts.Enemy;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class GoblinTorch : MonoBehaviour
+public class GoblinTorch : Enemy
+
 {
     [SerializeField] private GameObject shakeModel;
     [SerializeField] private GameObject fire;
@@ -49,7 +51,6 @@ public class GoblinTorch : MonoBehaviour
     {
         fire.SetActive(false);
         StartCoroutine(ShakeCoroutine());
-
     }
 
     void SpawnGolbin()
@@ -64,6 +65,7 @@ public class GoblinTorch : MonoBehaviour
     {
         _canSpawnGolbin = true;
     }
+
     IEnumerator ShakeCoroutine()
     {
         Vector3 originalPos = shakeModel.transform.localPosition;
@@ -76,6 +78,7 @@ public class GoblinTorch : MonoBehaviour
                 shakeModel.transform.localPosition = originalPos + new Vector3(Random.Range(-shakeRange, shakeRange),
                     Random.Range(-shakeRange, shakeRange), 0);
             }
+
             yield return null; // 讓出控制權並繼續下一幀的執行
         }
 

@@ -404,6 +404,8 @@ namespace _.Scripts.Player.State
             _hammerState.AddTransition(PlayerState.GunAbility, PlayerState.Idle);
             _hammerState.AddTransition(PlayerState.QuityAbility, PlayerState.Idle,transition =>
                 !_abilityWeapon.isQuitAbility);
+            _hammerState.AddTransition(PlayerState.QuityAbility, PlayerState.Idle,transition =>
+                !_abilityWeapon.isQuitAbility);
 
 
         
