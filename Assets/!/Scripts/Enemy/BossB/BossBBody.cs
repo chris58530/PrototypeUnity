@@ -36,7 +36,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public bool thisBreakTurn = false;
     public bool isBroken = false;
-    private static bool _canDamage = true;
+    private static bool _canBossBDamage = true;
     private static bool _canBreak = true;
 
     [SerializeField] private GameObject moveTarget; //要位移的物件
@@ -68,9 +68,9 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
     void SetCanDamaged(bool canDamage)
     {
         if (canDamage)
-            _canDamage = true;
+            _canBossBDamage = true;
         else
-            _canDamage = false;
+            _canBossBDamage = false;
     }
 
     void SetCanBreak(bool canBreak)
@@ -110,7 +110,7 @@ public class BossBBody : MonoBehaviour, IDamageable, IBreakable
 
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
-        if (!_canDamage)
+        if (!_canBossBDamage)
         {
             LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.AttackStone);
 

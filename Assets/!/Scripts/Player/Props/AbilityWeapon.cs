@@ -213,10 +213,22 @@ namespace @_.Scripts.Player.Props
         private void OnTriggerEnter(Collider other)
         {
             // if (currentAbility != AbilityType.None) return;
+            if (!isHammer) return;
+
             if (other.gameObject.TryGetComponent(out IAbilityContainer getAbility))
             {
                 ChangeAbility(getAbility.GetAbility());
                 GetComponent<Collider>().enabled = false;
+                // AutoTurnAroundDetect.onRemoveDetectList?.Invoke(other.gameObject);
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (isHammer) return;
+            if (other.gameObject.TryGetComponent(out IAbilityContainer getAbility))
+            {
+                ChangeAbility(getAbility.GetAbility());
                 // AutoTurnAroundDetect.onRemoveDetectList?.Invoke(other.gameObject);
             }
         }

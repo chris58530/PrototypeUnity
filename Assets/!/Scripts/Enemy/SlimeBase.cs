@@ -84,4 +84,13 @@ public class SlimeBase : Enemy, IDamageable, IShieldable
 
         isShield = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EatCollider>())
+        {
+            LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.AbsortSlime);
+
+        }
+    }
 }

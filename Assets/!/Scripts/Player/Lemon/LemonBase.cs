@@ -16,7 +16,8 @@ public enum LemonSpeakEnum
     InsertCrystal,
     GoblibAttack,
     AttackStone,
-    EarthQuake
+    EarthQuake,
+    AbsortSlime,
 }
 
 public class LemonBase : MonoBehaviour
