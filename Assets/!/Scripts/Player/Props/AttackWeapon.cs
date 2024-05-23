@@ -45,7 +45,7 @@ namespace @_.Scripts.Player.Props
             attackAction?.Invoke(other);
 
 
-            Debug.Log("主角攻擊了" + other.name + " 造成了" + attackValue + "傷害");
+            // Debug.Log("主角攻擊了" + other.name + " 造成了" + attackValue + "傷害");
 
             PlayerActions.onHitEnemy?.Invoke();
 

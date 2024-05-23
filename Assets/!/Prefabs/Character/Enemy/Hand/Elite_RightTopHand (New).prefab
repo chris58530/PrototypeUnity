@@ -97874,6 +97874,7 @@ Transform:
   - {fileID: 1736414998028721577}
   - {fileID: 2821795838041163300}
   - {fileID: 117083927}
+  - {fileID: 4411617746063960411}
   m_Father: {fileID: 8105125041599995254}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97919,7 +97920,7 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThisObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":"ThisCollider","IsShared":true,"CollidermValue":2},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RestHighPoint","IsShared":true,"GameObjectmValue":3},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"RotateReset","IsShared":true,"Vector3mValue":"(0,-180,0)"},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"AttackWeapon","IsShared":true,"GameObjectmValue":4},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Rhino
-        Effect","IsShared":true,"GameObjectmValue":5},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RazerObject","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"BlockCollider","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RhinoInHandObject","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThrowRhino","IsShared":true,"GameObjectmValue":9},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SpawnRhinoPoint","IsShared":true,"GameObjectmValue":10},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LazerPrepareVFX","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SmallHand_ChasePoint","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"BreakableCollider","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"OnDestination","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SmallHandPunch","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Elite_Runaway_Object","IsShared":true,"GameObjectmValue":15}]}'
+        Effect","IsShared":true,"GameObjectmValue":5},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RazerObject","IsShared":true,"GameObjectmValue":6},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"BlockCollider","IsShared":true,"GameObjectmValue":7},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"RhinoInHandObject","IsShared":true,"GameObjectmValue":8},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ThrowRhino","IsShared":true,"GameObjectmValue":9},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SpawnRhinoPoint","IsShared":true,"GameObjectmValue":10},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"LazerPrepareVFX","IsShared":true,"GameObjectmValue":11},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SmallHand_ChasePoint","IsShared":true,"GameObjectmValue":12},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"BreakableCollider","IsShared":true,"GameObjectmValue":13},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"OnDestination","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"SmallHandPunch","IsShared":true,"GameObjectmValue":14},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Elite_Runaway_Object","IsShared":true,"GameObjectmValue":15},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"stoneHandUIObject","IsShared":true,"GameObjectmValue":16}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -97942,6 +97943,7 @@ MonoBehaviour:
         - {fileID: 8765923042348940303}
         - {fileID: 2195600660307008295}
         - {fileID: 0}
+        - {fileID: 4411617746063960408}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -97984,6 +97986,7 @@ MonoBehaviour:
   - {fileID: 8765923043083377618}
   break2Objects:
   - {fileID: 8765923042688352095}
+  - {fileID: 4411617746063960408}
   breakEffect: {fileID: 5625360502516566125}
 --- !u!95 &1298000626
 Animator:
@@ -98027,6 +98030,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFirstHand: 0
+  stoneHandUI: {fileID: 7860824048484040600}
 --- !u!1 &8105125041134443995
 GameObject:
   m_ObjectHideFlags: 0
@@ -105306,3 +105310,146 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 957766791}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6572676978619096997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8105125040841373762}
+    m_Modifications:
+    - target: {fileID: 7354343093745301245, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_Name
+      value: HandStoneUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.93969345
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.3420179
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000041075307
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000014950077
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ef497f691b6bc14c931cc5420208d11, type: 3}
+--- !u!1 &4411617746063960408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7354343093745301245, guid: 1ef497f691b6bc14c931cc5420208d11,
+    type: 3}
+  m_PrefabInstance: {fileID: 6572676978619096997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4411617746063960411 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7354343093745301246, guid: 1ef497f691b6bc14c931cc5420208d11,
+    type: 3}
+  m_PrefabInstance: {fileID: 6572676978619096997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7860824048484040600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3900564991912681533, guid: 1ef497f691b6bc14c931cc5420208d11,
+    type: 3}
+  m_PrefabInstance: {fileID: 6572676978619096997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411617746063960408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d486a9d7953fb4eaf80f9b49a62e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

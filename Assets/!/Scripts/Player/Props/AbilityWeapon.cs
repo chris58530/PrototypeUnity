@@ -161,7 +161,7 @@ namespace @_.Scripts.Player.Props
                     float keepTime = currentAbilityBase.lifeTime;
                     abilityRemainingTime = keepTime;
 
-                    _abilityTimer = Observable.EveryUpdate().Subscribe(_ =>
+                    _abilityTimer = Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(0.1f)).Subscribe(_ =>
                     {
                         _abilityValueUI.DisplayTime(abilityRemainingTime, keepTime);
                         abilityRemainingTime -= Time.deltaTime;

@@ -20,6 +20,8 @@ namespace @_.Scripts.Enemy.BossA
         [SerializeField]
         private GameObject tower;
 
+        private StoneUI _towerSstoneUI;
+
         [SerializeField] private Animator towerAni;
 
         [Tooltip("Boss stand on tower and become tower's child")] [SerializeField]
@@ -142,7 +144,15 @@ namespace @_.Scripts.Enemy.BossA
                 Vector3 brokenTowerOffset = new Vector3(0, 15, 0);
                 raiseTower.Play();
                 LemonBase.onUseBTSpeak?.Invoke(LemonSpeakEnum.QuackBigBomb);
-
+                _towerSstoneUI = GameObject.FindObjectOfType<StoneUI>();
+                Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.3f)).Subscribe(_ =>
+                {
+                    _towerSstoneUI.ScaleShowImage(true);
+                }).AddTo(this);
+                Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.7f)).Subscribe(_ =>
+                {
+                    _towerSstoneUI.UpdateHpImage(3, 3);
+                }).AddTo(this);
             }
             else
             {
@@ -155,6 +165,10 @@ namespace @_.Scripts.Enemy.BossA
 
                 // brokenTower.Play();
                 towerAni.Play("DropTower");
+                Observable.EveryUpdate().First().Delay(TimeSpan.FromSeconds(.3f)).Subscribe(_ =>
+                {
+                    _towerSstoneUI.FadeOutAndHideImage();
+                }).AddTo(this);
             }
         }
 

@@ -42,7 +42,6 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
 
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
-        Debug.Log("rhino take damage");
         bt.SendEvent("OnTakeDamage");
 
         if (isShield)
@@ -122,6 +121,7 @@ public class RhinoBase : Enemy, IDamageable, IShieldable
     private void OnTriggerEnter(Collider other)
     {
         if ((mask & (1 << other.gameObject.layer)) == 0) return;
+        Debug.Log(other.gameObject.name + " hit " + gameObject.name);
         bt.SendEvent("OnHitWall");
     }
 

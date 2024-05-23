@@ -4,8 +4,10 @@ using _.Scripts.Event;
 using _.Scripts.Interface;
 using _.Scripts.Level;
 using BehaviorDesigner.Runtime;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class EliteHandBase : Enemy, IDamageable, IBreakable
 {
@@ -18,6 +20,7 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
     private HandEffect _hadnEffect;
     public bool isFirstHand = false;
     private bool _canBreakWall;
+    [SerializeField] private StoneHandUI stoneHandUI;
 
     private void OnEnable()
     {
@@ -95,8 +98,10 @@ public class EliteHandBase : Enemy, IDamageable, IBreakable
 
     public void OnTakeBreakableAttack()
     {
+        stoneHandUI.UpdateHpImage(2, 3);
         breakState += 1;
         SwitchBreakMaterial();
+
         bt.SendEvent("Runaway");
         _canBreakWall = true;
         TimeLineManager.Instance.PlayTimeLine(4);

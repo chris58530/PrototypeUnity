@@ -1,13 +1,16 @@
+using _.Scripts.Event;
 using _.Scripts.Interface;
 using _.Scripts.Player.Ability;
 using _.Scripts.Player.Props;
 using UnityEngine;
+using System;
 
 namespace @_.Scripts.Ability
 {
     [CreateAssetMenu(fileName = "BrokeWallAbilityData", menuName = "Ability/BrokeWallAbility", order = 7)]
     public class BrokeWallAbilitySO : AbilityBase
     {
+
         public override void AbilityAlgorithm()
         {
             //Hold this ability will do
@@ -21,12 +24,14 @@ namespace @_.Scripts.Ability
         {
             GameObject.Find("PlayerAttackCollider").GetComponent<AttackWeapon>().AddLayerFromMask(true, "Breakable");
             AbilityWeapon.onPlayerGetAbility?.Invoke();
+            PlayerActions.endPlayerUseBrokeWallAbility?.Invoke(true);
         }
 
         public override void QuitAbilityAlgorithm()
         {
             // Instantiate(fakeKeyMonster, transform.position, transform.rotation);
             AbilityWeapon.onPlayerQuitAbility?.Invoke();
+            PlayerActions.endPlayerUseBrokeWallAbility?.Invoke(false);
 
             AbilityOnFire.onFire?.Invoke(false);
 

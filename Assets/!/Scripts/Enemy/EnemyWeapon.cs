@@ -8,7 +8,7 @@ public class EnemyWeapon : MonoBehaviour
 {
     private int attackValue = 1;
     [SerializeField] private LayerMask mask;
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,11 +20,12 @@ public class EnemyWeapon : MonoBehaviour
 
     void Damage(Collider other)
     {
+        if (other.GetComponent<StoneWall>()) return;
         if (!other.TryGetComponent<IDamageable>(out var obj)) return;
 
-        obj.OnTakeDamage(attackValue,Vector3.zero,Quaternion.identity);
+        obj.OnTakeDamage(attackValue, Vector3.zero, Quaternion.identity);
 
-        Debug.Log($"{other.name} get {attackValue} damage");
+        // Debug.Log($"{other.name} get {attackValue} damage");
     }
 
     void Knock(Collider other)
@@ -32,5 +33,4 @@ public class EnemyWeapon : MonoBehaviour
         if (!other.TryGetComponent<IKnockable>(out var obj)) return;
         obj.OnKnock(this.transform);
     }
- 
 }

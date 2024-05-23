@@ -22,7 +22,7 @@ public class BossATower : MonoBehaviour, IDamageable
         GetComponent<Collider>().enabled = false;
     }
 
-    public void OnTakeDamage(int value,Vector3 sparkleDirection,Quaternion rotation)
+    public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
         hp -= value;
         SetEmission();
@@ -31,6 +31,7 @@ public class BossATower : MonoBehaviour, IDamageable
 
     public void OnDied()
     {
+        FindObjectOfType<StoneUI>().UpdateHpImage(0, 3);
         GetComponent<Collider>().enabled = false;
         //set Boss A parent to null 
         if (transform.childCount > 0)

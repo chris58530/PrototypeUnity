@@ -42,7 +42,7 @@ namespace @_.Scripts.Ability
             sword.canUse = false;
             AbilityOnFire.onFire?.Invoke(false);
             AbilityWeapon.onPlayerQuitAbility?.Invoke();
-            AudioManager.Instance.PlaySFX("OutOfMana");
+            // AudioManager.Instance.PlaySFX("OutOfMana");
 
         }
 

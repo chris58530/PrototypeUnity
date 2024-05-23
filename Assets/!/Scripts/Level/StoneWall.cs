@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _.Scripts.Event;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
-using VTabs.Libs;
 
 public class StoneWall : MonoBehaviour, IDamageable
 {
     [SerializeField] private StoneUI stoneUI;
     [SerializeField] private float maxHp = 3;
+    [SerializeField] private GameObject[] shakingGameObjects;
     [SerializeField] private UnityEvent onDiedEvent;
     private float _currentHp;
     private bool _canWallDamage = true;
@@ -17,6 +18,7 @@ public class StoneWall : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         EnemyActions.setCanDamagedEnemy += SetCanDamaged;
+        EnemyActions.setCanDamagedEnemy?.Invoke(false);
     }
 
     private void OnDisable()
@@ -40,8 +42,14 @@ public class StoneWall : MonoBehaviour, IDamageable
     public void OnTakeDamage(int value, Vector3 sparkleDirection, Quaternion rotation)
     {
         if (!_canWallDamage) return;
+        // foreach (var stone in shakingGameObjects)
+        // {
+        //     Vector3 originalPosition = stone.transform.position;
+        //     stone.transform.position = sparkleDirection * 0.5f + originalPosition;
+        //     stone.transform.rotation = rotation;
+        // }
+        Debug.Log("STONE WALL TAKE DAMAGE");
         EnemyActions.setCanDamagedEnemy?.Invoke(false);
-        Debug.Log(_currentHp + " took damage");
         _currentHp -= 1;
         stoneUI.UpdateHpImage(_currentHp, maxHp);
         if (_currentHp <= 0)
@@ -50,9 +58,32 @@ public class StoneWall : MonoBehaviour, IDamageable
         }
     }
 
+    public void TakeRhinoAttack()
+    {
+        // stoneUI.ShowImage(true);
+        stoneUI.ShowImage(true);
+        _currentHp -= 1;
+
+        stoneUI.UpdateHpImage(_currentHp, maxHp);
+
+        if (_currentHp <= 0)
+        {
+            OnDied();
+        }
+    }
+
     public void OnDied()
     {
+        Debug.Log("die _currentHp + \" took damage\"");
+
         onDiedEvent?.Invoke();
-        this.GetComponents<Collider>().ForEach(c => c.enabled = false);
+
+        Collider[] colliders = this.GetComponents<Collider>();
+        foreach (var VARIABLE in colliders)
+        {
+            VARIABLE.enabled = false;
+        }
+        Observable.EveryUpdate().Delay(TimeSpan.FromSeconds(1f))
+            .Subscribe(_ => { stoneUI.ScaleShowImage(false); }).AddTo(this);
     }
 }

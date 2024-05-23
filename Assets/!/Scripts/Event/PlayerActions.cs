@@ -19,6 +19,8 @@ namespace _.Scripts.Event
         public static Action onPlayerEatEffect;
         
         public static Action endPlayerEatEffect;
+        public static Action<bool> endPlayerUseBrokeWallAbility;
+
         //state machine insert state call
         
         public static Action onHitEnemy;

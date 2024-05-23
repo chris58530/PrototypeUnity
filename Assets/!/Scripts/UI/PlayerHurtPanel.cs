@@ -28,7 +28,7 @@ public class PlayerHurtPanel : MonoBehaviour
 
     IEnumerator CloseImage()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.15f);
         hurtImage.enabled = false;
     }
 }

@@ -10,7 +10,7 @@ public class LemonSpeakAction : Action
 {
     public SharedGameObject dialogText;
     public SharedGameObject dialogCanvas;
-    public float keepTime;
+     float keepTime = 2;
     private float _currentTime;
     public string[] dialog;
     public SharedBool isImportantSpeaking;
