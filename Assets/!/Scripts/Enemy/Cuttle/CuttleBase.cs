@@ -33,7 +33,8 @@ public class CuttleBase : Enemy, IDamageable
 
         if (_currentHp.Value <= 0)
         {
-            OnDied();
+            onDiedEvent?.Invoke();
+            Debug.Log("cuttle died");
             return;
         }
 
