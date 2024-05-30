@@ -16,10 +16,11 @@ namespace @_.Scripts.Player.State.AbilityState
         private float _insertTime;
         private readonly AbilityWeapon _abilityWeapon;
         private Timer _timer;
-        private IDisposable _shootDisposable;
+        private IDisposable _shootDisposable;        private AbilitySystem _abilitySystem;
+
         public GunAbility(PlayerInput playerInput,
             PlayerController playerController, Animator animator, AttackSystem attackSystem
-            , AbilityWeapon abilityWeapon, PlayerBase playerBase,
+            , AbilityWeapon abilityWeapon, PlayerBase playerBase,AbilitySystem abilitySystem,
             bool needsExitTime,
             bool isGhostState = false) : base(needsExitTime,
             isGhostState)
@@ -29,7 +30,8 @@ namespace @_.Scripts.Player.State.AbilityState
             _animator = animator;
             _attackSystem = attackSystem;
             _abilityWeapon = abilityWeapon;
-            _playerBase = playerBase;
+            _playerBase = playerBase;            _abilitySystem = abilitySystem;
+
         }
 
 
@@ -40,6 +42,8 @@ namespace @_.Scripts.Player.State.AbilityState
 
             _shootDisposable?.Dispose();
             _animator.Play("Shoot_1");
+            _attackSystem.OpenWeaponCollider(true);
+
             // _animator.Play("Eat");
         }
 
@@ -62,6 +66,10 @@ namespace @_.Scripts.Player.State.AbilityState
 
         public override void OnExit()
         {
+            _attackSystem.OpenWeaponCollider(false);
+
+
+
             _abilityWeapon.ExecuteAblilty();
         }
     }

@@ -343,7 +343,7 @@ namespace _.Scripts.Player.State
                     _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
             _hammerState.AddState(
                 PlayerState.GunAbility, new GunAbility(
-                    _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, true));
+                    _input, _controller, animator, _attackSystem, _abilityWeapon, _playerBase, _abilitySystem,true));
 
 
             //Idle

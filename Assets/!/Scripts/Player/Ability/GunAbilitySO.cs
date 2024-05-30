@@ -37,6 +37,8 @@ namespace @_.Scripts.Ability
         public override void QuitAbilityAlgorithm()
         {
             AbilityWeapon.onPlayerQuitAbility?.Invoke();
+            AbilityOnFire.onFire?.Invoke(false);
+
 
         }
 
@@ -44,6 +46,17 @@ namespace @_.Scripts.Ability
         {
             //OnTrigger enemy will do 
             Debug.Log("Use fire TriggerEffect ");
+            if (other.gameObject.TryGetComponent<CampFire>(out var campFire))
+            {
+                AbilityOnFire.onFire?.Invoke(true);
+            }
+            if (other.gameObject.TryGetComponent<GoblinTorch>(out var torch))
+            {
+                if (AbilityOnFire.isOnFire)
+                {
+                    torch.OpenTorchLight();
+                }
+            }
         }
     }
 }
